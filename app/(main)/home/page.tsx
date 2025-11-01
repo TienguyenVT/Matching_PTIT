@@ -23,6 +23,8 @@ export default function HomePage() {
   const [totalEnrolled, setTotalEnrolled] = useState(0);
   const [totalSuggested, setTotalSuggested] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [registering, setRegistering] = useState<string | null>(null);
+  const [enrolledIds, setEnrolledIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const load = async () => {
@@ -47,14 +49,15 @@ export default function HomePage() {
         console.error('[HomePage] Error fetching enrolled IDs:', idsError);
       }
       
-      const enrolledIds = new Set((myIds ?? []).map((r: any) => r.course_id));
-      console.log('[HomePage] Enrolled course IDs:', enrolledIds.size);
+      const enrolledIdsSet = new Set((myIds ?? []).map((r: any) => r.course_id));
+      console.log('[HomePage] Enrolled course IDs:', enrolledIdsSet.size);
+      setEnrolledIds(enrolledIdsSet);
 
-      if (enrolledIds.size > 0) {
+      if (enrolledIdsSet.size > 0) {
         const { data: myCourses, error: coursesError } = await supabase
           .from('courses')
           .select('id,title,description,cover_url,level,created_at')
-          .in('id', Array.from(enrolledIds))
+          .in('id', Array.from(enrolledIdsSet))
           .order('created_at', { ascending: false });
         
         if (coursesError) {
@@ -83,7 +86,7 @@ export default function HomePage() {
       }
 
       const allSuggested = (allActive ?? []).filter(
-        (c: any) => !enrolledIds.has(c.id)
+        (c: any) => !enrolledIdsSet.has(c.id)
       );
       
       setTotalSuggested(allSuggested.length);
@@ -96,6 +99,63 @@ export default function HomePage() {
     };
     load();
   }, [supabase, router]);
+
+  const handleRegisterCourse = async (courseId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setRegistering(courseId);
+    
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push(ROUTES.LOGIN);
+        return;
+      }
+
+      const { error } = await supabase
+        .from('user_courses')
+        .insert([{ user_id: user.id, course_id: courseId }]);
+
+      if (error) {
+        console.error('[HomePage] Error registering course:', error);
+        alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
+      } else {
+        console.log('[HomePage] Course registered successfully:', courseId);
+        // Cập nhật enrolledIds
+        setEnrolledIds(prev => new Set(prev).add(courseId));
+        // Reload suggested courses - remove the registered course
+        setSuggested(prev => prev.filter(c => c.id !== courseId));
+        setTotalSuggested(prev => prev - 1);
+        // Reload enrolled courses to show the new one
+        const { data: allActive } = await supabase
+          .from('courses')
+          .select('id,title,description,cover_url,level,created_at')
+          .eq('is_active', true)
+          .order('created_at', { ascending: false });
+        const { data: { user: reloadUser } } = await supabase.auth.getUser();
+        if (reloadUser) {
+          const { data: myIds } = await supabase
+            .from('user_courses')
+            .select('course_id')
+            .eq('user_id', reloadUser.id);
+          const enrolledIdsSet = new Set((myIds ?? []).map((r: any) => r.course_id));
+          const { data: myCourses } = await supabase
+            .from('courses')
+            .select('id,title,description,cover_url,level,created_at')
+            .in('id', Array.from(enrolledIdsSet))
+            .order('created_at', { ascending: false });
+          setEnrolled(myCourses?.slice(0, 4) ?? []);
+          setTotalEnrolled(myCourses?.length ?? 0);
+        }
+      }
+    } catch (error) {
+      console.error('[HomePage] Error:', error);
+      alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
+    } finally {
+      setRegistering(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -200,41 +260,56 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {suggested.map((course) => (
-              <Link
+              <div
                 key={course.id}
-                href={ROUTES.COURSE_DETAIL(course.id)}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 block"
+                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
               >
                 {/* Course Image */}
-                <div 
-                  className="h-40 w-full bg-gray-200 relative overflow-hidden"
-                  style={{
-                    backgroundImage: course.cover_url ? `url(${course.cover_url})` : undefined,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  {!course.cover_url && (
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-4xl">📚</span>
-                    </div>
-                  )}
-                </div>
+                <Link href={ROUTES.COURSE_DETAIL(course.id)}>
+                  <div 
+                    className="h-40 w-full bg-gray-200 relative overflow-hidden cursor-pointer"
+                    style={{
+                      backgroundImage: course.cover_url ? `url(${course.cover_url})` : undefined,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center'
+                    }}
+                  >
+                    {!course.cover_url && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-4xl">📚</span>
+                      </div>
+                    )}
+                  </div>
+                </Link>
 
                 {/* Course Content */}
                 <div className="p-4">
-                  <div className="flex items-start gap-2 mb-2">
-                    <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
-                    <h3 className="font-semibold text-gray-800 line-clamp-2">{course.title}</h3>
-                  </div>
+                  <Link href={ROUTES.COURSE_DETAIL(course.id)}>
+                    <div className="flex items-start gap-2 mb-2">
+                      <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
+                      <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-orange-500 transition-colors">{course.title}</h3>
+                    </div>
+                  </Link>
                   
                   <p className="text-sm text-gray-500 mb-4 line-clamp-2">{course.description}</p>
 
-                  <div className="w-full text-center py-2 px-4 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors text-sm font-medium">
-                    Xem khóa học
+                  {/* Button Actions */}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={(e) => handleRegisterCourse(course.id, e)}
+                      disabled={registering === course.id}
+                      className="flex-1 text-center py-2 px-3 bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white rounded-md transition-colors text-sm font-medium cursor-pointer"
+                    >
+                      {registering === course.id ? 'Đang đăng ký...' : 'Đăng ký'}
+                    </button>
+                    <Link href={ROUTES.COURSE_DETAIL(course.id)} className="flex-1">
+                      <div className="w-full text-center py-2 px-3 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                        Xem
+                      </div>
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
             {/* Card Xem thêm - Khóa học đề xuất */}
             {totalSuggested > suggested.length && (
