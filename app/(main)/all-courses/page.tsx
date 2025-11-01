@@ -24,6 +24,7 @@ export default function AllCoursesPage() {
   const [enrolledIds, setEnrolledIds] = useState<Set<string>>(new Set());
   const [filter, setFilter] = useState<FilterType>('all');
   const [loading, setLoading] = useState(true);
+  const [registering, setRegistering] = useState<string | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -80,6 +81,39 @@ export default function AllCoursesPage() {
       return allCourses.filter(c => !enrolledIds.has(c.id));
     }
     return allCourses;
+  };
+
+  const handleRegisterCourse = async (courseId: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    setRegistering(courseId);
+    
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) {
+        router.push(ROUTES.LOGIN);
+        return;
+      }
+
+      const { error } = await supabase
+        .from('user_courses')
+        .insert([{ user_id: user.id, course_id: courseId }]);
+
+      if (error) {
+        console.error('[AllCoursesPage] Error registering course:', error);
+        alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
+      } else {
+        console.log('[AllCoursesPage] Course registered successfully:', courseId);
+        // Cập nhật enrolledIds
+        setEnrolledIds(prev => new Set(prev).add(courseId));
+      }
+    } catch (error) {
+      console.error('[AllCoursesPage] Error:', error);
+      alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
+    } finally {
+      setRegistering(null);
+    }
   };
 
   if (loading) {
@@ -148,51 +182,70 @@ export default function AllCoursesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {filteredCourses.map((course) => (
-            <Link
+            <div
               key={course.id}
-              href={ROUTES.COURSE_DETAIL(course.id)}
-              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 block"
+              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
             >
               {/* Course Image */}
-              <div 
-                className="h-40 w-full bg-gray-200 relative overflow-hidden"
-                style={{
-                  backgroundImage: course.cover_url ? `url(${course.cover_url})` : undefined,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                {!course.cover_url && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-4xl">📚</span>
-                  </div>
-                )}
-                {/* Enrolled Badge */}
-                {enrolledIds.has(course.id) && (
-                  <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-                    Đã đăng ký
-                  </div>
-                )}
-              </div>
+              <Link href={ROUTES.COURSE_DETAIL(course.id)}>
+                <div 
+                  className="h-40 w-full bg-gray-200 relative overflow-hidden cursor-pointer"
+                  style={{
+                    backgroundImage: course.cover_url ? `url(${course.cover_url})` : undefined,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                  }}
+                >
+                  {!course.cover_url && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-4xl">📚</span>
+                    </div>
+                  )}
+                  {/* Enrolled Badge */}
+                  {enrolledIds.has(course.id) && (
+                    <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                      Đã đăng ký
+                    </div>
+                  )}
+                </div>
+              </Link>
 
               {/* Course Content */}
               <div className="p-4">
-                <div className="flex items-start gap-2 mb-2">
-                  <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
-                  <h3 className="font-semibold text-gray-800 line-clamp-2">{course.title}</h3>
-                </div>
+                <Link href={ROUTES.COURSE_DETAIL(course.id)}>
+                  <div className="flex items-start gap-2 mb-2">
+                    <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
+                    <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-orange-500 transition-colors">{course.title}</h3>
+                  </div>
+                </Link>
                 
                 <p className="text-sm text-gray-500 mb-4 line-clamp-2">{course.description}</p>
 
-                <div className={`w-full text-center py-2 px-4 rounded-md transition-colors text-sm font-medium ${
-                  enrolledIds.has(course.id)
-                    ? 'bg-teal-600 hover:bg-teal-700 text-white'
-                    : 'bg-orange-500 hover:bg-orange-600 text-white'
-                }`}>
-                  {enrolledIds.has(course.id) ? 'Xem chi tiết' : 'Xem khóa học'}
-                </div>
+                {/* Button Actions */}
+                {enrolledIds.has(course.id) ? (
+                  <Link href={ROUTES.COURSE_DETAIL(course.id)}>
+                    <div className="w-full text-center py-2 px-4 bg-teal-600 hover:bg-teal-700 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                      Xem chi tiết
+                    </div>
+                  </Link>
+                ) : (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={(e) => handleRegisterCourse(course.id, e)}
+                      disabled={registering === course.id}
+                      className="flex-1 text-center py-2 px-3 bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white rounded-md transition-colors text-sm font-medium cursor-pointer"
+                    >
+                      {registering === course.id ? 'Đang đăng ký...' : 'Đăng ký'}
+                    </button>
+                    <Link href={ROUTES.COURSE_DETAIL(course.id)} className="flex-1">
+                      <div className="w-full text-center py-2 px-3 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                        Xem
+                      </div>
+                    </Link>
+                  </div>
+                )}
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       )}
