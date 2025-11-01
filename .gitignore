@@ -1,0 +1,13 @@
+# Dependencies (Thư viện)
+/node_modules
+
+# Build output (Kết quả build)
+/.next/
+
+# Environment files (Tệp môi trường - chứa mật khẩu, API key...)
+.env.local
+.env.development.local
+.env.production.local
+
+# Log files
+*.log
