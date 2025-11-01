@@ -16,6 +16,7 @@ export const ROUTES = {
   // Protected routes
   DASHBOARD: '/home',
   COURSES: '/courses',
+  ALL_COURSES: '/all-courses',
   PROFILE: '/profile',
   SETTINGS: '/settings',
 

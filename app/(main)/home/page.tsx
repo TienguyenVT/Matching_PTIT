@@ -20,6 +20,8 @@ export default function HomePage() {
   const router = useRouter();
   const [enrolled, setEnrolled] = useState<Course[]>([]);
   const [suggested, setSuggested] = useState<Course[]>([]);
+  const [totalEnrolled, setTotalEnrolled] = useState(0);
+  const [totalSuggested, setTotalSuggested] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -61,7 +63,9 @@ export default function HomePage() {
           console.log('[HomePage] Enrolled courses loaded:', myCourses?.length || 0);
         }
         
-        setEnrolled(myCourses ?? []);
+        const allEnrolled = myCourses ?? [];
+        setTotalEnrolled(allEnrolled.length);
+        setEnrolled(allEnrolled.slice(0, 4)); // Chỉ hiển thị 4 khóa học đầu tiên
       }
 
       // Lấy các khóa học chưa đăng ký (đề xuất)
@@ -78,12 +82,14 @@ export default function HomePage() {
         console.log('[HomePage] All active courses loaded:', allActive?.length || 0);
       }
 
-      const suggestedCourses = (allActive ?? []).filter(
+      const allSuggested = (allActive ?? []).filter(
         (c: any) => !enrolledIds.has(c.id)
-      ).slice(0, 4); // Giới hạn 4 khóa học đề xuất
+      );
       
-      console.log('[HomePage] Suggested courses:', suggestedCourses.length);
-      setSuggested(suggestedCourses);
+      setTotalSuggested(allSuggested.length);
+      setSuggested(allSuggested.slice(0, 4)); // Chỉ hiển thị 4 khóa học đầu tiên
+      
+      console.log('[HomePage] Suggested courses:', allSuggested.length);
 
       console.log('[HomePage] Load complete');
       setLoading(false);
@@ -159,6 +165,28 @@ export default function HomePage() {
               </div>
             </Link>
           ))}
+          {/* Card Xem thêm - Khóa học tự ôn */}
+          {totalEnrolled > enrolled.length && (
+            <Link
+              href={ROUTES.ALL_COURSES}
+              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 block border-dashed"
+            >
+              <div className="h-40 w-full bg-gray-50 relative overflow-hidden flex items-center justify-center">
+                <div className="text-center">
+                  <svg className="w-16 h-16 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                  </svg>
+                  <p className="text-gray-500 text-sm font-medium">Xem thêm</p>
+                  <p className="text-gray-400 text-xs mt-1">{totalEnrolled - enrolled.length} khóa học</p>
+                </div>
+              </div>
+              <div className="p-4">
+                <div className="w-full text-center py-2 px-4 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium">
+                  Xem tất cả
+                </div>
+              </div>
+            </Link>
+          )}
         </div>
       )}
 
@@ -208,6 +236,28 @@ export default function HomePage() {
                 </div>
               </Link>
             ))}
+            {/* Card Xem thêm - Khóa học đề xuất */}
+            {totalSuggested > suggested.length && (
+              <Link
+                href={ROUTES.ALL_COURSES}
+                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 block border-dashed"
+              >
+                <div className="h-40 w-full bg-gray-50 relative overflow-hidden flex items-center justify-center">
+                  <div className="text-center">
+                    <svg className="w-16 h-16 mx-auto mb-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    <p className="text-gray-500 text-sm font-medium">Xem thêm</p>
+                    <p className="text-gray-400 text-xs mt-1">{totalSuggested - suggested.length} khóa học</p>
+                  </div>
+                </div>
+                <div className="p-4">
+                  <div className="w-full text-center py-2 px-4 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium">
+                    Xem tất cả
+                  </div>
+                </div>
+              </Link>
+            )}
           </div>
         </>
       )}
