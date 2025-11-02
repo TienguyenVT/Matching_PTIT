@@ -12,13 +12,13 @@ export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
   REGISTER: '/register',
+  RESET_PASSWORD: '/reset-password',
 
   // Protected routes
   DASHBOARD: '/home',
   COURSES: '/courses',
   ALL_COURSES: '/all-courses',
   PROFILE: '/profile',
-  SETTINGS: '/settings',
 
   // Dynamic routes - Course related
   COURSE_DETAIL: (courseId: string) => `/course/${courseId}/detail`,
@@ -30,13 +30,12 @@ export const ROUTES = {
 // ROUTE CATEGORIES
 // =====================================================
 
-export const PUBLIC_ROUTES = [ROUTES.HOME, ROUTES.LOGIN, ROUTES.REGISTER] as const;
+export const PUBLIC_ROUTES = [ROUTES.HOME, ROUTES.LOGIN, ROUTES.REGISTER, ROUTES.RESET_PASSWORD] as const;
 
 export const PROTECTED_ROUTES = [
   ROUTES.DASHBOARD,
   ROUTES.COURSES,
   ROUTES.PROFILE,
-  ROUTES.SETTINGS,
 ] as const;
 
 /**

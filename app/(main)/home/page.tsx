@@ -170,7 +170,7 @@ export default function HomePage() {
       {/* Title với thanh màu cam bên trái */}
       <div className="flex items-center gap-3 mb-6">
         <div className="w-1 h-8 bg-orange-500 rounded"></div>
-        <h1 className="text-2xl font-semibold text-gray-800">Khóa học tự ôn</h1>
+        <h1 className="text-2xl font-semibold text-gray-800">Khóa học đã đăng ký</h1>
       </div>
 
       {/* Course Grid - Khóa học tự ôn */}
