@@ -88,9 +88,10 @@ export default function NewMatchesSection({
   if (loading) {
     return (
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold mb-4">
-          Ghép đôi học tập với người dùng khác
-        </h2>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+          <h1 className="text-xl font-semibold text-gray-800">Ghép đôi học tập với người dùng khác</h1>
+        </div>
         <p className="text-gray-500">Đang tải...</p>
       </div>
     );
@@ -99,9 +100,10 @@ export default function NewMatchesSection({
   if (matches.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold mb-4">
-          Ghép đôi học tập với người dùng khác
-        </h2>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-1 h-55 bg-red-500 rounded flex-shrink-0"></div>
+          <h1 className="text-xl font-semibold text-gray-800">Ghép đôi học tập với người dùng khác</h1>
+        </div>
         <p className="text-gray-500">
           Không tìm thấy người dùng phù hợp để ghép đôi.
         </p>
@@ -111,9 +113,10 @@ export default function NewMatchesSection({
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-xl font-semibold mb-4">
-        Ghép đôi học tập với người dùng khác
-      </h2>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+        <h1 className="text-xl font-semibold text-gray-800">Ghép đôi học tập với người dùng khác</h1>
+      </div>
       <p className="text-sm text-gray-600 mb-4">
         Các người dùng được đề xuất dựa trên khóa học chung, trình độ và tiến
         độ học tập.
