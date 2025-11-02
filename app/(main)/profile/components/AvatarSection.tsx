@@ -30,6 +30,9 @@ interface AvatarSectionProps {
   onToggleAvatarSelector: () => void;
   expandedAvatars: boolean;
   onToggleExpandedAvatars: () => void;
+  onFullNameChange: (value: string) => void;
+  onSaveProfile: () => void;
+  saving: boolean;
 }
 
 export default function AvatarSection({
@@ -42,6 +45,9 @@ export default function AvatarSection({
   onToggleAvatarSelector,
   expandedAvatars,
   onToggleExpandedAvatars,
+  onFullNameChange,
+  onSaveProfile,
+  saving,
 }: AvatarSectionProps) {
   const getAvatarDisplay = () => {
     if (selectedAvatar) {
@@ -187,6 +193,18 @@ export default function AvatarSection({
           </div>
         </div>
       )}
+
+      <div className="space-y-4 mt-6">
+        <div className="pt-4">
+          <button
+            onClick={onSaveProfile}
+            disabled={saving}
+            className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors"
+          >
+            {saving ? "Đang lưu..." : "Lưu thay đổi"}
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

@@ -94,14 +94,19 @@ export default function ProfilePage() {
         console.error("Error updating profile:", error);
         alert("Cập nhật thông tin thất bại. Vui lòng thử lại.");
       } else {
-        alert("Cập nhật thông tin thành công!");
+        // Reload user data immediately
         const {
           data: { user: updatedUser },
         } = await supabase.auth.getUser();
         if (updatedUser) {
           setUser(updatedUser);
+          setFullName(updatedUser.user_metadata?.full_name || "");
+          setSelectedAvatar(updatedUser.user_metadata?.avatar_url || "");
         }
         setShowAvatarSelector(false);
+        setIsChangingAvatar(false);
+        alert("Cập nhật thông tin thành công!");
+        // Dispatch event to notify Header
         window.dispatchEvent(new CustomEvent("profile-updated"));
       }
     } catch (error) {
@@ -301,6 +306,9 @@ export default function ProfilePage() {
         }
         expandedAvatars={expandedAvatars}
         onToggleExpandedAvatars={() => setExpandedAvatars(!expandedAvatars)}
+        onFullNameChange={setFullName}
+        onSaveProfile={handleSaveProfile}
+        saving={saving}
       />
 
       {/* Phần 2: Thông tin tài khoản */}

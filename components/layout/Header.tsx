@@ -148,10 +148,14 @@ export function Header({ onMenuToggle }: HeaderProps) {
   useEffect(() => {
     // Listen for profile updates
     const handleProfileUpdate = async () => {
+      // Wait a bit to ensure Supabase has updated the user metadata
+      await new Promise((resolve) => setTimeout(resolve, 100));
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      setUser(user);
+      if (user) {
+        setUser(user);
+      }
     };
 
     window.addEventListener("profile-updated", handleProfileUpdate);
