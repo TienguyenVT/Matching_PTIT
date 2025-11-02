@@ -18,7 +18,6 @@ export const ROUTES = {
   COURSES: '/courses',
   ALL_COURSES: '/all-courses',
   PROFILE: '/profile',
-  SETTINGS: '/settings',
 
   // Dynamic routes - Course related
   COURSE_DETAIL: (courseId: string) => `/course/${courseId}/detail`,
@@ -36,7 +35,6 @@ export const PROTECTED_ROUTES = [
   ROUTES.DASHBOARD,
   ROUTES.COURSES,
   ROUTES.PROFILE,
-  ROUTES.SETTINGS,
 ] as const;
 
 /**
