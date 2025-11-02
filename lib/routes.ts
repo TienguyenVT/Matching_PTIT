@@ -12,6 +12,7 @@ export const ROUTES = {
   HOME: '/',
   LOGIN: '/login',
   REGISTER: '/register',
+  RESET_PASSWORD: '/reset-password',
 
   // Protected routes
   DASHBOARD: '/home',
@@ -29,7 +30,7 @@ export const ROUTES = {
 // ROUTE CATEGORIES
 // =====================================================
 
-export const PUBLIC_ROUTES = [ROUTES.HOME, ROUTES.LOGIN, ROUTES.REGISTER] as const;
+export const PUBLIC_ROUTES = [ROUTES.HOME, ROUTES.LOGIN, ROUTES.REGISTER, ROUTES.RESET_PASSWORD] as const;
 
 export const PROTECTED_ROUTES = [
   ROUTES.DASHBOARD,
