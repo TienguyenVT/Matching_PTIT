@@ -83,32 +83,48 @@ export default function ProfilePage() {
 
     setSaving(true);
     try {
-      const { error } = await supabase.auth.updateUser({
+      // 1. Update user metadata trong Supabase Auth
+      const { error: authError } = await supabase.auth.updateUser({
         data: {
           full_name: fullName,
           avatar_url: selectedAvatar,
         },
       });
 
-      if (error) {
-        console.error("Error updating profile:", error);
+      if (authError) {
+        console.error("Error updating user metadata:", authError);
         alert("Cập nhật thông tin thất bại. Vui lòng thử lại.");
-      } else {
-        // Reload user data immediately
-        const {
-          data: { user: updatedUser },
-        } = await supabase.auth.getUser();
-        if (updatedUser) {
-          setUser(updatedUser);
-          setFullName(updatedUser.user_metadata?.full_name || "");
-          setSelectedAvatar(updatedUser.user_metadata?.avatar_url || "");
-        }
-        setShowAvatarSelector(false);
-        setIsChangingAvatar(false);
-        alert("Cập nhật thông tin thành công!");
-        // Dispatch event to notify Header
-        window.dispatchEvent(new CustomEvent("profile-updated"));
+        return;
       }
+
+      // 2. Sync avatar và full_name vào bảng profiles trong database
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .update({
+          full_name: fullName || null,
+          avatar_url: selectedAvatar || null,
+        })
+        .eq("id", user.id);
+
+      if (profileError) {
+        console.error("Error updating profiles table:", profileError);
+        // Vẫn tiếp tục vì metadata đã được update
+      }
+
+      // Reload user data immediately
+      const {
+        data: { user: updatedUser },
+      } = await supabase.auth.getUser();
+      if (updatedUser) {
+        setUser(updatedUser);
+        setFullName(updatedUser.user_metadata?.full_name || "");
+        setSelectedAvatar(updatedUser.user_metadata?.avatar_url || "");
+      }
+      setShowAvatarSelector(false);
+      setIsChangingAvatar(false);
+      alert("Cập nhật thông tin thành công!");
+      // Dispatch event to notify Header
+      window.dispatchEvent(new CustomEvent("profile-updated"));
     } catch (error) {
       console.error("Error:", error);
       alert("Cập nhật thông tin thất bại. Vui lòng thử lại.");
@@ -250,30 +266,47 @@ export default function ProfilePage() {
         updates.email = editEmail;
       }
 
-      const { error } = await supabase.auth.updateUser(updates);
+      const { error: authError } = await supabase.auth.updateUser(updates);
 
-      if (error) {
+      if (authError) {
         alert("Cập nhật thông tin thất bại. Vui lòng thử lại.");
-      } else {
-        if (editEmail !== user.email) {
-          alert(
-            "Thông tin đã được cập nhật. Vui lòng kiểm tra email mới để xác nhận."
-          );
-        } else {
-          alert("Cập nhật thông tin thành công!");
-        }
-
-        const {
-          data: { user: updatedUser },
-        } = await supabase.auth.getUser();
-        if (updatedUser) {
-          setUser(updatedUser);
-          setFullName(updatedUser.user_metadata?.full_name || "");
-        }
-
-        setShowEditAccountModal(false);
-        window.dispatchEvent(new CustomEvent("profile-updated"));
+        return;
       }
+
+      // Sync full_name và email vào bảng profiles
+      const profileUpdates: any = {
+        full_name: editFullName || null,
+        email: editEmail,
+      };
+
+      const { error: profileError } = await supabase
+        .from("profiles")
+        .update(profileUpdates)
+        .eq("id", user.id);
+
+      if (profileError) {
+        console.error("Error updating profiles table:", profileError);
+        // Vẫn tiếp tục vì metadata đã được update
+      }
+
+      if (editEmail !== user.email) {
+        alert(
+          "Thông tin đã được cập nhật. Vui lòng kiểm tra email mới để xác nhận."
+        );
+      } else {
+        alert("Cập nhật thông tin thành công!");
+      }
+
+      const {
+        data: { user: updatedUser },
+      } = await supabase.auth.getUser();
+      if (updatedUser) {
+        setUser(updatedUser);
+        setFullName(updatedUser.user_metadata?.full_name || "");
+      }
+
+      setShowEditAccountModal(false);
+      window.dispatchEvent(new CustomEvent("profile-updated"));
     } catch (error) {
       alert("Cập nhật thông tin thất bại. Vui lòng thử lại.");
     } finally {
