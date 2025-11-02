@@ -75,6 +75,8 @@ export default function ProfilePage() {
           setUser(updatedUser);
         }
         setShowAvatarSelector(false);
+        // Dispatch custom event to notify Header
+        window.dispatchEvent(new CustomEvent('profile-updated'));
       }
     } catch (error) {
       console.error('Error:', error);

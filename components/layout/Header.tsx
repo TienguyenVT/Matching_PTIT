@@ -23,6 +23,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  const [user, setUser] = useState<any>(null);
   const supabase = supabaseBrowser();
   const router = useRouter();
 
@@ -49,6 +50,24 @@ export function Header({ onMenuToggle }: HeaderProps) {
   }, []);
 
   useEffect(() => {
+    // Load user data
+    const loadUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    loadUser();
+
+    // Listen for auth state changes (including avatar updates)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [supabase]);
+
+  useEffect(() => {
     // Đóng menus khi click outside
     const handleClickOutside = (e: MouseEvent) => {
       if (!(e.target as Element).closest('.user-menu-container')) {
@@ -61,6 +80,17 @@ export function Header({ onMenuToggle }: HeaderProps) {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  useEffect(() => {
+    // Listen for profile updates
+    const handleProfileUpdate = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+    };
+    
+    window.addEventListener('profile-updated', handleProfileUpdate);
+    return () => window.removeEventListener('profile-updated', handleProfileUpdate);
+  }, [supabase]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -150,9 +180,24 @@ export function Header({ onMenuToggle }: HeaderProps) {
         <div className="relative user-menu-container">
           <button 
             onClick={() => setUserMenuOpen(!userMenuOpen)}
-            className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center hover:ring-2 ring-teal-200 transition-all"
+            className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center hover:ring-2 ring-teal-200 transition-all overflow-hidden"
           >
-            <svg className="w-6 h-6 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
+            {user?.user_metadata?.avatar_url ? (
+              <img 
+                src={user.user_metadata.avatar_url} 
+                alt="Avatar" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Nếu ảnh không load được, hiển thị icon mặc định
+                  e.currentTarget.style.display = 'none';
+                  const nextSibling = e.currentTarget.nextSibling as HTMLElement;
+                  if (nextSibling) {
+                    nextSibling.style.display = 'flex';
+                  }
+                }}
+              />
+            ) : null}
+            <svg className={`w-6 h-6 text-teal-600 ${user?.user_metadata?.avatar_url ? 'hidden' : ''}`} fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
             </svg>
           </button>
