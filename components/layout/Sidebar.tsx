@@ -18,7 +18,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       items: [
         { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
         { label: "Cộng đồng",href: ROUTES.COMMUNITY, icon: "👥" },
-        { label: "Hồ sơ học tập", href: ROUTES.PROFILE, icon: "👤" },
+        { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
       ],
     },
   ];
