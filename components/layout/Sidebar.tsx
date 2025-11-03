@@ -17,7 +17,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       section: "HỌC TẬP",
       items: [
         { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
-        { label: "Cộng đồng",href: ROUTES.PROFILE, icon: "👥" },
+        { label: "Cộng đồng",href: ROUTES.COMMUNITY, icon: "👥" },
         { label: "Hồ sơ học tập", href: ROUTES.PROFILE, icon: "👤" },
       ],
     },
@@ -91,9 +91,9 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </h3>
               )}
               <nav className="space-y-1">
-                {section.items.map((item) => (
+                {section.items.map((item, itemIdx) => (
                   <Link
-                    key={item.href}
+                    key={`${idx}-${itemIdx}-${item.href}`}
                     href={item.href}
                     onClick={onClose}
                     className={`

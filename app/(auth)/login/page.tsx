@@ -40,12 +40,6 @@ export default function LoginPage() {
     <main className="flex min-h-dvh items-center justify-center p-6">
       <div className="w-full max-w-sm rounded-lg bg-white p-6 shadow-level1">
         <h1 className="text-xl font-semibold">Đăng nhập</h1>
-        <p className="mt-1 text-sm opacity-70">Tiếp tục để vào Dashboard</p>
-
-        <button onClick={onGoogle} className="mt-4 w-full rounded-md bg-primary px-4 py-2 text-white hover:opacity-90">
-          Đăng nhập với Google
-        </button>
-
         <div className="my-4 h-px bg-gray-200" />
 
         <form onSubmit={onEmail} className="space-y-3">

@@ -256,12 +256,18 @@ END $$;
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, email, full_name)
+  INSERT INTO public.profiles (id, email, full_name, avatar_url)
   VALUES (
     NEW.id,
     NEW.email,
-    NEW.raw_user_meta_data->>'full_name'
-  );
+    COALESCE(NEW.raw_user_meta_data->>'full_name', NULL),
+    COALESCE(NEW.raw_user_meta_data->>'avatar_url', NULL)
+  )
+  ON CONFLICT (id) DO UPDATE
+  SET
+    email = EXCLUDED.email,
+    full_name = COALESCE(EXCLUDED.full_name, profiles.full_name),
+    avatar_url = COALESCE(EXCLUDED.avatar_url, profiles.avatar_url);
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
@@ -683,12 +689,18 @@ END $$;
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, email, full_name)
+  INSERT INTO public.profiles (id, email, full_name, avatar_url)
   VALUES (
     NEW.id,
     NEW.email,
-    NEW.raw_user_meta_data->>'full_name'
-  );
+    COALESCE(NEW.raw_user_meta_data->>'full_name', NULL),
+    COALESCE(NEW.raw_user_meta_data->>'avatar_url', NULL)
+  )
+  ON CONFLICT (id) DO UPDATE
+  SET
+    email = EXCLUDED.email,
+    full_name = COALESCE(EXCLUDED.full_name, profiles.full_name),
+    avatar_url = COALESCE(EXCLUDED.avatar_url, profiles.avatar_url);
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
