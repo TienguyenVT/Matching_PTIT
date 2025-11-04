@@ -26,6 +26,9 @@ export const ROUTES = {
   COURSE_DETAIL: (courseId: string) => `/course/${courseId}/detail`,
   COURSE_LEARN: (courseId: string) => `/course/${courseId}/learn`,
   COURSE_MATCH: (courseId: string) => `/course/${courseId}/match`,
+  
+  // Dynamic routes - Profile related
+  STUDY_PROFILE_USER: (userId: string) => `/study-profile?userId=${userId}`,
 } as const;
 
 // =====================================================

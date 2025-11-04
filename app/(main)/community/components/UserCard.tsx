@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { ROUTES } from "@/lib/routes";
+
 interface UserCardProps {
   user: {
     id: string;
@@ -82,15 +85,23 @@ export default function UserCard({
             </p>
           )}
         </div>
-        {showMatchButton && onMatch && (
-          <button
-            onClick={onMatch}
-            disabled={matching}
-            className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors text-sm whitespace-nowrap"
+        <div className="flex items-center gap-2">
+          <Link
+            href={ROUTES.STUDY_PROFILE_USER(user.id)}
+            className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors text-sm whitespace-nowrap"
           >
-            {matching ? "Đang ghép..." : "Ghép đôi"}
-          </button>
-        )}
+            Xem hồ sơ
+          </Link>
+          {showMatchButton && onMatch && (
+            <button
+              onClick={onMatch}
+              disabled={matching}
+              className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors text-sm whitespace-nowrap"
+            >
+              {matching ? "Đang ghép..." : "Ghép đôi"}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
