@@ -17,7 +17,10 @@ export default function AccountInfoSection({
 }: AccountInfoSectionProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6 max-w-2xl mx-auto">
-      <h2 className="text-xl font-semibold mb-4">Thông tin tài khoản</h2>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+        <h1 className="text-xl font-semibold text-gray-800">Thông tin tài khoản</h1>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div>

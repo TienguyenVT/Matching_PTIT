@@ -131,7 +131,7 @@ export default function AllCoursesPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-1 h-8 bg-orange-500 rounded"></div>
+          <div className="w-1 h-8 bg-red-500 rounded"></div>
           <h1 className="text-2xl font-semibold text-gray-800">Tất cả khóa học</h1>
         </div>
       </div>
@@ -142,7 +142,7 @@ export default function AllCoursesPage() {
           onClick={() => setFilter('all')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             filter === 'all'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-red-500 text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -152,7 +152,7 @@ export default function AllCoursesPage() {
           onClick={() => setFilter('enrolled')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             filter === 'enrolled'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-red-500 text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -162,7 +162,7 @@ export default function AllCoursesPage() {
           onClick={() => setFilter('not-enrolled')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             filter === 'not-enrolled'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-red-500 text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -214,8 +214,8 @@ export default function AllCoursesPage() {
               <div className="p-4">
                 <Link href={ROUTES.COURSE_DETAIL(course.id)}>
                   <div className="flex items-start gap-2 mb-2">
-                    <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
-                    <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-orange-500 transition-colors">{course.title}</h3>
+                    <div className="w-1 h-5 bg-red-500 rounded mt-1 flex-shrink-0"></div>
+                    <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-red-500 transition-colors">{course.title}</h3>
                   </div>
                 </Link>
                 
@@ -238,7 +238,7 @@ export default function AllCoursesPage() {
                       {registering === course.id ? 'Đang đăng ký...' : 'Đăng ký'}
                     </button>
                     <Link href={ROUTES.COURSE_DETAIL(course.id)} className="flex-1">
-                      <div className="w-full text-center py-2 px-3 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                      <div className="w-full text-center py-2 px-3 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
                         Xem
                       </div>
                     </Link>
