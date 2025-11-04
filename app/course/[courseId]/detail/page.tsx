@@ -210,7 +210,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         <div className="lg:col-span-1">
           <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-8">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-1 h-6 bg-green-500 rounded"></div>
+              <div className="w-1 h-6 bg-red-500 rounded"></div>
               <h2 className="text-lg font-semibold text-gray-800">Chương trình học</h2>
             </div>
             <div className="space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto">
@@ -265,7 +265,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <div className="w-1 h-6 bg-green-500 rounded"></div>
+                <div className="w-1 h-6 bg-red-500 rounded"></div>
                 <h2 className="text-lg font-semibold text-gray-800">{getCurrentModuleTitle()}</h2>
               </div>
               {isEnrolled && (
