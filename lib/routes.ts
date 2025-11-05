@@ -21,6 +21,7 @@ export const ROUTES = {
   PROFILE: '/profile',
   COMMUNITY: '/community',
   STUDY_PROFILE: '/study-profile',
+  ADMIN: '/admin',
 
   // Dynamic routes - Course related
   COURSE_DETAIL: (courseId: string) => `/course/${courseId}/detail`,

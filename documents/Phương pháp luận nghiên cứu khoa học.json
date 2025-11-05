@@ -1,0 +1,370 @@
+{
+    "document_title": "PHƯƠNG PHÁP LUẬN NGHIÊN CỨU KHOA HỌC",
+    "structure_type": "Chương/Mục",
+    "data": [
+      {
+        "level_1_title": "CHƯƠNG I: ĐẠI CƯƠNG VỀ NGHIÊN CỨU KHOA HỌC",
+        "level_1_id": "I",
+        "children": [
+          {
+            "level_2_title": "1.1. KHÁI NIỆM NGHIÊN CỨU KHOA HỌC",
+            "level_2_id": "1.1",
+            "content": "Nghiên cứu khoa học là sự phát hiện bản chất sự vật, phát triển nhận thức khoa học về thế giới; hoặc là sáng tạo phương pháp mới và phương tiện kỹ thuật mới để làm biến đổi sự vật phục vụ cho mục tiêu hoạt động của con người.\nVề mặt thao tác, có thể định nghĩa, nghiên cứu khoa học là quá trình hình thành và chứng minh luận điểm khoa học."
+          },
+          {
+            "level_2_title": "1.2. PHÂN LOẠI NGHIÊN CỨU KHOA HỌC",
+            "level_2_id": "1.2",
+            "content": "Có nhiều cách phân loại nghiên cứu khoa học. Thông dụng, có thể xem xét 2 cách phân loại sau.",
+            "children": [
+              {
+                "level_3_title": "1. Phân loại theo chức năng nghiên cứu",
+                "level_3_id": "1.2.1",
+                "content": "- Nghiên cứu mô tả, là nghiên cứu nhằm đưa ra một hệ thống tri thức về nhận dạng một sự vật, đánh giá một sự vật.\n- Nghiên cứu giải thích, là những nghiên cứu nhằm giải thích nguồn gốc; động thái; cấu trúc tương tác; hậu quả; quy luật chung chi phối quá trình vận động của sự vật.\n- Nghiên cứu giải pháp, là loại nghiên cứu nhằm sáng tạo các giải pháp, có thể là giải pháp công nghệ, giải pháp tổ chức và quản lý.\n- Nghiên cứu dự báo, là những nghiên cứu nhằm nhận dạng trạng thái của sự vật trong tương lai."
+              },
+              {
+                "level_3_title": "2. Phân loại theo các giai đoạn của nghiên cứu",
+                "level_3_id": "1.2.2",
+                "content": "Theo các giai đoạn của nghiên cứu, người ta phân chia thành:\n- Nghiên cứu cơ bản, là những nghiên cứu nhằm phát hiện thuộc tính, cấu trúc, động thái các sự vật. Kết quả nghiên cứu cơ bản có thể là các khám phá, phát hiện, phát minh, dẫn tới hình thành một hệ thống lý thuyết mới.\n- Nghiên cứu ứng dụng, là sự vận dụng quy luật được phát hiện từ nghiên cứu cơ bản để giải thích một sự vật hoặc tạo ra những nguyên lý mới về các giải pháp.\n- Triển khai, còn gọi là triển khai thực nghiệm, là sự vận dụng các lý thuyết để đưa ra các hình mẫu (prototype) với những tham số khả thi về kỹ thuật. Hoạt động triển khai gồm 3 giai đoạn:\n+ Tạo vật mẫu (prototype), là giai đoạn thực nghiệm nhằm tạo ra được sản phẩm, chưa quan tâm đến quy trình sản xuất.\n+ Tạo công nghệ còn gọi là giai đoạn “làm pilot”, là giai đoạn tìm kiếm và thử nghiệm công nghệ để sản xuất ra sản phẩm theo mẫu vừa thành công trong giai đoạn thứ nhất.\n+ Sản xuất thử loạt nhỏ, còn gọi là sản xuất “Série 0\" (Loạt 0). Đây là giai đoạn kiểm chứng độ tin cậy của công nghệ trên quy mô nhỏ.\n\nTrên thực tế, trong một đề tài có thể chỉ tồn tại một loại nghiên cứu, chẳng hạn, nghiên cứu về một biến cố xã hội, một hiện trạng công nghệ; cũng có thể nghiên cứu những lý do về một nguyên nhân của sự suy thoái kinh tế; cũng có thể là nghiên cứu về một giải pháp kỹ thuật hoặc giải pháp xã hội, song cũng có thể tồn tại cả một số loại nghiên cứu nào đó."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG II: TRÌNH TỰ LOGIC CỦA NGHIÊN CỨU KHOA HỌC",
+        "level_1_id": "II",
+        "content": "Nghiên cứu khoa học, bất kể trong nghiên cứu khoa học tự nhiên, khoa học xã hội hoặc khoa học công nghệ đều tuân theo một trật tự logic xác định, bao gồm các bước sau đây:\n1. Phát hiện vấn đề (Problem), để lựa chọn chủ đề (topic) nghiên cứu\n2. Xác định mục tiêu (objective) nghiên cứu\n3. Nhận dạng câu hỏi (question) nghiên cứu\n4. Đưa luận điểm, tức giả thuyết (hypothesis) nghiên cứu\n5. Lựa chọn các phương pháp (methods) chứng minh giả thuyết\n6. Tìm kiếm các luận cứ (evidence) để chứng minh luận điểm",
+        "children": [
+          {
+            "level_2_title": "2.1. LỰA CHỌN CHỦ ĐỀ VÀ ĐẶT TÊN ĐỀ TÀI",
+            "level_2_id": "2.1",
+            "content": "Đề tài là một hình thức tổ chức nghiên cứu khoa học, trong đó có một nhóm người cùng thực hiện một nhiệm vụ nghiên cứu. Đề tài được lựa chọn từ một sự kiện khoa học.",
+            "children": [
+              {
+                "level_3_title": "1. Phát hiện vấn đề (Problem) nghiên cứu",
+                "level_3_id": "2.1.1",
+                "content": "Phát hiện vấn đề nghiên cứu (Research Problem) để xác định chủ đề nghiên cứu (Research Topics). Trên cơ sở đó đặt tên đề tài.\nVấn đề nghiên cứu được phát hiện nhờ các sự kiện thông thường, trong đó chứa đựng những mâu thuẫn giữa lý thuyết vốn tồn tại và thực tế. Loại sự kiện như thế được gọi là sự kiện khoa học (Scienctific Fact). Một số thủ thuật để phát hiện vấn đề nghiên cứu có thể là:\n1) Tìm kiếm nguyên nhân của những bất đồng trong tranh luận khoa học\n2) Nhận dạng những vướng mắc trong thực tế, mà các lý thuyết hiện hữu không cắt nghĩa được.\n3) Lắng nghe ý kiến của những người không biết gì về lĩnh vực mà mình quan tâm\n4) Nghĩ ngược lại quan niệm thông thường\n5) Những câu hỏi hoặc nghĩ bất chợt của người nghiên cứu."
+              },
+              {
+                "level_3_title": "2. Xác định nhiệm vụ nghiên cứu",
+                "level_3_id": "2.1.2",
+                "content": "Nhiệm vụ nghiên cứu là một chủ đề mà người nghiên cứu (hoặc nhóm nghiên cứu) thực hiện. Nhiệm vụ nghiên cứu có thể xuất hiện trước hoặc sau vấn đề nghiên cứu. Có nhiều nguồn nhiệm vụ:\n- Chủ trương phát triển kinh tế và xã hội của quốc gia được ghi trong các văn kiện chính thức của các cơ quan có thẩm quyền. Từ chủ trương phát triển kinh tế - xã hội, mà người nghiên cứu đi sâu phân tích để phát hiện “vấn đề nghiên cứu”.\n- Nhiệm vụ được giao từ cơ quan cấp trên của cá nhân hoặc tổ chức nghiên cứu. Cấp trên giao là xuất phát từ nhu cầu kinh tế - xã hội. Căn cứ nhiệm vụ cấp trên giao, người nghiên cứu mới phân tích xem, “Vấn đề nghiên cứu” nằm ở đâu?\n- Nhiệm vụ được nhận từ hợp đồng với các đối tác. Đối tác có thể là các doanh nghiệp hoặc tổ chức xã hội hoặc cơ quan chính phủ. Thông thường, các đối tác có thể chủ động nêu ra các “vấn đề nghiên cứu để ký hợp đồng, song cũng có thể họ chỉ quan tâm đến nhu cầu nghiên cứu của họ, mà không hề quan tâm tới cái “vấn đề nghiên cứu theo nghĩa khoa học mà người nghiên cứu sẽ phải phân tích sau này.\n- Nhiệm vụ do người nghiên cứu tự đặt cho mình xuất phát từ ý tưởng khoa học của bản thân người nghiên cứu.\nViệc lựa chọn đề tài có thể dựa trên những căn cứ được xem xét theo các cấp độ sau:\n1) Đề tài có ý nghĩa khoa học hay không?\n2) Đề tài có mang một ý nghĩa thực tiễn nào không?\n3) Đề tài có cấp thiết phải nghiên cứu hay không?\n4) Có đủ điều kiện đảm bảo cho việc hoàn thành đề tài không?\n5) Và đề tài có phù hợp sở thích không?"
+              },
+              {
+                "level_3_title": "3. Mục tiêu nghiên cứu",
+                "level_3_id": "2.1.3",
+                "content": "Mục tiêu nghiên cứu là những nội dung cần được xem xét và làm rõ trong nghiên cứu. Mục tiêu trả lời câu hỏi “Nghiên cứu cái gì?\""
+              },
+              {
+                "level_3_title": "4. Phạm vi nghiên cứu",
+                "level_3_id": "2.1.4",
+                "content": "Phạm vi nghiên cứu luôn được giới hạn trong một khuôn khổ nhất định:\n1) Phạm vi về nội dung nghiên cứu.\n2) Phạm vi về không gian của sự vật cần quan tâm trong nghiên cứu, cụ thể ở đây là giới hạn phạm vi mẫu khảo sát\n3) Phạm vi thời gian của tiến trình của sự vật, phạm vi nội dung nghiên cứu."
+              },
+              {
+                "level_3_title": "5. Mẫu khảo sát trong quá trình nghiên cứu",
+                "level_3_id": "2.1.5",
+                "content": "Mẫu khảo sát có thể được chọn trong: một không gian, một khu vực hành chính, một quá trình, một hoạt động, một cộng đồng."
+              },
+              {
+                "level_3_title": "6. Đặt tên đề tài",
+                "level_3_id": "2.1.6",
+                "content": "Tên đề tài phải phản ánh cô đọng nhất nội dung nghiên cứu của đề tài. Tên một đề tài khoa học khác với tên của tác phẩm văn học hoặc những bài luận chiến. Tên một tác phẩm văn học hoặc một bài luận chiến có thể mang những ý ẩn dụ sâu xa. Còn tên của một đề tài khoa học thì chỉ được mang một nghĩa, không được phép hiểu hai hoặc nhiều nghĩa. Để làm được điều này, người nghiên cứu cần lưu ý một vài nhược điểm cần tránh khi đặt tên đề tài:\n\nThứ nhất, tên đề tài không nên đặt bằng những cụm từ có độ bất định cao về thông tin. Ví dụ: Về ...; Thử bàn về...; Góp bàn về; Suy nghĩ về ...; Vài suy nghĩ về...; Một số suy nghĩ về ...; Một số biện pháp ...; Một số biện pháp về ...; Tìm hiểu về ...; Bước đầu tìm hiểu về ...; Thử tìm hiểu về; Nghiên cứu về ...; Bước đầu nghiên cứu về ...; Một số nghiên cứu về .; Vấn đề ...; Một số vấn đề ...; Những vấn đề về ...\n\nThứ hai, cũng cần hạn chế lạm dụng dụng những cụm từ chỉ mục đích để đặt tên đề tài. Cụm từ chỉ mục đích là những cụm từ mở đầu bởi những từ để, nhằm, góp phần, v.v.. Nói lạm dụng, nghĩa là sử dụng một cách thiếu cân nhắc, sử dụng tuỳ tiện trong những trường hợp không chỉ rõ được nội dung thực tế cần làm, mà chỉ đưa những cụm từ chỉ mục đích để che lấp những nội dung mà bản thân tác giả cũng chưa có được một sự hình dung rõ rệt. Ví dụ: (...) nhằm nâng cao chất lượng....; (...) để phát triển năng lực cạnh tranh; (...) góp phần vào...\nSẽ là không đạt yêu cầu khi đặt tên đề tài bao gồm hàng loạt loại cụm từ vừa nêu trên đây.\n\nThứ ba, cũng sẽ là không đạt yêu cầu khi đặt những tên đề tài có dạng như: “Lạm phát – Hiện trạng, Nguyên nhân, Giải pháp”. Đương nhiên, khi nghiên cứu đề tài “Lạm phát”, tác giả nào chăng phải tìm hiểu hiện trạng, phân tích nguyên nhân và đề xuất giải pháp chống lạm phát. Tuy nhiên loại tên đề tài này còn có một lỗi hết sức nghiêm trọng, nếu ta diễn giải tên đề tài này là đề tài nghiên cứu về 3 nội dung: “Hiện trạng lạm phát”, “Nguyên nhân lạm phát” và “Giải pháp lạm phát\"."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.2. XÂY DỰNG LUẬN ĐIỂM KHOA HỌC CỦA ĐỀ TÀI",
+            "level_2_id": "2.2",
+            "content": "Luận điểm khoa học là một phán đoán về bản chất sự vật. Quá trình xây dựng luận điểm khoa học bao gồm các bước: Phát hiện câu hỏi nghiên cứu; Đặt giả thuyết nghiên cứu.",
+            "children": [
+              {
+                "level_3_title": "1. Câu hỏi nghiên cứu",
+                "level_3_id": "2.2.1",
+                "content": "Câu hỏi nghiên cứu (Research Question) là câu hỏi được đặt ra khi người nghiên cứu đứng trước mâu thuẫn giữa tính hạn chế của tri thức khoa học hiện có với yêu cầu phát triển tri thức đó ở trình độ cao hơn. Phát hiện được vấn đề nghiên cứu là giai đoạn quan trọng trên bước đường phát triển nhận thức.\nTuy nhiên, nêu câu hỏi lại chính là công việc khó nhất đối với các bạn đồng nghiệp trẻ tuổi. Câu trả lời trong trường hợp này luôn là: “Hãy bắt đầu từ đặt câu hỏi nghiên cứu\".\nTrong nghiên cứu khoa học luôn tồn tại hai lớp câu hỏi: Câu hỏi về bản chất sự vật cần tìm kiếm, và câu hỏi về phương pháp nghiên cứu để làm sáng tỏ, về lý thuyết và về thực tiễn những câu hỏi thuộc lớp thứ nhất.\nCâu hỏi nghiên cứu đặt cho người nghiên cứu mối quan tâm: \"Cần chứng minh điều gì?\". Như vậy, thực chất việc đưa ra được những câu hỏi sẽ tạo cơ sở cho việc tìm kiếm câu trả lời.\nTương tự như phát hiện vấn đề nghiên cứu, nhưng câu hỏi nghiên cứu nhằm chi tiết hóa vấn đề nghiên cứu. Cũng có thể sử dụng những phương pháp tương tự để đặt câu hỏi nghiên cứu. Có thể nêu cụ thể hơn như sau:\n- Nhận dạng những bất đồng trong tranh luận khoa học: Khi hai đồng nghiệp bất đồng ý kiến, có thể là họ đã nhận ra những mặt yếu của nhau. Đây là cơ hội thuận lợi để người nghiên cứu nhận dạng những vấn đề mà các đồng nghiệp đã phát hiện.\n- Nhận dạng những vướng mắc trong hoạt động thực tế: Nhiều khó khăn nảy sinh trong hoạt động sản xuất, hoạt động xã hội, không thể sử dụng những lý thuyết hiện hữu để lý giải, hoặc những biện pháp thông thường để xử lý. Thực tế này đặt trước người nghiên cứu những câu hỏi phải trả lời, tức xuất hiện vấn đề, đòi hỏi người nghiên cứu phải đề xuất những giải pháp mới.\n- Nghĩ ngược lại quan niệm thông thường.\n- Lắng nghe lời phàn nàn của những người không am hiểu: Đôi khi nhiều câu hỏi nghiên cứu xuất hiện nhờ lời phàn nàn của người hoàn toàn không am hiểu lĩnh vực mà người nghiên cứu quan tâm.\n- Phát hiện mặt mạnh, mặt yếu trong nghiên cứu của đồng nghiệp: Mặt mạnh trong luận điểm, luận cứ, phương pháp của đồng nghiệp sẽ được sử dụng làm luận cứ hoặc phương pháp để chứng minh luận điểm của mình; còn mặt yếu được sử dụng để phát hiện vấn đề (tức đặt câu hỏi nghiên cứu), từ đó xây dựng luận điểm cho nghiên cứu của mình.\n- Những câu hỏi bất chợt xuất hiện không phụ thuộc lý do nào: Đây là những câu hỏi xuất hiện ở người nghiên cứu do bất chợt quan sát được một sự kiện nào đó, cũng có thể xuất hiện rất ngẫu nhiên, không phụ thuộc bất cứ lý do, thời gian hoặc không gian nào."
+              },
+              {
+                "level_3_title": "2. Giả thuyết nghiên cứu",
+                "level_3_id": "2.2.2",
+                "content": "Giả thuyết nghiên cứu (tiếng Anh là Hypothesis), là một kết luận giả định về bản chất sự vật, do người nghiên cứu đưa ra để chứng minh hoặc bác bỏ. Xét trong quan hệ giữa giả thuyết với câu hỏi nghiên cứu, thì giả thuyết chính là “câu trả lời” vào “câu hỏi nghiên cứu đã nêu ra.\nNgười nghiên cứu cần căn cứ vào phân loại nghiên cứu để đưa ra những giả thuyết phù hợp với bản chất của nghiên cứu khoa học. Theo chức năng của nghiên cứu khoa học, giả thuyết được phân chia thành giả thuyết mô tả, giả thuyết giải thích, giả thuyết dự báo, giả thuyết giải pháp.\nGiả thuyết là một phán đoán, cho nên viết giả thuyết khoa học, xét về mặt logic là viết một phán đoán. Phán đoán là một thao tác logic luôn được thực hiện trong nghiên cứu khoa học. Phán đoán có cấu trúc chung là \"S là P\", trong đó, S được gọi là chủ từ của phán đoán; còn P là vị từ (tức thuộc từ) của phán đoán.\nPhán đoán được sử dụng trong trường hợp cần nhận định về bản chất một sự vật, trình bày giả thuyết khoa học, trình bày luận cứ khoa học, v.v... Một số loại phán đoán thông dụng được liệt kê trong Bảng 1.\n\nBảng 1: Phân loại các phán đoán\n| Loại phán đoán | Cấu trúc |\n| :--- | :--- |\n| Phán đoán khẳng định | S là P |\n| Phán đoán phủ định | S không là P |\n| Phán đoán xác suất | S có lẽ là P |\n| Phán đoán hiện thực | S đang là P |\n| Phán đoán tất nhiên | S chắc chắn là P |\n| Phán đoán chung | Mọi S là P |\n| Phán đoán riêng | Một số S là P |\n| Phán đoán đơn nhất | Duy có S là P |\n| Phán đoán liên kết (phép hội) | S vừa là P1 vừa là P2 |\n| Phán đoán lựa chọn (phép tuyển) | S hoặc là P1 hoặc là P2 |\n| Phán đoán có điều kiện | Nếu S thì P |\n| Phán đoán tương đương | S khi và chỉ khi P |"
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.3. CHỨNG MINH LUẬN ĐIỂM KHOA HỌC",
+            "level_2_id": "2.3",
+            "content": "Muốn chứng minh một luận điểm khoa học, người nghiên cứu phải có đầy đủ luận cứ khoa học, Muốn tìm được các luận cứ và làm cho luận cứ có sức thuyết phục người nghiên cứu phải sử dụng những phương pháp nhất định. Phương pháp ở đây bao gồm hai loại: phương pháp tìm kiếm luận cứ và phương pháp sắp xếp các luận cứ để chứng minh luận điểm khoa học. Đó là những việc làm cần thiết của người nghiên cứu trong quá trình chứng minh luận điểm khoa học của mình.",
+            "children": [
+              {
+                "level_3_title": "1. Cấu trúc logic của phép chứng minh",
+                "level_3_id": "2.3.1",
+                "content": "Cấu trúc logic của phép chứng minh được nghiên cứu trong logic học, gồm 3 bộ phận hợp thành: Luận điểm, Luận cứ và Phương pháp.\n- Giả thuyết, là điều cần chứng minh trong một nghiên cứu khoa học. Giả thuyết trả lời câu hỏi: “Cần chứng minh điều gì?”. Về mặt logic học, giả thuyết là một phán đoán mà tính chân xác của nó cần được chứng minh.\n- Luận cứ là bằng chứng được đưa ra để chứng minh luận điểm. Luận cứ được xây dựng từ những thông tin thu được nhờ đọc tài liệu, quan sát hoặc thực nghiệm. Luận cứ trả lời câu hỏi: “Chứng minh bằng cái gì?”. Về mặt logic, luận cứ là phán đoán mà tính chân xác đã được chứng minh và được sử dụng làm tiền đề để chứng minh luận điểm.\n- Phương pháp, là các cách thức được sử dụng để tìm kiếm luận cứ và tổ chức luận cứ để chứng minh luận điểm (luận đề). Trong logic học có một khái niệm tương đương, là “Luận chứng”. Tuy nhiên, ban đầu khái niệm này trong logic học chỉ mang nghĩa là “Lập luận\"."
+              },
+              {
+                "level_3_title": "2. Luận cứ",
+                "level_3_id": "2.3.2",
+                "content": "Để chứng minh luận điểm khoa học, người nghiên cứu cần có hai loại luận cứ:\n- Luận cứ lý thuyết, là các luận điểm khoa học đã được chứng minh, bao gồm các khái niệm, các tiên đề, định lý, định luật, quy luật, tức các mối liên hệ, đã được khoa học chứng minh là đúng. Luận cứ lý thuyết được khai thác từ các tài liệu, công trình khoa học của các đồng nghiệp đi trước. Việc sử dụng luận cứ lý thuyết sẽ giúp người nghiên cứu tiết kiệm thời gian, không tốn kém thời gian để chứng minh lại những gì mà đồng nghiệp đã chứng minh.\n- Luận cứ thực tế, được thu thập từ trong thực tế bằng cách quan sát, thực nghiệm, phỏng vấn, điều tra hoặc khai thác từ các công trình nghiên cứu của các đồng nghiệp. Về mặt logic, luận cứ thực tiễn là các sự kiện thu thập được từ quan sát hoặc thực nghiệm khoa học.\nToàn bộ quá trình nghiên cứu khoa học, sau khi hình thành luận điểm, là quá trình tìm kiếm và chứng minh luận cứ.\nMột giả thuyết được chứng minh hay bị bác bỏ đều có nghĩa là “một chân lý được chứng minh\". Điều đó có nghĩa rằng, trong khoa học tồn tại hoặc không tồn tại bản chất như đã nêu trong giả thuyết."
+              },
+              {
+                "level_3_title": "3. Phương pháp xây dựng và sử dụng luận cứ",
+                "level_3_id": "2.3.3",
+                "content": "Nhiệm vụ của người nghiên cứu phải làm 3 việc: tìm kiếm luận cứ, chứng minh độ đúng đắn của bản thân luận cứ và sắp xếp luận cứ để chứng minh giả thuyết. Để làm 3 việc đó phải có phương pháp. Phương pháp trả lời câu hỏi: “Chứng minh bằng cách nào?”.\nNgười nghiên cứu cần những loại thông tin sau:\n• Cơ sở lý thuyết liên quan đến nội dung nghiên cứu.\n• Tài liệu thống kê và kết quả nghiên cứu của đồng nghiệp đi trước.\n• Kết quả quan sát hoặc thực nghiệm của bản thân người nghiên cứu.\nMuốn có luận cứ, người nghiên cứu phải biết lựa chọn các hướng tiếp cận để thu thập thông tin. Những loại thông tin trên đây có thể được thu thập qua các tác phẩm khoa học, sách giáo khoa, tạp chí chuyên ngành, báo chí và các phương tiện truyền thông, hiện vật, phỏng vấn chuyên gia trong và ngoài ngành.\nCó các hướng tiếp cận cơ bản sau:\n- Thứ nhất, tiếp cận phương pháp chung. Có hàng loạt cặp các hướng tiếp cận về phương pháp. Chẳng hạn: Tiếp cận Hệ thống/Cấu trúc; Tiếp cận Lịch sử/Logic; Tiếp cận Lý thuyết/Thực tiễn; Tiếp cận Phân tích/Tổng hợp; Tiếp cận Cá biệt/So sánh.\n- Thứ hai, tiếp cận lý thuyết. Trong tiếp cận lý thuyết, người nghiên cứu tìm kiếm các lý thuyết để hình thành luận cứ.\n- Thứ ba, tiếp cận thực tiễn. Có thể có 3 hướng tiếp cận thực tiễn: Khảo sát trực tiếp bằng các hoạt động quan sát hiện trường; Phương pháp chuyên gia thông qua các cuộc phỏng vấn, điều tra bằng bảng hỏi, mở hội thảo để nghe ý kiến chuyên gia; Phương pháp thực nghiệm."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG III: PHƯƠNG PHÁP THU THẬP THÔNG TIN",
+        "level_1_id": "III",
+        "content": "Nghiên cứu khoa học là quá trình thu thập thông tin và chế biến thông tin. Không một nghiên cứu nào là không cần thông tin. Không một khâu nào trong toàn bộ quá trình nghiên cứu là không cần thông tin. Thông tin cần thiết trong tất cả các trường hợp sau:\n• Tìm kiếm chủ đề nghiên cứu\n• Xác nhận lý do nghiên cứu\n• Tìm hiểu lịch sử nghiên cứu\n• Xác định mục tiêu nghiên cứu\n• Nhận dạng vấn đề nghiên cứu\n• Đặt giả thuyết nghiên cứu\n• Tìm kiếm luận cứ để chứng minh giả thuyết",
+        "children": [
+          {
+            "level_2_title": "3.1. ĐẠI CƯƠNG VỀ THU THẬP THÔNG TIN",
+            "level_2_id": "3.1",
+            "content": "Có nhiều phương pháp thu thập thông tin:\n1) Nghiên cứu tài liệu hoặc phỏng vấn để kế thừa những thành tựu mà các đồng nghiệp đã đạt được trong nghiên cứu.\n2) Trực tiếp quan sát trên đối tượng khảo sát ngay tại nơi diễn ra những quá trình mà người nghiên cứu có thể sử dụng làm luận cứ.\n3) Tiến hành các hoạt động thực nghiệm trực tiếp trên đối tượng khảo sát hoặc trên mô hình tương tự các quá trình diễn ra trên đối tượng nghiên cứu.\n4) Thực hiện các trắc nghiệm trên đối tượng khảo sát để thu thập các thông tin phản ứng từ phái đối tượng khảo sát.\nTrong nhiều trường hợp người nghiên cứu không thể trực tiếp thu thập thông tin trên đối tượng khảo sát, ví dụ, núi lửa đã tắt, trận động đất đã ngưng, một sự kiện lịch sử đã lùi vào quá khứ, v.v... Khi đó, người nghiên cứu phải thu thập thông tin một cách gián tiếp qua những người trung gian. Người ta gọi chung là phương pháp chuyên gia. Phương pháp chuyên gia bao gồm:\n• Phỏng vấn những người có am hiểu hoặc có liên quan đến những thông tin về sự kiện khoa học.\n• Gửi phiếu điều tra (bảng hỏi) để thu thập thông tin liên quan tới sự kiện khoa học.\n• Thảo luận dưới các hình thức hội nghị khoa học.",
+            "children": [
+              {
+                "level_3_title": "1. Chọn mẫu khảo sát",
+                "level_3_id": "3.1.1",
+                "content": "Mẫu, tức đối tượng khảo sát, được lựa chọn từ khách thể. Bất kể nghiên cứu trong lĩnh vực nào, người nghiên cứu đều phải chọn mẫu.\nViệc chọn mẫu có ảnh hưởng quyết định tới độ tin cậy của kết quả nghiên cứu và chi phí các nguồn lực cho công cuộc khảo sát. Việc chọn mẫu phải đảm bảo tính ngẫu nhiên, nhưng phải mang tính đại diện, tránh chọn mẫu theo định hướng chủ quan của người nghiên cứu.\nCó một số cách chọn mẫu thông dụng sau:\n- Lấy mẫu ngẫu nhiên (Random sampling), là cách chọn mẫu sao cho mỗi đơn vị lấy mẫu có một cơ hội hiện diện trong mẫu bằng nhau.\n- Lấy mẫu hệ thống (Systematic sampling). Một đối tượng gồm nhiều đơn vị được đánh số thứ tự. Chọn một đơn vị ngẫu nhiên có số thứ tự bất kỳ. Lấy một số bất kỳ làm khoảng cách mẫu, cộng vào số thứ tự của mẫu đầu tiên.\n- Lấy mẫu ngẫu nhiên phân tầng (Stratified random sampling). Trong trường hợp này, đối tượng được chia thành nhiều lớp, mỗi lớp có những đặc trưng đồng nhất. Như vậy, từ mỗi lớp, người nghiên cứu có thể thực hiện theo kỹ thuật lấy mẫu ngẫu nhiên. Cách lấy mẫu này cho phép phân tích số liệu khá toàn diện, nhưng có nhược điểm là phải biết trước những thông tin để phân tầng, phải tổ chức cấu trúc riêng biệt trong mỗi lớp.\n- Lấy mẫu hệ thống phân tầng (Stratified systematic sampling). Đối tượng điều tra gồm nhiều tập hợp không đồng nhất liên quan đến những thuộc tính cần nghiên cứu. Lấy mẫu được thực hiện trên cơ sở phân chia đối tượng thành nhiều lớp, mỗi lớp có những đặc trưng đồng nhất. Đối với mỗi lớp, người nghiên cứu thực hiện theo kỹ thuật lấy mẫu hệ thống.\n- Lấy mẫu từng cụm (Cluster sampling). Đối tượng điều tra được chia thành nhiều cụm tương tự như chia lớp trong kỹ thuật lấy mẫu phân tầng, chỉ có điều khác là mỗi cụm không chứa đựng những đơn vị đồng nhất, mà dị biệt."
+              },
+              {
+                "level_3_title": "2. Đặt “Giả thiết nghiên cứu”",
+                "level_3_id": "3.1.2",
+                "content": "Giả thiết (tiếng Anh là Assumption) là điều kiện giả định của nghiên cứu. Nói điều kiện “giả định là những điều kiện không có thực trong đối tượng khảo sát, mà chỉ là những tình huống giả định do người nghiên cứu đặt ra để lý tưởng hóa điều kiện thực nghiệm, với một giả thiết đặt ra, người nghiên cứu đã gạt bỏ bớt các yếu tố ảnh hưởng tới những diễn biến và kết quả nghiên cứu. Giả thiết không phải chứng minh.\nQuan hệ giữa giả thuyết và giả thiết trong nghiên cứu:\n- Giả thuyết là nhận định sơ bộ, là kết luận giả định của nghiên cứu, là luận điểm khoa học mà người nghiên cứu đặt ra. Giả thuyết cần được chứng minh hoặc bác bỏ;\n- Còn giả thiết là điều kiện giả định của nghiên cứu. Giả thiết được đặt ra để lý tưởng hóa điều kiện thực nghiệm. Giả thiết không cần phải chứng minh, nhưng có thể bị bác bỏ, nếu điều kiện giả định này quá “lý tưởng”, đến mức làm cho kết quả nghiên cứu trở nên không thể nghiệm đúng được.\n\nĐặt giả thiết nghiên cứu:\nGiả thiết nghiên cứu là những điều kiện giả định nhằm lý tưởng hóa các điều kiện để chứng minh giả thuyết. Giả thiết, tức điều kiện giả định được hình thành bằng cách lược bỏ một số điều kiện (tức một số biến) không có hoặc có ít mối liên hệ trực tiếp với những luận cứ để chứng minh giả thuyết nghiên cứu."
+              },
+              {
+                "level_3_title": "3. Biện luận kết quả nghiên cứu",
+                "level_3_id": "3.1.3",
+                "content": "Biện luận kết quả là điều bắt buộc trong nghiên cứu, bởi vì, không bao giờ có được điều kiện lý tưởng như đã giả định trong giả thiết nghiên cứu. Có hai hướng biện luận:\n(1) Hoặc là kết quả thực nghiệm hoàn toàn lý tưởng như trong giả thiết;\n(2) Hoặc là kết quả sẽ sai lệch nếu có sự tham gia của các biến đã giả định là không có trong nghiên cứu."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.2. PHƯƠNG PHÁP NGHIÊN CỨU TÀI LIỆU",
+            "level_2_id": "3.2",
+            "children": [
+              {
+                "level_3_title": "1. Mục đích nghiên cứu tài liệu",
+                "level_3_id": "3.2.1",
+                "content": "Nghiên cứu tài liệu là để thu thập được những thông tin sau:\n• Cơ sở lý thuyết liên quan đến chủ đề nghiên cứu.\n• Thành tựu lý thuyết đã đạt được liên quan đến chủ đề nghiên cứu.\n• Kết quả nghiên cứu của đồng nghiệp đã công bố trên các ấn phẩm.\n• Chủ trương và chính sách liên quan nội dung nghiên cứu.\n• Số liệu thống kê.\nTrong công việc nghiên cứu tài liệu, người nghiên cứu thường phải làm một số công việc về phân tích tài liệu và tổng hợp tài liệu.\nNguồn tài liệu cho nghiên cứu có thể rất đa dạng, có thể bao gồm một số thể loại như tạp chí và báo cáo khoa học trong ngành; tác phẩm khoa học trong ngành, sách giáo khoa; tạp chí và báo cáo khoa học ngoài ngành; tài liệu lưu trữ; số liệu thống kê; thông tin đại chúng."
+              },
+              {
+                "level_3_title": "2. Phân tích các nguồn tài liệu",
+                "level_3_id": "3.2.2",
+                "content": "Nguồn tài liệu được phân tích từ nhiều giác độ: chủng loại, tác giả, logic, v.v...\n1) Xét về chủng loại\n- Tạp chí và báo cáo khoa học trong ngành: có vai trò quan trọng nhất, mang tính thời sự cao.\n- Tác phẩm khoa học: đủ hoàn thiện về lý thuyết, có giá trị cao về các luận cứ lý thuyết, nhưng không mang tính thời sự.\n- Tạp chí và báo cáo khoa học ngoài ngành: cung cấp thông tin nhiều mặt, có thể có những gợi ý độc đáo.\n- Tài liệu lưu trữ: bao gồm các văn kiện chính thức, các hồ sơ không công bố trên báo chí.\n- Thông tin đại chúng: phản ánh nhu cầu bức xúc từ cuộc sống, nhưng thường không có chiều sâu nghiên cứu như chuyên khảo khoa học.\n\nCác loại nguồn liệt kê trên đây luôn có thể tồn tại dưới 2 dạng:\n- Nguồn tài liệu cấp I, gồm những tài liệu nguyên gốc của chính tác giả hoặc nhóm tác giả viết.\n- Nguồn tài liệu cấp II, gồm những tài liệu được tóm tắt, xử lý, biên soạn, biên dịch, trích dẫn, tổng quan từ tài liệu cấp I.\nTrong nghiên cứu khoa học, người ta ưu tiên sử dụng tài liệu cấp I. Chỉ trong trường hợp không thể tìm kiếm được tài liệu cấp I, người ta mới sử dụng tài liệu cấp II. Tài liệu dịch, sách dịch, về nguyên tắc phải được xem là tài liệu cấp II. Khi sử dụng tài liệu dịch phải tra cứu bản gốc. Trích dẫn khoa học trong các tài liệu phải được xem là tài liệu cấp II, khi muốn trích dẫn phải tra cứu bản gốc.\n\n2) Xét từ giác độ tác giả\nCó thể phân tích các tác giả theo một số đặc điểm sau:\n- Tác giả trong ngành hay ngoài ngành.\n- Tác giả trong cuộc hay ngoài cuộc.\n- Tác giả trong nước hay ngoài nước.\n- Tác giả đương thời hay hậu thế."
+              },
+              {
+                "level_3_title": "3. Tổng hợp tài liệu",
+                "level_3_id": "3.2.3",
+                "content": "Tổng hợp tài liệu bao gồm những nội dung sau:\n• Bổ túc tài liệu, sau khi phân tích phát hiện thiếu, sai lệch.\n• Lựa chọn tài liệu, chỉ chọn những thứ cần để đủ để xây dựng luận cứ.\n• Sắp xếp tài liệu, theo lịch đại (theo tiến trình), theo đồng đại (cùng thời điểm), và theo quan hệ nhân - quả.\n• Làm tái hiện quy luật. Đây là bước quan trọng nhất trong nghiên cứu tư liệu, chính là mục đích của tiếp cận lịch sử.\n• Giải thích quy luật."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.3. PHƯƠNG PHÁP PHI THỰC NGHIỆM",
+            "level_2_id": "3.3",
+            "content": "Phương pháp phi thực nghiệm (non-empirical method) là tên gọi chung cho một nhóm phương pháp thu thập thông tin, trong đó người nghiên cứu không gây bất cứ tác động nào làm biến đổi trạng thái của đối tượng khảo sát và môi trường bao quanh đối tượng khảo sát. Nhóm phương pháp phi thực nghiệm rất phong phú: quan sát, phỏng vấn, hội nghị, điều tra.",
+            "children": [
+              {
+                "level_3_title": "1. Quan sát",
+                "level_3_id": "3.3.1",
+                "content": "Quan sát là phương pháp được sử dụng cả trong nghiên cứu khoa học tự nhiên, khoa học xã hội và các nghiên cứu công nghệ. Trong phương pháp quan sát, người nghiên cứu chỉ quan sát những gì đã và đang tồn tại, không có bất cứ sự can thiệp nào gây biến đổi trạng thái của đối tượng nghiên cứu. Tuy nhiên, quan sát có nhược điểm cơ bản của quan sát khách quan là sự chậm chạp và thụ động.\nCác phương pháp quan sát thông dụng:\n- Theo mức độ chuẩn bị: quan sát có chuẩn bị trước và quan sát không chuẩn bị (bất chợt).\n- Theo quan hệ giữa người quan sát và người bị quan sát: quan sát không tham dự và quan sát có tham dự.\n- Theo mục đích nắm bắt bản chất đối tượng: quan sát hình thái, quan sát công năng, quan sát hình thái-công năng.\n- Theo mục đích xử lý thông tin: quan sát mô tả, quan sát phân tích.\n- Theo tính liên tục: quan sát liên tục, quan sát định kỳ, quan sát chu kỳ, quan sát tự động theo chương trình.\nTrong quan sát, người nghiên cứu có thể quan sát bằng nhiều cách trực tiếp xem, nghe, nhìn; sử dụng các phương tiện ghi âm, ghi hình; sử dụng các phương tiện đo lường."
+              },
+              {
+                "level_3_title": "2. Phỏng vấn",
+                "level_3_id": "3.3.2",
+                "content": "Phỏng vấn là đưa ra những câu hỏi với người đối thoại để thu thập thông tin. Thực chất, phỏng vấn tựa như quan sát gián tiếp bằng cách \"nhờ người khác quan sát hộ\", sau đó hỏi lại kết quả quan sát.\nTrong phỏng vấn, trước hết cần chọn người đối thoại. Sau khi đã lựa chọn được người đối thoại, cần phân tích tâm lý đối tác để có cách tiếp cận phù hợp.\nTrong phỏng vấn người ta chia ra các loại, như phỏng vấn có chuẩn bị trước; phỏng vấn không chuẩn bị trước; trao đổi trực tiếp; trao đổi qua điện thoại; có loại phỏng vấn để biết; có loại phỏng vấn sâu để khai thác chi tiết hơn về một chủ đề.\nCách đặt câu hỏi cũng là điều cần đặc biệt coi trọng. Nên hỏi vào việc người ta làm, tránh đòi hỏi người ta đánh giá hoặc hỏi vào những vấn đề nhạy cảm."
+              },
+              {
+                "level_3_title": "3. Hội nghị",
+                "level_3_id": "3.3.3",
+                "content": "Nội dung phương pháp hội nghị là nêu câu hỏi trước một nhóm chuyên gia để nghe họ tranh luận, phân tích. Đặc điểm chung của hội nghị khoa học là nêu vấn đề, thảo luận, ghi nhận mà không kết luận dưới hình thức một nghị quyết. Ưu điểm của phương pháp hội nghị là được nghe những ý kiến phản bác nhau. Song, nhược điểm là ý kiến hội nghị thường hay bị chi phối bởi những người có tài hùng biện và những người có địa vị xã hội cao tương đối so với nhóm.\nĐể khắc phục mặt nhược điểm, người ta thường dùng phương pháp tấn công não (brainstorming). Để nâng cao hiệu quả tấn công não, người ta tấn công não phân nhóm bằng cách chia nhỏ nhóm để tấn công não, lấy kết quả tấn công não nhóm trước làm dữ liệu để tấn công não cho nhóm sau. Gọi đó là phương pháp Delphi.\n\n1) Các loại hội nghị\n- Bàn tròn (roundtable): thảo luận và tranh luận thẳng thắn.\n- Hội thảo khoa học (seminar): đưa ra một số vấn đề khoa học nhất định để thảo luận, tranh luận.\n- Symposium: một loại seminar, nhưng được tổ chức trong nhiều hội thảo kế tục nhau, không định kỳ, để thảo luận những vấn đề gần nhau hoặc giống nhau.\n- Lớp huấn luyện (workshop hoặc school seminar): những chuyên gia có uy tín được mời trình bày các chuyên đề.\n- Hội nghị khoa học (conference): loại seminar đa chủ đề, được tổ chức khoảng từ 3 đến 5 năm một lần, với số lượng lớn.\n\n2) Tiến trình hội nghị\nThông thường hội nghị khoa học thường đơn giản, ít hoặc không có các nghi lễ ngoại giao. Sau phần các thủ tục khai mạc là đến các báo cáo.\n\n3) Kỷ yếu khoa học\nKỷ yếu khoa học là ấn phẩm công bố các công trình, các bài thảo luận trong khuôn khổ các hội nghị khoa học. Kỷ yếu được công bố nhằm mục đích ghi nhận hoạt động của một hội nghị hoặc một tổ chức, tạo cơ hội để người nghiên cứu công bố kết quả nghiên cứu và thiết lập quan hệ với đồng nghiệp."
+              },
+              {
+                "level_3_title": "4. Điều tra bằng bảng hỏi",
+                "level_3_id": "3.3.4",
+                "content": "Điều tra bằng bảng hỏi vốn là phương pháp của xã hội học, nhưng đã được áp dụng phổ biến trong nhiều lĩnh vực. Về mặt kỹ thuật có ba loại công việc phải quan tâm: chọn mẫu, thiết kế bảng câu hỏi và xử lý kết quả.\n- Thứ nhất: Chọn mẫu. Việc chọn mẫu phải đảm bảo vừa mang tính ngẫu nhiên, vừa mang tính đại diện.\n- Thứ hai: Thiết kế bảng câu hỏi. Có hai nội dung được quan tâm: (1) Các loại câu hỏi (câu hỏi đóng có/không, câu hỏi nhiều phương án, câu hỏi có trọng số, câu hỏi mở); và (2) Trật tự logic của các câu hỏi.\n- Thứ ba: Xử lý kết quả điều tra. Kết quả điều tra được xử lí dựa trên cơ sở thống kê toán. Hiện nay chương trình xử lí thống kê trên máy đã được sử dụng một cách phổ biến (ví dụ SPSS)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.4. PHƯƠNG PHÁP THỰC NGHIỆM",
+            "level_2_id": "3.4",
+            "children": [
+              {
+                "level_3_title": "1. Khái niệm chung",
+                "level_3_id": "3.4.1",
+                "content": "Thực nghiệm là một phương pháp thu thập thông tin được thực hiện bởi những quan sát trong điều kiện gây biến đổi đối tượng khảo sát và môi trường xung quanh đối tượng khảo sát một cách có chủ định. Bằng việc thay đổi các tham số, người nghiên cứu có thể tạo ra nhiều cơ hội thu được những kết quả mong muốn, như: tách riêng từng phần thuần nhất để quan sát, biến đổi môi trường, rút ngắn thời gian tiếp cận, tiến hành lặp lại nhiều lần.\nDù có ưu điểm, nhưng nó không thể áp dụng trong hàng loạt trường hợp, chẳng hạn, nghiên cứu lịch sử, địa lý, địa chất, khí tượng, thiên văn (chỉ có thể quan sát); còn nghiên cứu lịch sử, văn học lại chỉ có thể thực hiện bằng phương pháp nghiên cứu tài liệu."
+              },
+              {
+                "level_3_title": "2. Phân loại thực nghiệm",
+                "level_3_id": "3.4.2",
+                "content": "Tùy nơi thực nghiệm, thực nghiệm được chia thành: (1) Thực nghiệm trong phòng thí nghiệm; (2) Thực nghiệm tại hiện trường; (3) Thực nghiệm trong quần thể xã hội.\nTùy mục đích quan sát thực nghiệm được phân loại thành: Thực nghiệm thăm dò; Thực nghiệm kiểm tra; Thực nghiệm song hành; Thực nghiệm đối nghịch; Thực nghiệm so sánh.\nTùy diễn trình thực nghiệm được phân loại thành: Thực nghiệm cấp diễn (thời gian ngắn); Thực nghiệm trường diễn (lâu dài, liên tục); Thực nghiệm bán cấp diễn.\nTrong thực nghiệm, người nghiên cứu phải tuân thủ các nguyên tắc sau: Đề ra những chuẩn đánh giá và phương thức đánh giá; Giữ ổn định các yếu tố không bị người nghiên cứu khống chế; Mẫu được lựa chọn phải mang tính phổ biến; Đưa ra một số giả thiết thực nghiệm để loại bớt những yếu tố tác động phức tạp."
+              },
+              {
+                "level_3_title": "3. Các loại thực nghiệm",
+                "level_3_id": "3.4.3",
+                "content": "Xét trên quan điểm truyền thống, có 3 nhóm phương pháp thực nghiệm:\n1) Thực nghiệm \"Thử và Sai\" (trial-and-error method): là \"thử\"; thử xong thấy \"sai\"; tiếp đó \"thử lại\"; lại \"sai\"; lại \"thử\", cho đến khi đạt được kết quả cuối cùng.\n2) Thực nghiệm Heuristic: là một phương pháp thử và sai theo nhiều bước, mỗi bước chỉ thực nghiệm trên một mục tiêu. Nội dung: Chia thực nghiệm thành nhiều bước, mỗi bước chỉ đưa ra một mục tiêu thực nghiệm; Phát hiện thêm các điều kiện phụ cho mỗi bước thực nghiệm.\n3) Thực nghiệm trên mô hình. (Note: The text mentions this third type in the intro to section 3 but does not provide detailed content for it in the subsequent subsections)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.5. PHƯƠNG PHÁP TRẮC NGHIỆM",
+            "level_2_id": "3.5",
+            "content": "Trắc nghiệm là một phương pháp bán thực nghiệm. Nói trắc nghiệm là một phương pháp bán thực nghiệm là vì, sự vật không bị bất cứ tác động nào làm biến đổi trạng thái, mà chỉ có các tình huống của môi trường hoạt động của sự vật bị thay đổi. Qua trắc nghiệm, người nghiên cứu nhận biết được chất lượng của đối tượng khảo sát.\nTrắc nghiệm được sử dụng trong nhiều lĩnh vực nghiên cứu (công nghệ, tâm lý...)."
+          },
+          {
+            "level_2_title": "3.6. PHƯƠNG PHÁP XỬ LÝ THÔNG TIN",
+            "level_2_id": "3.6",
+            "content": "Kết quả thu thập thông tin tồn tại dưới hai dạng: Thông tin định tính và Thông tin định lượng. Có hai phương hướng xử lý thông tin:\n- Xử lý toán học đối với các thông tin định lượng: sử dụng phương pháp thống kê toán để xác định xu hướng diễn biến.\n- Xử lý logic đối với các thông tin định tính: đưa ra những phán đoán về bản chất các sự kiện, thể hiện những liên hệ logic.",
+            "children": [
+              {
+                "level_3_title": "1. Xử lý thông tin định lượng",
+                "level_3_id": "3.6.1",
+                "content": "Người nghiên cứu phải sắp xếp số liệu để làm bộc lộ ra các mối liên hệ và xu thế của sự vật. Số liệu có thể được trình bày dưới nhiều dạng:\n- Con số rời rạc: dùng trong trường hợp số liệu thuộc các sự vật riêng lẻ, không mang tính hệ thống.\n- Bảng số liệu: sử dụng khi số liệu mang tính hệ thống, thể hiện một cấu trúc hoặc một xu thế.\n- Biểu đồ: cung cấp hình ảnh trực quan về tương quan giữa các sự vật (biểu đồ hình cột, hình quạt, tuyến tính, không gian, bậc thang).\n- Đồ thị: sử dụng khi quy mô của tập hợp số liệu đủ lớn, để nhận ra những liên hệ tất yếu."
+              },
+              {
+                "level_3_title": "2. Xử lý các thông tin định tính",
+                "level_3_id": "3.6.2",
+                "content": "Mục đích của xử lý định tính là nhận dạng bản chất và mối liên hệ bản chất giữa các sự kiện. Kết quả sẽ giúp người nghiên cứu mô tả được dưới dạng các sơ đồ hoặc biểu thức toán học.\n- Sơ đồ cho phép hình dung một cách trực quan các mối liên hệ giữa các yếu tố trong cấu trúc của một sự vật.\n- Mô hình toán cho phép khái quát hóa các liên hệ của sự vật, tính toán được các quan hệ định lượng giữa chúng."
+              },
+              {
+                "level_3_title": "3. Sai số quan sát",
+                "level_3_id": "3.6.3",
+                "content": "Bất cứ phép đo nào cũng phạm những sai số. Có ba cấp độ sai số:\n1) Sai số ngẫu nhiên: do sự cảm nhận chủ quan của người quan sát.\n2) Sai số kỹ thuật: do các yếu tố kỹ thuật gây ra một cách khách quan.\n3) Sai số hệ thống: do hệ thống quyết định. Hệ thống càng lớn thì sai số quan sát càng lớn."
+              },
+              {
+                "level_3_title": "4. Phương pháp trình bày độ chính xác của số liệu",
+                "level_3_id": "3.6.4",
+                "content": "Độ chính xác của số liệu được trình bày khác nhau tuỳ thuộc một số yếu tố:\n1) Độ chính xác phụ thuộc kích thước của hệ thống.\n2) Độ chính xác phụ thuộc phương tiện quan sát.\n3) Tính nhất quán trong khi trình bày độ chính xác của số liệu (phải đưa về cùng một độ chính xác trong cùng một hệ thống)."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG IV: TRÌNH BÀY LUẬN ĐIỂM KHOA HỌC",
+        "level_1_id": "IV",
+        "content": "Người nghiên cứu có thể trình bày luận điểm khoa học bằng viết hoặc thuyết trình. Kết quả có thể được công bố dưới dạng các tài liệu lưu hành rộng rãi hoặc không rộng rãi với nhiều hình thức khác nhau, như bài báo khoa học, chuyên khảo khoa học, tổng luận khoa học, tác phẩm khoa học, v.v...",
+        "children": [
+          {
+            "level_2_title": "4.1. BÀI BÁO KHOA HỌC",
+            "level_2_id": "4.1",
+            "content": "Bài báo khoa học được viết để công bố trên các tạp chí chuyên môn hoặc trong hội nghị khoa học nhằm nhiều mục đích (công bố ý tưởng, kết quả, đề xướng tranh luận...). Một bài báo khoa học chỉ nên viết trong khoảng 1500-2000 chữ (3-4 trang khổ A4). Báo cáo hội nghị khoa học có thể dài hơn, nhưng cũng không nên dài quá 3000-4000 chữ.\nNội dung khoa học của bài báo thường có các môđun sau:\n- Môđun 1: Mở đầu (Lý do, ý nghĩa, đối tượng hưởng lợi).\n- Môđun 2: Lịch sử nghiên cứu (Ai đã làm gì? Mặt mạnh yếu, kết luận nội dung cần giải quyết).\n- Môđun 3: Mục tiêu nghiên cứu (Tôi sẽ làm gì?).\n- Môđun 4: Vấn đề nghiên cứu và luận điểm của tác giả (Luận điểm của tôi là gì?).\n- Môđun 5: Phương pháp và Luận cứ chứng minh luận điểm.\n- Môđun 6: Phân tích kết quả (Sự khác biệt thực tế và giả thiết, độ chính xác, hạn chế).\n- Môđun 7: Kết luận và Khuyến nghị."
+          },
+          {
+            "level_2_title": "4.2. THÔNG BÁO VÀ TỔNG LUẬN KHOA HỌC",
+            "level_2_id": "4.2",
+            "children": [
+              {
+                "level_3_title": "1. Thông báo khoa học",
+                "level_3_id": "4.2.1",
+                "content": "Thông báo khoa học được sử dụng trong một số trường hợp cần đưa tin vắn tắt về hoạt động nghiên cứu. Mục đích là cung cấp thông tin tóm tắt về hoạt động và thành tựu, không trình bày luận cứ hoặc phương pháp. Thông báo thường khoảng 100-200 chữ, hoặc trình bày miệng không quá 5 phút."
+              },
+              {
+                "level_3_title": "2. Tổng luận khoa học",
+                "level_3_id": "4.2.2",
+                "content": "Tổng luận khoa học là bản mô tả khái quát toàn bộ sự kiện, thành tựu và vấn đề liên quan đến một chủ đề nghiên cứu. Nội dung gồm: Lý do làm tổng luận; Trình bày tóm lược lịch sử nghiên cứu, các phương hướng và thành tựu; Trình bày các vấn đề khoa học; Tóm lược các tác giả, luận điểm, phương pháp; Nhận xét tổng quát; Đề xuất chủ kiến của cá nhân."
+              }
+            ]
+          },
+          {
+            "level_2_title": "4.3. CÔNG TRÌNH KHOA HỌC",
+            "level_2_id": "4.3",
+            "children": [
+              {
+                "level_3_title": "1. Chuyên khảo khoa học",
+                "level_3_id": "4.3.1",
+                "content": "Chuyên khảo gồm các bài viết định hướng theo một nhóm vấn đề xác định, tập trung vào một chủ đề đã được lựa chọn, nhưng không nhất thiết hợp thành một hệ thống lý thuyết, ngược lại thường khi còn có hàng loạt luận điểm khoa học trái ngược nhau."
+              },
+              {
+                "level_3_title": "2. Tác phẩm khoa học",
+                "level_3_id": "4.3.2",
+                "content": "Tác phẩm khoa học phải là sự tổng kết một cách có hệ thống toàn bộ phương hướng nghiên cứu. Về mặt luận điểm khoa học, tác phẩm khoa học khác nghiên cứu chuyên khảo ở chỗ, giữa các phần có một luận điểm nhất quán."
+              }
+            ]
+          },
+          {
+            "level_2_title": "4.4. BÁO CÁO KẾT QUẢ NGHIÊN CỨU KHOA HỌC",
+            "level_2_id": "4.4",
+            "content": "Báo cáo kết quả nghiên cứu là văn bản trình bày một cách hệ thống các kết quả nghiên cứu, là sản phẩm cuối cùng của nghiên cứu và là sản phẩm công bố đầu tiên trước cộng đồng nghiên cứu.",
+            "children": [
+              {
+                "level_3_title": "1. Bố cục chung của báo cáo",
+                "level_3_id": "4.4.1",
+                "content": "Về nguyên tắc tổ chức bố cục, các báo cáo bao gồm 3 môđun như sau:\n1) Phần khai tập (Front Matter): gồm phần bìa (Bìa chính, Bìa phụ, Bìa lót), lời nói đầu, mục lục, danh sách ký hiệu và viết tắt.\n2) Phần bài chính (Main Text): bao gồm Mở đầu (Lý do, lịch sử, mục tiêu, mẫu, phạm vi, thời gian, vấn đề, luận điểm, phương pháp); Kết quả nghiên cứu và phân tích (Luận cứ lý thuyết, luận cứ thực tiễn, kết quả đạt được, thảo luận); Kết luận và khuyến nghị; Tài liệu tham khảo.\n3) Phần phụ đính (Back Matter): có thể có các phụ lục, hình vẽ, biểu đồ, phần giải thích thuật ngữ, phần tra cứu..."
+              },
+              {
+                "level_3_title": "2. Cách đánh số chương mục của báo cáo",
+                "level_3_id": "4.4.2",
+                "content": "Tuỳ theo quy mô của công trình mà báo cáo có thể được chia nhiều cấp chương mục. Thông thường: Tập -> Phần -> Chương -> Mục lớn (La mã) -> Mục (A rập) -> Tiểu mục -> Ý lớn (chữ cái) -> Ý nhỏ (gạch đầu dòng)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "4.5. THUYẾT TRÌNH KHOA HỌC",
+            "level_2_id": "4.5",
+            "content": "Kỹ năng thuyết trình có thể luyện tập. Ngôn ngữ nói có cấu trúc logic gồm 4 bộ phận hợp thành:\n1. Vấn đề thuyết trình: là câu hỏi đặt ra cho mỗi bản thuyết trình.\n2. Luận điểm thuyết trình: mỗi bản thuyết trình phải có ít nhất 1 luận điểm khoa học của tác giả. Luận điểm phải rõ ràng, không chung chung.\n3. Luận cứ của thuyết trình: là bằng chứng để chứng minh luận điểm. Bài giảng thiếu luận cứ là một bài giảng nghèo nàn.\n4. Phương pháp thuyết trình: có 3 phương pháp thuyết trình là diễn dịch (đi từ cái chung đến cái riêng), quy nạp (đi từ cái riêng đến cái chung), loại suy (đi từ cái riêng đến cái riêng)."
+          },
+          {
+            "level_2_title": "4.6. NGÔN NGỮ KHOA HỌC",
+            "level_2_id": "4.6",
+            "content": "1. Văn phong khoa học: Lời văn trong tài liệu khoa học thường được dùng ở thể bị động. Văn phong khoa học phải giúp trình bày một cách khách quan kết quả nghiên cứu, tránh thể hiện tình cảm yêu ghét.\n2. Ngôn ngữ toán học: được sử dụng để trình bày những quan hệ định lượng thuộc đối tượng nghiên cứu (số liệu, bảng, biểu đồ, đồ thị).\n3. Sơ đồ: là hình ảnh trực quan về mối liên hệ giữa các yếu tố trong hệ thống.\n4. Hình vẽ: cung cấp hình ảnh tương tự đối tượng nghiên cứu về mặt hình thể và tương quan trong không gian.\n5. Ảnh: sử dụng trong trường hợp cần thiết, quan trọng cho các lĩnh vực như sử học, khảo cổ học, kiến trúc, hội hoạ, môi trường."
+          },
+          {
+            "level_2_title": "4.6. TRÍCH DẪN KHOA HỌC",
+            "level_2_id": "4.6_bis",
+            "content": "(Lưu ý: Mục này bị trùng số 4.6 trong tài liệu gốc)\nKhi sử dụng kết quả nghiên cứu của đồng nghiệp, ghi rõ xuất xứ của tài liệu đã trích dẫn là một nguyên tắc hết sức quan trọng.\n1. Công dụng của trích dẫn: dùng làm luận cứ, để bác bỏ, để phân tích.\n2. Nguyên tắc trích dẫn: tôn trọng nguyên tắc bảo mật của nguồn tài liệu (nếu có).\n3. Ý nghĩa của trích dẫn: Ý nghĩa khoa học (thể hiện tính chuẩn xác), Ý nghĩa trách nhiệm, Ý nghĩa pháp lý (tôn trọng quyền tác giả), Ý nghĩa đạo đức.\n4. Nơi ghi trích dẫn: có thể ghi cuối trang, cuối chương hoặc cuối sách. Mỗi trích dẫn được đánh số chỉ dẫn.\n5. Mẫu ghi trích dẫn: tuỳ theo quy định của các nhà xuất bản.\n6. Vài điểm lưu ý khi ghi trích dẫn: Sử dụng cách đánh số thống nhất; nếu ghi cuối trang thì đánh số liên tục hoặc theo từng trang; nếu ghi cuối sách thì liệt kê một lần theo thứ tự chữ cái."
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG V: TỔ CHỨC THỰC HIỆN ĐỀ TÀI",
+        "level_1_id": "V",
+        "content": "Tổ chức thực hiện đề tài được xác định dựa trên trình tự logic của nghiên cứu. Các bước thực hiện đề tài không quá chặt chẽ như việc điều hành một công nghệ sản xuất, có thể linh hoạt điều chỉnh.",
+        "children": [
+          {
+            "level_2_title": "Bước 1. Lựa chọn đề tài",
+            "level_2_id": "5.1",
+            "content": "Việc lựa chọn đề tài có một ý nghĩa rất quan trọng. Trước hết cần xác định nhiệm vụ nghiên cứu từ các nguồn (chủ trương quốc gia, cấp trên giao, hợp đồng, tự đặt). Sau đó, xem xét nhiệm vụ theo các tiêu chí: ý nghĩa khoa học, ý nghĩa thực tiễn, tính cấp thiết, điều kiện đảm bảo, sự phù hợp sở thích."
+          },
+          {
+            "level_2_title": "Bước 2. Xây dựng đề cương và lập kế hoạch nghiên cứu",
+            "level_2_id": "5.2",
+            "content": "Đề cương được xây dựng để trình cơ quan và tổ chức tài trợ phê duyệt; là cơ sở để làm việc với các đồng nghiệp. Nội dung đề cương cần thuyết minh: Tên đề tài, Lý do chọn đề tài, Lịch sử nghiên cứu, Mục tiêu nghiên cứu (cây mục tiêu), Phạm vi nghiên cứu, Mẫu khảo sát, Vấn đề nghiên cứu, Giả thuyết nghiên cứu, Lựa chọn luận cứ và phương pháp thu thập thông tin.\nNgoài ra cần: Lập danh sách cộng tác viên (nhân lực chính nhiệm, kiêm nhiệm, quy đổi, hỗ trợ); Lập tiến độ thực hiện; Lập dự toán kinh phí (lương, chi phí nghiên cứu, mua tài liệu, hội nghị, thiết bị...); Chuẩn bị kế hoạch nghiên cứu (văn bản pháp lý và văn bản nội bộ); Chuẩn bị phương tiện nghiên cứu."
+          },
+          {
+            "level_2_title": "Bước 3. Thu thập và xử lý thông tin",
+            "level_2_id": "5.3",
+            "content": "Công việc này thường được tiến hành sau khi đề tài đã được cấp kinh phí. Bao gồm: Lập danh mục tư liệu; Lập phiếu thư mục; Quản lý dữ liệu bằng máy tính; Xử lý kết quả nghiên cứu (định lượng và định tính)."
+          },
+          {
+            "level_2_title": "Bước 4. Viết báo cáo tổng kết đề tài nghiên cứu",
+            "level_2_id": "5.4",
+            "content": "Báo cáo kết thúc đề tài là cơ sở để các hội đồng nghiệm thu đánh giá. Những đề tài lớn thường có một tổng biên tập giúp việc chuẩn bị báo cáo."
+          },
+          {
+            "level_2_title": "Bước 5. Đánh giá và nghiệm thu đề tài",
+            "level_2_id": "5.5",
+            "content": "Nghiệm thu đề tài là sự đánh giá chất lượng của đề tài để công nhận hay không công nhận kết quả nghiên cứu. Thể thức nghiệm thu: có chuyên gia phản biện, thành lập hội đồng nghiệm thu, hội đồng nghe báo cáo và bỏ phiếu."
+          },
+          {
+            "level_2_title": "Bước 6. Công bố kết quả nghiên cứu",
+            "level_2_id": "5.6",
+            "content": "Trừ những kết quả có tính hệ trọng về an ninh và quốc phòng, mọi kết quả nghiên cứu cần được công bố trên báo, tạp chí chuyên ngành, hoặc các phương tiện truyền thông đại chúng."
+          }
+        ]
+      },
+      {
+        "level_1_title": "PHỤ LỤC I: BIỂU MẪU ĐĂNG KÝ NGHIÊN CỨU KHOA HỌC",
+        "level_1_id": "PL1",
+        "content": "(Chứa các mẫu biểu: Thuyết minh đề tài nghiên cứu khoa học; Dự toán kinh phí đề tài; Giải trình các khoản chi...)"
+      },
+      {
+        "level_1_title": "PHỤ LỤC II: PHÂN TÍCH CÁC SAI LỖI CỦA LUẬN VĂN/BÁO CÁO KHOA HỌC",
+        "level_1_id": "PL2",
+        "content": "CHÚ Ý: ĐÂY KHÔNG PHẢI LÀ BẢN MẪU TÓM TẮT LUẬN VĂN MÀ LÀ VÍ DỤ ĐỂ PHÂN TÍCH SAI LỖI CỦA LUẬN VĂN/ BÁO CÁO KHOA HỌC\n\n(Nội dung bao gồm ví dụ Tóm tắt luận văn thạc sĩ quản lý giáo dục với đề tài \"MỘT SỐ BIỆN PHÁP QUẢN LÝ NHẰM NÂNG CAO CHẤT LƯỢNG DẠY HỌC Ở TRƯỜNG TRUNG HỌC PHỔ THÔNG XXX THÀNH PHỐ YYY\", bao gồm các phần Mở đầu, Chương 1, Chương 2, Chương 3, Kết luận và khuyến nghị của luận văn ví dụ đó.)"
+      }
+    ]
+  }

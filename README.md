@@ -23,6 +23,7 @@ npm install
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+GEMINI_API_KEY=your_gemini_api_key  # API key cho Google Gemini AI
 DAILY_API_KEY=your_daily_api_key  # Tùy chọn, sẽ mock nếu không có
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 ```
@@ -34,6 +35,9 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 3. Copy **TOÀN BỘ** nội dung file `supabase/complete-setup.sql`
 4. Paste và chạy (RUN)
 5. Đợi kết quả "SETUP COMPLETED"
+6. Chạy migration cho course_modules:
+   - Copy nội dung file `supabase/add-course-modules.sql`
+   - Paste và chạy (RUN)
 
 ### 4. Bật Realtime cho chat
 
@@ -69,6 +73,8 @@ Mở [http://localhost:3000](http://localhost:3000)
 - [x] Upload file (ảnh, video, audio, document) trong chat
 - [x] RLS policies bảo mật
 - [x] API serverless cho nghiệp vụ nhạy cảm
+- [x] **AI phân tích tài liệu JSON** - Tự động tạo cấu trúc học phần/bài học từ file JSON
+- [x] **Admin interface** - Xử lý batch các file JSON từ folder documents
 
 ### 🚧 Cần bổ sung
 
@@ -76,7 +82,48 @@ Mở [http://localhost:3000](http://localhost:3000)
 - [ ] Quiz/Test feature
 - [ ] Notifications
 - [ ] User profile
-- [ ] Admin dashboard
+
+## Tính năng xử lý tài liệu JSON
+
+Hệ thống hỗ trợ sử dụng file JSON có cấu trúc chương/mục để tạo khóa học:
+
+### Cách sử dụng
+
+1. **Upload PDF qua Admin Interface**:
+   - Truy cập `/admin` (cần đăng nhập)
+   - Upload file PDF (tối đa 50MB)
+   - Nhập thông tin khóa học (tên, mô tả, cấp độ)
+   - Hệ thống sẽ tự động phân tích và tạo:
+     - Học phần (modules) theo chương trong PDF
+     - Bài học (lessons) theo mục trong mỗi chương
+
+2. **Xử lý batch từ folder documents**:
+   - Click nút "Xử lý batch (JSON)" trong trang admin
+   - Hệ thống sẽ tự động xử lý tất cả file JSON trong folder `documents/`
+   - Tạo khóa học tương ứng với tên file JSON
+
+### Yêu cầu
+
+- Google Gemini API key (đặt trong `.env.local` với key `GEMINI_API_KEY`) – dùng để sinh Quiz 10 câu cho mỗi chương
+- File JSON cần theo mẫu (ví dụ trong `documents/`), có cấu trúc chương/mục rõ ràng
+
+### Cấu trúc Database
+
+- `course_modules`: Lưu học phần (chương)
+- `course_contents`: Lưu bài học (mục) với foreign key đến `course_modules`
+
+### Hướng dẫn Test
+
+Xem file [docs/testing-pdf-analysis.md](./docs/testing-pdf-analysis.md) để có hướng dẫn chi tiết (đã cập nhật cho JSON).
+
+**Quick test**:
+```bash
+# Cài đặt tsx nếu chưa có
+npm install -D tsx
+
+# Chạy script test
+npm run test:pdf
+```
 
 ## Notes
 

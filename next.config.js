@@ -3,7 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   experimental: {
     serverActions: {
-      bodySizeLimit: '2mb'
+      bodySizeLimit: '50mb' // Tăng limit cho PDF lớn
+    }
+  },
+  api: {
+    bodyParser: {
+      sizeLimit: '50mb'
     }
   }
 };
