@@ -222,9 +222,6 @@ export default function AdminPage() {
           </svg>
           <h2 className="text-lg font-semibold text-gray-800">Tải lên và xử lý JSON</h2>
         </div>
-        <p className="text-sm text-gray-600 mb-6">
-          Tải lên file JSON có cấu trúc Chương/Mục để tự động tạo khóa học với học phần và bài học.
-        </p>
         <JSONUploadForm
           onUploadSuccess={handleUploadSuccess}
           onUploadError={handleUploadError}
@@ -240,9 +237,6 @@ export default function AdminPage() {
           </svg>
           <h2 className="text-lg font-semibold text-gray-800">Xử lý batch từ folder documents</h2>
         </div>
-        <p className="text-sm text-gray-600 mb-4">
-          Xử lý tất cả file JSON trong folder <code className="bg-gray-100 px-2 py-1 rounded">documents/</code> và tự động tạo khóa học cho mỗi file.
-        </p>
         <button
           onClick={handleBatchProcess}
           disabled={batchProcessing}

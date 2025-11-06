@@ -9,49 +9,49 @@
         "children": [
           {
             "level_2_id": "1.1",
-            "level_2_title": "ĐẶC TRƯNG CỦA PHẦN MỀM",
-            "content": "Phần mềm không mòn.\nPhần mềm được phát triển mà không được sản xuất theo nghĩa thông thường.\nMặc dù công nghiệp phần mềm đang hướng đến phát triển dựa trên thành phần nhưng phần lớn phần mềm phát triển dựa theo yêu cầu của khách hàng.\nCho đến nay những đặc trưng của phần mềm vẫn còn là vấn đề tranh cãi. Chính điều này thể hiện sự chưa trưởng thành của ngành học CÔNG NGHỆ PHẦN MỀM.",
+            "level_2_title": "1.1. ĐẶC TRƯNG CỦA PHẦN MỀM",
+            "content": "Phần mềm không mòn.\nPhần mềm được phát triển mà không được sản xuất theo nghĩa thông thường.\nMặc dù công nghiệp phần mềm đang hướng đến phát triển dựa trên thành phần nhưng phần lớn phần mềm phát triển dựa theo yêu cầu của khách hàng.\nCho đến nay những đặc trưng của phần mềm vẫn còn là vấn đề tranh cãi. Chính điều này thể hiện sự chưa trưởng thành của ngành CÔNG NGHỆ PHẦN MỀM.",
             "children": []
           },
           {
             "level_2_id": "1.2",
-            "level_2_title": "CÁC KIỂU PHẦN MỀM",
-            "content": "- Phần mềm hệ thống: Tập hợp các chương trình được viết để phục vụ các chương trình khác, tương tác với phần cứng (ví dụ, biên dịch, trình soạn thảo, HĐH...).\n- Phần mềm thời gian thực: Phần mềm điều khiển/phân tích/kiểm soát sự kiện thực thế giới, đáp ứng các ràng buộc thời gian thực.\n- Phần mềm nghiệp vụ: Các phần mềm tính lương, kế toán, quản lý kho...\n- Phần mềm khoa học và công nghệ: Các ứng dụng trong thiên văn, sinh học phân tử, điều khiển tàu con thoi,...\n- Phần mềm nhúng: Nằm trong bộ nhớ chỉ đọc, dùng để điều khiển các sản phẩm và hệ thống (ví dụ: bàn phím lò vi sóng...).\n- Phần mềm máy tính cá nhân: Xử lý văn bản, đồ họa máy tính...\n- Phần mềm trên Web.\n- Phần mềm trí tuệ nhân tạo: Dựa trên những kỹ thuật của Trí tuệ nhân tạo như hệ chuyên gia, mạng nơ-ron.\n*Nhận xét*: Hiện nay web được xem là môi trường phổ biến để xây dựng giao diện với người sử dụng cho nhiều hệ thống phần mềm trên mạng.",
+            "level_2_title": "1.2. CÁC KIỂU PHẦN MỀM",
+            "content": "- Phần mềm hệ thống: Tập hợp các chương trình được viết để phục vụ các chương trình khác, tương tác với phần cứng (ví dụ: biên dịch, trình soạn thảo, HĐH...).\n- Phần mềm thời gian thực: Phần mềm điều khiển/phân tích/kiểm soát sự kiện thực thế giới, đáp ứng các ràng buộc thời gian thực.\n- Phần mềm nghiệp vụ: Các phần mềm tính lương, kế toán, quản lý kho...\n- Phần mềm khoa học và công nghệ: Các ứng dụng trong thiên văn, sinh học phân tử, điều khiển tàu con thoi...\n- Phần mềm nhúng: Nằm trong bộ nhớ chỉ đọc, dùng để điều khiển các sản phẩm và hệ thống (ví dụ: bàn phím lò vi sóng...).\n- Phần mềm máy tính cá nhân: Xử lý văn bản, đồ họa máy tính...\n- Phần mềm trên Web.\n- Phần mềm trí tuệ nhân tạo: Dựa trên những kỹ thuật của Trí tuệ nhân tạo như hệ chuyên gia, mạng nơ-ron.\n*Nhận xét*: Hiện nay web được xem là môi trường phổ biến để xây dựng giao diện với người sử dụng cho nhiều hệ thống phần mềm trên mạng.",
             "children": []
           },
           {
             "level_2_id": "1.3",
-            "level_2_title": "KHÍA CẠNH LỊCH SỬ",
+            "level_2_title": "1.3. KHÍA CẠNH LỊCH SỬ",
             "content": "Năm 1967 nhóm NATO đưa ra thuật ngữ Công nghệ phần mềm (Software Engineering).\nNăm 1968 Hội nghị Software Engineering ở Garmisch, Đức đưa ra mục đích là giải quyết 'Cuộc khủng hoảng phần mềm':\n- Phần mềm hoàn thành không đúng thời hạn.\n- Chi phí vượt dự toán ban đầu.\n- Phần mềm còn nhiều lỗi.\n- Bảo trì khó khăn.\nTại sao không thể sử dụng kỹ nghệ xây cất như xây dựng cầu để xây dựng các hệ điều hành?\n- Thái độ đối với việc sập cầu và sập hệ điều hành khác nhau.\n- Thông tin về CNPM thường không đầy đủ, không chắc chắn.\n- Độ phức tạp cao hơn.\nCông nghệ phần mềm không thể xem giống như các kỹ nghệ thông thường khác.",
             "children": []
           },
           {
             "level_2_id": "1.4",
-            "level_2_title": "KHÍA CẠNH KINH TẾ",
+            "level_2_title": "1.4. KHÍA CẠNH KINH TẾ",
             "content": "CNPM và khoa học máy tính (tương tự như hóa học và kỹ nghệ hóa).\nKhoa học có phần thực nghiệm và lý thuyết: Phần thực nghiệm của Hóa học là thí nghiệm còn của khoa học máy tính là lập trình.\nKhoa học máy tính nghiên cứu những cách khác nhau để tạo ra phần mềm. Nhưng kỹ sư phần mềm chỉ quan tâm kỹ thuật có ý nghĩa kinh tế.\nVí dụ: Phương pháp mã hóa mới KTmới (lập trình hướng thành phần) nhanh hơn phương pháp đang sử dụng hiện thời KTcũ (lập trình hướng đối tượng) là 10%. Chúng ta nên sử dụng phương pháp mới hay không?\nCâu trả lời thông thường là: Tất nhiên!\nCâu trả lời Công nghệ phần mềm: xét hiệu quả kinh tế của KTmới (chi phí đào tạo, thay đổi công cụ so với lợi ích 10%).",
             "children": []
           },
           {
             "level_2_id": "1.5",
-            "level_2_title": "KHÍA CẠNH BẢO TRÌ",
+            "level_2_title": "1.5. KHÍA CẠNH BẢO TRÌ",
             "content": "Vòng đời phần mềm: Một loạt các pha mà phần mềm phải trải qua từ khám phá các khái niệm đến loại bỏ hoàn toàn.\nMô hình vòng đời cơ bản: Pha yêu cầu -> Pha đặc tả -> Pha thiết kế -> Pha cài đặt -> Pha tích hợp -> Pha bảo trì -> Loại bỏ.\nBảo trì: Mọi thay đổi đối với sản phẩm một khi khách hàng đã đồng ý sản phẩm thỏa mãn tài liệu đặc tả.\nPhần mềm tốt được bảo trì, khác với phần mềm tồi bị loại bỏ.\nCác dạng bảo trì:\n- Bảo trì sửa lỗi [17,5%]: sửa chữa lỗi nhưng đặc tả không đổi.\n- Bảo trì hoàn thiện [60,5%]: thêm chức năng để cải tiến sản phẩm (sửa chữa theo thay đổi của đặc tả).\n- Bảo trì thích nghi [18%]: thay đổi phần mềm để đáp ứng thay đổi của môi trường như quy định chính phủ, CPU, công nghệ mới...\nVí dụ 1: Tỷ lệ thuế GTGT thay đổi từ 6% đến 7%.\nVí dụ 2: Tổ chức y tế thay đổi -> Hoạt động thay đổi.\nVí dụ 3: Các hệ thời gian thực/hệ nhúng, thế giới thực thay đổi -> hệ thay đổi.\nThống kê chi phí (1976-1981): Maintenance chiếm 67%.\nHewlett-Packard (1992): 60-80% nguồn nhân lực nghiên cứu và phát triển dành cho bảo trì. 40-60% chi phí phần mềm dành cho bảo trì.\nKết luận: Bảo trì là pha tốn kém nhiều thời gian và chi phí nhất.",
             "children": []
           },
           {
             "level_2_id": "1.6",
-            "level_2_title": "KHÍA CẠNH PHÂN TÍCH VÀ THIẾT KẾ",
+            "level_2_title": "1.6. KHÍA CẠNH PHÂN TÍCH VÀ THIẾT KẾ",
             "content": "60 đến 70% lỗi của phần mềm là những lỗi do đặc tả và thiết kế.\nDữ liệu của Kelly, Sherif and Hops [1992] về chương trình không gian của Nasa: 1.9 lỗi trên một trang đặc tả, 0.9 lỗi trên một trang thiết kế, 0.3 lỗi trên một trang chương trình nguồn.\nDữ liệu của Bhandari et al. [1994]: Lỗi trong cuối pha thiết kế của phiên bản mới của sản phẩm: 13% lỗi từ phiên bản trước, 16% lỗi trong pha đặc tả mới, 71% lỗi trong pha thiết kế mới.\nKết luận: Xây dựng những kỹ thuật sinh ra thiết kế và đặc tả tốt hơn là một vấn đề quan trọng trong công nghệ phần mềm.\nChi phí cho việc phát hiện và sửa chữa lỗi tăng theo cấp số nhân nếu phát hiện muộn (Ví dụ: phát hiện ở pha bảo trì tốn kém hơn rất nhiều so với phát hiện ở pha yêu cầu).",
             "children": []
           },
           {
             "level_2_id": "1.7",
-            "level_2_title": "KHÍA CẠNH LẬP TRÌNH NHÓM",
-            "content": "Phần cứng rẻ, khả năng tăng, kích thước giảm. Phần mềm lớn, đắt.\nNhiều phần mềm quá lớn nên một người không thể phát triển được trong thời gian có hạn, cần lập trình nhóm.\nVí dụ vấn đề giao diện: Lan và Minh viết code cho hai Mô đun p và q với mô đun p gọi q. Khi viết p Lan đã viết một hàm gọi q với 5 đối số. Minh cũng code q với 5 đối số nhưng thứ tự khác Lan. Compiler của C/Java có thể không phát hiện nếu cùng kiểu dữ liệu.",
+            "level_2_title": "1.7. KHÍA CẠNH LẬP TRÌNH NHÓM",
+            "content": "Phần cứng rẻ, khả năng tăng, kích thước giảm. Phần mềm lớn, đắt.\nNhiều phần mềm quá lớn nên một người không thể phát triển được trong thời gian có hạn, cần lập trình nhóm.\nVí dụ vấn đề giao diện: Lan và Minh viết code cho hai mô đun p và q với mô đun p gọi q. Khi viết p Lan đã viết một hàm gọi q với 5 đối số. Minh cũng code q với 5 đối số nhưng thứ tự khác Lan. Compiler của C/Java có thể không phát hiện nếu cùng kiểu dữ liệu.",
             "children": []
           },
           {
             "level_2_id": "1.8",
-            "level_2_title": "PHƯƠNG PHÁP HƯỚNG ĐỐI TƯỢNG",
+            "level_2_title": "1.8. PHƯƠNG PHÁP HƯỚNG ĐỐI TƯỢNG",
             "content": "Trước năm 1975: kỹ thuật riêng, cá nhân.\n1975-1985: Phương pháp cấu trúc (Structured Paradigm). Phù hợp với chương trình 5.000 - 50.000 dòng mã.\nHạn chế của phương pháp cấu trúc: Không phù hợp với phần mềm lớn (> 50.000 dòng lệnh). 80% chi phí và sức lực dành cho bảo trì nhưng phương pháp cấu trúc không giải quyết tốt vấn đề này.\nĐặc trưng của phương pháp cấu trúc: Hướng hành động (DFD, máy trạng thái) HOẶC Hướng dữ liệu (ERD, Jackson). Không cả hai.\nPhương pháp hướng đối tượng (Object-Oriented Paradigm): Cả dữ liệu và hành động đều quan trọng như nhau.\nĐối tượng: Thành phần phần mềm kết hợp cả hai dữ liệu và các hành động thực hiện trên dữ liệu đó.\nVí dụ: Quản lý trương mục ngân hàng. Dữ liệu: account balance. Hành động: deposit, withdraw, determine balance.\nƯu điểm HĐT: Ẩn giấu thông tin, thiết kế dựa trên trách nhiệm, ảnh hưởng tốt đối với bảo trì và phát triển.\nSo sánh: Phương pháp cấu trúc tạo 'góc' (khoảng cách lớn) giữa phân tích (WHAT) và thiết kế (HOW). Phương pháp HĐT chuyển pha 'êm dịu' hơn, giảm sai sót. Các đối tượng đi vào ngay từ đầu vòng đời.\nKết luận: Công nghệ phần mềm là ngành học nghiên cứu cách sản xuất phần mềm thỏa mãn khách hàng, không lỗi, đúng hạn, trong chi phí. HĐT là cách tiếp cận phổ biến hiện nay.",
             "children": []
           }
@@ -64,49 +64,49 @@
         "children": [
           {
             "level_2_id": "2.1",
-            "level_2_title": "TIẾN TRÌNH THÀNH PHẦN",
+            "level_2_title": "2.1. TIẾN TRÌNH THÀNH PHẦN",
             "content": "Tiến trình phần mềm là 'phương cách' sản xuất ra phần mềm. Nó nghiên cứu các cách kết hợp: Mô hình vòng đời, Các công cụ CASE, Các cá nhân xây dựng phần mềm, Các công nghệ.\nTiến trình phần mềm = Khía cạnh kỹ thuật + Khía cạnh quản lý.\nCác sai lầm thường gặp: Coi nhẹ khâu viết tài liệu, chi phí kiểm thử (thường chiếm 1/2 chi phí), chỉ tập trung phát triển mà coi nhẹ bảo trì.\nNguyên nhân: Thiếu kỹ năng CNPM, quản lý thiếu kiến thức, quan điểm 'coder' (chỉ code là quan trọng).\nKhông có 'pha kiểm thử' riêng biệt vì kiểm thử là hoạt động thực hiện trong MỌI pha.\n- Check = test.\n- Verification (Kiểm tra): Thực hiện vào cuối mỗi pha.\n- Validation (Kiểm chứng): Thực hiện trước khi giao sản phẩm cho khách hàng.\nKhông có 'pha viết tài liệu' riêng biệt. Mọi pha phải được viết tài liệu trước khi khởi đầu pha mới. Tài liệu cần thiết cho giao tiếp, bảo trì và kiểm soát thay đổi.",
             "children": []
           },
           {
             "level_2_id": "2.2",
-            "level_2_title": "SQA LÀ GÌ?",
+            "level_2_title": "2.2. SQA LÀ GÌ?",
             "content": "SQA (Software Quality Assurance): Nhóm đảm bảo chất lượng phần mềm.\nCó trách nhiệm đảm bảo sản phẩm được xây dựng đúng (theo đặc tả) và theo đơn đặt hàng.\nNhóm SQA phải đóng đúng vai trò ngay từ đầu và hoạt động trong mọi pha của tiến trình. SQA kiểm tra với khách hàng xem phiên bản cuối cùng thỏa mãn hoàn toàn chưa.",
             "children": []
           },
           {
             "level_2_id": "2.3",
-            "level_2_title": "PHA YÊU CẦU",
+            "level_2_title": "2.3. PHA YÊU CẦU",
             "content": "Bắt đầu khi khách hàng tiếp xúc công ty phần mềm. Khám phá khái niệm: khách hàng thường không biết chính xác họ cần gì.\nNgười phát triển phải xác định nhu cầu thực sự và ràng buộc của khách hàng.\nKiểm thử pha yêu cầu: Làm bản mẫu nhanh (Rapid prototype) để khách hàng dùng thử và phản hồi.\nTài liệu pha yêu cầu: Ghi lại thỏa thuận, mô tả nhu cầu khách hàng. Phải được khách hàng và nhóm phát triển kiểm tra trước khi SQA xem xét.",
             "children": []
           },
           {
             "level_2_id": "2.4",
-            "level_2_title": "PHA ĐẶC TẢ",
+            "level_2_title": "2.4. PHA ĐẶC TẢ",
             "content": "Nhóm đặc tả viết tài liệu mô tả chức năng của sản phẩm (WHAT the product must do) + ràng buộc.\nĐặc tả bao gồm input, output được yêu cầu.\nYêu cầu của đặc tả: Không nhập nhằng, Đầy đủ, Phi mâu thuẫn, Theo dõi được (Traceability).\nKế hoạch quản lý dự án phần mềm (SPMP) được hình thành sau khi đặc tả hoàn thành (thời gian, chi phí, nhân lực, cột mốc...).\nKiểm thử pha đặc tả: Rất quan trọng vì lỗi đặc tả tốn kém nhất. Duyệt xét lại (Review) là cách tốt nhất, với sự tham gia của SQA, nhóm đặc tả và khách hàng.",
             "children": []
           },
           {
             "level_2_id": "2.5",
-            "level_2_title": "PHA THIẾT KẾ",
+            "level_2_title": "2.5. PHA THIẾT KẾ",
             "content": "Đặc tả là WHAT, Thiết kế là HOW.\nThiết kế kiến trúc: Phân rã sản phẩm thành các mô đun.\nThiết kế chi tiết: Thiết kế từng mô đun (cấu trúc dữ liệu, thuật toán).\nThiết kế nên mở (open-ended) để dễ bảo trì.\nKiểm thử pha thiết kế: Duyệt tài liệu thiết kế (Design Review).",
             "children": []
           },
           {
             "level_2_id": "2.6",
-            "level_2_title": "PHA CÀI ĐẶT",
+            "level_2_title": "2.6. PHA CÀI ĐẶT",
             "content": "Cài đặt thiết kế chi tiết thành chương trình (coding).\nKiểm thử pha cài đặt: Rà soát code (Code review), thực hiện các test case đơn vị.",
             "children": []
           },
           {
             "level_2_id": "2.7",
-            "level_2_title": "TÍCH HỢP",
+            "level_2_title": "2.7. TÍCH HỢP",
             "content": "Kết hợp các mô đun và kiểm thử toàn bộ sản phẩm.\nTest không hình thức (desk checking) và Test hình thức (Formal testing) do nhóm SQA thực hiện.\nTài liệu: Mã nguồn có chú thích, các test cases.",
             "children": []
           },
           {
             "level_2_id": "2.8",
-            "level_2_title": "CẢI TIẾN TIẾN TRÌNH PHẦN MỀM",
+            "level_2_title": "2.8. CẢI TIẾN TIẾN TRÌNH PHẦN MỀM",
             "content": "CMM (Capability Maturity Model) của SEI: 5 mức trưởng thành của tiến trình phần mềm.\n- Mức 1 (Initial): Ad hoc, hỗn loạn. Phụ thuộc cá nhân.\n- Mức 2 (Repeatable): Quản lý dự án cơ bản. Có thể lặp lại thành công ở các dự án tương tự.\n- Mức 3 (Defined): Tiến trình được tài liệu hóa, chuẩn hóa và tích hợp vào tổ chức.\n- Mức 4 (Managed): Tiến trình và chất lượng được đo lường chi tiết, định lượng.\n- Mức 5 (Optimizing): Cải tiến tiến trình liên tục dựa trên phản hồi định lượng.\nCác chuẩn khác: ISO 9000-series (ISO 9001 cho hệ thống chất lượng, ISO 9000-3 hướng dẫn cho phần mềm), ISO/IEC 15504 (SPICE - khung đánh giá tiến trình).",
             "children": []
           }
@@ -119,49 +119,49 @@
         "children": [
           {
             "level_2_id": "3.1",
-            "level_2_title": "PHÁT TRIỂN PHẦN MỀM",
+            "level_2_title": "3.1. PHÁT TRIỂN PHẦN MỀM",
             "content": "Lý thuyết: Tuyến tính, bắt đầu từ con số 0 (Requirements -> Analysis -> Design -> Implementation).\nThực tế: Có lỗi, yêu cầu thay đổi liên tục. Bài toán Winburg Mini minh họa sự cần thiết của việc quay lui và sửa đổi (các Episode khác nhau do lỗi và thay đổi yêu cầu).",
             "children": []
           },
           {
             "level_2_id": "3.2",
-            "level_2_title": "MÔ HÌNH XÂY VÀ SỬA (BUILD AND FIX)",
+            "level_2_title": "3.2. MÔ HÌNH XÂY VÀ SỬA (BUILD AND FIX)",
             "content": "Làm phiên bản đầu -> Chỉnh sửa cho đến khi khách hàng hài lòng -> Bảo trì -> Loại bỏ.\nĐặc điểm: Không thiết kế, không đặc tả. Dễ nhất nhưng đắt nhất và bảo trì là ác mộng. Chỉ phù hợp cho bài tập lập trình nhỏ.",
             "children": []
           },
           {
             "level_2_id": "3.3",
-            "level_2_title": "MÔ HÌNH TIẾN HÓA (MÔ HÌNH THÁC NƯỚC - WATERFALL)",
+            "level_2_title": "3.3. MÔ HÌNH TIẾN HÓA (MÔ HÌNH THÁC NƯỚC - WATERFALL)",
             "content": "Mô hình thác nước có các vòng lặp phản hồi giữa các pha kế tiếp.\nĐặc trưng: Hướng tài liệu. Mỗi pha phải hoàn thành tài liệu trước khi sang pha sau.\nThuận lợi: Có kỷ luật, dễ quản lý nhờ tài liệu.\nBất lợi: Khách hàng chỉ thấy sản phẩm ở cuối cùng. Thay đổi yêu cầu muộn tốn kém.",
             "children": []
           },
           {
             "level_2_id": "3.4",
-            "level_2_title": "MÔ HÌNH BẢN MẪU NHANH (RAPID PROTOTYPING)",
+            "level_2_title": "3.4. MÔ HÌNH BẢN MẪU NHANH (RAPID PROTOTYPING)",
             "content": "Xây dựng nhanh một phiên bản (bản mẫu) để làm rõ yêu cầu với khách hàng, sau đó có thể vứt bỏ bản mẫu để xây dựng sản phẩm thật theo mô hình thác nước, hoặc phát triển tiếp từ bản mẫu.\nGiúp giảm rủi ro sai yêu cầu.",
             "children": []
           },
           {
             "level_2_id": "3.5",
-            "level_2_title": "MÔ HÌNH LẶP VÀ TĂNG (ITERATIVE AND INCREMENTAL)",
+            "level_2_title": "3.5. MÔ HÌNH LẶP VÀ TĂNG (ITERATIVE AND INCREMENTAL)",
             "content": "Chia dự án thành các phần nhỏ (increments). Mỗi phần được phát triển qua các vòng lặp (iterations) gồm các bước: yêu cầu, phân tích, thiết kế, cài đặt, kiểm thử.\nLuật Miller: con người chỉ xử lý được ~7 đơn vị thông tin cùng lúc -> cần chia nhỏ bài toán.\nƯu điểm: Có sản phẩm hoạt động sớm, dễ kiểm thử, giảm rủi ro, linh hoạt với thay đổi. Phù hợp với các dự án lớn hiện đại.",
             "children": []
           },
           {
             "level_2_id": "3.6",
-            "level_2_title": "MÔ HÌNH UP (UNIFIED PROCESS)",
+            "level_2_title": "3.6. MÔ HÌNH UP (UNIFIED PROCESS)",
             "content": "Là quy trình hợp nhất hướng đối tượng (Booch, Jacobson, Rumbaugh). Sử dụng UML.\nĐặc trưng: Hướng Use-case, lấy kiến trúc làm trung tâm, lặp và tăng dần.\nBốn pha chính: Khởi đầu (Inception), Khảo sát tỉ mỉ (Elaboration), Xây dựng (Construction), Chuyển giao (Transition).\nNăm luồng công việc chính xuyên suốt: Yêu cầu, Phân tích, Thiết kế, Cài đặt, Kiểm thử.",
             "children": []
           },
           {
             "level_2_id": "3.7",
-            "level_2_title": "MÔ HÌNH XOẮN ỐC (SPIRAL)",
+            "level_2_title": "3.7. MÔ HÌNH XOẮN ỐC (SPIRAL)",
             "content": "Nhấn mạnh vào phân tích rủi ro. Mỗi vòng xoắn ốc bắt đầu bằng việc xác định mục tiêu, các giải pháp thay thế, ràng buộc, sau đó là phân tích rủi ro. Nếu rủi ro quá cao, dự án có thể dừng.\nPhù hợp với các hệ thống lớn, phức tạp, rủi ro cao (ví dụ: phần mềm nội bộ quy mô lớn).",
             "children": []
           },
           {
             "level_2_id": "3.8",
-            "level_2_title": "MÔ HÌNH MÃ NGUỒN MỞ",
+            "level_2_title": "3.8. MÔ HÌNH MÃ NGUỒN MỞ",
             "content": "Hai pha không hình thức: 1. Nhóm nòng cốt xây dựng phiên bản đầu. 2. Đưa lên Internet, cộng đồng (nhóm ngoại vi) tham gia báo lỗi, sửa lỗi, thêm chức năng (thực chất là bảo trì và tiến hóa liên tục).\nThành công nhờ số lượng lớn người dùng tham gia kiểm thử và đóng góp (Linux, Apache, Firefox...). Hạn chế: Không phải dự án nào cũng thu hút được cộng đồng.",
             "children": []
           }
@@ -174,30 +174,30 @@
         "children": [
           {
             "level_2_id": "4.1",
-            "level_2_title": "VẤN ĐỀ CHẤT LƯỢNG PHẦN MỀM",
+            "level_2_title": "4.1. VẤN ĐỀ CHẤT LƯỢNG PHẦN MỀM",
             "content": "Đảm bảo chất lượng phần mềm (SQA) phải được thực hiện xuyên suốt tiến trình bởi nhóm độc lập với nhóm phát triển.\nCần độc lập quản lý giữa SQA và Phát triển để đảm bảo khách quan.",
             "children": []
           },
           {
             "level_2_id": "4.2",
-            "level_2_title": "KIỂM CHỨNG PHẦN MỀM (V&V)",
+            "level_2_title": "4.2. KIỂM CHỨNG PHẦN MỀM (V&V)",
             "content": "Verification (Xác minh): Are we building the product right? (Làm đúng theo quy trình/đặc tả chưa?)\nValidation (Thẩm định): Are we building the right product? (Sản phẩm có đáp ứng đúng nhu cầu khách hàng không?)\nCó hai kiểu: Kiểm thử không thực thi (tĩnh) và kiểm thử có thực thi (động).",
             "children": []
           },
           {
             "level_2_id": "4.3",
-            "level_2_title": "CÁC PHƯƠNG PHÁP KIỂM CHỨNG",
+            "level_2_title": "4.3. CÁC PHƯƠNG PHÁP KIỂM CHỨNG",
             "content": "",
             "children": [
               {
                 "level_3_id": "4.3.1",
-                "level_3_title": "Kiểm thử không có sự thực thi (Static testing)",
+                "level_3_title": "4.3.1. Kiểm thử không có sự thực thi (Static testing)",
                 "content": "- Rà soát lướt qua (Walkthrough): Không hình thức, đội rà soát (4-6 người) đọc tài liệu/code, phát hiện lỗi nhưng không sửa tại chỗ. Ít hiệu quả nếu không chuẩn bị kỹ.\n- Kiểm tra kỹ lưỡng (Inspection): Hình thức hơn, 5 bước (Tổng quan, Chuẩn bị, Kiểm tra, Sửa lỗi, Theo dõi). Có các vai trò rõ ràng (Moderator, Reader, Recorder...). Hiệu quả cao trong việc tìm lỗi sớm.\n- So sánh: Inspection hình thức và hiệu quả hơn Walkthrough, có số liệu thống kê lỗi để cải tiến quy trình.",
                 "children": []
               },
               {
                 "level_3_id": "4.3.2",
-                "level_3_title": "Kiểm thử có dựa trên sự thực thi (Dynamic testing)",
+                "level_3_title": "4.3.2. Kiểm thử có dựa trên sự thực thi (Dynamic testing)",
                 "content": "Chạy chương trình với các ca kiểm thử (test cases). Chiếm tỉ trọng lớn ngân sách. Dijkstra: 'Kiểm thử chỉ có thể chỉ ra sự hiện diện của lỗi, không thể chỉ ra sự vắng mặt của chúng'.",
                 "children": []
               }
@@ -205,7 +205,7 @@
           },
           {
             "level_2_id": "4.4",
-            "level_2_title": "NHỮNG VẤN ĐỀ TRONG KIỂM THỬ",
+            "level_2_title": "4.4. NHỮNG VẤN ĐỀ TRONG KIỂM THỬ",
             "content": "- Cái gì nên được kiểm thử? Tính chính xác (thỏa mãn đặc tả), Tiện ích (dễ dùng, hữu ích, hiệu quả kinh tế), Tính đáng tin (tần suất thất bại), Tính mạnh mẽ (xử lý trường hợp bất thường), Hiệu năng (thời gian, không gian).\n- Kiểm thử vs Kiểm chứng tính chính xác (toán học): Chứng minh toán học khó, tốn kém, chỉ dùng khi rủi ro cực cao (tính mạng con người).\n- Ai thực hiện? Lập trình viên không nên tự test chính mình (tâm lý). Cần nhóm SQA độc lập.\n- Khi nào dừng? Về lý thuyết là không bao giờ, thực tế là khi hết ngân sách/thời gian hoặc đạt mục tiêu chất lượng.",
             "children": []
           }
@@ -218,19 +218,19 @@
         "children": [
           {
             "level_2_id": "5.1",
-            "level_2_title": "VẤN ĐỀ LẬP KẾ HOẠCH VÀ ƯỚC LƯỢNG",
+            "level_2_title": "5.1. VẤN ĐỀ LẬP KẾ HOẠCH VÀ ƯỚC LƯỢNG DỰ ÁN PHẦN MỀM",
             "content": "Lập kế hoạch phải diễn ra liên tục. Ước lượng ban đầu thường không chính xác, độ chính xác tăng dần khi dự án tiến triển (Mô hình nón bất định).",
             "children": []
           },
           {
             "level_2_id": "5.2",
-            "level_2_title": "ƯỚC LƯỢNG THỜI GIAN VÀ CHI PHÍ",
+            "level_2_title": "5.2. ƯỚC LƯỢNG THỜI GIAN VÀ CHI PHÍ",
             "content": "Rất khó chính xác do nhiều yếu tố con người, kỹ thuật thay đổi.\nCác thước đo kích cỡ:\n- LOC (Lines of Code): Dễ đếm nhưng phụ thuộc ngôn ngữ, khó xác định sớm, không rõ ràng (đếm dòng nào?).\n- FFP (Files, Flows, Processes): Cho phần mềm xử lý dữ liệu trung bình. C = b * S, S = Fi + Fl + Pr.\n- Điểm chức năng (Function Points - FP): Dựa trên số lượng đầu vào, đầu ra, truy vấn, tệp chính, giao diện. FP = UFP * TCF. Độc lập với ngôn ngữ, có thể ước lượng sớm hơn LOC.\nCác kỹ thuật ước lượng chi phí:\n- Đánh giá chuyên gia: Dựa trên kinh nghiệm, so sánh tương tự (kỹ thuật Delphi).\n- Dưới lên: Chia nhỏ thành phần rồi cộng lại.\n- Mô hình thuật toán (ví dụ COCOMO): Công thức toán học dựa trên dữ liệu lịch sử. COCOMO trung gian: E = a * (KDSI)^b * EAF (Effort Adjustment Factor - dựa trên 15 nhân tố chi phí).\nCOCOMO II: Cập nhật cho phần mềm hiện đại (OO, 4GL, COTS, bản mẫu...).",
             "children": []
           },
           {
             "level_2_id": "5.3",
-            "level_2_title": "CÁC THÀNH PHẦN CỦA KẾ HOẠCH (SPMP)",
+            "level_2_title": "5.3. CÁC THÀNH PHẦN CỦA VIỆC LẬP KẾ HOẠCH PHÁT TRIỂN PHẦN MỀM",
             "content": "Nên theo chuẩn IEEE 1058.1. Bao gồm: Mục tiêu, tổ chức dự án, quy trình quản lý (lịch biểu, ngân sách, báo cáo...), quy trình kỹ thuật (phương pháp, công cụ), gói công việc (Work packages), tài nguyên, đào tạo, chuẩn tài liệu.",
             "children": []
           }
@@ -243,25 +243,25 @@
         "children": [
           {
             "level_2_id": "6.1",
-            "level_2_title": "XÁC ĐỊNH YÊU CẦU CỦA KHÁCH HÀNG",
+            "level_2_title": "6.1. XÁC ĐỊNH YÊU CẦU CỦA KHÁCH HÀNG",
             "content": "Khó khăn: Khách hàng không biết rõ mình muốn gì, hoặc diễn đạt sai. 'I know you believe you understood what you think I said, but I am not sure you realize that what you heard is not what I meant!'.\nCần thu thập thông tin ban đầu, xây dựng mô hình nghiệp vụ để hiểu nhu cầu thực.",
             "children": []
           },
           {
             "level_2_id": "6.2",
-            "level_2_title": "TỔNG QUAN VỀ LUỒNG CÔNG VIỆC XÁC ĐỊNH YÊU CẦU",
+            "level_2_title": "6.2. TỔNG QUAN VỀ LUỒNG CÔNG VIỆC XÁC ĐỊNH YÊU CẦU",
             "content": "Mục đích: Trả lời 'Hệ thống phải làm gì?'.\nCác bước: Hiểu lĩnh vực ứng dụng (xây dựng thuật ngữ), Xây dựng mô hình nghiệp vụ (hiểu quy trình hiện tại của khách hàng), Xác định yêu cầu từ mô hình đó.\nKỹ thuật: Phỏng vấn (có cấu trúc/không cấu trúc, câu hỏi đóng/mở), Bảng thăm dò, Quan sát trực tiếp, Nghiên cứu tài liệu/biểu mẫu hiện có.\nUse case: Mô hình tương tác giữa tác nhân (Actor - người dùng hoặc hệ thống khác) và hệ thống. Giúp xác định yêu cầu chức năng. Tránh 'nạp chồng tác nhân' (một người đóng nhiều vai trò -> tách thành các actor riêng biệt).\nPhân loại yêu cầu: Chức năng (hành động hệ thống làm) và Phi chức năng (ràng buộc: hiệu năng, tin cậy, bảo mật...).",
             "children": []
           },
           {
             "level_2_id": "6.4",
-            "level_2_title": "BẢN MẪU NHANH (RAPID PROTOTYPING)",
+            "level_2_title": "6.4. BẢN MẪU NHANH (RAPID PROTOTYPING)",
             "content": "Xây dựng nhanh giao diện hoặc chức năng chính để khách hàng dùng thử và phản hồi. Giúp làm rõ yêu cầu. Có thể vứt bỏ hoặc phát triển tiếp.",
             "children": []
           },
           {
             "level_2_id": "6.10",
-            "level_2_title": "CASE STUDY: QUẢN LÝ KHÁCH SẠN",
+            "level_2_title": "6.10. CASE STUDY CHO PHA XÁC ĐỊNH YÊU CẦU",
             "content": "Bài toán: Phần mềm quản lý cho lễ tân, bán hàng, quản lý. Chức năng: tìm phòng, đặt phòng, checkin, checkout, thanh toán, báo cáo. Thông tin: khách sạn, phòng, khách hàng, booking, hóa đơn.\nXây dựng Use case: Actors (Manager, Seller, Receptionist, Client). Use cases (Manage room, Create report, Book a room, Cancel booking, Checkin, Checkout, Payment).",
             "children": []
           }
@@ -274,13 +274,13 @@
         "children": [
           {
             "level_2_id": "7.1",
-            "level_2_title": "YÊU CẦU TÀI LIỆU ĐẶC TẢ",
+            "level_2_title": "7.1. YÊU CẦU TÀI LIỆU ĐẶC TẢ",
             "content": "Là hợp đồng giữa khách hàng và người phát triển. Phải rõ ràng, dễ hiểu (cho khách hàng) nhưng cũng phải đầy đủ, chi tiết (cho lập trình viên).\nCác ràng buộc: Giá thành, thời gian, tính khả chuyển, độ tin cậy, đáp ứng nhanh...",
             "children": []
           },
           {
             "level_2_id": "7.2",
-            "level_2_title": "CÁC PHƯƠNG PHÁP ĐẶC TẢ",
+            "level_2_title": "7.2. CÁC PHƯƠNG PHÁP ĐẶC TẢ",
             "content": "- Phi hình thức: Ngôn ngữ tự nhiên. Dễ hiểu nhưng dễ nhập nhằng, mâu thuẫn.\n- Nửa hình thức: DFD (Data Flow Diagram), ERD (Entity Relationship Diagram). Sử dụng các biểu đồ và ký hiệu chuẩn.\n- Hình thức: Toán học (Z, Petri nets). Chính xác tuyệt đối nhưng khó hiểu, tốn kém.\nPhân tích hướng cấu trúc (Structured Analysis): Sử dụng DFD để mô hình hóa luồng dữ liệu qua hệ thống. Các ký hiệu: Nguồn/Đích dữ liệu (hình vuông đôi/hình chữ nhật), Dòng dữ liệu (mũi tên), Tiến trình xử lý (hình tròn/hình chữ nhật bo tròn), Kho dữ liệu (cặp đường thẳng song song/hình chữ nhật hở).",
             "children": []
           }
@@ -293,25 +293,25 @@
         "children": [
           {
             "level_2_id": "8.1",
-            "level_2_title": "LUỒNG CÔNG VIỆC PHÂN TÍCH",
+            "level_2_title": "8.1. LUỒNG CÔNG VIỆC PHÂN TÍCH",
             "content": "Mục đích: Hiểu sâu yêu cầu, mô tả yêu cầu để thuận lợi cho thiết kế/cài đặt.\nBa kiểu lớp chính:\n- Lớp thực thể (Entity classes): Mô hình thông tin lưu trữ lâu dài (Ví dụ: Account, Room).\n- Lớp biên (Boundary classes): Giao tiếp giữa hệ thống và tác nhân (Ví dụ: Form, Interface).\n- Lớp điều khiển (Control classes): Điều phối, thực hiện các tính toán phức tạp, logic nghiệp vụ.",
             "children": []
           },
           {
             "level_2_id": "8.2",
-            "level_2_title": "TRÍCH RÚT CÁC LỚP THỰC THỂ",
+            "level_2_title": "8.2. VIỆC TRÍCH RÚT CÁC LỚP THỰC THỂ",
             "content": "Ba bước lặp:\n1. Mô hình hóa chức năng (Use-case scenarios): Kịch bản tương tác.\n2. Mô hình hóa lớp (Class modeling): Xác định lớp thực thể, thuộc tính, quan hệ (Class Diagram).\n3. Mô hình hóa động (Dynamic modeling): Xác định hành động/trạng thái (Statechart/Sequence Diagram).",
             "children": []
           },
           {
             "level_2_id": "8.5",
-            "level_2_title": "PHƯƠNG PHÁP TRÍCH RÚT LỚP",
+            "level_2_title": "8.5. MÔ HÌNH HÓA LỚP THỰC THỂ",
             "content": "- Trích rút danh từ: Tìm các danh từ trong mô tả bài toán -> ứng cử viên cho lớp. Loại bỏ danh từ trừu tượng, nằm ngoài phạm vi hệ thống.\n- Thẻ CRC (Class-Responsibility-Collaboration): Ghi tên lớp, trách nhiệm và các lớp cộng tác lên thẻ để thảo luận, kiểm thử thiết kế.",
             "children": []
           },
           {
             "level_2_id": "8.9",
-            "level_2_title": "CASE STUDY: PHÂN TÍCH OO QUẢN LÝ KHÁCH SẠN",
+            "level_2_title": "8.9. CASE STUDY CHO PHA PHÂN TÍCH HƯỚNG ĐỐI TƯỢNG",
             "content": "Xây dựng kịch bản (scenarios) chi tiết cho từng use case (Add room, Book room...). Trích rút các lớp thực thể từ mô tả: Hotel, Room, Client, User, Booking, Bill, Service, UsedService. Xác định quan hệ giữa chúng (ví dụ: Hotel 1-n Room, Booking n-n Service thông qua UsedService).",
             "children": []
           }
@@ -324,13 +324,13 @@
         "children": [
           {
             "level_2_id": "9.1",
-            "level_2_title": "TỔNG QUAN",
+            "level_2_title": "9.1. TỔNG QUAN VỀ PHA THIẾT KẾ",
             "content": "Thiết kế kiến trúc (phân rã thành hệ thống con/mô đun) và Thiết kế chi tiết (thuật toán, cấu trúc dữ liệu cho từng mô đun).\nTiêu chí chất lượng: Kết dính (Cohesion - cao là tốt), Kết nối (Coupling - thấp là tốt).",
             "children": []
           },
           {
             "level_2_id": "9.4",
-            "level_2_title": "THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
+            "level_2_title": "9.4. THIẾT KẾ HƯỚNG ĐỐI TƯỢNG",
             "content": "Hoàn thiện biểu đồ lớp: xác định kiểu dữ liệu thuộc tính, gán phương thức cho lớp (dựa trên nguyên lý ẩn giấu thông tin, trách nhiệm). Thiết kế chi tiết các phương thức (dùng mã giả, biểu đồ hoạt động).\nCác mô hình thiết kế cho Case study khách sạn:\n- Dùng Bean: Lớp Bean chứa cả dữ liệu và logic truy cập CSDL.\n- Dùng DAO (Data Access Object) và Thực thể thuần (POJO): Tách biệt lớp chứa dữ liệu (Entity) và lớp truy cập CSDL (DAO).\n- Mô hình MVC cải tiến: Tách biệt rõ ràng Model (Entity + DAO), View (Form), Controller (điều phối).",
             "children": []
           }
@@ -343,19 +343,19 @@
         "children": [
           {
             "level_2_id": "10.1",
-            "level_2_title": "CÀI ĐẶT VÀ TÍCH HỢP",
+            "level_2_title": "10.1. CÁC PHƯƠNG PHÁP CÀI ĐẶT VÀ TÍCH HỢP",
             "content": "Chọn ngôn ngữ lập trình: Phân tích lợi nhuận-chi phí, phù hợp với miền ứng dụng (ví dụ: C++ cho hiệu năng, Java cho OO/Web).\nChuẩn lập trình: Đặt tên biến có ý nghĩa, chú thích, thụt đầu dòng, hạn chế độ phức tạp (không lồng if quá sâu).\nTích hợp: Kết hợp các mô đun đã kiểm thử đơn vị.\n- Top-down: Cần Stubs (mô đun giả lập cấp dưới). Cô lập lỗi tốt, thấy giao diện chính sớm.\n- Bottom-up: Cần Drivers (mô đun giả lập cấp trên gọi nó). Kiểm thử kỹ các mô đun chức năng dưới cùng.\n- Sandwich: Kết hợp cả hai.",
             "children": []
           },
           {
             "level_2_id": "10.2",
-            "level_2_title": "KIỂM THỬ CÀI ĐẶT",
+            "level_2_title": "10.2. KIỂM THỬ PHA CÀI ĐẶT VÀ TÍCH HỢP",
             "content": "Kiểm thử đơn vị (Unit testing): Hộp trắng (White-box - dựa vào mã nguồn: phủ dòng lệnh, phủ nhánh) và Hộp đen (Black-box - dựa vào đặc tả: phân lớp tương đương, giá trị biên).\nKiểm thử tích hợp: Kiểm thử giao diện giữa các mô đun.",
             "children": []
           },
           {
             "level_2_id": "10.3",
-            "level_2_title": "KIỂM THỬ SẢN PHẨM VÀ CHẤP NHẬN",
+            "level_2_title": "10.3. KIỂM THỬ SẢN PHẨM VÀ CHẤP NHẬN",
             "content": "Kiểm thử sản phẩm (Product testing): Do SQA thực hiện trên toàn bộ hệ thống (chức năng, hiệu năng, chịu tải - stress/volume testing).\nKiểm thử chấp nhận (Acceptance testing): Do khách hàng thực hiện trên dữ liệu thực để quyết định nhận sản phẩm.",
             "children": []
           }
@@ -368,13 +368,13 @@
         "children": [
           {
             "level_2_id": "11.1",
-            "level_2_title": "BẢO TRÌ SAU CHUYỂN GIAO",
+            "level_2_title": "11.1. PHA BẢO TRÌ SAU KHI CHUYỂN GIAO",
             "content": "Là pha tốn kém nhất (67% chi phí). Gồm: Bảo trì sửa lỗi, Bảo trì hoàn thiện (chiếm nhiều nhất ~60%), Bảo trì thích nghi.\nKhó khăn: Thường thiếu tài liệu hoặc tài liệu sai, mã nguồn cũ khó hiểu, rủi ro sinh lỗi mới (lỗi hồi quy) khi sửa lỗi cũ.\nCần kỹ nghệ ngược (Reverse Engineering) nếu mất tài liệu: từ mã nguồn tái tạo thiết kế/đặc tả.",
             "children": []
           },
           {
             "level_2_id": "11.2",
-            "level_2_title": "BẢO TRÌ HỆ HƯỚNG ĐỐI TƯỢNG",
+            "level_2_title": "11.2. BẢO TRÌ HỆ PHẦN MỀM HƯỚNG ĐỐI TƯỢNG",
             "content": "Lợi ích lý thuyết: Độc lập, đóng gói giúp dễ bảo trì.\nThực tế khó khăn: Kế thừa sâu phức tạp, đa hình/liên kết động khó theo dõi luồng thực thi, vấn đề 'lớp cơ sở mỏng manh' (sửa lớp cha ảnh hưởng tất cả lớp con).",
             "children": []
           }

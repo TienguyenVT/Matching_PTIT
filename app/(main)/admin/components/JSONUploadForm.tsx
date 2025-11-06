@@ -132,9 +132,6 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* File Upload */}
       <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Chọn file JSON *
-        </label>
         <input
           ref={fileInputRef}
           type="file"
@@ -144,15 +141,12 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           required
           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 disabled:opacity-50"
         />
-        <p className="mt-2 text-sm text-gray-500">
-          File JSON phải có cấu trúc Chương/Mục với format: <code className="bg-gray-100 px-1 rounded">{"{ \"data\": [...] }"}</code>
-        </p>
       </div>
 
       {/* Course Title */}
       <div>
         <label htmlFor="courseTitle" className="block text-sm font-medium text-gray-700 mb-2">
-          Tên khóa học *
+          Tên khóa học
         </label>
         <input
           type="text"
