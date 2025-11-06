@@ -1,13 +1,15 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 interface JSONUploadFormProps {
   onUploadSuccess?: (result: any) => void;
   onUploadError?: (error: string) => void;
+  supabase?: SupabaseClient;
 }
 
-export default function JSONUploadForm({ onUploadSuccess, onUploadError }: JSONUploadFormProps) {
+export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabase }: JSONUploadFormProps) {
   const [file, setFile] = useState<File | null>(null);
   const [courseTitle, setCourseTitle] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
@@ -48,6 +50,19 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError }: JSONU
     setProgress(0);
 
     try {
+      // Get session token để gửi kèm request
+      let sessionToken: string | null = null;
+      if (supabase) {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          sessionToken = session.access_token;
+        }
+      }
+
+      if (!sessionToken) {
+        throw new Error('Bạn cần đăng nhập để sử dụng tính năng này.');
+      }
+
       const formData = new FormData();
       formData.append('file', file);
       if (courseTitle) formData.append('courseTitle', courseTitle);
@@ -67,7 +82,11 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError }: JSONU
 
       const response = await fetch('/api/admin/process-json', {
         method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${sessionToken}`,
+        },
         body: formData,
+        credentials: 'include',
       });
 
       clearInterval(progressInterval);

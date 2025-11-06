@@ -228,6 +228,7 @@ export default function AdminPage() {
         <JSONUploadForm
           onUploadSuccess={handleUploadSuccess}
           onUploadError={handleUploadError}
+          supabase={supabase}
         />
       </div>
 
