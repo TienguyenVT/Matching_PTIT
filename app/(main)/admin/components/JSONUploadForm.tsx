@@ -2,12 +2,12 @@
 
 import { useState, useRef } from 'react';
 
-interface PDFUploadFormProps {
+interface JSONUploadFormProps {
   onUploadSuccess?: (result: any) => void;
   onUploadError?: (error: string) => void;
 }
 
-export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUploadFormProps) {
+export default function JSONUploadForm({ onUploadSuccess, onUploadError }: JSONUploadFormProps) {
   const [file, setFile] = useState<File | null>(null);
   const [courseTitle, setCourseTitle] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
@@ -19,18 +19,18 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
-      if (selectedFile.type !== 'application/pdf') {
-        alert('Vui lòng chọn file PDF.');
+      if (selectedFile.type !== 'application/json' && !selectedFile.name.toLowerCase().endsWith('.json')) {
+        alert('Vui lòng chọn file JSON.');
         return;
       }
-      if (selectedFile.size > 50 * 1024 * 1024) {
-        alert('File quá lớn. Kích thước tối đa là 50MB.');
+      if (selectedFile.size > 10 * 1024 * 1024) {
+        alert('File quá lớn. Kích thước tối đa là 10MB.');
         return;
       }
       setFile(selectedFile);
       // Auto-fill course title from file name
       if (!courseTitle) {
-        const fileName = selectedFile.name.replace(/\.pdf$/i, '');
+        const fileName = selectedFile.name.replace(/\.json$/i, '');
         setCourseTitle(fileName);
       }
     }
@@ -38,8 +38,11 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Chế độ batch-only JSON đang bật. Upload PDF tạm thời không khả dụng. Vui lòng dùng batch JSON trong documents/.');
-    return;
+
+    if (!file) {
+      alert('Vui lòng chọn file JSON.');
+      return;
+    }
 
     setUploading(true);
     setProgress(0);
@@ -51,7 +54,7 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
       if (courseDescription) formData.append('courseDescription', courseDescription);
       if (courseLevel) formData.append('courseLevel', courseLevel);
 
-      // Simulate progress (PDF processing is complex, so we simulate)
+      // Simulate progress
       const progressInterval = setInterval(() => {
         setProgress(prev => {
           if (prev >= 90) {
@@ -60,9 +63,9 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
           }
           return prev + 10;
         });
-      }, 1000);
+      }, 500);
 
-      const response = await fetch('/api/admin/process-pdf', {
+      const response = await fetch('/api/admin/process-json', {
         method: 'POST',
         body: formData,
       });
@@ -73,7 +76,7 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Lỗi xử lý PDF');
+        throw new Error(data.error || 'Lỗi xử lý JSON');
       }
 
       if (onUploadSuccess) {
@@ -96,9 +99,9 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
     } catch (error: any) {
       console.error('Upload error:', error);
       if (onUploadError) {
-        onUploadError(error.message || 'Lỗi xử lý PDF');
+        onUploadError(error.message || 'Lỗi xử lý JSON');
       } else {
-        alert(error.message || 'Lỗi xử lý PDF. Vui lòng thử lại.');
+        alert(error.message || 'Lỗi xử lý JSON. Vui lòng thử lại.');
       }
     } finally {
       setUploading(false);
@@ -111,17 +114,20 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
       {/* File Upload */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Chọn file PDF (đã deprecate – dùng batch JSON)
+          Chọn file JSON *
         </label>
         <input
           ref={fileInputRef}
           type="file"
-          accept=".pdf"
+          accept=".json,application/json"
           onChange={handleFileChange}
-          disabled
+          disabled={uploading}
+          required
           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 disabled:opacity-50"
         />
-        <p className="mt-2 text-sm text-gray-500">Upload PDF tạm thời không khả dụng. Hãy đặt các file JSON vào documents/ và dùng chức năng batch.</p>
+        <p className="mt-2 text-sm text-gray-500">
+          File JSON phải có cấu trúc Chương/Mục với format: <code className="bg-gray-100 px-1 rounded">{"{ \"data\": [...] }"}</code>
+        </p>
       </div>
 
       {/* Course Title */}
@@ -179,7 +185,7 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
       {uploading && (
         <div>
           <div className="flex justify-between text-sm text-gray-600 mb-1">
-            <span>Đang xử lý PDF...</span>
+            <span>Đang xử lý JSON...</span>
             <span>{progress}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5">
@@ -194,10 +200,10 @@ export default function PDFUploadForm({ onUploadSuccess, onUploadError }: PDFUpl
       {/* Submit Button */}
       <button
         type="submit"
-        disabled
+        disabled={uploading || !file}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {'Upload PDF đã deprecate'}
+        {uploading ? 'Đang xử lý...' : 'Upload và tạo khóa học'}
       </button>
     </form>
   );

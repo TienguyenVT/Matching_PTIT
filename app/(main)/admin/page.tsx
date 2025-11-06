@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import { ROUTES } from '@/lib/routes';
-import PDFUploadForm from './components/PDFUploadForm';
+import JSONUploadForm from './components/JSONUploadForm';
 
 interface BatchProcessResult {
   success: boolean;
@@ -220,12 +220,12 @@ export default function AdminPage() {
           <svg className="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
           </svg>
-          <h2 className="text-lg font-semibold text-gray-800">Tải lên và xử lý PDF</h2>
+          <h2 className="text-lg font-semibold text-gray-800">Tải lên và xử lý JSON</h2>
         </div>
         <p className="text-sm text-gray-600 mb-6">
-          Tải lên file PDF để tự động tạo khóa học với cấu trúc học phần và bài học.
+          Tải lên file JSON có cấu trúc Chương/Mục để tự động tạo khóa học với học phần và bài học.
         </p>
-        <PDFUploadForm
+        <JSONUploadForm
           onUploadSuccess={handleUploadSuccess}
           onUploadError={handleUploadError}
         />
@@ -385,8 +385,9 @@ export default function AdminPage() {
           <div className="text-sm text-blue-800">
             <p className="font-medium mb-1">Lưu ý:</p>
             <ul className="list-disc list-inside space-y-1">
-              <li>Hệ thống chỉ xử lý các file JSON trong documents/ để tạo khóa học</li>
-              <li>Đảm bảo JSON theo mẫu (Chương/Mục) để phân tách chính xác</li>
+              <li>Upload file JSON trực tiếp hoặc sử dụng batch processing từ folder documents/</li>
+              <li>File JSON phải có cấu trúc Chương/Mục với format: <code className="bg-blue-100 px-1 rounded">{"{ \"data\": [...] }"}</code></li>
+              <li>Hệ thống sẽ tự động tạo khóa học, học phần và bài học từ nội dung JSON</li>
             </ul>
           </div>
         </div>
