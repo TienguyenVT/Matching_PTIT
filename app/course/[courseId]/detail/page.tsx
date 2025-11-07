@@ -14,12 +14,37 @@ type Course = {
   level?: string;
 };
 
+type CourseModule = {
+  id: string;
+  course_id: string;
+  title: string;
+  chapter_number: number | null;
+  description: string | null;
+  order_index: number;
+};
+
 type CourseContent = {
   id: string;
   title: string;
   kind: 'video' | 'doc' | 'quiz';
   storage_path?: string;
   order_index: number;
+  module_id: string | null;
+};
+
+type LessonContent = {
+  content_id: string;
+  content_text: string;
+};
+
+type QuizContent = {
+  content_id: string;
+  questions: Array<{
+    question: string;
+    options: string[];
+    correctAnswer: number;
+    explanation?: string;
+  }>;
 };
 
 export default function CourseDetailPage({ params }: { params: { courseId: string } }) {
@@ -30,9 +55,13 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   const supabase = supabaseBrowser();
   
   const [course, setCourse] = useState<Course | null>(null);
+  const [modules, setModules] = useState<CourseModule[]>([]);
   const [contents, setContents] = useState<CourseContent[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedContent, setSelectedContent] = useState<CourseContent | null>(null);
+  const [lessonContent, setLessonContent] = useState<LessonContent | null>(null);
+  const [quizContent, setQuizContent] = useState<QuizContent | null>(null);
+  const [loadingContent, setLoadingContent] = useState(false);
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab] = useState<'knowledge' | 'exercises' | 'products' | 'report'>('knowledge');
@@ -68,6 +97,22 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
 
       setCourse(courseData);
 
+      // Load modules
+      console.log('[DetailPage] Loading course modules...');
+      const { data: modulesData, error: modulesError } = await supabase
+        .from('course_modules')
+        .select('*')
+        .eq('course_id', courseId)
+        .order('order_index');
+
+      if (modulesError) {
+        console.error('[DetailPage] Error loading modules:', modulesError);
+      } else {
+        console.log('[DetailPage] Modules loaded:', modulesData?.length || 0, 'modules');
+      }
+
+      setModules(modulesData || []);
+
       // Load contents
       console.log('[DetailPage] Loading course contents...');
       const { data: contentsData, error: contentsError } = await supabase
@@ -83,8 +128,13 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
       }
 
       setContents(contentsData || []);
+      
+      // Set first content as selected (loadContentDetails sẽ được gọi tự động qua useEffect)
       if (contentsData && contentsData.length > 0) {
         setSelectedContent(contentsData[0]);
+      } else if (modulesData && modulesData.length > 0) {
+        // Auto-expand first module
+        setExpandedModules(new Set([modulesData[0].id]));
       }
 
       // Check if enrolled
@@ -108,6 +158,58 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     };
     load();
   }, [courseId, router, supabase]);
+
+  // Load content details khi selectedContent thay đổi
+  const loadContentDetails = async (contentId: string, kind: 'video' | 'doc' | 'quiz') => {
+    setLoadingContent(true);
+    try {
+      if (kind === 'doc') {
+        // Load lesson content
+        const { data, error } = await supabase
+          .from('lesson_content')
+          .select('*')
+          .eq('content_id', contentId)
+          .maybeSingle();
+
+        if (error) {
+          console.error('Error loading lesson content:', error);
+        } else {
+          setLessonContent(data);
+          setQuizContent(null);
+        }
+      } else if (kind === 'quiz') {
+        // Load quiz content
+        const { data, error } = await supabase
+          .from('quiz_content')
+          .select('*')
+          .eq('content_id', contentId)
+          .maybeSingle();
+
+        if (error) {
+          console.error('Error loading quiz content:', error);
+        } else {
+          setQuizContent(data);
+          setLessonContent(null);
+        }
+      } else {
+        // Video: không có content chi tiết
+        setLessonContent(null);
+        setQuizContent(null);
+      }
+    } catch (error) {
+      console.error('Error loading content details:', error);
+    } finally {
+      setLoadingContent(false);
+    }
+  };
+
+  // Load content khi selectedContent thay đổi
+  useEffect(() => {
+    if (selectedContent) {
+      loadContentDetails(selectedContent.id, selectedContent.kind);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedContent?.id]);
 
   const handleRegister = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -165,20 +267,13 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     );
   }
 
-  // Group contents by modules (tạm thời phân nhóm theo logic đơn giản)
-  const groupedModules = contents.reduce((acc, content) => {
-    const moduleIndex = Math.floor(content.order_index / 3) + 1;
-    const moduleKey = `module-${moduleIndex}`;
-    if (!acc[moduleKey]) {
-      acc[moduleKey] = {
-        id: moduleKey,
-        title: `Học phần ${moduleIndex} - ${content.title.split(' ').slice(0, 5).join(' ')}`,
-        contents: []
-      };
-    }
-    acc[moduleKey].contents.push(content);
-    return acc;
-  }, {} as Record<string, { id: string; title: string; contents: CourseContent[] }>);
+  // Group contents by modules
+  const groupedModules = modules.map(module => ({
+    ...module,
+    contents: contents
+      .filter(content => content.module_id === module.id)
+      .sort((a, b) => a.order_index - b.order_index)
+  })).filter(module => module.contents.length > 0);
 
   const toggleModule = (moduleId: string) => {
     setExpandedModules(prev => {
@@ -195,7 +290,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   // Tìm module chứa selectedContent để hiển thị tên
   const getCurrentModuleTitle = () => {
     if (selectedContent) {
-      const module = Object.values(groupedModules).find(m => 
+      const module = groupedModules.find(m => 
         m.contents.some(c => c.id === selectedContent.id)
       );
       return module ? module.title : selectedContent.title;
@@ -214,10 +309,10 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
               <h2 className="text-lg font-semibold text-gray-800">Chương trình học</h2>
             </div>
             <div className="space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto">
-              {Object.values(groupedModules).length === 0 ? (
+              {groupedModules.length === 0 ? (
                 <p className="text-gray-500 text-sm">Chưa có nội dung</p>
               ) : (
-                Object.values(groupedModules).map((module) => (
+                groupedModules.map((module) => (
                   <div key={module.id} className="border border-gray-200 rounded-lg">
                     <button
                       onClick={() => toggleModule(module.id)}
@@ -247,6 +342,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                                 : 'text-gray-600 hover:bg-gray-50'
                             }`}
                           >
+                            <span className="mr-1 text-xs uppercase">{content.kind === 'doc' ? '📄' : content.kind === 'quiz' ? '📝' : '🎥'}</span>
                             {content.title}
                           </button>
                         ))}
@@ -312,21 +408,103 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
 
             {activeTab === 'knowledge' && (
               <div className="space-y-6">
-                <div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    <h3 className="font-medium text-gray-800">Nội dung bài học</h3>
+                {loadingContent ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-teal-600"></div>
+                    <span className="ml-3 text-gray-600">Đang tải nội dung...</span>
                   </div>
+                ) : selectedContent?.kind === 'doc' && lessonContent ? (
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <h3 className="font-medium text-gray-800">Nội dung bài học</h3>
+                    </div>
+                    <div 
+                      className="bg-white rounded-lg p-6 prose-content"
+                      dangerouslySetInnerHTML={{ __html: lessonContent.content_text }}
+                      style={{
+                        lineHeight: '1.75',
+                      }}
+                    />
+                  </div>
+                ) : selectedContent?.kind === 'quiz' && quizContent ? (
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                      </svg>
+                      <h3 className="font-medium text-gray-800">Bài kiểm tra trắc nghiệm</h3>
+                    </div>
+                    <div className="bg-white rounded-lg p-6 space-y-6">
+                      {quizContent.questions.map((q, idx) => (
+                        <div key={idx} className="border border-gray-200 rounded-lg p-4">
+                          <div className="flex items-start gap-2 mb-3">
+                            <span className="flex-shrink-0 w-6 h-6 bg-teal-500 text-white rounded-full flex items-center justify-center text-sm font-medium">
+                              {idx + 1}
+                            </span>
+                            <p className="font-medium text-gray-800 flex-1">{q.question}</p>
+                          </div>
+                          <div className="ml-8 space-y-2">
+                            {q.options.map((option, optIdx) => (
+                              <label
+                                key={optIdx}
+                                className={`flex items-center gap-2 p-2 rounded cursor-pointer ${
+                                  optIdx === q.correctAnswer
+                                    ? 'bg-green-50 border border-green-200'
+                                    : 'hover:bg-gray-50'
+                                }`}
+                              >
+                                <input
+                                  type="radio"
+                                  name={`question-${idx}`}
+                                  value={optIdx}
+                                  checked={optIdx === q.correctAnswer}
+                                  disabled
+                                  className="text-teal-600"
+                                />
+                                <span className={`${optIdx === q.correctAnswer ? 'font-medium text-green-700' : 'text-gray-700'}`}>
+                                  {String.fromCharCode(65 + optIdx)}. {option}
+                                </span>
+                                {optIdx === q.correctAnswer && (
+                                  <span className="ml-auto text-green-600 text-sm">✓ Đáp án đúng</span>
+                                )}
+                              </label>
+                            ))}
+                          </div>
+                          {q.explanation && (
+                            <div className="ml-8 mt-3 p-3 bg-blue-50 border border-blue-200 rounded">
+                              <p className="text-sm text-blue-800">
+                                <strong>Giải thích:</strong> {q.explanation}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : selectedContent?.kind === 'video' ? (
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <svg className="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                      <h3 className="font-medium text-gray-800">Video bài học</h3>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-6">
+                      {selectedContent.storage_path ? (
+                        <video src={selectedContent.storage_path} controls className="w-full rounded-md bg-black" />
+                      ) : (
+                        <p className="text-gray-500 text-sm">Video chưa được cập nhật</p>
+                      )}
+                    </div>
+                  </div>
+                ) : (
                   <div className="bg-gray-50 rounded-lg p-6">
-                    {selectedContent ? (
-                      <p className="text-gray-700">{selectedContent.title}</p>
-                    ) : (
-                      <p className="text-gray-500 text-sm">Nội dung bài học đang được cập nhật</p>
-                    )}
+                    <p className="text-gray-500 text-sm">Nội dung bài học đang được cập nhật</p>
                   </div>
-                </div>
+                )}
               </div>
             )}
 

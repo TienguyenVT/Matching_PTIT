@@ -1,0 +1,937 @@
+{
+    "document_title": "KỸ THUẬT MẠNG TRUYỀN THÔNG",
+    "structure_type": "Chương/Mục",
+    "data": [
+      {
+        "level_1_title": "CHƯƠNG 1. GIỚI THIỆU CHUNG",
+        "level_1_id": "1",
+        "children": [
+          {
+            "level_2_title": "1.1. Các loại mạng truyền thông",
+            "level_2_id": "1.1",
+            "content": "",
+            "children": [
+              {
+                "title": "1.1.1. Mạng cục bộ",
+                "id": "1.1.1",
+                "content": "Mạng cục bộ, thường được gọi là LAN (Local Area Network), là mạng riêng trong một tòa nhà hoặc khuôn viên có phạm vi lên đến vài km. Chúng được sử dụng rộng rãi để kết nối máy tính cá nhân và máy trạm trong văn phòng công ty hay tổ chức để chia sẻ tài nguyên (ví dụ như máy in) và trao đổi thông tin. LAN được phân biệt với các loại mạng khác bởi ba đặc điểm: (1) kích thước, (2) công nghệ truyền dẫn, và (3) cấu trúc liên kết. Mạng LAN bị hạn chế về kích thước, do vậy thời gian truyền dẫn được đảm bảo trong giới hạn. Điều này tạo ra những thuận lợi nhất định trong thiết kế và quản lí mạng.\nMạng LAN có thể sử dụng công nghệ truyền dẫn gồm một đường cáp mà tất cả các máy được nối tới. Mạng LAN truyền thống chạy ở tốc độ từ 10 Mbps đến 100Mbps, có độ trễ thấp (micro giây hoặc nano giây), và rất ít lỗi. Gần đây mạng LAN có thể hoạt động với tốc độ lên đến 10 Gbps.\nCó rất nhiều cấu trúc liên kết có thể được sử dụng cho mạng LAN. Hình 1.1 cho thấy hai cấu trúc trong số đó. Trong mạng dạng bus, tại một thời điểm cho phép nhiều nhất một máy tính truyền dữ liệu. Tất cả các máy khác không được gửi. Một cơ chế điều khiển là cần thiết để giải quyết xung đột khi hai máy hoặc nhiều hơn muốn truyền dữ liệu đồng thời. Cơ chế điều khiển có thể tập trung hoặc phân tán. Ví dụ, chuẩn IEEE 802.3, thường được gọi là Ethernet, là một chuẩn mạng dựa trên bus với điều khiển không tập trung, thường hoạt động ở tốc độ từ 10 Mbps đến 10 Gbps. Máy tính trên một mạng Ethernet có thể truyền dữ liệu bất cứ khi nào muốn. Nếu có hai hay nhiều gói va chạm, mỗi máy tính chỉ chờ đợi một thời gian ngẫu nhiên và thử lại sau đó.\nDạng cấu trúc mạng thứ hai là vòng (ring). Trong mạng này, mỗi bit truyền xung quanh vòng mà không phải chờ phần còn lại của gói tin mà nó thuộc về. Thông thường, mỗi bit chạy hết một vòng trong khoảng thời gian có vài bịt được đưa vào vòng, cho đến khi toàn bộ gói tin được truyền đi. Giống như với các hệ thống truyền khác, một số quy tắc cần được thiết lập để để điều khiển sự truy nhập đồng thời vào vòng. Có nhiều phương pháp khác nhau có thể được sử dụng, chẳng hạn như để các máy thay phiên nhau truyền dữ liệu. IEEE 802.5 (IBM Token Ring) là chuẩn LAN dựa trên cấu trúc vòng hoạt động ở tốc độ 4 và 16 Mbps. FDDI cũng là một ví dụ của mạng hoạt động theo cấu trúc vòng.\nMạng quảng bá có thể được chia thành tĩnh và động, tùy thuộc vào việc kênh được phân bổ như thế nào. Cơ chế phân bổ kênh tĩnh điển hình phân chia thời gian thành các khoảng thời gian rời rạc và sử dụng thuật toán quay vòng (round-robin), cho phép mỗi máy truyền khi đến lượt khe thời gian của mình. Cơ chế phân bổ kênh tĩnh không hiệu quả ở góc độ sử dụng băng thông khi một máy không có gì để truyền trong khe thời gian được phân bổ. Vì vậy hầu hết các hệ thống đều cố gắng để phân bổ kênh động (theo nhu cầu).\nPhương pháp phân bổ kênh động có thể là tập trung hoặc phân tán. Trong phương pháp phân bổ kênh tập trung, có một thực thể duy nhất, ví dụ đơn vị điều khiển bus, xác định người truyền tiếp theo. Nó có thể làm điều này bằng cách chấp nhận các yêu cầu và đưa ra quyết định theo một số thuật toán nội bộ. Trong phương pháp phân bổ kênh phân tán, không có thực thể trung tâm, mỗi máy phải tự quyết định khi nào thực hiện truyền tải."
+              },
+              {
+                "title": "1.1.2. Mạng đô thị",
+                "id": "1.1.2",
+                "content": "Một mạng khu vực đô thị, còn được gọi là MAN, có phạm vi trong một thành phố. Ví dụ nổi tiếng nhất của MAN là mạng truyền hình cáp có sẵn ở nhiều thành phố. Hệ thống này đã phát triển từ hệ thống ăng-ten công cộng trước đó. Trong các hệ thống này, một ăng-ten lớn được đặt trên đỉnh của một ngọn đồi gần đó và tín hiệu sau đó được truyền đến các thuê bao.\nBan đầu là những mạng được thiết kế nội bộ và riêng biệt. Sau đó, các công ty bắt đầu tham gia kinh doanh và nhận được hợp đồng từ chính quyền để xây lắp mạng cho toàn thành phố. Bước tiếp theo là thiết kế chương trình cho các kênh truyền hình. Thường thì những kênh này có nhiều nội dung, chẳng hạn như tin tức, thể thao, nấu ăn,...\nBắt đầu từ khi Internet thu hút được một lượng quan tâm lớn, các nhà khai thác mạng cáp truyền hình đã bắt đầu nhận ra rằng với một số thay đổi đối với hệ thống, họ có thể cung cấp dịch vụ Internet hai chiều trong phần dải tần chưa sử dụng. Vào thời điểm đó, các hệ thống truyền hình cáp bắt đầu biến hình từ phân phối truyền hình cho một khu vực đô thị thành phân phối mạng đô thị. Trong Hình 1.2 chúng ta thấy cả hai tín hiệu truyền hình và Internet được đưa vào đầu cuối tập trung để phân phối tiếp đến hộ gia đình. Truyền hình cáp không phải là giải pháp MAN duy nhất. Sự phát triển của các công nghệ truyền dẫn quang và không dây tốc độ cao trong thời gian gần đây đã tạo ra nhiều giải pháp MAN khác."
+              },
+              {
+                "title": "1.1.3. Mạng diện rộng",
+                "id": "1.1.3",
+                "content": "Một mạng diện rộng, còn được gọi là WAN (Wide Area Network), có phạm vi trong một khu vực địa lý rộng lớn, thường là một quốc gia hay lục địa. Nó chứa một tập hợp các máy tính chạy các chương trình ứng dụng còn được gọi là máy trạm (host). Các máy trạm được nối với nhau bởi một phân mạng hay mạng con (subnet). Các máy trạm thuộc sở hữu của khách hàng (ví dụ, máy tính cá nhân của người dân), trong khi các phân mạng thường được sở hữu và điều hành bởi nhà cung cấp dịch vụ Internet. Chức năng của một mạng con là chuyển bản tin từ máy trạm đến máy trạm. Tách các khía cạnh truyền thông của mạng khỏi khía cạnh ứng dụng có thể giúp đơn giản hóa quá trình thiết kế mạng.\nTrong hầu hết các mạng diện rộng, một mạng con bao gồm hai thành phần khác nhau: đường dây và phần tử chuyển mạch. Đường dây vận chuyển các bịt giữa các máy. Chúng có thể được làm bằng dây đồng, cáp quang, hoặc thậm chí liên kết vô tuyến. Các phần tử chuyển mạch là các máy tính chuyên dụng kết nối ba hoặc nhiều đường truyền. Khi dữ liệu trên một đường gửi đến, các phần tử chuyển mạch phải chọn một đường đi trên đó để chuyển tiếp chúng. Những máy tính chuyển mạch được gọi bằng tên khác nhau trong quá khứ, hiện tại chúng thường được gọi là bộ định tuyến (router).\nTrên Hình 1.3, mỗi máy trạm được kết nối với một mạng LAN rồi từ đó kết nối tới một bộ định tuyến, tuy nhiên trong một số trường hợp máy trạm có thể được kết nối trực tiếp với một bộ định tuyến. Tập hợp các đường truyền và thiết bị định tuyến (nhưng không phải các máy chủ) hình thành nên các phân mạng.\nBan đầu, ý nghĩa duy nhất của thuật ngữ “phân mạng\" là tập hợp các thiết bị định tuyến và đường truyền để vận chuyển các gói tin từ trạm nguồn đến trạm đích. Tuy nhiên, sau đó khái niệm “phân mạng\" có một ý nghĩa thứ hai liên quan đến việc đánh địa chỉ mạng.\nTrong hầu hết các WAN, mạng có nhiều đường truyền, mỗi một đường kết nối một cặp bộ định tuyến. Nếu hai bộ định tuyến không có đường truyền trực tiếp muốn trao đổi thông tin với nhau, chúng phải làm điều này một cách gián tiếp thông qua các bộ định tuyến khác. Khi một gói tin được gửi từ một bộ định tuyến này đến bộ định tuyến khác thông qua một hoặc nhiều router trung gian, các gói tin sẽ được bộ định tuyến trung gian nhận, lưu tạm ở đó cho đến khi đầu ra theo yêu cầu rỗi, và sau đó được chuyển tiếp đi. Một phân mạng tổ chức theo nguyên tắc này được gọi là “lưu và chuyển tiếp” (store-and-forward) hay phân mạng chuyển mạch gói (packet-switched). Hầu như tất cả mạng diện rộng (trừ khi sử dụng các vệ tinh) có các mạng con lưu và chuyển tiếp.\nNguyên tắc của WAN dựa trên chuyển mạch gói: khi một máy trạm có một bản tin cần gửi đến một số trạm khác, trạm gửi đầu tiên cắt bản tin thành các gói tin, mỗi gói mang số theo trình tự. Các gói dữ liệu sau đó được chuyển vào mạng liên tiếp nhau theo từng gói một. Các gói dữ liệu được vận chuyển qua mạng theo những cách riêng và tới các máy trạm tiếp nhận, nơi chúng được tập hợp lại thành bản tin ban đầu và chuyển cho quá trình tiếp nhận.\nViệc lựa chọn đường đi được thực hiện tại bộ định tuyến. Khi một gói tin đến bộ định tuyến A, A cần đưa ra một quyết định để chuyển gói này trên đường B hoặc đường C. A dùng giải thuật định tuyến để đưa ra quyết định này.\nKhông phải tất cả WAN đều dựa trên chuyển mạch gói. Một giải pháp khác cho mạng WAN là hệ thống truyền dẫn vệ tinh. Mỗi bộ định tuyến có một ăng-ten để thông qua đó có thể gửi và nhận tín hiệu. Tất cả các bộ định tuyến có thể nhận dữ liệu từ các vệ tinh, và trong một số trường hợp, chúng cũng có thể nhận biết được việc truyền dữ liệu lên vệ tinh từ các bộ định tuyến đồng cấp với chúng. Mạng vệ tinh phù hợp với các trường hợp khi việc truyền thông tin mang tính quảng bá."
+              },
+              {
+                "title": "1.1.4. Mạng không dây",
+                "id": "1.1.4",
+                "content": "Thông tin liên lạc kỹ thuật số không dây không phải là một ý tưởng mới. Các mạng không dây có thể được chia thành ba loại chính:\n1. Hệ thống kết nối;\n2. LAN không dây;\n3. WAN không dây.\nHệ thống kết nối bao gồm tất cả các thành phần kết nối của một máy tính sử dụng sóng radio trong khoảng cách ngắn. Bluetooth là một giải pháp mạng không dây tầm ngắn để kết nối các thành phần này mà không cần dây. Bluetooth cũng cho phép máy ảnh kỹ thuật số, tai nghe, máy quét và các thiết bị khác kết nối với một máy tính bằng cách chỉ được đưa trong phạm vi bắt sóng. Ở hình thức đơn giản nhất, hệ thống kết nối sử dụng mô hình master-slave (chủ/thợ).\nBước phát triển tiếp theo trong mạng không dây là WLAN (Wireless LAN). Đây là hệ thống trong đó mỗi máy tính có một modem không dây và ăng-ten mà nhờ đó nó có thể giao tiếp với các hệ thống khác. Thường có một ăng-ten đặt trên trần giúp các máy liên lạc với nhau. Tuy nhiên, nếu các máy đủ gần, chúng có thể giao tiếp trực tiếp với nhau trong một cấu hình peer-to-peer. Có một tiêu chuẩn cho mạng LAN không dây là IEEE 802.11 đang trở nên rất phổ biến.\nLoại thứ ba của mạng không dây được sử dụng trong các mạng diện rộng. Mạng vô tuyến dùng cho điện thoại di động là một ví dụ của hệ thống không dây băng thông thấp. Hệ thống này đã trải qua một vài thế hệ (analog, digital truyền thoại, digital truyền thoại và dữ liệu). Ngoài các mạng tốc độ thấp, mạng không dây diện rộng băng thông cao cũng đang được phát triển, tập trung hỗ trợ truy nhập Internet không dây tốc độ cao từ gia đình và doanh nghiệp. Dịch vụ này thường được gọi là dịch vụ phân phối đa điểm. Một tiêu chuẩn cho nó là IEEE 802.16 (Wimax) cũng đã được phát triển.\nHầu như tất cả các mạng không dây đều kết nối với mạng có dây tại một số điểm để cung cấp khả năng truy nhập vào các tập tin, cơ sở dữ liệu, và Internet."
+              },
+              {
+                "title": "1.1.5. Kết nối liên mạng",
+                "id": "1.1.5",
+                "content": "Nhiều mạng tồn tại trên thế giới, thường với phần cứng và phần mềm khác nhau. Việc kết nối các mạng khác nhau (thường không tương thích cả về phần cứng và phần mềm) đòi hỏi chúng được kết nối với nhau, đôi khi thông qua phương tiện kĩ thuật được gọi là cổng kết nối (gateway) để tạo kết nối và cung cấp các sự tương thích phần cứng và phần mềm cần thiết. Một tập hợp các mạng kết nối với nhau được gọi là một liên mạng hay internet. Thuật ngữ này được sử dụng trong nghĩa rộng, phân biệt với khái niệm mạng toàn cầu Internet (thường được viết hoa) để chỉ một liên mạng cụ thể.\nHình thức phổ biến của liên mạng là một tập hợp các LAN kết nối bởi một mạng WAN. Sự khác biệt kỹ thuật giữa một phân mạng và WAN trong trường hợp này là sự có mặt của các máy trạm. Nếu hệ thống chỉ chứa các bộ định tuyến thì nó là một phân mạng, còn nếu nó có chứa cả các bộ định tuyến và máy trạm thì nó là một WAN. Sự khác biệt thực tế ở đây liên quan đến quyền sở hữu và sử dụng.\nPhân mạng, mạng, và liên mạng thường bị nhầm lẫn. Phân mạng đề cập đến tập các bộ định tuyến và đường truyền thuộc sở hữu của nhà điều hành mạng. Sự kết hợp của một phân mạng và các máy trạm của nó tạo thành một mạng. Một liên mạng được hình thành khi các mạng khác nhau được kết nối với nhau."
+              }
+            ]
+          },
+          {
+            "level_2_title": "1.2. Nguyên lí hoạt động chung của mạng truyền thông",
+            "level_2_id": "1.2",
+            "content": "",
+            "children": [
+              {
+                "title": "1.2.1. Sự phân lớp giao thức",
+                "id": "1.2.1",
+                "content": "Để giảm độ phức tạp trong thiết kế, hầu hết các mạng được tổ chức theo mô hình phân lớp. Số lượng các lớp, tên của mỗi lớp, nội dung và chức năng của mỗi lớp với các mạng là khác nhau. Mục đích của mỗi lớp là cung cấp các dịch vụ nhất định cho lớp cao hơn. Có thể hiểu, mỗi lớp là một loại máy ảo, cung cấp dịch vụ nhất định cho các lớp trên. Ý tưởng cơ bản ở đây là một thực thể (phần mềm hay phần cứng) cung cấp dịch vụ cho thực thể khác sử dụng nhưng ẩn đi các chi tiết về các trạng thái hay giải thuật sử dụng bên trong."
+              },
+              {
+                "title": "1.2.2. Thiết kế chức năng cho các lớp",
+                "id": "1.2.2",
+                "content": "Khi thiết kế chức năng cho các lớp Mạng truyền thông thường người ta tuân thủ một số nguyên tắc sau đây:\n- Số lượng các lớp không nhiều quá để đơn giản hóa việc thiết kế mạng, song cũng không được ít quá vì khi đó các bài toán cần giải quyết trên mỗi lớp lại trở nên quá phức tạp;\n- Tạo ranh giới các lớp sao cho sự tương tác và mô tả các dịch vụ giữa chúng là tối thiểu;\n- Chia các lớp sao cho các chức năng khác nhau được tách biệt với nhau; các lớp sử dụng các loại công nghệ khác nhau cũng được tách biệt;\n- Các chức năng giống nhau được đặt vào cùng một lớp; các chức năng được định vị sao cho có thể thiết kế lại lớp mà ảnh hưởng ít nhất đến các lớp kề nó;\n- Tạo ranh giới các lớp sao cho có thể chuẩn hóa các giao diện tương ứng và theo kinh nghiệm đã được chứng tỏ là thành công;\n- Khi dữ liệu được xử lí một cách khác biệt thì cần phải tạo một lớp mới;\n- Các thay đổi về chức năng hoặc giao thức trong một lớp không được ảnh hưởng đến các lớp khác (đảm bảo tính trong suốt giữa các lớp);\n- Mỗi lớp chỉ có các ranh giới (giao diện) với các lớp kề trên và dưới nó.\n- Có thể chia một lớp thành các lớp con khi cần thiết; nguyên tắc chia lớp con được áp dụng tương tự như trên; khi không cần thiết các lớp con có thể hủy bỏ."
+              },
+              {
+                "title": "1.2.3. Dịch vụ hướng kết nối và phi kết nối",
+                "id": "1.2.3",
+                "content": "Mỗi lớp có thể cung cấp hai loại hình dịch vụ cho các lớp phía trên chúng: hướng kết nối và phi kết nối.\nDịch vụ hướng kết nối được xây dựng theo ý tưởng của hệ thống điện thoại. Để sử dụng một dịch vụ hướng kết nối mạng, người sử dụng dịch vụ đầu tiên thiết lập một kết nối, sử dụng kết nối, và sau đó kết thúc kết nối. Một cách đơn giản, kết nối hoạt động như một cái ống: người gửi đẩy các đối tượng (bit) vào một đầu ống, và người nhận lấy chúng ra ở đầu kia. Trong hầu hết các trường hợp, thứ tự các bịt được giữ đúng như khi chúng được gửi.\nNgược lại, dịch vụ phi kết nối được phỏng theo hoạt động của hệ thống bưu chính. Mỗi bản tin (thư) mang đầy đủ địa chỉ đích và được chuyển tiếp thông qua hệ thống một cách độc lập. Thông thường, khi hai bản tin được gửi đến cùng một đích, bản tin được gửi trước sẽ đến nơi trước. Tuy nhiên, có thể xảy ra trường hợp bản tin đầu tiên bị trễ và để cho bản tin thứ hai đến trước.\nMỗi dịch vụ có thể được đặc trưng bởi chất lượng dịch vụ. Một số dịch vụ đáng tin cậy có nghĩa là chúng không bao giờ bị mất dữ liệu. Thông thường, dịch vụ tin cậy được đảm bảo bằng thủ tục máy thu xác nhận rằng gói tin đã đến. Quá trình xác nhận thường gây ra thời gian trễ.\nKhông phải tất cả các ứng dụng đều cần phải thiết lập kết nối (ví dụ thư rác, thư điện tử). Dịch vụ phi kết nối không tin cậy (không được xác nhận) thường được gọi là dịch vụ lược đồ dữ liệu (datagram)."
+              },
+              {
+                "title": "1.2.4. Sự tương tác giữa dịch vụ và giao thức",
+                "id": "1.2.4",
+                "content": "Dịch vụ và giao thức là những khái niệm khác nhau. Dịch vụ là một tập hợp các hoạt động nguyên thủy mà một lớp cung cấp cho lớp trên. Dịch vụ xác định những hoạt động mà một lớp thực hiện nhưng không nói gì về việc các hoạt động này được thực hiện như thế nào. Một dịch vụ liên quan đến một giao diện giữa hai lớp, trong đó lớp thấp hơn là lớp cung cấp dịch vụ, lớp trên là lớp sử dụng dịch vụ.\nGiao thức, ngược lại, là một bộ các quy tắc quản lý định dạng và ý nghĩa của các gói tin hay bản tin được trao đổi bởi các thực thể ngang hàng trong một lớp. Các thực thể sử dụng giao thức để thực hiện các nghĩa vụ của chúng. Giao thức liên quan đến các gói tin gửi giữa các thực thể ngang hàng trên các máy khác nhau. Theo cách này, dịch vụ và giao thức là hoàn toàn tách rời.\nTập hợp các lớp và các giao thức của mỗi lớp gọi là chồng giao thức. Để truyền thông thành công, hai máy tính phải sử dụng chính xác cùng một chồng giao thức. Hình 1.7 minh họa các khái niệm về giao thức, giao diện và chồng giao thức. Giao thức chỉ rõ ý nghĩa, định dạng của thông tin mà một lớp gửi xuống lớp dưới."
+              }
+            ]
+          },
+          {
+            "level_2_title": "1.3. Các mô hình phân lớp Mạng",
+            "level_2_id": "1.3",
+            "content": "",
+            "children": [
+              {
+                "title": "1.3.1. Mô hình OSI",
+                "id": "1.3.1",
+                "content": "Mô hình tham chiếu cho việc kết nối các hệ thống mở (OSI) được phát triển bởi ISO nhằm cung cấp một khung chuẩn cho kiến trúc mạng máy tính để giảm thiểu sự không tương thích giữa các hệ thống. Mô hình này có 7 lớp: Ứng dụng (7), Trình diễn (6), Phiên (5), Giao vận (4), Mạng (3), Liên kết dữ liệu (2), Vật lý (1).\nTrong mô hình OSI, các lớp từ 4 đến 7 được thực hiện chỉ trong truyền thông ở các máy trạm, chúng không thực hiện quá trình truyền dữ liệu đầu cuối thực sự. Quá trình truyền dữ liệu thực sự thuộc về các lớp từ 1 đến 3.",
+                "children": [
+                  {
+                    "title": "1.3.1.1. Lớp Vật lý",
+                    "id": "1.3.1.1",
+                    "content": "Lớp Vật lý liên quan đến quá trình truyền dẫn tín hiệu qua một kênh truyền thông. Vấn đề chính của việc thiết kế là đảm bảo khi một bên gửi bit “1” thì bên kia cũng phải nhận được bit “1” chứ không phải bit “0”. Các đặc tính kỹ thuật gồm: tốc độ bit, giá trị điện áp, số chân cắm và loại bộ nối. Các đặc tả của lớp vật lý liên quan đến các giao diện điện, cơ và phương tiện truyền dẫn vật lý."
+                  },
+                  {
+                    "title": "1.3.1.2. Lớp Liên kết dữ liệu",
+                    "id": "1.3.1.2",
+                    "content": "Lớp Liên kết dữ liệu có nhiệm vụ tạo lập các khung, gửi chúng tới kênh truyền thông vật lý thông qua lớp vật lý; nhận khung, kiểm tra lỗi và chuyển khung không có lỗi lên lớp Mạng. ISO chia lớp này thành 2 lớp con cho mạng LAN: Lớp con điều khiển truy nhập phương tiện (MAC) và Lớp con điều khiển liên kết logic (LLC). Trong mạng LAN, mỗi máy tính có địa chỉ MAC (địa chỉ phần cứng) để xác định nguồn và đích trên kênh quảng bá."
+                  },
+                  {
+                    "title": "1.3.1.3. Lớp Mạng",
+                    "id": "1.3.1.3",
+                    "content": "Lớp Mạng có kiến thức về kiến trúc mạng và thực hiện định tuyến các gói dữ liệu thông qua mạng để tới đích. Mỗi nút có một địa chỉ toàn cục (địa chỉ lớp Mạng). Lớp mạng cũng chịu trách nhiệm điều khiển tắc nghẽn và đôi khi là chức năng tính cước."
+                  },
+                  {
+                    "title": "1.3.1.4. Lớp Giao vận",
+                    "id": "1.3.1.4",
+                    "content": "Lớp giao vận là lớp đầu cuối thực sự đầu tiên, hoạt động như một lớp giao diện giữa các lớp thấp (kết nối mạng) và các lớp cao (dịch vụ ứng dụng). Nhiệm vụ là đảm bảo truyền dẫn từ đầu cuối đến đầu cuối không có lỗi và không bị mất gói tin. Lớp này cung cấp 2 lớp dịch vụ cơ sở cho lớp Phiên: truyền các thông điệp/gói dữ liệu riêng biệt (ví dụ UDP, TP1) và kênh truyền điểm-điểm không lỗi (ví dụ TCP, TP4)."
+                  },
+                  {
+                    "title": "1.3.1.5. Lớp Phiên",
+                    "id": "1.3.1.5",
+                    "content": "Lớp phiên cho phép người sử dụng trên các máy khác nhau thiết lập các phiên làm việc với nhau. Nó cung cấp các dịch vụ như quản lí điều khiển đàm thoại (truyền thông 2 hướng hoặc 1 hướng), quản lí thẻ bài (token management), và đồng bộ hóa (chèn các điểm kiểm tra vào luồng dữ liệu để phục hồi khi có lỗi)."
+                  },
+                  {
+                    "title": "1.3.1.6. Lớp Trình diễn",
+                    "id": "1.3.1.6",
+                    "content": "Lớp Trình diễn liên quan đến dạng thông tin được truyền đi. Nhiệm vụ của nó là mã hóa dữ liệu được cấu trúc theo các định dạng của máy tính thành luồng dữ liệu phù hợp cho truyền dẫn (ví dụ nén dữ liệu, chuyển đổi mã ký tự như ASCII, EBCDIC). Lớp này giúp các máy tính khác nhau hiểu được ý nghĩa của luồng bit nhận được."
+                  },
+                  {
+                    "title": "1.3.1.7. Lớp Ứng dụng",
+                    "id": "1.3.1.7",
+                    "content": "Lớp ứng dụng bao hàm các ứng dụng truyền thống sử dụng dịch vụ của các lớp thấp hơn. Nó cung cấp các dịch vụ cho các ứng dụng người sử dụng (ví dụ: truyền tệp, thư điện tử). Giao thức lớp Ứng dụng định nghĩa các định dạng và quy tắc trao đổi thông tin cho các ứng dụng này."
+                  }
+                ]
+              },
+              {
+                "title": "1.3.2. Mô hình TCP/IP",
+                "id": "1.3.2",
+                "content": "",
+                "children": [
+                  {
+                    "title": "1.3.2.1. Giới thiệu",
+                    "id": "1.3.2.1",
+                    "content": "TCP/IP là một bộ giao thức được phát triển bởi ARPA, ban đầu cho mạng ARPANET, sau đó tích hợp vào UNIX và phổ biến trên Internet. Chồng giao thức TCP/IP được chia thành bốn lớp: Truy nhập mạng (Network Access), Liên mạng (Internet), Giao vận (Transport) và Ứng dụng (Application). Nó không hoàn toàn tuân theo mô hình OSI nhưng có những mục tiêu tương tự. Lớp Ứng dụng TCP/IP tương ứng với ba lớp (Ứng dụng, Trình diễn, Phiên) trong OSI."
+                  },
+                  {
+                    "title": "1.3.2.2. Lớp Truy nhập mạng",
+                    "id": "1.3.2.2",
+                    "content": "Lớp Truy nhập mạng cung cấp giao tiếp với mạng vật lý, kiểm soát lỗi, đóng gói dữ liệu IP vào khung và ánh xạ địa chỉ IP sang địa chỉ vật lý. Nó bao gồm các công nghệ LAN và WAN, tương ứng với lớp Liên kết dữ liệu và Vật lý trong OSI."
+                  },
+                  {
+                    "title": "1.3.2.3. Lớp Liên mạng",
+                    "id": "1.3.2.3",
+                    "content": "Mục đích là chọn đường đi tốt nhất qua mạng cho các gói tin. Các giao thức chính bao gồm: IP (đánh địa chỉ logic và định tuyến, dịch vụ best-effort phi kết nối), ICMP (thông báo lỗi và kiểm soát), ARP (xác định địa chỉ MAC từ địa chỉ IP), RARP (xác định địa chỉ IP từ địa chỉ MAC)."
+                  },
+                  {
+                    "title": "1.3.2.4. Lớp giao vận",
+                    "id": "1.3.2.4",
+                    "content": "Lớp giao vận cung cấp dịch vụ truyền tải từ trạm nguồn đến trạm đích, thiết lập kết nối logic giữa hai điểm cuối. Hai giao thức chính là TCP (hướng kết nối, tin cậy, điều khiển luồng bằng cửa sổ trượt) và UDP (phi kết nối, không tin cậy). Cả hai đều thực hiện phân mảnh dữ liệu ứng dụng."
+                  },
+                  {
+                    "title": "1.3.2.5. Lớp ứng dụng",
+                    "id": "1.3.2.5",
+                    "content": "Lớp ứng dụng cung cấp các dịch vụ dưới dạng các giao thức cho ứng dụng người dùng. Các giao thức tiêu biểu gồm: FTP (truyền tệp), Telnet (đăng nhập từ xa), HTTP (web), SMTP (thư điện tử), POP3 (lấy thư), DNS (phân giải tên miền), DHCP (cấu hình động), SNMP (quản trị mạng)."
+                  }
+                ]
+              },
+              {
+                "title": "1.3.3. So sánh OSI và TCP/IP",
+                "id": "1.3.3",
+                "content": "Mô hình OSI có 7 lớp, TCP/IP có 4 lớp. OSI phân biệt rõ ràng giữa dịch vụ, giao diện và giao thức, trong khi TCP/IP ban đầu không rõ ràng lắm. OSI hỗ trợ cả truyền thông hướng kết nối và phi kết nối ở lớp Mạng, nhưng chỉ hỗ trợ hướng kết nối ở lớp Giao vận. TCP/IP chỉ có chế độ phi kết nối ở lớp Mạng, nhưng hỗ trợ cả hai chế độ ở lớp Giao vận."
+              }
+            ]
+          },
+          {
+            "level_2_title": "1.4. Tổng kết",
+            "level_2_id": "1.4",
+            "content": "Chương 1 giới thiệu các loại mạng truyền thông (LAN, MAN, WAN, không dây), nguyên lí hoạt động chung, và các mô hình phân lớp điển hình (OSI, TCP/IP). Nó cũng đề cập đến xu hướng hội tụ của các mạng viễn thông."
+          },
+          {
+            "level_2_title": "1.5. Câu hỏi ôn tập",
+            "level_2_id": "1.5",
+            "content": "1. Nêu và phân tích các khái niệm mạng cục bộ, đô thị và diện rộng.\n2. Trình bày nguyên lí hoạt động chung của các mạng truyền thông.\n3. Phân biệt và so sánh đặc điểm của các dịch vụ hướng kết nối và phi kết nối\n4. Phân biệt các khái niệm dịch vụ và giao thức, phân tích sự tương tác giữa dịch vụ và giao thức.\n5. Vẽ hình và nêu ý tưởng xây dựng mô hình kết nối các hệ thống mở (OSI).\n6. Phân tích chức năng các lớp trong mô hình kết nối các hệ thống mở (OSI).\n7. Vẽ hình và nêu khái quát về mô hình giao thức TCP/IP.\n8. Phân tích chức năng các lớp trong mô hình TCP/IP.\n9. Giới thiệu các thành phần cơ bản của mạng Internet.\n10. Trình bày và phân tích xu hướng hội tụ của các mạng viễn thông."
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 2. LỚP VẬT LÍ VÀ LIÊN KẾT DỮ LIỆU",
+        "level_1_id": "2",
+        "children": [
+          {
+            "level_2_title": "2.1. Lớp Vật lí",
+            "level_2_id": "2.1",
+            "content": "Nhiệm vụ của lớp Vật lí là cung cấp một kênh để truyền các bit thông tin giữa hai điểm hoặc nhiều điểm. Lớp Vật lí chuẩn hóa môi trường vật lí, biểu diễn bit, chuẩn kết nối giao diện và vận hành truyền bit.",
+            "children": [
+              {
+                "title": "2.1.1. Truyền tín hiệu ở lớp Vật lí",
+                "id": "2.1.1",
+                "content": "Truyền tín hiệu chỉ ra phương pháp truyền thông tin trong môi trường vật lí. Có 2 loại chính: băng rộng (broadband - tương tự) và băng cơ sở (baseband - số).",
+                "children": [
+                  {
+                    "title": "2.1.1.1. Truyền tín hiệu tương tự",
+                    "id": "2.1.1.1",
+                    "content": "Truyền tín hiệu tương tự sử dụng sóng biến đổi liên tục (thường là sóng hình sin) để truyền thông tin. Sóng hình sin có 3 đặc điểm cơ bản: biên độ, tần số, và pha. Để truyền thông tin số trên kênh tương tự (như đường dây điện thoại), cần sử dụng modem để điều chế tín hiệu (biến đổi biên độ, tần số, hoặc pha, hoặc kết hợp như QAM)."
+                  },
+                  {
+                    "title": "2.1.1.2. Truyền tín hiệu số",
+                    "id": "2.1.1.2",
+                    "content": "Truyền tín hiệu số sử dụng các trạng thái rời rạc (xung, sóng vuông) để truyền thông tin. Các phương thức truyền tín hiệu số bao gồm: đơn cực (unipolar - dùng trong TTL), lưỡng cực (bipolar - dùng trong EIA-232-E), và lưỡng cực trở về không (BPRZ/AMI - dùng trong đường truyền T-1)."
+                  },
+                  {
+                    "title": "2.1.1.3. Băng rộng với băng cơ sở và tương tự với số",
+                    "id": "2.1.1.3",
+                    "content": "Thông tin (tương tự hoặc số) có thể được truyền trên kênh truyền thông (băng rộng hoặc băng cơ sở). Thiết bị DTE tạo thông tin, thiết bị DCE (như modem, codec, CSU/DSU) chuyển đổi dữ liệu từ DTE thành khuôn dạng tương thích với kênh truyền."
+                  },
+                  {
+                    "title": "2.1.1.4. Những giới hạn của việc truyền tín hiệu và dung lượng kênh",
+                    "id": "2.1.1.4",
+                    "content": "Dung lượng kênh truyền bị giới hạn bởi băng tần và tỉ lệ tín hiệu trên nhiễu (S/N). Định lý Nyquist: tốc độ baud tối đa không thể vượt quá hai lần băng thông của kênh (với kênh không nhiễu). Định lý Shannon: đưa ra giới hạn dung lượng kênh tối đa khi có nhiễu. Các kỹ thuật điều chế đa bit/baud (như DPSK, QAM) có thể tăng tốc độ bit vượt quá tốc độ baud."
+                  }
+                ]
+              },
+              {
+                "title": "2.1.2. Đồng bộ và định thời",
+                "id": "2.1.2",
+                "content": "Bên phát và bên thu phải đồng bộ với nhau để nhận tín hiệu chính xác.",
+                "children": [
+                  {
+                    "title": "2.1.2.1. Định thời trong các giao diện vật lí song song",
+                    "id": "2.1.2.1",
+                    "content": "Sử dụng một đường truyền riêng mang thông tin đồng hồ định thời (clock) để đồng bộ."
+                  },
+                  {
+                    "title": "2.1.2.2. Định thời trong các giao diện vật lí nối tiếp",
+                    "id": "2.1.2.2",
+                    "content": "Có hai cách: truyền thông dị bộ (dựa vào định thời ngầm) và truyền thông đồng bộ (chuyển thông tin định thời ngầm trong dữ liệu)."
+                  },
+                  {
+                    "title": "2.1.2.3. Truyền thông dị bộ",
+                    "id": "2.1.2.3",
+                    "content": "Truyền từng kí tự, sử dụng bit khởi động (start bit) và bit kết thúc (stop bit/interval) để đồng bộ cho mỗi kí tự. Phù hợp với tốc độ dữ liệu thấp."
+                  },
+                  {
+                    "title": "2.1.2.4. Truyền thông đồng bộ",
+                    "id": "2.1.2.4",
+                    "content": "Trao đổi thông tin định thời chính xác để đồng bộ cho khối lượng lớn dữ liệu. Thông tin định thời thường được \"nhúng\" trong dữ liệu (ví dụ sử dụng mã BPRZ để đảm bảo có sự chuyển dịch tín hiệu thường xuyên)."
+                  }
+                ]
+              },
+              {
+                "title": "2.1.3. Các giao thức và đặc tả lớp Vật lí",
+                "id": "2.1.3",
+                "content": "Lớp Vật lý định nghĩa các qui cách về điện, cơ, thủ tục và các đặc tả chức năng để kích hoạt, duy trì và dừng một liên kết vật lí. Các đặc điểm bao gồm: mức điện thế, thời gian thay đổi điện thế, tốc độ dữ liệu, khoảng cách tối đa, và các đầu nối vật lí.",
+                "children": [
+                  {
+                    "title": "2.1.3.1. EIA-232-E",
+                    "id": "2.1.3.1",
+                    "content": "Chuẩn phổ cập (RS-232-C), dùng cho truyền thông nối tiếp tốc độ thấp (<= 20 kb/s, khoảng 15m), thường dùng cổng DB-25 hoặc DB-9. Là giao diện không cân bằng."
+                  },
+                  {
+                    "title": "2.1.3.2. ITU Recommendation X.21",
+                    "id": "2.1.3.2",
+                    "content": "Chuẩn cho mạng dữ liệu công cộng, sử dụng giao diện song song đồng bộ, đầu nối 15 chân. Là giao diện trong băng (in band)."
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.2. Lớp Liên kết dữ liệu",
+            "level_2_id": "2.2",
+            "content": "",
+            "children": [
+              {
+                "title": "2.2.1. Các chức năng của lớp Liên kết dữ liệu",
+                "id": "2.2.1",
+                "content": "Cung cấp giao diện dịch vụ cho lớp Mạng, kiểm soát và xử lí lỗi đường truyền, điều khiển luồng dữ liệu. Nó đóng gói dữ liệu từ lớp Mạng thành các khung (frame) chứa tiêu đề, tải trọng và phần đuôi."
+              },
+              {
+                "title": "2.2.2. Phân/tách khung",
+                "id": "2.2.2",
+                "content": "Chia dòng bit thành các khung rời rạc. Các phương pháp: Đếm kí tự (dễ mất đồng bộ nếu lỗi), Sử dụng byte cờ với kĩ thuật byte stuffing (chèn byte ESC để phân biệt dữ liệu với cờ), Sử dụng cờ bắt đầu và kết thúc với kĩ thuật bit stuffing (chèn bit 0 sau năm bit 1 liên tiếp), Sử dụng các đặc điểm mã hóa lớp Vật lí."
+              },
+              {
+                "title": "2.2.3. Kiểm soát lỗi",
+                "id": "2.2.3",
+                "content": "Đảm bảo truyền khung tin cậy bằng cách sử dụng thông tin phản hồi (xác nhận dương/âm), bộ định thời (để phát hiện mất khung/phản hồi và truyền lại), và số trình tự (để tránh nhận lặp khung)."
+              },
+              {
+                "title": "2.2.4. Điều khiển luồng",
+                "id": "2.2.4",
+                "content": "Ngăn máy phát gửi quá nhanh làm quá tải máy thu. Sử dụng điều khiển luồng dựa trên thông tin phản hồi (máy thu cho phép máy phát truyền tiếp) hoặc dựa trên tốc độ."
+              },
+              {
+                "title": "2.2.5. Điều khiển truy nhập đường truyền",
+                "id": "2.2.5",
+                "content": "Cần thiết cho các đường truyền dùng chung (bus, ring, vô tuyến). Phân loại: Có điều khiển (Chuyển thẻ bài, Ưu tiên theo yêu cầu) và Ngẫu nhiên (ALOHA, CSMA, CSMA/CD, CSMA/CA).",
+                "children": [
+                  {
+                    "title": "2.2.5.2. Đa truy nhập cảm nhận sóng mang có phát hiện xung đột (CSMA/CD)",
+                    "id": "2.2.5.2",
+                    "content": "Sử dụng trong mạng BUS (như Ethernet). Máy tính kiểm tra đường truyền (cảm nhận sóng mang), nếu rỗi thì truyền. Nếu có xung đột, ngừng truyền, chờ một thời gian ngẫu nhiên rồi thử lại."
+                  },
+                  {
+                    "title": "2.2.5.3. Chuyển thẻ bài",
+                    "id": "2.2.5.3",
+                    "content": "Sử dụng thẻ bài (token) luân chuyển trên vòng. Chỉ trạm nắm thẻ bài mới được truyền dữ liệu."
+                  },
+                  {
+                    "title": "2.2.5.6. Các phương thức truy nhập không dây",
+                    "id": "2.2.5.6",
+                    "content": "Bao gồm FDMA (phân chia theo tần số), TDMA (phân chia theo thời gian), CDMA (phân chia theo mã), SDMA (phân chia theo không gian)."
+                  }
+                ]
+              },
+              {
+                "title": "2.2.6. Các chuẩn lớp Liên kết dữ liệu",
+                "id": "2.2.6",
+                "content": "IEEE chia lớp Liên kết dữ liệu thành 2 lớp con: MAC và LLC. Các chuẩn phổ biến: IEEE 802.3 (Ethernet), IEEE 802.5 (Token Ring), IEEE 802.11 (Wireless LAN), ANSI X3T9.5 (FDDI)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.3. Công nghệ Ethernet",
+            "level_2_id": "2.3",
+            "content": "",
+            "children": [
+              {
+                "title": "2.3.1. Giới thiệu",
+                "id": "2.3.1",
+                "content": "Ethernet là công nghệ LAN phổ biến nhất, sử dụng CSMA/CD. Các tốc độ: 10 Mb/s (10Base-T), 100 Mb/s (Fast Ethernet), 1000 Mb/s (Gigabit Ethernet)."
+              },
+              {
+                "title": "2.3.2. Mô hình phân lớp Ethernet",
+                "id": "2.3.2",
+                "content": "Tương ứng với 2 lớp con MAC và MAC-client (LLC hoặc Bridge entity) trong mô hình OSI."
+              },
+              {
+                "title": "2.3.3. Cấu trúc khung Ethernet",
+                "id": "2.3.3",
+                "content": "Khung gồm các trường: Preamble (7 bytes), SFD (1 byte), Destination Address (6 bytes), Source Address (6 bytes), Length/Type (2 bytes), Data (46-1500 bytes), PAD (nếu cần), FCS (4 bytes CRC)."
+              },
+              {
+                "title": "2.3.4. Quá trình truyền và nhận khung",
+                "id": "2.3.4",
+                "content": "Lớp MAC đóng gói dữ liệu từ LLC vào khung, thêm các trường địa chỉ, kiểm lỗi, và truyền đi. Khi nhận, nó kiểm tra địa chỉ đích, kiểm lỗi CRC, xác định kiểu khung và chuyển dữ liệu lên lớp trên."
+              },
+              {
+                "title": "2.3.5. Các chuẩn Ethernet",
+                "id": "2.3.5",
+                "content": "10Base-T (10Mb/s, cáp xoắn đôi), Fast Ethernet (100Mb/s, gồm 100Base-TX, 100Base-T4, 100Base-FX), Gigabit Ethernet (1000Mb/s, gồm 1000Base-T, 1000Base-SX, 1000Base-LX, 1000Base-CX)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.4. Công nghệ WLAN và chuẩn 802.11",
+            "level_2_id": "2.4",
+            "content": "",
+            "children": [
+              {
+                "title": "2.4.1. Giới thiệu về WLAN",
+                "id": "2.4.1",
+                "content": "WLAN sử dụng sóng vô tuyến để kết nối các nút mạng, mang lại tính linh hoạt và dễ dàng mở rộng. Lịch sử phát triển qua 3 thế hệ, với các chuẩn IEEE 802.11 phổ biến nhất."
+              },
+              {
+                "title": "2.4.2. Các thành phần của mạng WLAN",
+                "id": "2.4.2",
+                "content": "Gồm card giao diện mạng vô tuyến, điểm truy nhập (Access Point - AP), và cầu nối vô tuyến từ xa."
+              },
+              {
+                "title": "2.4.3. Các mô hình WLAN",
+                "id": "2.4.3",
+                "content": "Mô hình mạng độc lập (IBSS/Ad-hoc), Mô hình mạng cơ sở (BSS - có AP), Mô hình mạng mở rộng (ESS - nhiều BSS kết nối qua hệ thống phân phối DS)."
+              },
+              {
+                "title": "2.4.4. Các chuẩn WLAN",
+                "id": "2.4.4",
+                "content": "IEEE 802.11b (11 Mbps, 2.4 GHz, DSSS), 802.11a (54 Mbps, 5 GHz, OFDM), 802.11g (54 Mbps, 2.4 GHz, OFDM), HIPERLAN, OpenAir."
+              },
+              {
+                "title": "2.4.5. Chuẩn IEEE 802.11",
+                "id": "2.4.5",
+                "content": "Định nghĩa lớp vật lý (PHY) và lớp MAC. Kiến trúc bao gồm BSS, ESS, DS. Mô hình tham chiếu gồm phân lớp MAC, PLCP và PMD."
+              },
+              {
+                "title": "2.4.6. Lớp vật lý IEEE 802.11",
+                "id": "2.4.6",
+                "content": "Các tùy chọn truyền dẫn: DSSS (Trải phổ chuỗi trực tiếp), FHSS (Trải phổ nhảy tần), DFIR (Hồng ngoại khuếch tán)."
+              },
+              {
+                "title": "2.4.7. Lớp điều khiển truy nhập môi trường IEEE 802.11",
+                "id": "2.4.7",
+                "content": "Sử dụng CSMA/CA (Đa truy nhập cảm nhận sóng mang tránh xung đột) với các khoảng trống liên khung (IFS) khác nhau (SIFS, PIFS, DIFS). Hỗ trợ chức năng phối hợp phân tán (DCF) và chức năng phối hợp điểm (PCF). Sử dụng ACK để xác nhận, và có thể dùng cơ chế RTS/CTS để tránh xung đột (nhất là với nút ẩn)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.5. VLAN",
+            "level_2_id": "2.5",
+            "content": "",
+            "children": [
+              {
+                "title": "2.5.1. Khái niệm VLAN",
+                "id": "2.5.1",
+                "content": "VLAN (Virtual LAN) cho phép tạo lập các mạng LAN độc lập một cách logic trên cùng một hạ tầng vật lý, giúp giảm miền quảng bá, tăng bảo mật và dễ quản lý."
+              },
+              {
+                "title": "2.5.2. Tạo và kết nối các VLAN",
+                "id": "2.5.2",
+                "content": "Gán cổng switch vào VLAN. Kết nối các VLAN qua đường Trunk (sử dụng chuẩn 802.1Q hoặc ISL để gắn thẻ VLAN vào khung)."
+              },
+              {
+                "title": "2.5.3. Ứng dụng của VLAN",
+                "id": "2.5.3",
+                "content": "Tiết kiệm băng thông, tăng bảo mật, linh hoạt trong quản lý và di chuyển thiết bị."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.6. Tổng kết",
+            "level_2_id": "2.6",
+            "content": "Chương 2 trình bày chức năng và hoạt động của lớp Vật lí và lớp Liên kết dữ liệu, các chuẩn Ethernet, WLAN và VLAN."
+          },
+          {
+            "level_2_title": "2.7. Câu hỏi ôn tập",
+            "level_2_id": "2.7",
+            "content": "Danh sách các câu hỏi ôn tập cho chương 2."
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 3. LỚP MẠNG",
+        "level_1_id": "3",
+        "children": [
+          {
+            "level_2_title": "3.1. Chức năng và hoạt động của lớp Mạng",
+            "level_2_id": "3.1",
+            "content": "Lớp Mạng chuyển các gói tin từ nguồn tới đích qua liên mạng, thực hiện định tuyến và xử lý truyền từ đầu cuối tới đầu cuối.",
+            "children": [
+              {
+                "title": "3.1.1. Kĩ thuật lưu và chuyển gói",
+                "id": "3.1.1",
+                "content": "Các bộ định tuyến trung gian nhận gói tin, lưu tạm thời rồi chuyển tiếp đi khi đường ra rỗi (store-and-forward)."
+              },
+              {
+                "title": "3.1.2. Thực thi dịch vụ hướng kết nối và phi kết nối",
+                "id": "3.1.2",
+                "content": "Dịch vụ phi kết nối (ví dụ IP): các gói tin được xử lý độc lập. Dịch vụ hướng kết nối (ví dụ ATM, X.25): thiết lập liên kết (kênh ảo) trước khi truyền dữ liệu."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.2. Định tuyến",
+            "level_2_id": "3.2",
+            "content": "Định tuyến là chức năng quan trọng nhất của lớp Mạng, lựa chọn đường đi tối ưu cho gói tin.",
+            "children": [
+              {
+                "title": "3.2.1. Nguyên lí chung của định tuyến",
+                "id": "3.2.1",
+                "content": "Định tuyến bao gồm xác định đường đi (dựa trên bảng định tuyến và giải thuật) và chuyển mạch (chuyển gói từ cổng vào tới cổng ra). Phân biệt giao thức được định tuyến (routed protocol - ví dụ IP) và giao thức định tuyến (routing protocol - ví dụ RIP, OSPF). Liên mạng được chia thành các hệ tự trị (AS). Metric định tuyến (chiều dài đường đi, độ tin cậy, độ trễ, băng thông, tải, giá) được dùng để chọn tuyến tốt nhất."
+              },
+              {
+                "title": "3.2.2. Phân loại kĩ thuật định tuyến",
+                "id": "3.2.2",
+                "content": "Tĩnh vs Động; Đơn đường vs Đa đường; Phẳng vs Phân cấp; Trạm thông minh vs Bộ định tuyến thông minh; Trong (IGP) vs Ngoài (EGP); Vectơ khoảng cách vs Trạng thái liên kết."
+              },
+              {
+                "title": "3.2.3. Định tuyến tĩnh và định tuyến động",
+                "id": "3.2.3",
+                "content": "Định tuyến tĩnh: thiết lập thủ công, không tự động cập nhật khi tôpô thay đổi, phù hợp mạng nhỏ hoặc mạng cụt. Định tuyến động: tự động cập nhật bảng định tuyến thông qua các giao thức định tuyến, thích ứng với thay đổi tôpô."
+              },
+              {
+                "title": "3.2.4. Định tuyến vectơ khoảng cách",
+                "id": "3.2.4",
+                "content": "Các bộ định tuyến định kỳ gửi toàn bộ bảng định tuyến cho hàng xóm. Dễ bị lặp vòng định tuyến (routing loop) và đếm vô hạn. Các giải pháp tránh lặp: giới hạn số bước nhảy tối đa, phân chia ranh giới (split horizon), bộ định thời giữ (hold-down timer). Ví dụ: RIP."
+              },
+              {
+                "title": "3.2.5. Định tuyến trạng thái liên kết",
+                "id": "3.2.5",
+                "content": "Các bộ định tuyến duy trì cơ sở dữ liệu tôpô đầy đủ của mạng. Sử dụng LSA (Link State Advertisement) để cập nhật trạng thái các liên kết, chỉ gửi khi có thay đổi. Sử dụng giải thuật SPF (Dijkstra) để tính đường đi ngắn nhất. Hội tụ nhanh hơn vectơ khoảng cách nhưng yêu cầu nhiều bộ nhớ và xử lý hơn. Ví dụ: OSPF, IS-IS."
+              },
+              {
+                "title": "3.2.6. Định tuyến lai ghép",
+                "id": "3.2.6",
+                "content": "Kết hợp ưu điểm của cả hai loại trên, ví dụ EIGRP."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.3. Điều khiển tắc nghẽn",
+            "level_2_id": "3.3",
+            "content": "Quản lý lưu lượng để ngăn chặn tắc nghẽn, đảm bảo hiệu suất mạng. Các kĩ thuật bao gồm điều khiển luồng, kĩ thuật lưu lượng, cân bằng tải."
+          },
+          {
+            "level_2_title": "3.4. Các giao thức lớp Mạng trong Internet",
+            "level_2_id": "3.4",
+            "content": "",
+            "children": [
+              {
+                "title": "3.4.1. Giao thức IP",
+                "id": "3.4.1",
+                "content": "IP là giao thức phi kết nối, không tin cậy, nỗ lực tốt nhất (best-effort). Sử dụng IP datagram. Địa chỉ IP (IPv4) dài 32 bit, chia thành các lớp A, B, C, D, E. Hỗ trợ phân mảnh datagram. Sử dụng mặt nạ mạng con (subnet mask) để chia mạng con. CIDR cho phép định tuyến không phân lớp."
+              },
+              {
+                "title": "3.4.2. Giao thức ICMP",
+                "id": "3.4.2",
+                "content": "Dùng để thông báo lỗi (Destination unreachable, Source quench, Time exceeded, Parameter problem) và truy vấn (Echo request/reply - ping, Timestamp, Address mask, Router solicitation/advertisement)."
+              },
+              {
+                "title": "3.4.3. Giao thức ARP và RARP",
+                "id": "3.4.3",
+                "content": "ARP chuyển đổi địa chỉ IP sang địa chỉ vật lý (MAC). RARP chuyển đổi địa chỉ vật lý sang địa chỉ IP."
+              },
+              {
+                "title": "3.4.4. Giao thức định tuyến RIP",
+                "id": "3.4.4",
+                "content": "Giao thức vectơ khoảng cách, sử dụng số bước nhảy làm metric (tối đa 15). RIPv1 là phân lớp, quảng bá cập nhật. RIPv2 là không phân lớp (hỗ trợ VLSM), sử dụng multicast, có chứng thực."
+              },
+              {
+                "title": "3.4.5. Giao thức định tuyến OSPF",
+                "id": "3.4.5",
+                "content": "Giao thức trạng thái liên kết, sử dụng giải thuật SPF. Hỗ trợ VLSM, hội tụ nhanh, sử dụng vùng (area) để định cỡ mạng lớn. Sử dụng các loại gói: Hello, DBD, LSR, LSU, LSAck. Bầu chọn DR (Designated Router) và BDR trên mạng đa truy nhập."
+              },
+              {
+                "title": "3.4.6. Giao thức định tuyến BGP",
+                "id": "3.4.6",
+                "content": "Giao thức định tuyến ngoài (EGP) chuẩn của Internet, dùng để trao đổi thông tin định tuyến giữa các hệ tự trị (AS). Là giao thức vectơ đường đi (path vector), sử dụng TCP cổng 179. Hỗ trợ định tuyến dựa trên chính sách (policy-based routing)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.5. IPv6",
+            "level_2_id": "3.5",
+            "content": "",
+            "children": [
+              {
+                "title": "3.5.1. Các đặc tính của IPv6",
+                "id": "3.5.1",
+                "content": "Không gian địa chỉ 128 bit. Tiêu đề đơn giản hóa. Tự động cấu hình địa chỉ (stateless autoconfiguration). Tích hợp bảo mật (IPSec) và di động (Mobile IP). Không phân mảnh tại router."
+              },
+              {
+                "title": "3.5.2. Biểu diễn địa chỉ IPv6",
+                "id": "3.5.2",
+                "content": "Dạng thập lục phân, 8 nhóm 16 bit, ngăn cách bởi dấu hai chấm. Có quy tắc rút gọn (bỏ số 0 đứng đầu, dùng \"::\" cho chuỗi số 0 liên tiếp)."
+              },
+              {
+                "title": "3.5.3. Phân loại địa chỉ IPv6",
+                "id": "3.5.3",
+                "content": "Unicast (Global, Link-local, Site-local, Unique Local), Multicast (thay thế broadcast), Anycast."
+              }
+            ]
+          },
+          {
+            "level_2_title": "3.6. Tổng kết",
+            "level_2_id": "3.6",
+            "content": "Chương 3 trình bày chức năng lớp Mạng, các kĩ thuật định tuyến, và các giao thức IP, ICMP, ARP, RIP, OSPF, BGP, cùng với IPv6."
+          },
+          {
+            "level_2_title": "3.7. Câu hỏi ôn tập",
+            "level_2_id": "3.7",
+            "content": "Danh sách câu hỏi ôn tập chương 3."
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 4. LỚP GIAO VẬN",
+        "level_1_id": "4",
+        "children": [
+          {
+            "level_2_title": "4.1. Các dịch vụ giao vận",
+            "level_2_id": "4.1",
+            "content": "",
+            "children": [
+              {
+                "title": "4.1.1. Dịch vụ được cung cấp tới các lớp trên",
+                "id": "4.1.1",
+                "content": "Cung cấp truyền thông hiệu quả, tin cậy từ đầu cuối tới đầu cuối (end-to-end), độc lập với lớp Mạng bên dưới. Có thể là hướng kết nối hoặc phi kết nối."
+              },
+              {
+                "title": "4.1.2. Dịch vụ giao vận nguyên thủy",
+                "id": "4.1.2",
+                "content": "Cung cấp giao diện cho người dùng (ứng dụng) để thiết lập, sử dụng và giải phóng kết nối (ví dụ: LISTEN, CONNECT, SEND, RECEIVE, DISCONNECT)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "4.2. Chức năng lớp Giao vận",
+            "level_2_id": "4.2",
+            "content": "",
+            "children": [
+              {
+                "title": "4.2.1. Đánh địa chỉ",
+                "id": "4.2.1",
+                "content": "Sử dụng TSAP (ví dụ: cổng - port) để xác định các ứng dụng cụ thể trên các máy chủ."
+              },
+              {
+                "title": "4.2.2. Thiết lập kết nối",
+                "id": "4.2.2",
+                "content": "Xử lý các vấn đề như gói tin bị trễ, lặp lại. Sử dụng bắt tay ba bước (three-way handshake) để thiết lập kết nối tin cậy."
+              },
+              {
+                "title": "4.2.3. Giải phóng kết nối",
+                "id": "4.2.3",
+                "content": "Giải phóng không đối xứng (đột ngột) có thể gây mất dữ liệu. Giải phóng đối xứng an toàn hơn nhưng phức tạp hơn (vấn đề hai đội quân)."
+              },
+              {
+                "title": "4.2.4. Điều khiển luồng và bộ đệm",
+                "id": "4.2.4",
+                "content": "Sử dụng cửa sổ trượt và quản lý bộ đệm (cố định, biến thiên) để điều khiển tốc độ truyền dữ liệu giữa bên gửi và bên nhận."
+              },
+              {
+                "title": "4.2.5. Khôi phục kết nối",
+                "id": "4.2.5",
+                "content": "Xử lý sự cố mạng hoặc máy chủ để khôi phục kết nối."
+              }
+            ]
+          },
+          {
+            "level_2_title": "4.3. Giao thức TCP",
+            "level_2_id": "4.3",
+            "content": "TCP (Transmission Control Protocol) là giao thức hướng kết nối, tin cậy, cung cấp dịch vụ luồng byte.",
+            "children": [
+              {
+                "title": "4.3.1. Truyền thông tiến trình-tới-tiến trình",
+                "id": "4.3.1",
+                "content": "Sử dụng số cổng (port) để định danh các tiến trình ứng dụng."
+              },
+              {
+                "title": "4.3.2. Phân đoạn TCP",
+                "id": "4.3.2",
+                "content": "Dữ liệu được chia thành các phân đoạn (segment) với tiêu đề chứa số cổng nguồn/đích, số trình tự (sequence number), số xác nhận (acknowledgment number), kích thước cửa sổ, checksum, và các cờ (SYN, ACK, FIN, RST, PSH, URG)."
+              },
+              {
+                "title": "4.3.3. Điều khiển luồng (flow control)",
+                "id": "4.3.3",
+                "content": "Sử dụng cửa sổ trượt kích thước biến thiên để bên nhận điều khiển lượng dữ liệu bên gửi có thể gửi."
+              },
+              {
+                "title": "4.3.4. Điều khiển lỗi",
+                "id": "4.3.4",
+                "content": "Sử dụng checksum, xác nhận (ACK), và thời gian chờ (time-out) để phát hiện và truyền lại các phân đoạn bị lỗi hoặc mất."
+              },
+              {
+                "title": "4.3.5. Các bộ định thời của TCP",
+                "id": "4.3.5",
+                "content": "Bao gồm bộ định thời truyền lại (retransmission), bộ định thời kiên nhẫn (persistence - cho cửa sổ kích thước 0), bộ định thời còn tồn tại (keepalive), và bộ định thời chờ (time-wait)."
+              },
+              {
+                "title": "4.3.6. Thiết lập và giải phóng kết nối",
+                "id": "4.3.6",
+                "content": "Thiết lập bằng bắt tay ba bước (SYN -> SYN+ACK -> ACK). Giải phóng bằng thủ tục bốn bước (FIN -> ACK, FIN -> ACK)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "4.4. Giao thức UDP",
+            "level_2_id": "4.4",
+            "content": "UDP (User Datagram Protocol) là giao thức phi kết nối, không tin cậy, đơn giản, nhanh, dùng cho các ứng dụng không yêu cầu độ tin cậy cao hoặc yêu cầu thời gian thực.",
+            "children": [
+              {
+                "title": "4.4.1. Cổng UDP",
+                "id": "4.4.1",
+                "content": "Sử dụng số cổng để định danh ứng dụng, tương tự TCP."
+              },
+              {
+                "title": "4.4.2. Định dạng UDP datagram",
+                "id": "4.4.2",
+                "content": "Tiêu đề đơn giản chỉ có 8 byte: cổng nguồn, cổng đích, độ dài, checksum."
+              },
+              {
+                "title": "4.4.3. Dịch vụ phi kết nối của UDP",
+                "id": "4.4.3",
+                "content": "Mỗi datagram là độc lập, không có thiết lập/giải phóng kết nối, không đảm bảo thứ tự hoặc tin cậy."
+              }
+            ]
+          },
+          {
+            "level_2_title": "4.5. Tổng kết",
+            "level_2_id": "4.5",
+            "content": "Chương 4 trình bày về các dịch vụ và chức năng lớp Giao vận, chi tiết về hai giao thức TCP và UDP."
+          },
+          {
+            "level_2_title": "4.6. Câu hỏi ôn tập",
+            "level_2_id": "4.6",
+            "content": "Danh sách câu hỏi ôn tập chương 4."
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 5. CÁC LỚP TRÊN",
+        "level_1_id": "5",
+        "children": [
+          {
+            "level_2_title": "5.1. Lớp Phiên",
+            "level_2_id": "5.1",
+            "content": "Cung cấp cơ chế kiểm soát hội thoại, đồng bộ hóa và quản lý hoạt động giữa các ứng dụng.",
+            "children": [
+              {
+                "title": "5.1.1. Các dịch vụ",
+                "id": "5.1.1",
+                "content": "Gồm các nhóm chức năng (Kernel, Negotiated Release, Duplex, Synchronize...). Sử dụng các nguyên thủy như S-CONNECT, S-RELEASE, S-DATA, S-SYNC..."
+              },
+              {
+                "title": "5.1.2. Giao thức",
+                "id": "5.1.2",
+                "content": "Sử dụng SPDU (Session Protocol Data Unit) và các thẻ bài (token) để quản lý quyền truyền dữ liệu và các hoạt động khác."
+              },
+              {
+                "title": "5.1.3. Các chuẩn",
+                "id": "5.1.3",
+                "content": "ISO 8326/ITU-T X.215 (dịch vụ), ISO 8327/ITU-T X.225 (giao thức)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "5.2. Lớp trình diễn",
+            "level_2_id": "5.2",
+            "content": "Đảm bảo các hệ thống khác nhau có thể hiểu được dữ liệu của nhau, xử lý các vấn đề về cú pháp và định dạng dữ liệu.",
+            "children": [
+              {
+                "title": "5.2.1. Các dịch vụ",
+                "id": "5.2.1",
+                "content": "Chuyển đổi giữa cú pháp trừu tượng và cú pháp cụ thể. Đàm phán ngữ cảnh trình diễn."
+              },
+              {
+                "title": "5.2.2. Định nghĩa kiểu dữ liệu",
+                "id": "5.2.2",
+                "content": "Sử dụng ASN.1 (Abstract Syntax Notation One) để định nghĩa các kiểu dữ liệu một cách độc lập với máy tính (ví dụ: INTEGER, BOOLEAN, SEQUENCE)."
+              },
+              {
+                "title": "5.2.3. Giao thức",
+                "id": "5.2.3",
+                "content": "Sử dụng PPDU để trao đổi dữ liệu và đàm phán ngữ cảnh."
+              },
+              {
+                "title": "5.2.4. Các chuẩn",
+                "id": "5.2.4",
+                "content": "ISO 8822/ITU-T X.216 (dịch vụ), ISO 8823/ITU-T X.226 (giao thức), ASN.1 (ISO 8824/X.208), BER (ISO 8825/X.209)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "5.3. Lớp Ứng dụng",
+            "level_2_id": "5.3",
+            "content": "Cung cấp các dịch vụ mạng trực tiếp cho người dùng và các ứng dụng.",
+            "children": [
+              {
+                "title": "5.3.1. Giới thiệu",
+                "id": "5.3.1",
+                "content": "Là lớp cao nhất, nơi các ứng dụng mạng hoạt động."
+              },
+              {
+                "title": "5.3.2. Kiến trúc Client/Server",
+                "id": "5.3.2",
+                "content": "Mô hình phổ biến, với máy chủ cung cấp dịch vụ và máy khách yêu cầu dịch vụ."
+              },
+              {
+                "title": "5.3.3. Kiến trúc ngang hàng",
+                "id": "5.3.3",
+                "content": "Các máy có vai trò ngang nhau, vừa là khách vừa là chủ, tăng khả năng mở rộng."
+              },
+              {
+                "title": "5.3.4. Các giao thức và dịch vụ lớp Ứng dụng",
+                "id": "5.3.4",
+                "content": "WWW (HTTP), E-mail (SMTP, POP3), FTP, Telnet, DNS, DHCP, SNMP..."
+              }
+            ]
+          },
+          {
+            "level_2_title": "5.4. Tổng kết",
+            "level_2_id": "5.4",
+            "content": "Chương 5 giới thiệu chức năng của lớp Phiên, lớp Trình diễn và lớp Ứng dụng."
+          },
+          {
+            "level_2_title": "5.5. Câu hỏi ôn tập",
+            "level_2_id": "5.5",
+            "content": "Danh sách câu hỏi ôn tập chương 5."
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 6. KĨ THUẬT VÀ THIẾT BỊ MẠNG IP",
+        "level_1_id": "6",
+        "children": [
+          {
+            "level_2_title": "6.1. Kĩ thuật mạng cục bộ",
+            "level_2_id": "6.1",
+            "content": "",
+            "children": [
+              {
+                "title": "6.1.1. Các kiểu kiến trúc mạng",
+                "id": "6.1.1",
+                "content": "Hình sao (Star), Đường trục (Bus), Vòng (Ring)."
+              },
+              {
+                "title": "6.1.2. Các thành phần mạng",
+                "id": "6.1.2",
+                "content": "Trạm cuối (máy tính, máy in...), Đường truyền dẫn (cáp), Card mạng (NIC), Các thiết bị liên kết mạng, Hệ điều hành mạng (NOS)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "6.2. Các thiết bị mạng cục bộ",
+            "level_2_id": "6.2",
+            "content": "",
+            "children": [
+              {
+                "title": "6.2.1. Bộ lặp và Hub",
+                "id": "6.2.1",
+                "content": "Hoạt động ở lớp Vật lý, tái tạo và khuếch đại tín hiệu để mở rộng mạng. Hub là bộ lặp đa cổng."
+              },
+              {
+                "title": "6.2.2. Cầu nối và bộ chuyển mạch",
+                "id": "6.2.2",
+                "content": "Hoạt động ở lớp Liên kết dữ liệu (và Vật lý). Cầu nối (Bridge) lọc lưu lượng dựa trên địa chỉ MAC để chia tách các miền xung đột. Bộ chuyển mạch (Switch) là cầu nối đa cổng, cung cấp băng thông riêng cho mỗi cổng."
+              }
+            ]
+          },
+          {
+            "level_2_title": "6.3. Thiết bị định tuyến IP",
+            "level_2_id": "6.3",
+            "content": "",
+            "children": [
+              {
+                "title": "6.3.1. Hoạt động của bộ định tuyến trong mạng",
+                "id": "6.3.1",
+                "content": "Hoạt động ở lớp Mạng (và 2 lớp dưới). Kết nối các mạng khác nhau, chuyển tiếp gói tin dựa trên địa chỉ IP và bảng định tuyến."
+              },
+              {
+                "title": "6.3.2. Các thành phần của bộ định tuyến",
+                "id": "6.3.2",
+                "content": "CPU, RAM/DRAM (lưu bảng định tuyến, bộ đệm...), NVRAM (lưu file cấu hình startup), FLASH (lưu hệ điều hành IOS), ROM (lưu chương trình khởi động), Các giao diện (Interface)."
+              },
+              {
+                "title": "6.3.3. Các chế độ vận hành",
+                "id": "6.3.3",
+                "content": "Chế độ người dùng (User exec), đặc quyền (Privileged exec), cấu hình toàn cục (Global config), cấu hình giao diện, cấu hình định tuyến..."
+              }
+            ]
+          },
+          {
+            "level_2_title": "6.4. Thiết bị Gateway",
+            "level_2_id": "6.4",
+            "content": "Hoạt động ở tất cả các lớp (đến lớp 7), dùng để chuyển đổi giao thức giữa các mạng hoàn toàn khác nhau."
+          },
+          {
+            "level_2_title": "6.5. Tổng kết",
+            "level_2_id": "6.5",
+            "content": "Chương 6 trình bày về các thiết bị mạng từ cơ bản (Repeater, Hub) đến phức tạp (Switch, Router, Gateway)."
+          },
+          {
+            "level_2_title": "6.6. Câu hỏi ôn tập",
+            "level_2_id": "6.6",
+            "content": "Danh sách câu hỏi ôn tập chương 6."
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 7. CÔNG NGHỆ CHUYỂN MẠCH NHÃN ĐA GIAO THỨC MPLS",
+        "level_1_id": "7",
+        "children": [
+          {
+            "level_2_title": "7.1. Giới thiệu về MPLS",
+            "level_2_id": "7.1",
+            "content": "",
+            "children": [
+              {
+                "title": "7.1.1. Nhu cầu phát triển MPLS",
+                "id": "7.1.1",
+                "content": "Kết hợp tốc độ chuyển mạch lớp 2 với khả năng định tuyến mềm dẻo lớp 3, cải thiện hiệu năng và hỗ trợ QoS, kĩ thuật lưu lượng (TE), VPN."
+              },
+              {
+                "title": "7.1.2. Các đặc điểm của MPLS",
+                "id": "7.1.2",
+                "content": "Sử dụng nhãn (label) để chuyển tiếp gói tin. Tách biệt mặt phẳng điều khiển (định tuyến) và mặt phẳng dữ liệu (chuyển tiếp). Hỗ trợ đa giao thức lớp mạng và lớp liên kết."
+              },
+              {
+                "title": "7.1.3. Ứng dụng của MPLS",
+                "id": "7.1.3",
+                "content": "Kĩ thuật lưu lượng (Traffic Engineering - TE), Mạng riêng ảo (MPLS-VPN), AToM (Any Transport over MPLS), VPLS."
+              }
+            ]
+          },
+          {
+            "level_2_title": "7.2. Nguyên lí hoạt động của MPLS",
+            "level_2_id": "7.2",
+            "content": "",
+            "children": [
+              {
+                "title": "7.2.1. Các khái niệm cơ bản",
+                "id": "7.2.1",
+                "content": "Nhãn (Label), Ngăn xếp nhãn (Label Stack), LSR (Label Switching Router), LER (Label Edge Router), LSP (Label Switched Path), FEC (Forwarding Equivalence Class), LIB (Label Information Base), LDP (Label Distribution Protocol)."
+              },
+              {
+                "title": "7.2.2. Kiến trúc nút chuyển mạch nhãn",
+                "id": "7.2.2",
+                "content": "Gồm thành phần điều khiển (chạy các giao thức định tuyến và phân phối nhãn để xây dựng bảng chuyển tiếp) và thành phần chuyển tiếp (dùng bảng chuyển tiếp để hoán đổi nhãn và chuyển gói)."
+              },
+              {
+                "title": "7.2.3. Hoạt động chuyển gói tin qua miền MPLS",
+                "id": "7.2.3",
+                "content": "LER lối vào phân loại gói vào FEC, gắn nhãn và chuyển vào LSP. Các LSR lõi hoán đổi nhãn. LER lối ra gỡ bỏ nhãn và chuyển gói IP bình thường. Hỗ trợ ngăn xếp nhãn cho các dịch vụ như VPN, TE."
+              }
+            ]
+          },
+          {
+            "level_2_title": "7.3. Phân phối nhãn",
+            "level_2_id": "7.3",
+            "content": "",
+            "children": [
+              {
+                "title": "7.3.1. Giao thức phân phối nhãn LDP",
+                "id": "7.3.1",
+                "content": "Giao thức chuẩn của IETF để phân phối nhãn giữa các LSR. Định nghĩa các bản tin: Discovery (Hello), Session, Advertisement, Notification."
+              },
+              {
+                "title": "7.3.2. Phân phối nhãn sử dụng RSVP",
+                "id": "7.3.2",
+                "content": "Mở rộng RSVP (RSVP-TE) để hỗ trợ phân phối nhãn và dành trước tài nguyên cho MPLS-TE."
+              },
+              {
+                "title": "7.3.3. Phân phối nhãn sử dụng BGP",
+                "id": "7.3.3",
+                "content": "Sử dụng MP-BGP để phân phối nhãn, thường dùng cho MPLS-VPN."
+              }
+            ]
+          },
+          {
+            "level_2_title": "7.4. Kĩ thuật mạng MPLS",
+            "level_2_id": "7.4",
+            "content": "",
+            "children": [
+              {
+                "title": "7.4.1. Định tuyến trong MPLS",
+                "id": "7.4.1",
+                "content": "Hỗ trợ định tuyến từng chặng (như IP truyền thống) và định tuyến hiện (Explicit Routing - ER) cho phép xác định trước đường đi."
+              },
+              {
+                "title": "7.4.2. Kỹ thuật lưu lượng MPLS",
+                "id": "7.4.2",
+                "content": "Sử dụng MPLS để điều khiển luồng lưu lượng nhằm tối ưu hóa việc sử dụng tài nguyên mạng, tránh tắc nghẽn, đảm bảo QoS. Thường dùng định tuyến ràng buộc (Constraint-based Routing) với phần mở rộng của OSPF/IS-IS và RSVP-TE."
+              },
+              {
+                "title": "7.4.3. MPLS-VPN",
+                "id": "7.4.3",
+                "content": "Cung cấp dịch vụ VPN lớp 3 (L3VPN - sử dụng BGP để trao đổi tuyến VPN, VRF để tách biệt bảng định tuyến) và lớp 2 (L2VPN - AToM, VPLS). Sử dụng ngăn xếp 2 nhãn: nhãn ngoài để chuyển tiếp qua mạng lõi MPLS, nhãn trong để xác định VPN/site đích."
+              }
+            ]
+          },
+          {
+            "level_2_title": "7.5. Tổng kết",
+            "level_2_id": "7.5",
+            "content": "Chương 7 trình bày chi tiết về công nghệ MPLS, các giao thức phân phối nhãn, và các ứng dụng quan trọng như TE và VPN."
+          }
+        ]
+      }
+    ]
+  }
