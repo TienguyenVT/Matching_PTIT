@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import { ROUTES } from '@/lib/routes';
+import { requireAdminAccess } from '@/lib/auth-helpers.client';
 import JSONUploadForm from './components/JSONUploadForm';
 
 interface BatchProcessResult {
@@ -24,7 +25,6 @@ interface BatchProcessResult {
     statistics?: {
       modules: number;
       lessons: number;
-      totalPages?: number;
     };
   }>;
   error?: string;
@@ -42,14 +42,19 @@ export default function AdminPage() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { user }, error } = await supabase.auth.getUser();
+      // Kiểm tra quyền admin, sẽ tự động redirect nếu không phải admin
+      const hasAccess = await requireAdminAccess(supabase, router, ROUTES.DASHBOARD);
       
-      if (error || !user) {
-        router.replace(ROUTES.LOGIN);
+      if (!hasAccess) {
+        // requireAdminAccess đã tự động redirect
         return;
       }
       
-      setUser(user);
+      // Nếu có quyền admin, lấy thông tin user
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUser(user);
+      }
       setLoading(false);
     };
     
@@ -194,7 +199,7 @@ export default function AdminPage() {
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Đang tải...</p>
+          <p className="text-gray-600">Đang kiểm tra quyền truy cập...</p>
         </div>
       </div>
     );
