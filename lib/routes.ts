@@ -20,11 +20,16 @@ export const ROUTES = {
   ALL_COURSES: '/all-courses',
   PROFILE: '/profile',
   COMMUNITY: '/community',
+  STUDY_PROFILE: '/study-profile',
+  ADMIN: '/admin',
 
   // Dynamic routes - Course related
   COURSE_DETAIL: (courseId: string) => `/course/${courseId}/detail`,
   COURSE_LEARN: (courseId: string) => `/course/${courseId}/learn`,
   COURSE_MATCH: (courseId: string) => `/course/${courseId}/match`,
+  
+  // Dynamic routes - Profile related
+  STUDY_PROFILE_USER: (userId: string) => `/study-profile?userId=${userId}`,
 } as const;
 
 // =====================================================
@@ -38,6 +43,7 @@ export const PROTECTED_ROUTES = [
   ROUTES.COURSES,
   ROUTES.PROFILE,
   ROUTES.COMMUNITY,
+  ROUTES.STUDY_PROFILE,
 ] as const;
 
 /**
