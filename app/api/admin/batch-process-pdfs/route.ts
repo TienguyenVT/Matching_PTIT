@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer, supabaseServiceRole } from '@/lib/supabase/server';
+import { requireAdminAPI } from '@/lib/auth-helpers.server';
 import { analyzePDFStructure, parseCourseNameFromFileName, validatePDFFile } from '@/lib/services/pdf-analyzer';
 import { analyzeStructuredJSON } from '@/lib/services/structured-json-analyzer';
 // AI removed: no content generation or quiz generation
@@ -14,42 +15,15 @@ import path from 'path';
  */
 export async function POST(req: NextRequest) {
   try {
-    // Authenticate user - support both Bearer token and cookies
+    // Kiểm tra quyền admin
+    const { user, response } = await requireAdminAPI(req);
+    if (response) {
+      return response; // Trả về error nếu không có quyền
+    }
+
+    // Lấy authHeader và supabase client để truyền vào async function
     const authHeader = req.headers.get('authorization');
-    let user;
-    let supabase = supabaseServer();
-    
-    // Ưu tiên: Nếu có Bearer token, verify token
-    if (authHeader?.startsWith('Bearer ')) {
-      const token = authHeader.split('Bearer ')[1];
-      const url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-      const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-      
-      if (url && anon) {
-        // Tạo client tạm để verify token
-        const tempClient = createClient(url, anon);
-        const { data: { user: tokenUser }, error: tokenError } = await tempClient.auth.getUser(token);
-        if (!tokenError && tokenUser) {
-          user = tokenUser;
-        }
-      }
-    }
-    
-    // Fallback: Lấy user từ cookie
-    if (!user) {
-      const { data: { user: cookieUser }, error: cookieError } = await supabase.auth.getUser();
-      if (!cookieError && cookieUser) {
-        user = cookieUser;
-      }
-    }
-    
-    if (!user) {
-      console.error('No user found. Auth header:', authHeader ? 'present' : 'missing');
-      return NextResponse.json(
-        { error: 'Unauthorized. Vui lòng đăng nhập.' },
-        { status: 401 }
-      );
-    }
+    const supabase = supabaseServer();
 
     // Get documents folder path
     const documentsPath = path.join(process.cwd(), 'documents');
@@ -123,7 +97,6 @@ async function processBatchAsync(
       statistics?: {
         modules: number;
         lessons: number;
-        totalPages?: number;
       };
     }> = [];
 
@@ -324,8 +297,7 @@ async function processBatchAsync(
           courseTitle: course.title,
           statistics: {
             modules: moduleOrder,
-            lessons: totalLessons,
-            totalPages: analysisResult.totalPages
+            lessons: totalLessons
           }
         };
         results.push(result);

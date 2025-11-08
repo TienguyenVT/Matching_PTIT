@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer, supabaseServiceRole } from '@/lib/supabase/server';
+import { requireAdminAPI } from '@/lib/auth-helpers.server';
 import { analyzeStructuredJSON } from '@/lib/services/structured-json-analyzer';
 import { parseCourseNameFromFileName } from '@/lib/services/pdf-analyzer';
 import { writeFile, unlink } from 'fs/promises';
@@ -14,48 +15,17 @@ export async function POST(req: NextRequest) {
   let tempFilePath: string | null = null;
 
   try {
-    // Authenticate user - support both Bearer token and cookies
-    const authHeader = req.headers.get('authorization');
-    let user;
-    let supabase = supabaseServer();
-    
-    // Ưu tiên: Nếu có Bearer token, verify token
-    if (authHeader?.startsWith('Bearer ')) {
-      const token = authHeader.split('Bearer ')[1];
-      const { createClient } = await import('@supabase/supabase-js');
-      const url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-      const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
-      
-      if (url && anon) {
-        // Tạo client tạm để verify token
-        const tempClient = createClient(url, anon);
-        const { data: { user: tokenUser }, error: tokenError } = await tempClient.auth.getUser(token);
-        if (!tokenError && tokenUser) {
-          user = tokenUser;
-        }
-      }
-    }
-    
-    // Fallback: Lấy user từ cookie
-    if (!user) {
-      const { data: { user: cookieUser }, error: cookieError } = await supabase.auth.getUser();
-      if (!cookieError && cookieUser) {
-        user = cookieUser;
-      }
-    }
-    
-    if (!user) {
-      console.error('No user found. Auth header:', authHeader ? 'present' : 'missing');
-      return NextResponse.json(
-        { error: 'Unauthorized. Vui lòng đăng nhập.' },
-        { status: 401 }
-      );
+    // Kiểm tra quyền admin
+    const { user, response } = await requireAdminAPI(req);
+    if (response) {
+      return response; // Trả về error nếu không có quyền
     }
 
-    // Use service role client để bypass RLS (khi dùng Bearer token) hoặc dùng supabase thường
+    // Nếu có quyền admin, lấy supabase client
+    const authHeader = req.headers.get('authorization');
     const supabaseAdmin = authHeader?.startsWith('Bearer ') 
       ? supabaseServiceRole() 
-      : supabase;
+      : supabaseServer();
 
     // Parse form data
     const formData = await req.formData();
@@ -92,7 +62,7 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     tempFilePath = path.join(tmpdir(), `upload_${Date.now()}_${file.name}`);
-    await writeFile(tempFilePath, buffer);
+    await writeFile(tempFilePath, new Uint8Array(buffer));
 
     console.log(`Processing JSON file: ${file.name}`);
 
