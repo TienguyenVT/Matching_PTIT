@@ -18,6 +18,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
+      "@/*": ["./*"],
       "@/components/*": [
         "components/*"
       ],
@@ -29,6 +30,18 @@
       ],
       "@/types/*": [
         "types/*"
+      ],
+      "@/providers/*": [
+        "providers/*"
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@/app/*": [
+        "app/*"
       ]
     },
     "forceConsistentCasingInFileNames": true,

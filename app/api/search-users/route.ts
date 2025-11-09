@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { supabaseServer } from "@/lib/supabase/server";
 import { createClient } from "@supabase/supabase-js";
 
+// Mark route as dynamic (uses cookies for auth)
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/search-users?q=searchTerm
  * Tìm kiếm người dùng theo username, full_name hoặc email trong bảng profiles

@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
-import { supabaseBrowser } from "@/lib/supabase/client";
-import { getUserRole } from "@/lib/auth-helpers.client";
+import { useAuth } from "@/providers/auth-provider";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -14,44 +13,10 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
-  const supabase = useMemo(() => supabaseBrowser(), []);
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const loadRole = async () => {
-      try {
-        const {
-          data: { user },
-          error,
-        } = await supabase.auth.getUser();
-
-        if (error || !user) {
-          if (isMounted) {
-            setIsAdmin(false);
-          }
-          return;
-        }
-
-        const role = await getUserRole(supabase, user.id);
-        if (isMounted) {
-          setIsAdmin(role === "admin");
-        }
-      } catch (err) {
-        console.error("[Sidebar] Unable to determine user role", err);
-        if (isMounted) {
-          setIsAdmin(false);
-        }
-      }
-    };
-
-    loadRole();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [supabase]);
+  
+  // Use global auth context - no duplicate API calls!
+  const { role } = useAuth();
+  const isAdmin = useMemo(() => role === 'admin', [role]);
 
   const menuItems = [
     {

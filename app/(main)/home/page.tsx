@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { supabaseBrowser } from '@/lib/supabase/client';
+import { useAuth } from '@/providers/auth-provider';
+import { useCourses, useUserCourses, useEnrollCourse } from '@/hooks/use-courses';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
@@ -16,141 +17,57 @@ type Course = {
 };
 
 export default function HomePage() {
-  const supabase = supabaseBrowser();
   const router = useRouter();
-  const [enrolled, setEnrolled] = useState<Course[]>([]);
-  const [suggested, setSuggested] = useState<Course[]>([]);
-  const [totalEnrolled, setTotalEnrolled] = useState(0);
-  const [totalSuggested, setTotalSuggested] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const { user, loading: authLoading } = useAuth();
+  
+  // Use React Query hooks for data fetching
+  const { data: allCourses = [], isLoading: coursesLoading } = useCourses();
+  const { data: userCourses = [], isLoading: userCoursesLoading } = useUserCourses();
+  const enrollMutation = useEnrollCourse();
+  
   const [registering, setRegistering] = useState<string | null>(null);
-  const [enrolledIds, setEnrolledIds] = useState<Set<string>>(new Set());
+  
+  const loading = authLoading || coursesLoading || userCoursesLoading;
 
+  // Redirect if not authenticated
   useEffect(() => {
-    const load = async () => {
-      console.log('[HomePage] Starting load...');
-      
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { 
-        console.log('[HomePage] No user found, redirecting to login');
-        router.replace(ROUTES.LOGIN); 
-        return; 
-      }
-      console.log('[HomePage] User authenticated:', user.id);
-
-      // Lấy các khóa học đã đăng ký
-      console.log('[HomePage] Fetching enrolled course IDs...');
-      const { data: myIds, error: idsError } = await supabase
-        .from('user_courses')
-        .select('course_id')
-        .eq('user_id', user.id);
-      
-      if (idsError) {
-        console.error('[HomePage] Error fetching enrolled IDs:', idsError);
-      }
-      
-      const enrolledIdsSet = new Set((myIds ?? []).map((r: any) => r.course_id));
-      console.log('[HomePage] Enrolled course IDs:', enrolledIdsSet.size);
-      setEnrolledIds(enrolledIdsSet);
-
-      if (enrolledIdsSet.size > 0) {
-        const { data: myCourses, error: coursesError } = await supabase
-          .from('courses')
-          .select('id,title,description,cover_url,level,created_at')
-          .in('id', Array.from(enrolledIdsSet))
-          .order('created_at', { ascending: false });
-        
-        if (coursesError) {
-          console.error('[HomePage] Error fetching enrolled courses:', coursesError);
-        } else {
-          console.log('[HomePage] Enrolled courses loaded:', myCourses?.length || 0);
-        }
-        
-        const allEnrolled = myCourses ?? [];
-        setTotalEnrolled(allEnrolled.length);
-        setEnrolled(allEnrolled.slice(0, 4)); // Chỉ hiển thị 4 khóa học đầu tiên
-      }
-
-      // Lấy các khóa học chưa đăng ký (đề xuất)
-      console.log('[HomePage] Fetching all active courses...');
-      const { data: allActive, error: allActiveError } = await supabase
-        .from('courses')
-        .select('id,title,description,cover_url,level,created_at')
-        .eq('is_active', true)
-        .order('created_at', { ascending: false });
-
-      if (allActiveError) {
-        console.error('[HomePage] Error fetching all active courses:', allActiveError);
-      } else {
-        console.log('[HomePage] All active courses loaded:', allActive?.length || 0);
-      }
-
-      const allSuggested = (allActive ?? []).filter(
-        (c: any) => !enrolledIdsSet.has(c.id)
-      );
-      
-      setTotalSuggested(allSuggested.length);
-      setSuggested(allSuggested.slice(0, 4)); // Chỉ hiển thị 4 khóa học đầu tiên
-      
-      console.log('[HomePage] Suggested courses:', allSuggested.length);
-
-      console.log('[HomePage] Load complete');
-      setLoading(false);
-    };
-    load();
-  }, [supabase, router]);
+    if (!authLoading && !user) {
+      console.log('[HomePage] No user found, redirecting to login');
+      router.replace(ROUTES.LOGIN);
+    }
+  }, [user, authLoading, router]);
+  
+  // Compute enrolled course IDs
+  const enrolledIds = new Set(userCourses.map(uc => uc.course_id));
+  
+  // Get enrolled courses details
+  const enrolled = allCourses
+    .filter(c => enrolledIds.has(c.id))
+    .slice(0, 4);
+  const totalEnrolled = allCourses.filter(c => enrolledIds.has(c.id)).length;
+  
+  // Get suggested courses (not enrolled)
+  const allSuggested = allCourses.filter(c => !enrolledIds.has(c.id));
+  const suggested = allSuggested.slice(0, 4);
+  const totalSuggested = allSuggested.length;
 
   const handleRegisterCourse = async (courseId: string, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
+    if (!user) {
+      router.push(ROUTES.LOGIN);
+      return;
+    }
+    
     setRegistering(courseId);
     
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        router.push(ROUTES.LOGIN);
-        return;
-      }
-
-      const { error } = await supabase
-        .from('user_courses')
-        .insert([{ user_id: user.id, course_id: courseId }]);
-
-      if (error) {
-        console.error('[HomePage] Error registering course:', error);
-        alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
-      } else {
-        console.log('[HomePage] Course registered successfully:', courseId);
-        // Cập nhật enrolledIds
-        setEnrolledIds(prev => new Set(prev).add(courseId));
-        // Reload suggested courses - remove the registered course
-        setSuggested(prev => prev.filter(c => c.id !== courseId));
-        setTotalSuggested(prev => prev - 1);
-        // Reload enrolled courses to show the new one
-        const { data: allActive } = await supabase
-          .from('courses')
-          .select('id,title,description,cover_url,level,created_at')
-          .eq('is_active', true)
-          .order('created_at', { ascending: false });
-        const { data: { user: reloadUser } } = await supabase.auth.getUser();
-        if (reloadUser) {
-          const { data: myIds } = await supabase
-            .from('user_courses')
-            .select('course_id')
-            .eq('user_id', reloadUser.id);
-          const enrolledIdsSet = new Set((myIds ?? []).map((r: any) => r.course_id));
-          const { data: myCourses } = await supabase
-            .from('courses')
-            .select('id,title,description,cover_url,level,created_at')
-            .in('id', Array.from(enrolledIdsSet))
-            .order('created_at', { ascending: false });
-          setEnrolled(myCourses?.slice(0, 4) ?? []);
-          setTotalEnrolled(myCourses?.length ?? 0);
-        }
-      }
+      await enrollMutation.mutateAsync(courseId);
+      console.log('[HomePage] Course registered successfully:', courseId);
+      // React Query will auto-refetch userCourses and update UI
     } catch (error) {
-      console.error('[HomePage] Error:', error);
+      console.error('[HomePage] Error registering course:', error);
       alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
     } finally {
       setRegistering(null);

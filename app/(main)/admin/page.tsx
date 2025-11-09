@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import { ROUTES } from '@/lib/routes';
 import { requireAdminAccess } from '@/lib/auth-helpers.client';
+import { useAuth } from '@/providers/auth-provider';
 import JSONUploadForm from './components/JSONUploadForm';
 
 interface BatchProcessResult {
@@ -33,7 +34,7 @@ interface BatchProcessResult {
 export default function AdminPage() {
   const router = useRouter();
   const supabase = supabaseBrowser();
-  const [user, setUser] = useState<any>(null);
+  const { user } = useAuth(); // ✅ Use shared state
   const [loading, setLoading] = useState(true);
   const [batchProcessing, setBatchProcessing] = useState(false);
   const [batchResult, setBatchResult] = useState<BatchProcessResult | null>(null);
@@ -50,11 +51,7 @@ export default function AdminPage() {
         return;
       }
       
-      // Nếu có quyền admin, lấy thông tin user
-      const { data: { user } } = await supabase.auth.getUser();
-      if (user) {
-        setUser(user);
-      }
+      // User already available from shared state
       setLoading(false);
     };
     

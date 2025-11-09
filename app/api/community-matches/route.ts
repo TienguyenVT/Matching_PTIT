@@ -8,6 +8,9 @@ import {
   type MatchScore,
 } from "@/lib/utils/matching";
 
+// Mark route as dynamic (uses cookies for auth)
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/community-matches
  * Lấy danh sách người dùng đã matching và matching mới
@@ -72,38 +75,45 @@ export async function GET(req: NextRequest) {
       .select("room_id, chat_rooms(id, course_id, status, created_at)")
       .eq("user_id", user.id);
 
-    const previousMatches: any[] = [];
-    if (userRooms) {
-      for (const userRoom of userRooms) {
-        const room = userRoom.chat_rooms as any;
-        if (!room || room.status !== "matched") continue;
-
-        // Lấy thành viên khác trong room
-        const { data: otherMembers } = await supabase
+    // ✅ OPTIMIZED: Batch fetch all data to avoid N+1 queries
+    let previousMatches: any[] = [];
+    
+    if (userRooms && userRooms.length > 0) {
+      // Get all matched room IDs
+      const matchedRoomIds = userRooms
+        .filter((ur: any) => ur.chat_rooms?.status === 'matched')
+        .map((ur: any) => ur.chat_rooms.id);
+      
+      if (matchedRoomIds.length > 0) {
+        // Batch fetch all chat members with their profiles in ONE query
+        const { data: allMembers } = await supabase
           .from("chat_members")
-          .select("user_id")
-          .eq("room_id", room.id)
+          .select(`
+            room_id,
+            user_id,
+            profiles!inner (
+              id,
+              full_name,
+              email,
+              avatar_url,
+              role
+            )
+          `)
+          .in("room_id", matchedRoomIds)
           .neq("user_id", user.id)
-          .limit(1);
-
-        if (otherMembers && otherMembers.length > 0) {
-          const otherUserId = otherMembers[0].user_id;
-          // Get user profile - chỉ lấy user cùng role
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("id, full_name, email, avatar_url, role")
-            .eq("id", otherUserId)
-            .eq("role", currentUserRole) // Filter theo role
-            .single();
-
-          if (profile) {
-            previousMatches.push({
-              ...profile,
-              roomId: room.id,
-              courseId: room.course_id,
-              matchedAt: room.created_at,
-            });
-          }
+          .eq("profiles.role", currentUserRole);
+        
+        // Map the results with room info
+        if (allMembers) {
+          previousMatches = allMembers.map((member: any) => {
+            const room = userRooms.find((ur: any) => ur.chat_rooms?.id === member.room_id)?.chat_rooms as any;
+            return {
+              ...member.profiles,
+              roomId: member.room_id,
+              courseId: room?.course_id,
+              matchedAt: room?.created_at,
+            };
+          });
         }
       }
     }

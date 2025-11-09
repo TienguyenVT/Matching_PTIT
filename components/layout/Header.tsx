@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { getUserRole } from "@/lib/auth-helpers.client";
+import { useAuth } from "@/providers/auth-provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
@@ -23,31 +23,29 @@ export function Header({ onMenuToggle }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const [user, setUser] = useState<any>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
   const supabase = supabaseBrowser();
   const router = useRouter();
+  
+  // Use global auth context - no duplicate API calls!
+  const { user, role, refreshProfile } = useAuth();
+  
+  // Memoize computed values
+  const isAdmin = useMemo(() => role === 'admin', [role]);
+  const unreadCount = useMemo(
+    () => notifications.filter(n => !n.read).length,
+    [notifications]
+  );
+  const homeHref = useMemo(
+    () => isAdmin ? ROUTES.COURSES : ROUTES.DASHBOARD,
+    [isAdmin]
+  );
 
-  const updateRole = async (userId: string | undefined | null) => {
-    if (!userId) {
-      setIsAdmin(false);
-      return;
-    }
+  // Removed updateRole - now handled by AuthProvider globally
 
-    try {
-      const role = await getUserRole(supabase, userId);
-      setIsAdmin(role === "admin");
-    } catch (error) {
-      console.error("[Header] Failed to determine user role", error);
-      setIsAdmin(false);
-    }
-  };
-
+  // Load notifications only once on mount
   useEffect(() => {
-    // Load notifications
     const loadNotifications = async () => {
-      // Tạm thời mock data, sau này sẽ query từ DB
+      // Mock data - in production use React Query
       const mockNotifications: Notification[] = [
         {
           id: "1",
@@ -121,42 +119,20 @@ export function Header({ onMenuToggle }: HeaderProps) {
         },
       ];
       setNotifications(mockNotifications);
-      setUnreadCount(mockNotifications.filter((n) => !n.read).length);
     };
     loadNotifications();
-  }, []);
+  }, []); // Only run once
 
+  // Removed - auth state now managed by AuthProvider globally
+
+  // Close menus on click outside
   useEffect(() => {
-    // Load user data
-    const loadUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user);
-      await updateRole(user?.id);
-    };
-    loadUser();
-
-    // Listen for auth state changes (including avatar updates)
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      setUser(session?.user ?? null);
-      await updateRole(session?.user?.id);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [supabase]);
-
-  useEffect(() => {
-    // Đóng menus khi click outside
     const handleClickOutside = (e: MouseEvent) => {
-      if (!(e.target as Element).closest(".user-menu-container")) {
+      const target = e.target as Element;
+      if (!target.closest(".user-menu-container")) {
         setUserMenuOpen(false);
       }
-      if (!(e.target as Element).closest(".notification-menu-container")) {
+      if (!target.closest(".notification-menu-container")) {
         setNotificationOpen(false);
       }
     };
@@ -164,33 +140,20 @@ export function Header({ onMenuToggle }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Listen for profile updates - use global refresh
   useEffect(() => {
-    // Listen for profile updates
-    const handleProfileUpdate = async () => {
-      // Wait a bit to ensure Supabase has updated the user metadata
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        setUser(user);
-        await updateRole(user.id);
-      } else {
-        setIsAdmin(false);
-      }
+    const handleProfileUpdate = () => {
+      refreshProfile(); // Use global refresh from AuthProvider
     };
 
     window.addEventListener("profile-updated", handleProfileUpdate);
-    return () =>
-      window.removeEventListener("profile-updated", handleProfileUpdate);
-  }, [supabase]);
+    return () => window.removeEventListener("profile-updated", handleProfileUpdate);
+  }, [refreshProfile]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.replace(ROUTES.LOGIN);
   };
-
-  const homeHref = isAdmin ? ROUTES.COURSES : ROUTES.DASHBOARD;
 
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
