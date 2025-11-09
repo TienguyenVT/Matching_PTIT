@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { getUserRole } from "@/lib/auth-helpers.client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
@@ -24,8 +25,24 @@ export function Header({ onMenuToggle }: HeaderProps) {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const [user, setUser] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const supabase = supabaseBrowser();
   const router = useRouter();
+
+  const updateRole = async (userId: string | undefined | null) => {
+    if (!userId) {
+      setIsAdmin(false);
+      return;
+    }
+
+    try {
+      const role = await getUserRole(supabase, userId);
+      setIsAdmin(role === "admin");
+    } catch (error) {
+      console.error("[Header] Failed to determine user role", error);
+      setIsAdmin(false);
+    }
+  };
 
   useEffect(() => {
     // Load notifications
@@ -116,14 +133,16 @@ export function Header({ onMenuToggle }: HeaderProps) {
         data: { user },
       } = await supabase.auth.getUser();
       setUser(user);
+      await updateRole(user?.id);
     };
     loadUser();
 
     // Listen for auth state changes (including avatar updates)
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setUser(session?.user ?? null);
+      await updateRole(session?.user?.id);
     });
 
     return () => {
@@ -155,6 +174,9 @@ export function Header({ onMenuToggle }: HeaderProps) {
       } = await supabase.auth.getUser();
       if (user) {
         setUser(user);
+        await updateRole(user.id);
+      } else {
+        setIsAdmin(false);
       }
     };
 
@@ -167,6 +189,8 @@ export function Header({ onMenuToggle }: HeaderProps) {
     await supabase.auth.signOut();
     router.replace(ROUTES.LOGIN);
   };
+
+  const homeHref = isAdmin ? ROUTES.COURSES : ROUTES.DASHBOARD;
 
   return (
     <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
@@ -190,7 +214,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
           </svg>
         </button>
         <Link
-          href={ROUTES.DASHBOARD}
+          href={homeHref}
           className="p-2 hover:bg-gray-100 rounded-md flex items-center gap-2 text-gray-700 hover:text-teal-600 transition-colors"
           title="Về trang chủ"
         >
