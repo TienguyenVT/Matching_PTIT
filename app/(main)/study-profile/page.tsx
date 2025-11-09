@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
@@ -29,7 +29,7 @@ type EnrolledCourse = {
   progressPercent: number; // MVP placeholder
 };
 
-export default function StudyProfilePage() {
+function StudyProfileContent() {
   const supabase = supabaseBrowser();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -212,4 +212,14 @@ export default function StudyProfilePage() {
   );
 }
 
-
+export default function StudyProfilePage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-full p-8">
+        <p className="text-gray-500">Đang tải hồ sơ...</p>
+      </div>
+    }>
+      <StudyProfileContent />
+    </Suspense>
+  );
+}

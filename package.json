@@ -5,9 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:analyze": "set ANALYZE=true && next build",
     "start": "next start",
     "lint": "next lint",
-    "test:pdf": "tsx scripts/test-pdf-analysis.ts"
+    "test:pdf": "tsx scripts/test-pdf-analysis.ts",
+    "test:performance": "node scripts/test-performance.js",
+    "test:prod": "test-prod.bat",
+    "monitor": "tsx utils/performance-monitor.ts",
+    "clear:cache": "clear-cache.bat"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
@@ -30,9 +35,11 @@
     "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
     "autoprefixer": "10.4.20",
+    "chalk": "^5.6.2",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.5",
     "postcss": "8.4.47",
+    "puppeteer": "^24.29.1",
     "supabase": "^2.54.11",
     "tailwindcss": "3.4.14",
     "tsx": "^4.7.0",

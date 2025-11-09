@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { supabaseBrowser } from '@/lib/supabase/client';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
 import { useAuth } from '@/providers/auth-provider';
+import { useCourses, useUserCourses } from '@/hooks/use-courses';
+import { supabaseBrowser } from '@/lib/supabase/client';
 
 type Course = {
   id: string;
@@ -16,65 +17,43 @@ type Course = {
 };
 
 export default function CoursesPage() {
-  const supabase = supabaseBrowser();
   const router = useRouter();
-  const { user } = useAuth(); // ✅ Use shared state at component level
-  const [available, setAvailable] = useState<Course[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { user, loading: authLoading } = useAuth(); // ✅ Use shared state at component level
+  
+  // ✅ Use React Query hooks for caching & deduplication
+  const { data: allCourses = [], isLoading: coursesLoading } = useCourses({
+    orderBy: 'title',
+  });
+  const { data: userCourses = [], isLoading: userCoursesLoading } = useUserCourses();
+  
+  const [registering, setRegistering] = useState<string | null>(null);
+  const loading = authLoading || coursesLoading || userCoursesLoading;
 
-  useEffect(() => {
-    const load = async () => {
-      if (!user) { router.replace(ROUTES.LOGIN); return; }
+  // ✅ Compute available courses from cached data
+  const enrolledIds = new Set(userCourses.map((uc: any) => uc.course_id || uc.courseId));
+  const available = allCourses.filter((c: Course) => !enrolledIds.has(c.id));
 
-      try {
-        const { data: myIds, error: enrolledError } = await supabase
-          .from('user_courses')
-          .select('course_id')
-          .eq('user_id', user.id);
-        
-        if (enrolledError) {
-          console.error('Error loading enrolled courses:', enrolledError);
-        }
-        
-        const enrolledIds = new Set((myIds ?? []).map((r: any) => r.course_id));
-        console.log('Enrolled course IDs:', Array.from(enrolledIds));
-
-        const { data: allActive, error: coursesError } = await supabase
-          .from('courses')
-          .select('id,title,description,cover_url,level')
-          .eq('is_active', true)
-          .order('title');
-
-        if (coursesError) {
-          console.error('Error loading courses:', coursesError);
-          alert('Lỗi khi tải danh sách khóa học: ' + coursesError.message);
-        } else {
-          console.log('Total active courses:', allActive?.length || 0);
-          console.log('Course IDs:', allActive?.map(c => c.id) || []);
-        }
-
-        const filtered = (allActive ?? []).filter((c: any) => !enrolledIds.has(c.id));
-        console.log('Available courses after filter:', filtered.length);
-        setAvailable(filtered);
-      } catch (error) {
-        console.error('Load error:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
-  }, [supabase, router, user]);
+  // Handle authentication
+  if (!authLoading && !user) {
+    router.replace(ROUTES.LOGIN);
+    return null;
+  }
 
   const onRegister = async (courseId: string) => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) { router.replace(ROUTES.LOGIN); return; }
+    if (!user) { router.replace(ROUTES.LOGIN); return; }
 
     if (!courseId) {
       alert('Lỗi: Không tìm thấy ID khóa học');
       return;
     }
 
+    setRegistering(courseId);
+    
     try {
+      const supabase = supabaseBrowser();
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { router.replace(ROUTES.LOGIN); return; }
+      
       const requestBody = { courseId };
       console.log('Registering course:', requestBody);
       
@@ -102,6 +81,8 @@ export default function CoursesPage() {
     } catch (error) {
       console.error('Register error:', error);
       alert('Có lỗi xảy ra khi đăng ký khóa học');
+    } finally {
+      setRegistering(null);
     }
   };
 
@@ -145,7 +126,13 @@ export default function CoursesPage() {
                   <Link href={ROUTES.COURSE_DETAIL(c.id)} className="flex-1 text-center rounded-md bg-gray-600 px-4 py-2 text-white hover:bg-gray-700 text-sm font-medium">
                     Xem chi tiết
                   </Link>
-                  <button onClick={() => onRegister(c.id)} className="flex-1 rounded-md bg-teal-600 px-4 py-2 text-white hover:bg-teal-700 text-sm font-medium">Đăng ký</button>
+                  <button 
+                    onClick={() => onRegister(c.id)} 
+                    disabled={registering === c.id}
+                    className="flex-1 rounded-md bg-teal-600 px-4 py-2 text-white hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed text-sm font-medium"
+                  >
+                    {registering === c.id ? 'Đang đăng ký...' : 'Đăng ký'}
+                  </button>
                 </div>
               </div>
             </div>

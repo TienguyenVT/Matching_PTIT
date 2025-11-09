@@ -23,6 +23,7 @@ export function useCourses(options?: {
   return useQuery({
     queryKey: courseKeys.list(options),
     queryFn: async () => {
+      console.log('[useCourses] Fetching courses with options:', options);
       const supabase = supabaseBrowser();
       let query = supabase
         .from('courses')
@@ -48,9 +49,9 @@ export function useCourses(options?: {
       return data;
     },
     // ✅ Stale-while-revalidate: Show cached data immediately, revalidate in background
-    staleTime: 30 * 1000, // Fresh for 30 seconds
+    staleTime: 5 * 60 * 1000, // Fresh for 5 minutes
     gcTime: 10 * 60 * 1000, // Keep in cache for 10 minutes
-    refetchOnMount: true, // Background revalidation on mount
+    refetchOnMount: false, // Don't refetch if data exists in cache
   });
 }
 
@@ -75,6 +76,8 @@ export function useCourseDetail(courseId: string) {
     enabled: !!courseId,
     // Cache course details for 30 minutes
     staleTime: 30 * 60 * 1000,
+    gcTime: 60 * 60 * 1000, // Keep in cache for 1 hour
+    refetchOnMount: false, // Don't refetch if data exists
   });
 }
 
@@ -86,6 +89,7 @@ export function useUserCourses(userId?: string) {
   return useQuery({
     queryKey: courseKeys.userCourses(targetUserId!),
     queryFn: async () => {
+      console.log('[useUserCourses] Fetching user courses for:', targetUserId);
       const supabase = supabaseBrowser();
       const { data, error } = await supabase
         .from('user_courses')
@@ -108,6 +112,8 @@ export function useUserCourses(userId?: string) {
     enabled: !!targetUserId,
     // Cache for 5 minutes
     staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+    refetchOnMount: false, // Don't refetch if data exists
   });
 }
 
