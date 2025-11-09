@@ -57,11 +57,20 @@ export default function StudyProfilePage() {
 
       const isViewingOwnProfile = targetUserId === user.id;
 
-      // Load profile data (including show_learning_progress)
+      // Load current user's role to filter access
+      const { data: currentUserProfile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+      
+      const currentUserRole = currentUserProfile?.role || 'user';
+
+      // Load profile data (including show_learning_progress and role)
       // Try to load with show_learning_progress first, fallback if column doesn't exist
       let { data: p, error: profileError } = await supabase
         .from("profiles")
-        .select("id, username, full_name, email, avatar_url, created_at, show_learning_progress")
+        .select("id, username, full_name, email, avatar_url, created_at, show_learning_progress, role")
         .eq("id", targetUserId)
         .single();
 
@@ -70,20 +79,28 @@ export default function StudyProfilePage() {
         console.warn("[StudyProfilePage] Column show_learning_progress does not exist. Please run migration. Falling back...");
         const retryResult = await supabase
           .from("profiles")
-          .select("id, username, full_name, email, avatar_url, created_at")
+          .select("id, username, full_name, email, avatar_url, created_at, role")
           .eq("id", targetUserId)
           .single();
-        p = retryResult.data;
         profileError = retryResult.error;
         // Set default to false since column doesn't exist
-        if (p) {
-          (p as any).show_learning_progress = false;
+        if (retryResult.data) {
+          p = { ...retryResult.data, show_learning_progress: false } as any;
         }
       }
 
       if (profileError || !p) {
         console.error("[StudyProfilePage] Error loading profile:", profileError);
         alert("Không tìm thấy hồ sơ người dùng.");
+        router.replace(ROUTES.STUDY_PROFILE);
+        return;
+      }
+
+      // Check if target user has same role (users can't view admin profiles and vice versa)
+      const targetUserRole = (p as any).role || 'user';
+      if (!isViewingOwnProfile && targetUserRole !== currentUserRole) {
+        console.log("[StudyProfilePage] Access denied: different roles");
+        alert("Bạn không có quyền xem hồ sơ này.");
         router.replace(ROUTES.STUDY_PROFILE);
         return;
       }

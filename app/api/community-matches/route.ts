@@ -55,6 +55,16 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Lấy role của current user để filter kết quả
+    const { data: currentUserProfile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+    
+    const currentUserRole = currentUserProfile?.role || 'user';
+    console.log("[community-matches] Current user role:", currentUserRole);
+
     // 1. Lấy người dùng đã matching (từ chat_rooms với status = 'matched')
     // Lấy tất cả rooms mà current user là thành viên
     const { data: userRooms } = await supabase
@@ -78,11 +88,12 @@ export async function GET(req: NextRequest) {
 
         if (otherMembers && otherMembers.length > 0) {
           const otherUserId = otherMembers[0].user_id;
-          // Get user profile
+          // Get user profile - chỉ lấy user cùng role
           const { data: profile } = await supabase
             .from("profiles")
-            .select("id, full_name, email, avatar_url")
+            .select("id, full_name, email, avatar_url, role")
             .eq("id", otherUserId)
+            .eq("role", currentUserRole) // Filter theo role
             .single();
 
           if (profile) {
@@ -149,10 +160,11 @@ export async function GET(req: NextRequest) {
 
     // 3. Lấy danh sách TẤT CẢ người dùng khả dụng (đã đăng ký ít nhất 1 khóa học)
     // Query từ bảng user_courses để kiểm tra course_id trùng lặp giữa các user_id
+    // Filter theo role: chỉ lấy user cùng role
     console.log("[community-matches] Fetching all available users from user_courses...");
     const { data: allAvailableUsers, error: allUsersError } = await supabase
       .from("user_courses")
-      .select("user_id, course_id, courses(id, level), profiles(id, full_name, email, avatar_url)")
+      .select("user_id, course_id, courses(id, level), profiles(id, full_name, email, avatar_url, role)")
       .neq("user_id", user.id);
 
     if (allUsersError) {
@@ -176,6 +188,14 @@ export async function GET(req: NextRequest) {
     for (const item of filteredUsers) {
       const userId = item.user_id;
       const courseId = item.course_id;
+      
+      // Handle both array and object cases for profiles
+      const profile = Array.isArray(item.profiles)
+        ? item.profiles[0]
+        : item.profiles;
+      
+      // Skip nếu profile không tồn tại hoặc không cùng role
+      if (!profile || profile.role !== currentUserRole) continue;
       
       // Track course_id for each user_id (for debugging)
       if (!courseIdTracking.has(userId)) {

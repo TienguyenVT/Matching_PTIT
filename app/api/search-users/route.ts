@@ -49,6 +49,16 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Lấy role của current user để filter kết quả
+    const { data: currentUserProfile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+    
+    const currentUserRole = currentUserProfile?.role || 'user';
+    console.log("[search-users] Current user role:", currentUserRole);
+
     // Lấy query parameter
     const searchParams = req.nextUrl.searchParams;
     const searchTerm = searchParams.get("q")?.trim();
@@ -69,10 +79,12 @@ export async function GET(req: NextRequest) {
     
     // Xây dựng query với điều kiện OR để tìm kiếm trên cả 3 trường
     // Xử lý trường hợp username có thể là NULL
+    // Filter theo role: user chỉ thấy user, admin chỉ thấy admin
     const { data: profiles, error } = await supabase
       .from("profiles")
-      .select("id, username, full_name, email, avatar_url")
+      .select("id, username, full_name, email, avatar_url, role")
       .or(`username.ilike.%${searchTerm}%,full_name.ilike.%${searchTerm}%,email.ilike.%${searchTerm}%`)
+      .eq("role", currentUserRole) // Chỉ hiển thị user cùng role
       .neq("id", user.id) // Loại bỏ chính user hiện tại
       .limit(20); // Giới hạn 20 kết quả
 
