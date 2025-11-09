@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
+import { useAuth } from "@/providers/auth-provider";
 import PublicProfileView from "./components/PublicProfileView";
 import LearningProgressSection from "./components/LearningProgressSection";
 import PrivacyToggle from "./components/PrivacyToggle";
@@ -32,7 +33,7 @@ export default function StudyProfilePage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [currentUserId, setCurrentUserId] = useState<string>("");
+  const { user } = useAuth(); // ✅ Use shared state
   const [viewingUserId, setViewingUserId] = useState<string>("");
   const [profile, setProfile] = useState<PublicProfile | null>(null);
   const [courses, setCourses] = useState<EnrolledCourse[]>([]);
@@ -41,14 +42,11 @@ export default function StudyProfilePage() {
 
   useEffect(() => {
     const load = async () => {
-      // Get current authenticated user
-      const { data: userRes } = await supabase.auth.getUser();
-      const user = userRes?.user;
+      // Check authenticated user from shared state
       if (!user) {
         router.replace(ROUTES.LOGIN);
         return;
       }
-      setCurrentUserId(user.id);
 
       // Get userId from query param, default to current user
       const userIdParam = searchParams.get("userId");
@@ -132,14 +130,16 @@ export default function StudyProfilePage() {
       setLoading(false);
     };
     load();
-  }, [supabase, router, searchParams]);
+  }, [supabase, router, searchParams, user]);
 
   const handlePrivacyToggleChange = async (newValue: boolean) => {
     try {
+      if (!user) return;
+      
       const { error } = await supabase
         .from("profiles")
         .update({ show_learning_progress: newValue })
-        .eq("id", currentUserId);
+        .eq("id", user.id);
 
       if (error) {
         // Check if column doesn't exist
@@ -171,7 +171,7 @@ export default function StudyProfilePage() {
     );
   }
 
-  const isViewingOwnProfile = currentUserId === viewingUserId;
+  const isViewingOwnProfile = user?.id === viewingUserId;
   const shouldShowProgress = isViewingOwnProfile || showLearningProgress;
 
   return (

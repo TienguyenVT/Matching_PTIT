@@ -5,6 +5,7 @@ import { supabaseBrowser } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
+import { useAuth } from '@/providers/auth-provider';
 
 type Course = {
   id: string;
@@ -17,12 +18,12 @@ type Course = {
 export default function CoursesPage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
+  const { user } = useAuth(); // ✅ Use shared state at component level
   const [available, setAvailable] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const load = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
       if (!user) { router.replace(ROUTES.LOGIN); return; }
 
       try {
@@ -62,7 +63,7 @@ export default function CoursesPage() {
       }
     };
     load();
-  }, [supabase, router]);
+  }, [supabase, router, user]);
 
   const onRegister = async (courseId: string) => {
     const { data: { session } } = await supabase.auth.getSession();

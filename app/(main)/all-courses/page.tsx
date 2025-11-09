@@ -5,6 +5,7 @@ import { supabaseBrowser } from '@/lib/supabase/client';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
+import { useAuth } from '@/providers/auth-provider';
 
 type Course = {
   id: string;
@@ -20,6 +21,7 @@ type FilterType = 'all' | 'enrolled' | 'not-enrolled';
 export default function AllCoursesPage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
+  const { user } = useAuth(); // ✅ Use shared state at component level
   const [allCourses, setAllCourses] = useState<Course[]>([]);
   const [enrolledIds, setEnrolledIds] = useState<Set<string>>(new Set());
   const [filter, setFilter] = useState<FilterType>('all');
@@ -30,7 +32,6 @@ export default function AllCoursesPage() {
     const load = async () => {
       console.log('[AllCoursesPage] Starting load...');
       
-      const { data: { user } } = await supabase.auth.getUser();
       if (!user) { 
         console.log('[AllCoursesPage] No user found, redirecting to login');
         router.replace(ROUTES.LOGIN); 
@@ -72,7 +73,7 @@ export default function AllCoursesPage() {
       setLoading(false);
     };
     load();
-  }, [supabase, router]);
+  }, [supabase, router, user]);
 
   const getFilteredCourses = () => {
     if (filter === 'enrolled') {
@@ -90,7 +91,6 @@ export default function AllCoursesPage() {
     setRegistering(courseId);
     
     try {
-      const { data: { user } } = await supabase.auth.getUser();
       if (!user) {
         router.push(ROUTES.LOGIN);
         return;
