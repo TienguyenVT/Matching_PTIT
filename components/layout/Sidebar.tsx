@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
+import { supabaseBrowser } from "@/lib/supabase/client";
+import { getUserRole } from "@/lib/auth-helpers.client";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -11,15 +14,59 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const supabase = useMemo(() => supabaseBrowser(), []);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadRole = async () => {
+      try {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser();
+
+        if (error || !user) {
+          if (isMounted) {
+            setIsAdmin(false);
+          }
+          return;
+        }
+
+        const role = await getUserRole(supabase, user.id);
+        if (isMounted) {
+          setIsAdmin(role === "admin");
+        }
+      } catch (err) {
+        console.error("[Sidebar] Unable to determine user role", err);
+        if (isMounted) {
+          setIsAdmin(false);
+        }
+      }
+    };
+
+    loadRole();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [supabase]);
 
   const menuItems = [
     {
       section: "HỌC TẬP",
-      items: [
-        { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
-        { label: "Cộng đồng",href: ROUTES.COMMUNITY, icon: "👥" },
-        { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
-      ],
+      items: isAdmin
+        ? [
+            { label: "Khóa học", href: ROUTES.COURSES, icon: "📚" },
+            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: "➕" },
+            { label: "Tài khoản", href: ROUTES.PROFILE, icon: "👤" },
+          ]
+        : [
+            { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
+            { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: "👥" },
+            { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
+          ],
     },
   ];
 
