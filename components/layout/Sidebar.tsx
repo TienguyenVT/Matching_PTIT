@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
+import { supabaseBrowser } from "@/lib/supabase/client";
+import { getUserProfile } from "@/lib/auth-helpers.client";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -11,17 +14,101 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const [role, setRole] = useState<string | null>(null);
+  const [isRoleLoaded, setIsRoleLoaded] = useState(false);
 
-  const menuItems = [
-    {
-      section: "HỌC TẬP",
-      items: [
-        { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
-        { label: "Cộng đồng",href: ROUTES.COMMUNITY, icon: "👥" },
-        { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
-      ],
-    },
-  ];
+  const supabase = useMemo(() => supabaseBrowser(), []);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchRole = async () => {
+      try {
+        if (typeof window !== "undefined") {
+          const cachedRole = window.localStorage.getItem("userRole");
+          if (cachedRole && isMounted) {
+            setRole(cachedRole);
+          }
+        }
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (!isMounted) return;
+
+        if (!user) {
+          setRole(null);
+          setIsRoleLoaded(true);
+          if (typeof window !== "undefined") {
+            window.localStorage.removeItem("userRole");
+          }
+          return;
+        }
+
+        const profile = await getUserProfile(supabase, user.id);
+        if (!isMounted) return;
+
+        const profileRole = profile?.role ?? null;
+        setRole(profileRole);
+
+        if (typeof window !== "undefined") {
+          if (profileRole) {
+            window.localStorage.setItem("userRole", profileRole);
+          } else {
+            window.localStorage.removeItem("userRole");
+          }
+        }
+      } catch (error) {
+        console.error("[Sidebar] Failed to load user role:", error);
+      }
+
+      if (isMounted) {
+        setIsRoleLoaded(true);
+      }
+    };
+
+    fetchRole();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [supabase]);
+
+  const menuSections = useMemo(() => {
+    if (role === "admin") {
+      return [
+        {
+          section: "QUẢN TRỊ",
+          items: [
+            { label: "Khóa học", href: ROUTES.COURSES, icon: "📚" },
+            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: "➕" },
+            { label: "Tài khoản", href: ROUTES.PROFILE, icon: "👤" },
+          ],
+        },
+      ];
+    }
+
+    if (!isRoleLoaded && role === null) {
+      return [
+        {
+          section: "HỌC TẬP",
+          items: [{ label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" }],
+        },
+      ];
+    }
+
+    return [
+      {
+        section: "HỌC TẬP",
+        items: [
+          { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
+          { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: "👥" },
+          { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
+        ],
+      },
+    ];
+  }, [isRoleLoaded, role]);
 
   const isActive = (href: string) => pathname === href;
 
@@ -64,7 +151,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
 
         <div className="p-4 flex-1 overflow-y-auto">
-          {menuItems.map((section, idx) => (
+          {menuSections.map((section, idx) => (
             <div key={idx} className={idx > 0 ? "mt-6" : ""}>
               {section.section && (
                 <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-3">
