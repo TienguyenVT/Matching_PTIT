@@ -47,8 +47,10 @@ export function useCourses(options?: {
       if (error) throw error;
       return data;
     },
-    // Cache for 10 minutes
-    staleTime: 10 * 60 * 1000,
+    // ✅ Stale-while-revalidate: Show cached data immediately, revalidate in background
+    staleTime: 30 * 1000, // Fresh for 30 seconds
+    gcTime: 10 * 60 * 1000, // Keep in cache for 10 minutes
+    refetchOnMount: true, // Background revalidation on mount
   });
 }
 
