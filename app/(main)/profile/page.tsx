@@ -17,6 +17,11 @@ type AvatarOption = {
   url: string;
 };
 
+type SaveFeedback = {
+  type: "success" | "error";
+  message: string;
+};
+
 export default function ProfilePage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
@@ -24,10 +29,13 @@ export default function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [fullName, setFullName] = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState<string>("");
+  const [initialAvatar, setInitialAvatar] = useState<string>("");
+  const [initialFullName, setInitialFullName] = useState<string>("");
   const [isChangingAvatar, setIsChangingAvatar] = useState(false);
   const [showAvatarSelector, setShowAvatarSelector] = useState(false);
   const [expandedAvatars, setExpandedAvatars] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [saveFeedback, setSaveFeedback] = useState<SaveFeedback | null>(null);
 
   // Thông tin tài khoản
   const [enrolledCoursesCount, setEnrolledCoursesCount] = useState(0);
@@ -63,8 +71,17 @@ export default function ProfilePage() {
     }
     
     const loadData = async () => {
-      setFullName(user.user_metadata?.full_name || "");
-      setSelectedAvatar(user.user_metadata?.avatar_url || "");
+      const currentFullName =
+        user.user_metadata?.full_name || profile?.full_name || "";
+      const currentAvatar =
+        user.user_metadata?.avatar_url || profile?.avatar_url || "";
+
+      setFullName(currentFullName);
+      setSelectedAvatar(currentAvatar);
+      setInitialFullName(currentFullName);
+      setInitialAvatar(currentAvatar);
+      setIsChangingAvatar(false);
+      setExpandedAvatars(false);
 
       // Load enrolled courses count
       const { data: enrolledCourses } = await supabase
@@ -76,14 +93,36 @@ export default function ProfilePage() {
       setLoading(false);
     };
     loadData();
-  }, [user, authLoading, router, supabase]);
+  }, [user, profile, authLoading, router, supabase]);
+
+  useEffect(() => {
+    setIsChangingAvatar((selectedAvatar || "") !== (initialAvatar || ""));
+  }, [selectedAvatar, initialAvatar]);
+
+  useEffect(() => {
+    if (!saveFeedback) return;
+
+    // Only auto-clear error messages, success will trigger reload in handleSaveProfile
+    if (saveFeedback.type === "error") {
+      const timeout = window.setTimeout(() => setSaveFeedback(null), 4000);
+      return () => window.clearTimeout(timeout);
+    }
+  }, [saveFeedback]);
+
+  const hasProfileChanges =
+    (selectedAvatar || "") !== (initialAvatar || "") ||
+    (fullName || "") !== (initialFullName || "");
 
   const handleSaveProfile = async () => {
-    if (!user) return;
+    if (!user || saving) return; // Prevent multiple clicks
 
-    setSaving(true);
+    console.log("[ProfilePage] Saving profile...", { fullName, selectedAvatar });
+    setSaveFeedback(null);
+    setSaving(true); // Disable button immediately
+    
     try {
       // 1. Update user metadata trong Supabase Auth
+      console.log("[ProfilePage] Updating user metadata...");
       const { error: authError } = await supabase.auth.updateUser({
         data: {
           full_name: fullName,
@@ -92,12 +131,18 @@ export default function ProfilePage() {
       });
 
       if (authError) {
-        console.error("Error updating user metadata:", authError);
-        alert("Cập nhật thông tin thất bại. Vui lòng thử lại.");
+        console.error("[ProfilePage] Error updating user metadata:", authError);
+        setSaveFeedback({
+          type: "error",
+          message: "Cập nhật thông tin thất bại. Vui lòng thử lại.",
+        });
+        setSaving(false);
         return;
       }
+      console.log("[ProfilePage] User metadata updated successfully");
 
       // 2. Sync avatar và full_name vào bảng profiles trong database
+      console.log("[ProfilePage] Updating profiles table...");
       const { error: profileError } = await supabase
         .from("profiles")
         .update({
@@ -107,29 +152,61 @@ export default function ProfilePage() {
         .eq("id", user.id);
 
       if (profileError) {
-        console.error("Error updating profiles table:", profileError);
-        // Vẫn tiếp tục vì metadata đã được update
+        console.error("[ProfilePage] Error updating profiles table:", profileError);
+        setSaveFeedback({
+          type: "error",
+          message: "Cập nhật metadata thành công nhưng đồng bộ hồ sơ thất bại.",
+        });
+        setSaving(false);
+        return;
       }
+      console.log("[ProfilePage] Profiles table updated successfully");
 
-      // Refresh auth context to get updated user data
-      await refreshProfile();
+      // 3. Refresh profile để đảm bảo dữ liệu được cập nhật trong context
+      console.log("[ProfilePage] Refreshing profile data...");
+      const refreshSuccess = await refreshProfile();
       
-      setShowAvatarSelector(false);
-      setIsChangingAvatar(false);
-      alert("Cập nhật thông tin thành công!");
-      // Dispatch event to notify Header
+      if (!refreshSuccess) {
+        console.warn("[ProfilePage] Profile refresh failed or timed out");
+        setSaveFeedback({
+          type: "error",
+          message: "Cập nhật thành công nhưng tải lại thông tin thất bại. Vui lòng tải lại trang.",
+        });
+        setSaving(false);
+        return;
+      }
+      
+      // Dispatch event để cập nhật avatar trên header
+      console.log("[ProfilePage] Dispatching profile-updated event");
       window.dispatchEvent(new CustomEvent("profile-updated"));
+      
+      // Reload page after short delay to ensure event is processed
+      console.log("[ProfilePage] Reloading page in 500ms...");
+      setTimeout(() => {
+        console.log("[ProfilePage] Executing page reload...");
+        window.location.reload();
+      }, 500);
     } catch (error) {
-      console.error("Error:", error);
-      alert("Cập nhật thông tin thất bại. Vui lòng thử lại.");
-    } finally {
+      console.error("[ProfilePage] Error saving profile:", error);
+      setSaveFeedback({
+        type: "error",
+        message: "Có lỗi xảy ra khi cập nhật. Vui lòng thử lại.",
+      });
       setSaving(false);
     }
   };
 
   const handleSelectAvatar = (avatar: AvatarOption) => {
+    setSaveFeedback(null);
     setSelectedAvatar(avatar.url);
-    setIsChangingAvatar(true);
+  };
+
+  const handleResetProfileChanges = () => {
+    setSelectedAvatar(initialAvatar || "");
+    setFullName(initialFullName || "");
+    setShowAvatarSelector(false);
+    setExpandedAvatars(false);
+    setSaveFeedback(null);
   };
 
   const handleChangePassword = async () => {
@@ -350,9 +427,16 @@ export default function ProfilePage() {
         }
         expandedAvatars={expandedAvatars}
         onToggleExpandedAvatars={() => setExpandedAvatars(!expandedAvatars)}
-        onFullNameChange={setFullName}
+        onFullNameChange={(value) => {
+          setSaveFeedback(null);
+          setFullName(value);
+        }}
         onSaveProfile={handleSaveProfile}
+        onResetChanges={handleResetProfileChanges}
         saving={saving}
+        hasChanges={hasProfileChanges}
+        feedback={saveFeedback}
+        onClearFeedback={() => setSaveFeedback(null)}
       />
 
       {/* Phần 2: Thông tin tài khoản */}

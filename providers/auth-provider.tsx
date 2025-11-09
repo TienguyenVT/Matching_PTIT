@@ -11,7 +11,7 @@ interface AuthContextType {
   role: 'admin' | 'user' | null;
   loading: boolean;
   error: Error | null;
-  refreshProfile: () => Promise<void>;
+  refreshProfile: () => Promise<boolean>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -20,7 +20,7 @@ const AuthContext = createContext<AuthContextType>({
   role: null,
   loading: true,
   error: null,
-  refreshProfile: async () => {},
+  refreshProfile: async () => false,
 });
 
 // Cache keys for localStorage
@@ -100,16 +100,55 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [supabase]);
 
-  // Refresh profile manually
-  const refreshProfile = useCallback(async () => {
-    if (!user) return;
+  // Refresh profile manually with retry logic
+  const refreshProfile = useCallback(async (): Promise<boolean> => {
+    // Số lần retry tối đa
+    const MAX_RETRIES = 3;
+    // Thời gian chờ giữa các lần retry (ms), sẽ tăng theo cấp số nhân
+    const BASE_DELAY = 500;
     
-    const newProfile = await fetchProfile(user.id);
-    if (newProfile) {
-      setProfile(newProfile);
-      saveToCache(user, newProfile);
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        console.log(`[AuthProvider] Refreshing profile, attempt ${attempt}/${MAX_RETRIES}`);
+        
+        // Fetch fresh user data from auth (includes updated metadata)
+        const { data: { user: freshUser }, error: authError } = await supabase.auth.getUser();
+        
+        if (authError) throw authError;
+        
+        if (freshUser) {
+          // Fetch updated profile from database
+          const newProfile = await fetchProfile(freshUser.id);
+          if (newProfile) {
+            setUser(freshUser); // Update user with fresh metadata
+            setProfile(newProfile);
+            saveToCache(freshUser, newProfile);
+            console.log('[AuthProvider] Profile refreshed successfully');
+            return true;
+          }
+        }
+        
+        // Nếu không có lỗi nhưng không có user hoặc profile, thử lại
+        if (attempt < MAX_RETRIES) {
+          const delay = BASE_DELAY * attempt;
+          console.log(`[AuthProvider] Profile data incomplete, retrying in ${delay}ms...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
+      } catch (err) {
+        console.error(`[AuthProvider] Error refreshing profile (attempt ${attempt}/${MAX_RETRIES}):`, err);
+        setError(err as Error);
+        
+        if (attempt < MAX_RETRIES) {
+          const delay = BASE_DELAY * attempt;
+          console.log(`[AuthProvider] Will retry in ${delay}ms...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
+      }
     }
-  }, [user, fetchProfile, saveToCache]);
+    
+    console.error('[AuthProvider] Failed to refresh profile after all retry attempts');
+    return false;
+  }, [supabase, fetchProfile, saveToCache]);
 
   // Initialize auth state
   useEffect(() => {
@@ -158,6 +197,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (!mounted) return;
       
       console.log('[AuthProvider] Auth event:', event);
+      
+      // Ignore USER_UPDATED events to prevent interrupting profile save flow
+      // The profile page will handle refresh manually after save
+      if (event === 'USER_UPDATED') {
+        console.log('[AuthProvider] Ignoring USER_UPDATED event');
+        return;
+      }
       
       if (session?.user) {
         const userProfile = await fetchProfile(session.user.id);
