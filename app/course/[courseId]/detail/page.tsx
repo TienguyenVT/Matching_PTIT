@@ -53,7 +53,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   const courseId = params.courseId;
   console.log('[DetailPage] courseId from params:', courseId);
   const supabase = supabaseBrowser();
-  
+
   const [course, setCourse] = useState<Course | null>(null);
   const [modules, setModules] = useState<CourseModule[]>([]);
   const [contents, setContents] = useState<CourseContent[]>([]);
@@ -69,7 +69,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   useEffect(() => {
     const load = async () => {
       console.log('[DetailPage] Starting load, courseId:', courseId);
-      
+
       const { data: { user }, error: authError } = await supabase.auth.getUser();
       if (authError) {
         console.error('[DetailPage] Auth error:', authError);
@@ -128,7 +128,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
       }
 
       setContents(contentsData || []);
-      
+
       // Set first content as selected (loadContentDetails sẽ được gọi tự động qua useEffect)
       if (contentsData && contentsData.length > 0) {
         setSelectedContent(contentsData[0]);
@@ -290,7 +290,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   // Tìm module chứa selectedContent để hiển thị tên
   const getCurrentModuleTitle = () => {
     if (selectedContent) {
-      const module = groupedModules.find(m => 
+      const module = groupedModules.find(m =>
         m.contents.some(c => c.id === selectedContent.id)
       );
       return module ? module.title : selectedContent.title;
@@ -320,9 +320,8 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                     >
                       <span className="text-sm font-medium text-gray-700">{module.title}</span>
                       <svg
-                        className={`w-4 h-4 text-gray-500 transition-transform ${
-                          expandedModules.has(module.id) ? 'rotate-180' : ''
-                        }`}
+                        className={`w-4 h-4 text-gray-500 transition-transform ${expandedModules.has(module.id) ? 'rotate-180' : ''
+                          }`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -336,11 +335,10 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                           <button
                             key={content.id}
                             onClick={() => setSelectedContent(content)}
-                            className={`w-full text-left p-2 rounded text-sm ${
-                              selectedContent?.id === content.id
-                                ? 'bg-green-50 text-green-700'
-                                : 'text-gray-600 hover:bg-gray-50'
-                            }`}
+                            className={`w-full text-left p-2 rounded text-sm ${selectedContent?.id === content.id
+                              ? 'bg-green-50 text-green-700'
+                              : 'text-gray-600 hover:bg-gray-50'
+                              }`}
                           >
                             <span className="mr-1 text-xs uppercase">{content.kind === 'doc' ? '📄' : content.kind === 'quiz' ? '📝' : '🎥'}</span>
                             {content.title}
@@ -377,7 +375,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                 <p className="text-sm font-medium text-gray-800">{selectedContent?.title}</p>
               </div>
             </div>
-            
+
             {/* Action Buttons */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
               <button className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
@@ -398,7 +396,9 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                 </svg>
                 <span className="text-xs">Làm bài kiểm tra</span>
               </button>
-              <button className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+              <button
+                onClick={() => router.push(ROUTES.ALL_MEMBER)}
+                className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
@@ -421,7 +421,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                       </svg>
                       <h3 className="font-medium text-gray-800">Nội dung bài học</h3>
                     </div>
-                    <div 
+                    <div
                       className="bg-white rounded-lg p-6 prose-content"
                       dangerouslySetInnerHTML={{ __html: lessonContent.content_text }}
                       style={{
@@ -450,11 +450,10 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                             {q.options.map((option, optIdx) => (
                               <label
                                 key={optIdx}
-                                className={`flex items-center gap-2 p-2 rounded cursor-pointer ${
-                                  optIdx === q.correctAnswer
-                                    ? 'bg-green-50 border border-green-200'
-                                    : 'hover:bg-gray-50'
-                                }`}
+                                className={`flex items-center gap-2 p-2 rounded cursor-pointer ${optIdx === q.correctAnswer
+                                  ? 'bg-green-50 border border-green-200'
+                                  : 'hover:bg-gray-50'
+                                  }`}
                               >
                                 <input
                                   type="radio"
