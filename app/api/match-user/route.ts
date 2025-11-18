@@ -6,8 +6,11 @@ import { matchUserBody } from '@/lib/validators';
 export async function POST(req: NextRequest) {
   try {
     const supabase = supabaseServer();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    // ✅ Server-side auth check
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
 
     const json = await req.json();
     const parse = matchUserBody.safeParse(json);

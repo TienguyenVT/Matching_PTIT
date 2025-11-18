@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { useAuth } from "@/providers/auth-provider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
@@ -22,15 +23,29 @@ export function Header({ onMenuToggle }: HeaderProps) {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const [user, setUser] = useState<any>(null);
   const supabase = supabaseBrowser();
   const router = useRouter();
+  
+  // Use global auth context - no duplicate API calls!
+  const { user, role, refreshProfile } = useAuth();
+  
+  // Memoize computed values
+  const isAdmin = useMemo(() => role === 'admin', [role]);
+  const unreadCount = useMemo(
+    () => notifications.filter(n => !n.read).length,
+    [notifications]
+  );
+  const homeHref = useMemo(
+    () => isAdmin ? ROUTES.COURSES : ROUTES.DASHBOARD,
+    [isAdmin]
+  );
 
+  // Removed updateRole - now handled by AuthProvider globally
+
+  // Load notifications only once on mount
   useEffect(() => {
-    // Load notifications
     const loadNotifications = async () => {
-      // Tạm thời mock data, sau này sẽ query từ DB
+      // Mock data - in production use React Query
       const mockNotifications: Notification[] = [
         {
           id: "1",
@@ -104,40 +119,20 @@ export function Header({ onMenuToggle }: HeaderProps) {
         },
       ];
       setNotifications(mockNotifications);
-      setUnreadCount(mockNotifications.filter((n) => !n.read).length);
     };
     loadNotifications();
-  }, []);
+  }, []); // Only run once
 
+  // Removed - auth state now managed by AuthProvider globally
+
+  // Close menus on click outside
   useEffect(() => {
-    // Load user data
-    const loadUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setUser(user);
-    };
-    loadUser();
-
-    // Listen for auth state changes (including avatar updates)
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [supabase]);
-
-  useEffect(() => {
-    // Đóng menus khi click outside
     const handleClickOutside = (e: MouseEvent) => {
-      if (!(e.target as Element).closest(".user-menu-container")) {
+      const target = e.target as Element;
+      if (!target.closest(".user-menu-container")) {
         setUserMenuOpen(false);
       }
-      if (!(e.target as Element).closest(".notification-menu-container")) {
+      if (!target.closest(".notification-menu-container")) {
         setNotificationOpen(false);
       }
     };
@@ -145,23 +140,15 @@ export function Header({ onMenuToggle }: HeaderProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Listen for profile updates - use global refresh
   useEffect(() => {
-    // Listen for profile updates
-    const handleProfileUpdate = async () => {
-      // Wait a bit to ensure Supabase has updated the user metadata
-      await new Promise((resolve) => setTimeout(resolve, 100));
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        setUser(user);
-      }
+    const handleProfileUpdate = () => {
+      refreshProfile(); // Use global refresh from AuthProvider
     };
 
     window.addEventListener("profile-updated", handleProfileUpdate);
-    return () =>
-      window.removeEventListener("profile-updated", handleProfileUpdate);
-  }, [supabase]);
+    return () => window.removeEventListener("profile-updated", handleProfileUpdate);
+  }, [refreshProfile]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -190,7 +177,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
           </svg>
         </button>
         <Link
-          href={ROUTES.DASHBOARD}
+          href={homeHref}
           className="p-2 hover:bg-gray-100 rounded-md flex items-center gap-2 text-gray-700 hover:text-teal-600 transition-colors"
           title="Về trang chủ"
         >

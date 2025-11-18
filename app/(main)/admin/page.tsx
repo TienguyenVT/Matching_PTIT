@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import { ROUTES } from '@/lib/routes';
+import { requireAdminAccess } from '@/lib/auth-helpers.client';
+import { useAuth } from '@/providers/auth-provider';
 import JSONUploadForm from './components/JSONUploadForm';
 
 interface BatchProcessResult {
@@ -24,7 +26,6 @@ interface BatchProcessResult {
     statistics?: {
       modules: number;
       lessons: number;
-      totalPages?: number;
     };
   }>;
   error?: string;
@@ -33,7 +34,7 @@ interface BatchProcessResult {
 export default function AdminPage() {
   const router = useRouter();
   const supabase = supabaseBrowser();
-  const [user, setUser] = useState<any>(null);
+  const { user } = useAuth(); // ✅ Use shared state
   const [loading, setLoading] = useState(true);
   const [batchProcessing, setBatchProcessing] = useState(false);
   const [batchResult, setBatchResult] = useState<BatchProcessResult | null>(null);
@@ -42,14 +43,15 @@ export default function AdminPage() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { user }, error } = await supabase.auth.getUser();
+      // Kiểm tra quyền admin, sẽ tự động redirect nếu không phải admin
+      const hasAccess = await requireAdminAccess(supabase, router, ROUTES.DASHBOARD);
       
-      if (error || !user) {
-        router.replace(ROUTES.LOGIN);
+      if (!hasAccess) {
+        // requireAdminAccess đã tự động redirect
         return;
       }
       
-      setUser(user);
+      // User already available from shared state
       setLoading(false);
     };
     
@@ -194,7 +196,7 @@ export default function AdminPage() {
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Đang tải...</p>
+          <p className="text-gray-600">Đang kiểm tra quyền truy cập...</p>
         </div>
       </div>
     );

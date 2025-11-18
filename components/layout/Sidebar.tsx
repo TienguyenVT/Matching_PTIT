@@ -1,8 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
+import { useAuth } from "@/providers/auth-provider";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -11,15 +13,25 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  
+  // Use global auth context - no duplicate API calls!
+  const { role } = useAuth();
+  const isAdmin = useMemo(() => role === 'admin', [role]);
 
   const menuItems = [
     {
       section: "HỌC TẬP",
-      items: [
-        { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
-        { label: "Cộng đồng",href: ROUTES.COMMUNITY, icon: "👥" },
-        { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
-      ],
+      items: isAdmin
+        ? [
+            { label: "Khóa học", href: ROUTES.COURSES, icon: "📚" },
+            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: "➕" },
+            { label: "Tài khoản", href: ROUTES.PROFILE, icon: "👤" },
+          ]
+        : [
+            { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
+            { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: "👥" },
+            { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
+          ],
     },
   ];
 

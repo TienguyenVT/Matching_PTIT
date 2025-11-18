@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer, supabaseServiceRole } from '@/lib/supabase/server';
+import { requireAdminAPI } from '@/lib/auth-helpers.server';
 import { analyzePDFStructure, parseCourseNameFromFileName, validatePDFFile } from '@/lib/services/pdf-analyzer';
 // AI removed: no content/quiz generation here
 import fs from 'fs';
@@ -12,15 +13,10 @@ import { writeFile } from 'fs/promises';
  */
 export async function POST(req: NextRequest) {
   try {
-    // Authenticate user
-    const supabase = supabaseServer();
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-    
-    if (authError || !user) {
-      return NextResponse.json(
-        { error: 'Unauthorized. Vui lòng đăng nhập.' },
-        { status: 401 }
-      );
+    // Kiểm tra quyền admin
+    const { user, response } = await requireAdminAPI(req);
+    if (response) {
+      return response; // Trả về error nếu không có quyền
     }
 
     // Parse form data
@@ -64,7 +60,7 @@ export async function POST(req: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const tempFilePath = path.join(uploadDir, `${Date.now()}_${file.name}`);
-    await writeFile(tempFilePath, buffer);
+    await writeFile(tempFilePath, new Uint8Array(buffer));
 
     try {
       // Validate PDF file

@@ -8,6 +8,9 @@ import {
   type MatchScore,
 } from "@/lib/utils/matching";
 
+// Mark route as dynamic (uses cookies for auth)
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/community-matches
  * Lấy danh sách người dùng đã matching và matching mới
@@ -55,6 +58,16 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    // Lấy role của current user để filter kết quả
+    const { data: currentUserProfile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+    
+    const currentUserRole = currentUserProfile?.role || 'user';
+    console.log("[community-matches] Current user role:", currentUserRole);
+
     // 1. Lấy người dùng đã matching (từ chat_rooms với status = 'matched')
     // Lấy tất cả rooms mà current user là thành viên
     const { data: userRooms } = await supabase
@@ -62,37 +75,45 @@ export async function GET(req: NextRequest) {
       .select("room_id, chat_rooms(id, course_id, status, created_at)")
       .eq("user_id", user.id);
 
-    const previousMatches: any[] = [];
-    if (userRooms) {
-      for (const userRoom of userRooms) {
-        const room = userRoom.chat_rooms as any;
-        if (!room || room.status !== "matched") continue;
-
-        // Lấy thành viên khác trong room
-        const { data: otherMembers } = await supabase
+    // ✅ OPTIMIZED: Batch fetch all data to avoid N+1 queries
+    let previousMatches: any[] = [];
+    
+    if (userRooms && userRooms.length > 0) {
+      // Get all matched room IDs
+      const matchedRoomIds = userRooms
+        .filter((ur: any) => ur.chat_rooms?.status === 'matched')
+        .map((ur: any) => ur.chat_rooms.id);
+      
+      if (matchedRoomIds.length > 0) {
+        // Batch fetch all chat members with their profiles in ONE query
+        const { data: allMembers } = await supabase
           .from("chat_members")
-          .select("user_id")
-          .eq("room_id", room.id)
+          .select(`
+            room_id,
+            user_id,
+            profiles!inner (
+              id,
+              full_name,
+              email,
+              avatar_url,
+              role
+            )
+          `)
+          .in("room_id", matchedRoomIds)
           .neq("user_id", user.id)
-          .limit(1);
-
-        if (otherMembers && otherMembers.length > 0) {
-          const otherUserId = otherMembers[0].user_id;
-          // Get user profile
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("id, full_name, email, avatar_url")
-            .eq("id", otherUserId)
-            .single();
-
-          if (profile) {
-            previousMatches.push({
-              ...profile,
-              roomId: room.id,
-              courseId: room.course_id,
-              matchedAt: room.created_at,
-            });
-          }
+          .eq("profiles.role", currentUserRole);
+        
+        // Map the results with room info
+        if (allMembers) {
+          previousMatches = allMembers.map((member: any) => {
+            const room = userRooms.find((ur: any) => ur.chat_rooms?.id === member.room_id)?.chat_rooms as any;
+            return {
+              ...member.profiles,
+              roomId: member.room_id,
+              courseId: room?.course_id,
+              matchedAt: room?.created_at,
+            };
+          });
         }
       }
     }
@@ -149,10 +170,11 @@ export async function GET(req: NextRequest) {
 
     // 3. Lấy danh sách TẤT CẢ người dùng khả dụng (đã đăng ký ít nhất 1 khóa học)
     // Query từ bảng user_courses để kiểm tra course_id trùng lặp giữa các user_id
+    // Filter theo role: chỉ lấy user cùng role
     console.log("[community-matches] Fetching all available users from user_courses...");
     const { data: allAvailableUsers, error: allUsersError } = await supabase
       .from("user_courses")
-      .select("user_id, course_id, courses(id, level), profiles(id, full_name, email, avatar_url)")
+      .select("user_id, course_id, courses(id, level), profiles(id, full_name, email, avatar_url, role)")
       .neq("user_id", user.id);
 
     if (allUsersError) {
@@ -176,6 +198,14 @@ export async function GET(req: NextRequest) {
     for (const item of filteredUsers) {
       const userId = item.user_id;
       const courseId = item.course_id;
+      
+      // Handle both array and object cases for profiles
+      const profile = Array.isArray(item.profiles)
+        ? item.profiles[0]
+        : item.profiles;
+      
+      // Skip nếu profile không tồn tại hoặc không cùng role
+      if (!profile || profile.role !== currentUserRole) continue;
       
       // Track course_id for each user_id (for debugging)
       if (!courseIdTracking.has(userId)) {
