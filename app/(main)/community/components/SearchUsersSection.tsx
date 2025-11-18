@@ -6,6 +6,7 @@ import { supabaseBrowser } from "@/lib/supabase/client";
 import { ROUTES } from "@/lib/routes";
 import { useRouter } from "next/navigation";
 import { findCommonCourses, type MatchingUser } from "@/lib/utils/matching";
+import { useAuth } from "@/providers/auth-provider";
 
 interface SearchUser {
   id: string;
@@ -19,6 +20,7 @@ interface SearchUser {
 export default function SearchUsersSection() {
   const supabase = supabaseBrowser();
   const router = useRouter();
+  const { user } = useAuth(); // ✅ Use shared state at component level
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState<SearchUser[]>([]);
   const [searching, setSearching] = useState(false);
@@ -29,7 +31,6 @@ export default function SearchUsersSection() {
   useEffect(() => {
     const loadCurrentUserCourses = async () => {
       try {
-        const { data: { user } } = await supabase.auth.getUser();
         if (user) {
           const { data: courses } = await supabase
             .from("user_courses")
@@ -65,7 +66,7 @@ export default function SearchUsersSection() {
     };
     
     loadCurrentUserCourses();
-  }, [supabase]);
+  }, [supabase, user]);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,7 +79,6 @@ export default function SearchUsersSection() {
     setSearching(true);
     try {
       // Reload current user courses để đảm bảo dữ liệu mới nhất khi tính common courses
-      const { data: { user } } = await supabase.auth.getUser();
       if (user) {
         const { data: courses } = await supabase
           .from("user_courses")

@@ -5,10 +5,12 @@ import { supabaseBrowser } from '@/lib/supabase/client';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/providers/auth-provider';
 
 export default function ResetPasswordPage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
+  const { user } = useAuth(); // ✅ Move useAuth to component level
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,14 +19,10 @@ export default function ResetPasswordPage() {
 
   useEffect(() => {
     // Check if user has a valid session from the reset link
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-        setError('Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.');
-      }
-    };
-    checkSession();
-  }, [supabase]);
+    if (!user) {
+      setError('Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn.');
+    }
+  }, [user]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

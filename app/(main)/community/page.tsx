@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
+import { useAuth } from "@/providers/auth-provider";
 import PreviousMatchesSection from "./components/PreviousMatchesSection";
 import NewMatchesSection from "./components/NewMatchesSection";
 import SearchUsersSection from "./components/SearchUsersSection";
@@ -22,6 +23,7 @@ interface PreviousMatch {
 export default function CommunityPage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
+  const { user } = useAuth(); // ✅ Use shared state
   const [previousMatches, setPreviousMatches] = useState<PreviousMatch[]>([]);
   const [totalPreviousMatches, setTotalPreviousMatches] = useState(0);
   const [newMatches, setNewMatches] = useState<MatchScore[]>([]);
@@ -29,9 +31,6 @@ export default function CommunityPage() {
 
   useEffect(() => {
     const loadData = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
       if (!user) {
         router.replace(ROUTES.LOGIN);
         return;
@@ -75,7 +74,7 @@ export default function CommunityPage() {
     };
 
     loadData();
-  }, [supabase, router]);
+  }, [supabase, router, user]);
 
   return (
     <div className="p-4 md:p-6 space-y-6">

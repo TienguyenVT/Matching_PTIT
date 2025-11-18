@@ -2,19 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { supabaseBrowser } from '@/lib/supabase/client';
+import { useAuth } from '@/providers/auth-provider';
 
 export default function MatchPage({ params }: { params: { courseId: string } }) {
   const courseId = params.courseId;
   const supabase = supabaseBrowser();
-  const [userId, setUserId] = useState<string | null>(null);
+  const { user } = useAuth(); // ✅ Use shared state
+  const userId = user?.id ?? null; // ✅ Get userId from shared state
   const [roomId, setRoomId] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'matching' | 'open' | 'matched'>('idle');
   const [messages, setMessages] = useState<any[]>([]);
   const [text, setText] = useState('');
-
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null));
-  }, [supabase]);
 
   useEffect(() => {
     if (!roomId) return;

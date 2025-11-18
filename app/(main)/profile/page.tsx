@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
+import { useAuth } from "@/providers/auth-provider";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
 import AvatarSection from "./components/AvatarSection";
@@ -19,7 +20,7 @@ type AvatarOption = {
 export default function ProfilePage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const { user, profile, loading: authLoading, refreshProfile } = useAuth();
   const [loading, setLoading] = useState(true);
   const [fullName, setFullName] = useState("");
   const [selectedAvatar, setSelectedAvatar] = useState<string>("");
@@ -54,15 +55,14 @@ export default function ProfilePage() {
   const [savingAccount, setSavingAccount] = useState(false);
 
   useEffect(() => {
-    const loadUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (!user) {
-        router.replace(ROUTES.LOGIN);
-        return;
-      }
-      setUser(user);
+    if (authLoading) return;
+    
+    if (!user) {
+      router.replace(ROUTES.LOGIN);
+      return;
+    }
+    
+    const loadData = async () => {
       setFullName(user.user_metadata?.full_name || "");
       setSelectedAvatar(user.user_metadata?.avatar_url || "");
 
@@ -75,8 +75,8 @@ export default function ProfilePage() {
 
       setLoading(false);
     };
-    loadUser();
-  }, [supabase, router]);
+    loadData();
+  }, [user, authLoading, router, supabase]);
 
   const handleSaveProfile = async () => {
     if (!user) return;
@@ -111,15 +111,9 @@ export default function ProfilePage() {
         // Vẫn tiếp tục vì metadata đã được update
       }
 
-      // Reload user data immediately
-      const {
-        data: { user: updatedUser },
-      } = await supabase.auth.getUser();
-      if (updatedUser) {
-        setUser(updatedUser);
-        setFullName(updatedUser.user_metadata?.full_name || "");
-        setSelectedAvatar(updatedUser.user_metadata?.avatar_url || "");
-      }
+      // Refresh auth context to get updated user data
+      await refreshProfile();
+      
       setShowAvatarSelector(false);
       setIsChangingAvatar(false);
       alert("Cập nhật thông tin thành công!");
@@ -139,6 +133,11 @@ export default function ProfilePage() {
   };
 
   const handleChangePassword = async () => {
+    if (!user?.email) {
+      alert("Không tìm thấy thông tin người dùng");
+      return;
+    }
+    
     if (!currentPassword || !newPassword || !confirmPassword) {
       alert("Vui lòng điền đầy đủ thông tin");
       return;
@@ -185,6 +184,11 @@ export default function ProfilePage() {
   };
 
   const handleDeleteAccount = async () => {
+    if (!user?.email || !user?.id) {
+      alert("Không tìm thấy thông tin người dùng");
+      return;
+    }
+    
     if (!deletePassword) {
       alert("Vui lòng nhập mật khẩu để xác nhận");
       return;
@@ -221,7 +225,12 @@ export default function ProfilePage() {
     }
   };
 
-  const handleForgotPassword = async () => {
+  const handleSendPasswordResetOTP = async () => {
+    if (!user?.email) {
+      alert("Không tìm thấy email người dùng");
+      return;
+    }
+    
     setSendingOtp(true);
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
@@ -241,14 +250,21 @@ export default function ProfilePage() {
     }
   };
 
-  const handleOpenEditAccount = () => {
-    setEditUsername(user?.email?.split("@")[0] || "");
+  const handleOpenEditAccountModal = () => {
+    if (!user) return;
+    
+    setEditUsername(user.user_metadata?.username || "");
     setEditFullName(fullName);
-    setEditEmail(user?.email || "");
+    setEditEmail(user.email || "");
     setShowEditAccountModal(true);
   };
 
   const handleSaveAccountInfo = async () => {
+    if (!user?.id || !user?.email) {
+      alert("Không tìm thấy thông tin người dùng");
+      return;
+    }
+    
     if (!editFullName || !editEmail) {
       alert("Vui lòng điền đầy đủ thông tin");
       return;
@@ -297,13 +313,8 @@ export default function ProfilePage() {
         alert("Cập nhật thông tin thành công!");
       }
 
-      const {
-        data: { user: updatedUser },
-      } = await supabase.auth.getUser();
-      if (updatedUser) {
-        setUser(updatedUser);
-        setFullName(updatedUser.user_metadata?.full_name || "");
-      }
+      // Refresh auth context
+      await refreshProfile();
 
       setShowEditAccountModal(false);
       window.dispatchEvent(new CustomEvent("profile-updated"));
@@ -349,7 +360,7 @@ export default function ProfilePage() {
         user={user}
         fullName={fullName}
         enrolledCoursesCount={enrolledCoursesCount}
-        onEditAccount={handleOpenEditAccount}
+        onEditAccount={handleOpenEditAccountModal}
         onDeleteAccount={() => setShowDeleteModal(true)}
       />
 
@@ -381,9 +392,9 @@ export default function ProfilePage() {
 
       <ForgotPasswordModal
         show={showForgotPasswordModal}
-        userEmail={user?.email}
+        userEmail={user?.email || ""}
         sendingOtp={sendingOtp}
-        onConfirm={handleForgotPassword}
+        onConfirm={handleSendPasswordResetOTP}
         onCancel={() => setShowForgotPasswordModal(false)}
       />
 

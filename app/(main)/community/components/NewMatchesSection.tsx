@@ -5,6 +5,7 @@ import UserCard from "./UserCard";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { ROUTES } from "@/lib/routes";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/providers/auth-provider";
 import type { MatchScore } from "@/lib/utils/matching";
 
 interface NewMatchesSectionProps {
@@ -18,6 +19,7 @@ export default function NewMatchesSection({
 }: NewMatchesSectionProps) {
   const supabase = supabaseBrowser();
   const router = useRouter();
+  const { user } = useAuth(); // ✅ Use shared state
   const [matchingUserId, setMatchingUserId] = useState<string | null>(null);
 
   const handleMatch = async (targetUser: MatchScore["user"], courseId?: string) => {
@@ -33,12 +35,11 @@ export default function NewMatchesSection({
 
       if (!matchingCourseId && targetUser.courses && targetUser.courses.length > 0) {
         // Lấy khóa học chung đầu tiên
-        const { data: currentUser } = await supabase.auth.getUser();
-        if (currentUser.user) {
+        if (user) {
           const { data: currentUserCourses } = await supabase
             .from("user_courses")
             .select("course_id")
-            .eq("user_id", currentUser.user.id);
+            .eq("user_id", user.id);
 
           const currentUserCourseIds = new Set(
             currentUserCourses?.map((uc) => uc.course_id) || []

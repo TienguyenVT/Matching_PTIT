@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { supabaseBrowser } from "@/lib/supabase/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES } from "@/lib/routes";
+import { useAuth } from "@/providers/auth-provider";
 import PublicProfileView from "./components/PublicProfileView";
 import LearningProgressSection from "./components/LearningProgressSection";
 import PrivacyToggle from "./components/PrivacyToggle";
@@ -28,11 +29,11 @@ type EnrolledCourse = {
   progressPercent: number; // MVP placeholder
 };
 
-export default function StudyProfilePage() {
+function StudyProfileContent() {
   const supabase = supabaseBrowser();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [currentUserId, setCurrentUserId] = useState<string>("");
+  const { user } = useAuth(); // ✅ Use shared state
   const [viewingUserId, setViewingUserId] = useState<string>("");
   const [profile, setProfile] = useState<PublicProfile | null>(null);
   const [courses, setCourses] = useState<EnrolledCourse[]>([]);
@@ -41,14 +42,11 @@ export default function StudyProfilePage() {
 
   useEffect(() => {
     const load = async () => {
-      // Get current authenticated user
-      const { data: userRes } = await supabase.auth.getUser();
-      const user = userRes?.user;
+      // Check authenticated user from shared state
       if (!user) {
         router.replace(ROUTES.LOGIN);
         return;
       }
-      setCurrentUserId(user.id);
 
       // Get userId from query param, default to current user
       const userIdParam = searchParams.get("userId");
@@ -57,11 +55,20 @@ export default function StudyProfilePage() {
 
       const isViewingOwnProfile = targetUserId === user.id;
 
-      // Load profile data (including show_learning_progress)
+      // Load current user's role to filter access
+      const { data: currentUserProfile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+      
+      const currentUserRole = currentUserProfile?.role || 'user';
+
+      // Load profile data (including show_learning_progress and role)
       // Try to load with show_learning_progress first, fallback if column doesn't exist
       let { data: p, error: profileError } = await supabase
         .from("profiles")
-        .select("id, username, full_name, email, avatar_url, created_at, show_learning_progress")
+        .select("id, username, full_name, email, avatar_url, created_at, show_learning_progress, role")
         .eq("id", targetUserId)
         .single();
 
@@ -70,20 +77,28 @@ export default function StudyProfilePage() {
         console.warn("[StudyProfilePage] Column show_learning_progress does not exist. Please run migration. Falling back...");
         const retryResult = await supabase
           .from("profiles")
-          .select("id, username, full_name, email, avatar_url, created_at")
+          .select("id, username, full_name, email, avatar_url, created_at, role")
           .eq("id", targetUserId)
           .single();
-        p = retryResult.data;
         profileError = retryResult.error;
         // Set default to false since column doesn't exist
-        if (p) {
-          (p as any).show_learning_progress = false;
+        if (retryResult.data) {
+          p = { ...retryResult.data, show_learning_progress: false } as any;
         }
       }
 
       if (profileError || !p) {
         console.error("[StudyProfilePage] Error loading profile:", profileError);
         alert("Không tìm thấy hồ sơ người dùng.");
+        router.replace(ROUTES.STUDY_PROFILE);
+        return;
+      }
+
+      // Check if target user has same role (users can't view admin profiles and vice versa)
+      const targetUserRole = (p as any).role || 'user';
+      if (!isViewingOwnProfile && targetUserRole !== currentUserRole) {
+        console.log("[StudyProfilePage] Access denied: different roles");
+        alert("Bạn không có quyền xem hồ sơ này.");
         router.replace(ROUTES.STUDY_PROFILE);
         return;
       }
@@ -115,14 +130,16 @@ export default function StudyProfilePage() {
       setLoading(false);
     };
     load();
-  }, [supabase, router, searchParams]);
+  }, [supabase, router, searchParams, user]);
 
   const handlePrivacyToggleChange = async (newValue: boolean) => {
     try {
+      if (!user) return;
+      
       const { error } = await supabase
         .from("profiles")
         .update({ show_learning_progress: newValue })
-        .eq("id", currentUserId);
+        .eq("id", user.id);
 
       if (error) {
         // Check if column doesn't exist
@@ -154,7 +171,7 @@ export default function StudyProfilePage() {
     );
   }
 
-  const isViewingOwnProfile = currentUserId === viewingUserId;
+  const isViewingOwnProfile = user?.id === viewingUserId;
   const shouldShowProgress = isViewingOwnProfile || showLearningProgress;
 
   return (
@@ -195,4 +212,14 @@ export default function StudyProfilePage() {
   );
 }
 
-
+export default function StudyProfilePage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center h-full p-8">
+        <p className="text-gray-500">Đang tải hồ sơ...</p>
+      </div>
+    }>
+      <StudyProfileContent />
+    </Suspense>
+  );
+}

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabaseBrowser } from '@/lib/supabase/client';
+import { useAuth } from '@/providers/auth-provider';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
 
@@ -53,6 +54,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   const courseId = params.courseId;
   console.log('[DetailPage] courseId from params:', courseId);
   const supabase = supabaseBrowser();
+  const { user } = useAuth(); // ✅ Use shared auth state
 
   const [course, setCourse] = useState<Course | null>(null);
   const [modules, setModules] = useState<CourseModule[]>([]);
@@ -70,10 +72,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     const load = async () => {
       console.log('[DetailPage] Starting load, courseId:', courseId);
 
-      const { data: { user }, error: authError } = await supabase.auth.getUser();
-      if (authError) {
-        console.error('[DetailPage] Auth error:', authError);
-      }
+      // ✅ Use user from shared state instead of duplicate API call
       if (!user) {
         console.log('[DetailPage] No user found, redirecting to login');
         router.replace(ROUTES.LOGIN);
@@ -157,7 +156,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
       setLoading(false);
     };
     load();
-  }, [courseId, router, supabase]);
+  }, [courseId, router, supabase, user]); // ✅ Add user to dependencies
 
   // Load content details khi selectedContent thay đổi
   const loadContentDetails = async (contentId: string, kind: 'video' | 'doc' | 'quiz') => {

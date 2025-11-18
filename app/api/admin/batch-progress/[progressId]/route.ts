@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { requireAdminAPI } from '@/lib/auth-helpers.server';
 import { getProgress } from '@/lib/services/batch-progress';
 
 /**
@@ -10,6 +11,12 @@ export async function GET(
   { params }: { params: Promise<{ progressId: string }> | { progressId: string } }
 ) {
   try {
+    // Kiểm tra quyền admin
+    const { user, response } = await requireAdminAPI(req);
+    if (response) {
+      return response; // Trả về error nếu không có quyền
+    }
+
     // Handle both sync and async params (Next.js 14/15 compatibility)
     const resolvedParams = params instanceof Promise ? await params : params;
     const { progressId } = resolvedParams;
