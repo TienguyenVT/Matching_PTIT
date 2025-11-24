@@ -11,7 +11,6 @@ export function middleware(request: NextRequest) {
         'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
         'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
         'Access-Control-Max-Age': '86400', // Cache preflight for 24 hours
-        'Access-Control-Allow-Credentials': 'true',
       },
     });
   }
@@ -21,7 +20,6 @@ export function middleware(request: NextRequest) {
     const response = NextResponse.next();
     
     response.headers.set('Access-Control-Allow-Origin', '*');
-    response.headers.set('Access-Control-Allow-Credentials', 'true');
     response.headers.set('Access-Control-Max-Age', '86400');
     
     // Add cache headers for GET requests

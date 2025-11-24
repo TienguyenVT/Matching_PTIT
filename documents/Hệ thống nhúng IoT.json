@@ -1,0 +1,391 @@
+{
+  "document_title": "Hệ thống nhúng IoT",
+  "structure_type": "Chương/Mục",
+  "data": [
+    {
+      "level_1_title": "CHƯƠNG 1. TỔNG QUAN VỀ HỆ THỐNG NHÚNG VÀ IOT",
+      "level_1_id": "1",
+      "children": [
+        {
+          "level_2_title": "1.1. Khái niệm và đặc điểm hệ thống nhúng",
+          "level_2_id": "1.1",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "1.1.1. Hệ thống nhúng là gì?",
+              "level_3_id": "1.1.1",
+              "content": "Hệ thống nhúng (Embedded system) là một thuật ngữ chỉ một hệ thống có khả năng tự chủ được nhúng vào trong một hệ thống mẹ (lớn hơn). Đó là các hệ thống tích hợp cả phần cứng và phần mềm phục vụ các bài toán chuyên dụng trong nhiều lĩnh vực công nghiệp, tự động hoá điều khiển, quan trắc môi trường, truyền tin... Đặc điểm của các hệ thống nhúng là hoạt động ổn định và có tính năng tự động hoá cao.\n\nHệ thống nhúng được thiết kế để thực hiện một số nhiệm vụ chuyên biệt, chứ không phải là đóng vai trò là một hệ thống máy tính đa chức năng. Một số hệ thống đòi hỏi ràng buộc về tính hoạt động thời gian thực để đảm bảo độ an toàn và tính ứng dụng; một số hệ thống khác lại đòi hỏi ràng buộc về tính năng lượng và giá thành; một số khác lại đòi hỏi ràng buộc về điều kiện hoạt động khắc nghiệt…\n\nHệ thống nhúng thường bao gồm một bộ vi xử lý hoặc vi điều khiển, bộ nhớ, các thiết bị ngoại vi đầu vào/đầu ra và phần mềm điều khiển được lập trình để thực hiện các chức năng cụ thể. Phần mềm này thường được lưu trữ trong bộ nhớ chỉ đọc (ROM) hoặc bộ nhớ flash để đảm bảo tính ổn định và độ tin cậy."
+            },
+            {
+              "level_3_title": "1.1.2. Lịch sử phát triển",
+              "level_3_id": "1.1.2",
+              "content": "Hệ thống nhúng đầu tiên là Apollo Guidance Computer, được phát triển bởi Charles Stark Draper tại phòng thí nghiệm MIT Instrumentation Laboratory. Apollo Guidance Computer là máy tính dẫn đường trên tàu Apollo. Mỗi chuyến bay lên mặt trăng đều có hai hệ thống máy tính dẫn đường (một ở module điều khiển, một ở module thám hiểm mặt trăng). Tại thời điểm đó, AGC (Apollo Guidance Computer) được xem là hệ thống sử dụng các mạch tích hợp nguyên khối, một dạng sơ khai của vi mạch ngày nay.\n\nHệ thống nhúng được sản xuất hàng loạt đầu tiên là máy tính dẫn đường cho tên lửa quân sự Autonetics D-17 vào năm 1961. Vào năm 1966, D-17 đã được thay thế bằng loại máy tính mới hơn, đó là chiếc hình thành việc sử dụng mạch tích hợp đầu tiên.\n\nTừ những ứng dụng đầu tiên đó, hệ thống nhúng đã có sự phát triển vượt bậc với giá thành giảm mạnh, năng lực xử lý và độ phong phú của các chủng loại sản phẩm ngày càng gia tăng. Hệ thống nhúng đóng vai trò quan trọng không thể thiếu trong thế giới hiện đại.\n\nNgày nay, hệ thống nhúng có mặt ở khắp mọi nơi, từ các thiết bị điện tử tiêu dùng như điện thoại thông minh, máy tính bảng, tivi thông minh, đến các thiết bị gia dụng như máy giặt, tủ lạnh, lò vi sóng, và các hệ thống công nghiệp, ô tô, y tế, v.v. Sự phát triển của công nghệ vi xử lý, bộ nhớ, cảm biến và kết nối không dây đã thúc đẩy sự phát triển mạnh mẽ của hệ thống nhúng, cho phép tạo ra các thiết bị thông minh hơn, kết nối hơn và hiệu quả hơn."
+            },
+            {
+              "level_3_title": "1.1.3. Đặc điểm của hệ thống nhúng",
+              "level_3_id": "1.1.3",
+              "content": "Hệ thống nhúng được thiết kế để thực hiện một chức năng chuyên biệt nào đó. Đây là điểm khác biệt cơ bản so với các hệ thống máy tính đa dụng. Các hệ thống nhúng thường chỉ thực hiện một hoặc một vài chức năng được xác định trước, ví dụ như điều khiển động cơ, thu thập dữ liệu từ cảm biến, xử lý tín hiệu âm thanh, hình ảnh...\n\nKhả năng tự hành: các hệ thống nhúng có khả năng hoạt động độc lập mà không cần sự can thiệp thường xuyên của con người. Chúng có thể tự động thu thập thông tin từ môi trường xung quanh, xử lý thông tin và đưa ra các quyết định điều khiển phù hợp.\n\nCác ràng buộc về tài nguyên: các hệ thống nhúng thường có các ràng buộc chặt chẽ về tài nguyên như năng lượng, bộ nhớ, tốc độ xử lý, kích thước, trọng lượng, giá thành... Do đó, việc thiết kế và phát triển hệ thống nhúng đòi hỏi phải tối ưu hóa việc sử dụng tài nguyên để đảm bảo hiệu năng và độ tin cậy của hệ thống.\n\nTương tác với môi trường thực: các hệ thống nhúng thường tương tác trực tiếp với môi trường thực thông qua các cảm biến và cơ cấu chấp hành. Chúng thu thập thông tin về các đại lượng vật lý như nhiệt độ, độ ẩm, ánh sáng, âm thanh, chuyển động... và tác động lên môi trường thông qua các cơ cấu chấp hành như động cơ, van, đèn báo, màn hình hiển thị...\n\nTính thời gian thực: nhiều hệ thống nhúng đòi hỏi phải hoạt động trong thời gian thực, nghĩa là phải phản ứng lại các sự kiện bên ngoài trong một khoảng thời gian xác định. Nếu hệ thống không phản ứng kịp thời, có thể dẫn đến hậu quả nghiêm trọng.\n\nĐộ tin cậy và tính ổn định: các hệ thống nhúng thường được sử dụng trong các ứng dụng quan trọng, đòi hỏi độ tin cậy và tính ổn định cao. Chúng phải hoạt động liên tục trong thời gian dài mà không gặp lỗi."
+            },
+            {
+              "level_3_title": "1.1.4. Phân loại hệ thống nhúng",
+              "level_3_id": "1.1.4",
+              "content": "Hệ thống nhúng có thể được phân loại theo nhiều tiêu chí khác nhau, ví dụ như:\n\n- Theo chức năng: hệ thống điều khiển, hệ thống giám sát, hệ thống truyền thông, hệ thống xử lý tín hiệu, hệ thống giải trí...\n\n- Theo kiến trúc: hệ thống dựa trên vi xử lý, hệ thống dựa trên vi điều khiển, hệ thống dựa trên DSP, hệ thống dựa trên FPGA...\n\n- Theo yêu cầu thời gian thực: hệ thống thời gian thực cứng, hệ thống thời gian thực mềm.\n\n- Theo kích thước và độ phức tạp: hệ thống nhúng nhỏ, hệ thống nhúng trung bình, hệ thống nhúng lớn."
+            },
+            {
+              "level_3_title": "1.1.5. Ứng dụng của hệ thống nhúng",
+              "level_3_id": "1.1.5",
+              "content": "Hệ thống nhúng có rất nhiều ứng dụng trong thực tế, ví dụ như:\n\n- Điện tử tiêu dùng: điện thoại thông minh, máy tính bảng, tivi thông minh, máy ảnh số, máy nghe nhạc, thiết bị chơi game...\n\n- Thiết bị gia dụng: máy giặt, tủ lạnh, lò vi sóng, điều hòa nhiệt độ, robot hút bụi...\n\n- Công nghiệp: hệ thống điều khiển dây chuyền sản xuất, robot công nghiệp, hệ thống giám sát môi trường, hệ thống quản lý năng lượng...\n\n- Ô tô: hệ thống điều khiển động cơ, hệ thống phanh ABS, hệ thống túi khí, hệ thống định vị GPS, hệ thống giải trí trên ô tô...\n\n- Y tế: máy tạo nhịp tim, máy đo huyết áp, máy chụp cắt lớp, máy siêu âm, thiết bị theo dõi sức khỏe...\n\n- Truyền thông: bộ định tuyến, modem, điện thoại di động, trạm phát sóng, vệ tinh...\n\n- Quân sự: hệ thống dẫn đường tên lửa, máy bay không người lái, hệ thống radar, thiết bị liên lạc quân sự..."
+            }
+          ]
+        },
+        {
+          "level_2_title": "1.2. Kiến trúc tổng quát của hệ thống nhúng",
+          "level_2_id": "1.2",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "1.2.1. Phần cứng",
+              "level_3_id": "1.2.1",
+              "content": "Phần cứng của một hệ thống nhúng thường bao gồm các thành phần sau:\n\n- Bộ vi xử lý hoặc vi điều khiển (CPU/MCU): là bộ não của hệ thống, chịu trách nhiệm thực hiện các lệnh và điều khiển các hoạt động của hệ thống.\n\n- Bộ nhớ: bao gồm bộ nhớ chỉ đọc (ROM) để lưu trữ chương trình và dữ liệu cố định, và bộ nhớ truy cập ngẫu nhiên (RAM) để lưu trữ dữ liệu tạm thời trong quá trình hoạt động.\n\n- Các thiết bị ngoại vi đầu vào/đầu ra (I/O): cho phép hệ thống tương tác với môi trường bên ngoài, ví dụ như cảm biến, cơ cấu chấp hành, màn hình hiển thị, bàn phím, cổng giao tiếp...\n\n- Bus hệ thống: là đường truyền dữ liệu giữa các thành phần của hệ thống.\n\n- Nguồn cung cấp: cung cấp năng lượng cho hệ thống hoạt động."
+            },
+            {
+              "level_3_title": "1.2.2. Phần mềm",
+              "level_3_id": "1.2.2",
+              "content": "Phần mềm của một hệ thống nhúng thường bao gồm các thành phần sau:\n\n- Hệ điều hành (Operating System - OS): là phần mềm nền tảng quản lý tài nguyên phần cứng và cung cấp các dịch vụ cho các ứng dụng chạy trên hệ thống. Hệ điều hành nhúng thường được tối ưu hóa cho các yêu cầu cụ thể của hệ thống, ví dụ như kích thước nhỏ gọn, tốc độ xử lý nhanh, khả năng hoạt động thời gian thực...\n\n- Trình điều khiển thiết bị (Device Driver): là phần mềm trung gian giúp hệ điều hành và các ứng dụng giao tiếp với các thiết bị phần cứng.\n\n- Phần mềm ứng dụng (Application Software): là phần mềm thực hiện các chức năng cụ thể của hệ thống nhúng, ví dụ như điều khiển động cơ, thu thập dữ liệu từ cảm biến, xử lý tín hiệu, giao tiếp với người dùng..."
+            },
+            {
+              "level_3_title": "1.2.3. Công cụ phát triển",
+              "level_3_id": "1.2.3",
+              "content": "Để phát triển một hệ thống nhúng, cần sử dụng các công cụ hỗ trợ như:\n\n- Trình biên dịch (Compiler): chuyển đổi mã nguồn chương trình sang mã máy có thể thực thi trên vi xử lý/vi điều khiển.\n\n- Trình gỡ lỗi (Debugger): giúp phát hiện và sửa lỗi trong chương trình.\n\n- Môi trường phát triển tích hợp (Integrated Development Environment - IDE): cung cấp một giao diện thống nhất để viết mã, biên dịch, gỡ lỗi và nạp chương trình vào hệ thống nhúng.\n\n- Các công cụ mô phỏng và kiểm thử: giúp mô phỏng hoạt động của hệ thống và kiểm thử chương trình trước khi nạp vào phần cứng thực tế."
+            }
+          ]
+        },
+        {
+          "level_2_title": "1.3. Khái niệm về Internet of Things (IoT)",
+          "level_2_id": "1.3",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "1.3.1. IoT là gì?",
+              "level_3_id": "1.3.1",
+              "content": "Internet of Things (IoT), hay còn gọi là Vạn vật kết nối, là một mạng lưới các thiết bị vật lý, phương tiện, thiết bị gia dụng và các mục khác được nhúng với các thiết bị điện tử, phần mềm, cảm biến, cơ cấu chấp hành và khả năng kết nối cho phép các đối tượng này kết nối và trao đổi dữ liệu.\n\nIoT cho phép các đối tượng được cảm nhận hoặc điều khiển từ xa thông qua cơ sở hạ tầng mạng hiện có, tạo cơ hội cho sự tích hợp trực tiếp hơn của thế giới vật lý vào các hệ thống dựa trên máy tính, và dẫn đến cải thiện hiệu quả, độ chính xác và lợi ích kinh tế bên cạnh việc giảm sự can thiệp của con người.\n\nIoT là một khái niệm rộng, bao gồm nhiều công nghệ và ứng dụng khác nhau. Các thiết bị IoT có thể là các thiết bị đơn giản như cảm biến nhiệt độ, hoặc các thiết bị phức tạp như xe tự lái, robot công nghiệp. Chúng có thể được kết nối với nhau thông qua các công nghệ không dây như Wi-Fi, Bluetooth, Zigbee, LoRa, NB-IoT... hoặc các công nghệ có dây như Ethernet.\n\nDữ liệu thu thập từ các thiết bị IoT có thể được xử lý cục bộ hoặc gửi lên đám mây để lưu trữ và phân tích. Thông tin thu được từ việc phân tích dữ liệu có thể được sử dụng để đưa ra các quyết định điều khiển, tối ưu hóa hoạt động của hệ thống, hoặc cung cấp các dịch vụ giá trị gia tăng cho người dùng."
+            },
+            {
+              "level_3_title": "1.3.2. Kiến trúc của hệ thống IoT",
+              "level_3_id": "1.3.2",
+              "content": "Kiến trúc của một hệ thống IoT thường được chia thành các tầng sau:\n\n- Tầng thiết bị (Device Layer): bao gồm các thiết bị vật lý được nhúng với các cảm biến, cơ cấu chấp hành và khả năng kết nối. Các thiết bị này chịu trách nhiệm thu thập dữ liệu từ môi trường và thực hiện các tác động lên môi trường.\n\n- Tầng mạng (Network Layer): chịu trách nhiệm kết nối các thiết bị IoT với nhau và với các hệ thống khác. Tầng này sử dụng các công nghệ truyền thông như Wi-Fi, Bluetooth, Zigbee, LoRa, NB-IoT, Ethernet... để truyền tải dữ liệu.\n\n- Tầng nền tảng (Platform Layer): cung cấp các dịch vụ cơ bản cho việc quản lý thiết bị, thu thập dữ liệu, xử lý dữ liệu, lưu trữ dữ liệu và phát triển ứng dụng. Các nền tảng IoT thường được triển khai trên đám mây hoặc tại biên mạng.\n\n- Tầng ứng dụng (Application Layer): bao gồm các ứng dụng cụ thể sử dụng dữ liệu từ các thiết bị IoT để cung cấp các dịch vụ giá trị gia tăng cho người dùng. Các ứng dụng này có thể thuộc nhiều lĩnh vực khác nhau như nhà thông minh, thành phố thông minh, y tế thông minh, nông nghiệp thông minh, công nghiệp thông minh..."
+            },
+            {
+              "level_3_title": "1.3.3. Các công nghệ chủ chốt trong IoT",
+              "level_3_id": "1.3.3",
+              "content": "Sự phát triển của IoT dựa trên nhiều công nghệ chủ chốt, bao gồm:\n\n- Công nghệ cảm biến: cho phép các thiết bị IoT thu thập thông tin về môi trường xung quanh, ví dụ như nhiệt độ, độ ẩm, ánh sáng, âm thanh, chuyển động, vị trí...\n\n- Công nghệ kết nối: cho phép các thiết bị IoT kết nối với nhau và với các hệ thống khác để trao đổi dữ liệu. Các công nghệ kết nối phổ biến bao gồm Wi-Fi, Bluetooth, Zigbee, LoRa, NB-IoT, 5G...\n\n- Công nghệ điện toán đám mây và điện toán biên: cung cấp khả năng lưu trữ và xử lý dữ liệu lớn từ các thiết bị IoT. Điện toán biên cho phép xử lý dữ liệu tại chỗ, giảm độ trễ và băng thông mạng, trong khi điện toán đám mây cung cấp khả năng lưu trữ và xử lý dữ liệu tập trung.\n\n- Công nghệ trí tuệ nhân tạo (AI) và học máy (Machine Learning): cho phép phân tích dữ liệu từ các thiết bị IoT để đưa ra các quyết định thông minh, dự đoán các sự kiện trong tương lai và tối ưu hóa hoạt động của hệ thống.\n\n- Công nghệ bảo mật: đảm bảo an toàn cho dữ liệu và các thiết bị IoT. Các giải pháp bảo mật bao gồm mã hóa dữ liệu, xác thực người dùng, kiểm soát truy cập, phát hiện và ngăn chặn xâm nhập..."
+            },
+            {
+              "level_3_title": "1.3.4. Ứng dụng của IoT",
+              "level_3_id": "1.3.4",
+              "content": "IoT có rất nhiều ứng dụng trong thực tế, ví dụ như:\n\n- Nhà thông minh (Smart Home): điều khiển các thiết bị điện trong nhà từ xa, tự động hóa các hoạt động trong nhà, giám sát an ninh, tiết kiệm năng lượng...\n\n- Thành phố thông minh (Smart City): quản lý giao thông, quản lý năng lượng, quản lý chất thải, giám sát môi trường, an toàn công cộng...\n\n- Y tế thông minh (Smart Healthcare): theo dõi sức khỏe bệnh nhân từ xa, quản lý thiết bị y tế, hỗ trợ chẩn đoán và điều trị bệnh...\n\n- Nông nghiệp thông minh (Smart Agriculture): giám sát điều kiện môi trường, tự động hóa việc tưới tiêu và bón phân, theo dõi sức khỏe cây trồng và vật nuôi, tối ưu hóa năng suất...\n\n- Công nghiệp thông minh (Industrial IoT - IIoT): tự động hóa dây chuyền sản xuất, giám sát tình trạng máy móc, dự báo bảo trì, tối ưu hóa quy trình sản xuất, quản lý chuỗi cung ứng..."
+            },
+            {
+              "level_3_title": "1.3.5. Thách thức của IoT",
+              "level_3_id": "1.3.5",
+              "content": "Mặc dù có nhiều tiềm năng, IoT cũng đối mặt với nhiều thách thức, bao gồm:\n\n- Bảo mật và quyền riêng tư: dữ liệu thu thập từ các thiết bị IoT có thể chứa thông tin nhạy cảm, do đó việc đảm bảo an toàn cho dữ liệu và quyền riêng tư của người dùng là một thách thức lớn.\n\n- Tiêu chuẩn hóa: sự thiếu thống nhất về các tiêu chuẩn giao tiếp và kết nối giữa các thiết bị IoT gây khó khăn cho việc tích hợp và tương tác giữa các hệ thống khác nhau.\n\n- Quản lý năng lượng: nhiều thiết bị IoT hoạt động bằng pin, do đó việc tối ưu hóa tiêu thụ năng lượng để kéo dài tuổi thọ pin là một vấn đề quan trọng.\n\n- Chi phí: chi phí triển khai và duy trì hệ thống IoT có thể cao, đặc biệt là đối với các hệ thống quy mô lớn.\n\n- Độ phức tạp: việc thiết kế, phát triển và quản lý các hệ thống IoT đòi hỏi kiến thức và kỹ năng chuyên môn cao."
+            }
+          ]
+        },
+        {
+          "level_2_title": "1.4. Mối quan hệ giữa hệ thống nhúng và IoT",
+          "level_2_id": "1.4",
+          "content": "Hệ thống nhúng là nền tảng của IoT. Hầu hết các thiết bị IoT đều là các hệ thống nhúng được trang bị thêm khả năng kết nối mạng. Các hệ thống nhúng cung cấp khả năng thu thập dữ liệu, xử lý dữ liệu và điều khiển các thiết bị vật lý, trong khi IoT cung cấp khả năng kết nối và chia sẻ dữ liệu giữa các thiết bị này.\n\nSự kết hợp giữa hệ thống nhúng và IoT đã tạo ra một cuộc cách mạng trong nhiều lĩnh vực, cho phép tạo ra các hệ thống thông minh hơn, kết nối hơn và hiệu quả hơn. Ví dụ, trong một hệ thống nhà thông minh, các thiết bị như cảm biến nhiệt độ, công tắc đèn, rèm cửa... đều là các hệ thống nhúng. Thông qua kết nối IoT, các thiết bị này có thể giao tiếp với nhau và với người dùng, cho phép tự động hóa các hoạt động trong nhà và điều khiển từ xa.\n\nSự phát triển của IoT cũng đặt ra những yêu cầu mới cho thiết kế hệ thống nhúng, ví dụ như yêu cầu về kết nối không dây, bảo mật dữ liệu, quản lý năng lượng hiệu quả, khả năng cập nhật phần mềm từ xa... Các nhà thiết kế hệ thống nhúng cần phải nắm vững các kiến thức về IoT để có thể phát triển các sản phẩm đáp ứng được nhu cầu của thị trường."
+        },
+        {
+          "level_2_title": "1.5. Câu hỏi và bài tập",
+          "level_2_id": "1.5",
+          "content": "1. Trình bày khái niệm và đặc điểm của hệ thống nhúng.\n\n2. So sánh hệ thống nhúng với hệ thống máy tính đa dụng.\n\n3. Trình bày kiến trúc tổng quát của một hệ thống nhúng.\n\n4. Trình bày khái niệm về IoT và kiến trúc của một hệ thống IoT.\n\n5. Trình bày mối quan hệ giữa hệ thống nhúng và IoT.\n\n6. Tìm hiểu và trình bày về một số ứng dụng thực tế của hệ thống nhúng và IoT."
+        }
+      ]
+    },
+    {
+      "level_1_title": "CHƯƠNG 2. PHẦN CỨNG CHO HỆ THỐNG NHÚNG IOT",
+      "level_1_id": "2",
+      "children": [
+        {
+          "level_2_title": "2.1. Vi xử lý và vi điều khiển",
+          "level_2_id": "2.1",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "2.1.1. Khái niệm vi xử lý và vi điều khiển",
+              "level_3_id": "2.1.1",
+              "content": "Vi xử lý (Microprocessor - µP) là một linh kiện điện tử tích hợp trên một vi mạch đơn, có khả năng thực hiện các phép toán số học, logic và điều khiển theo một chương trình được lưu trữ trong bộ nhớ. Vi xử lý thường được sử dụng trong các máy tính đa dụng, nơi cần có khả năng xử lý mạnh mẽ và linh hoạt.\n\nVi điều khiển (Microcontroller - µC hoặc MCU) là một máy tính nhỏ được tích hợp trên một vi mạch đơn. Nó bao gồm một vi xử lý, bộ nhớ (RAM, ROM, EEPROM...), và các thiết bị ngoại vi đầu vào/đầu ra (I/O) có thể lập trình được. Vi điều khiển được thiết kế để sử dụng trong các hệ thống nhúng, nơi cần có sự tích hợp cao, tiêu thụ năng lượng thấp và chi phí thấp."
+            },
+            {
+              "level_3_title": "2.1.2. So sánh vi xử lý và vi điều khiển",
+              "level_3_id": "2.1.2",
+              "content": "Dưới đây là bảng so sánh một số đặc điểm chính giữa vi xử lý và vi điều khiển:\n\n- Cấu trúc: Vi xử lý thường chỉ chứa CPU, trong khi vi điều khiển tích hợp cả CPU, bộ nhớ và các thiết bị ngoại vi trên cùng một chip.\n\n- Ứng dụng: Vi xử lý thường được sử dụng trong các máy tính đa dụng, trong khi vi điều khiển thường được sử dụng trong các hệ thống nhúng.\n\n- Hiệu năng: Vi xử lý thường có hiệu năng cao hơn, tốc độ xử lý nhanh hơn và khả năng tính toán mạnh mẽ hơn so với vi điều khiển.\n\n- Tiêu thụ năng lượng: Vi điều khiển thường tiêu thụ năng lượng thấp hơn so với vi xử lý, đặc biệt là ở chế độ chờ.\n\n- Chi phí: Vi điều khiển thường có chi phí thấp hơn so với vi xử lý, do mức độ tích hợp cao và quy trình sản xuất đơn giản hơn.\n\n- Kích thước: Vi điều khiển thường có kích thước nhỏ gọn hơn so với vi xử lý.\n\n- Tính linh hoạt: Vi xử lý thường linh hoạt hơn, cho phép người dùng tùy chọn các thành phần phần cứng khác nhau, trong khi vi điều khiển thường có cấu hình cố định."
+            },
+            {
+              "level_3_title": "2.1.3. Các kiến trúc vi xử lý/vi điều khiển phổ biến",
+              "level_3_id": "2.1.3",
+              "content": "Có nhiều kiến trúc vi xử lý/vi điều khiển khác nhau được sử dụng trong các hệ thống nhúng, ví dụ như:\n\n- ARM: là kiến trúc vi xử lý phổ biến nhất hiện nay, được sử dụng rộng rãi trong các thiết bị di động, máy tính bảng, các thiết bị IoT... ARM có nhiều dòng vi xử lý khác nhau, từ các dòng Cortex-M cho các ứng dụng nhúng công suất thấp đến các dòng Cortex-A cho các ứng dụng hiệu năng cao.\n\n- AVR: là kiến trúc vi điều khiển 8-bit phổ biến của Atmel (nay thuộc Microchip Technology), được sử dụng rộng rãi trong các ứng dụng nhúng đơn giản, ví dụ như các dự án Arduino.\n\n- PIC: là kiến trúc vi điều khiển phổ biến của Microchip Technology, có nhiều dòng vi điều khiển khác nhau, từ các dòng 8-bit, 16-bit đến 32-bit.\n\n- Intel x86: là kiến trúc vi xử lý được sử dụng phổ biến trong các máy tính cá nhân, nhưng cũng được sử dụng trong một số hệ thống nhúng đòi hỏi hiệu năng cao.\n\n- RISC-V: là một kiến trúc tập lệnh mở (open source instruction set architecture - ISA) đang ngày càng trở nên phổ biến, đặc biệt là trong các ứng dụng IoT, do tính linh hoạt và chi phí thấp."
+            },
+            {
+              "level_3_title": "2.1.4. Lựa chọn vi xử lý/vi điều khiển cho hệ thống nhúng IoT",
+              "level_3_id": "2.1.4",
+              "content": "Việc lựa chọn vi xử lý/vi điều khiển cho hệ thống nhúng IoT phụ thuộc vào nhiều yếu tố, ví dụ như:\n\n- Yêu cầu về hiệu năng: tốc độ xử lý, khả năng tính toán, bộ nhớ...\n\n- Yêu cầu về năng lượng: mức tiêu thụ năng lượng, các chế độ tiết kiệm năng lượng...\n\n- Yêu cầu về kết nối: các chuẩn giao tiếp được hỗ trợ (Wi-Fi, Bluetooth, Zigbee...).\n\n- Yêu cầu về bảo mật: các tính năng bảo mật được tích hợp sẵn (mã hóa, xác thực...).\n\n- Yêu cầu về giá thành: chi phí của vi xử lý/vi điều khiển và các thành phần liên quan.\n\n- Hệ sinh thái phát triển: sự sẵn có của các công cụ phát triển, tài liệu kỹ thuật, cộng đồng hỗ trợ..."
+            }
+          ]
+        },
+        {
+          "level_2_title": "2.2. Bộ nhớ trong hệ thống nhúng",
+          "level_2_id": "2.2",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "2.2.1. Phân loại bộ nhớ",
+              "level_3_id": "2.2.1",
+              "content": "Bộ nhớ trong hệ thống nhúng thường được chia thành hai loại chính:\n\n- Bộ nhớ chỉ đọc (Read-Only Memory - ROM): được sử dụng để lưu trữ chương trình và dữ liệu cố định. Dữ liệu trong ROM không bị mất đi khi mất nguồn. Các loại ROM phổ biến bao gồm Mask ROM, PROM, EPROM, EEPROM, Flash Memory.\n\n- Bộ nhớ truy cập ngẫu nhiên (Random Access Memory - RAM): được sử dụng để lưu trữ dữ liệu tạm thời trong quá trình hoạt động của hệ thống. Dữ liệu trong RAM sẽ bị mất đi khi mất nguồn. Các loại RAM phổ biến bao gồm SRAM (Static RAM) và DRAM (Dynamic RAM)."
+            },
+            {
+              "level_3_title": "2.2.2. Vai trò của bộ nhớ trong hệ thống nhúng",
+              "level_3_id": "2.2.2",
+              "content": "Bộ nhớ đóng vai trò quan trọng trong hệ thống nhúng:\n\n- Lưu trữ chương trình: Chương trình điều khiển hệ thống nhúng được lưu trữ trong ROM (thường là Flash Memory). Khi hệ thống khởi động, chương trình sẽ được nạp vào RAM (nếu cần) và thực thi bởi vi xử lý/vi điều khiển.\n\n- Lưu trữ dữ liệu: Dữ liệu tạm thời trong quá trình hoạt động của hệ thống được lưu trữ trong RAM. Dữ liệu cố định hoặc dữ liệu cấu hình được lưu trữ trong ROM hoặc EEPROM.\n\n- Thực thi chương trình: Vi xử lý/vi điều khiển đọc các lệnh từ bộ nhớ (ROM hoặc RAM) và thực thi chúng để điều khiển hoạt động của hệ thống."
+            },
+            {
+              "level_3_title": "2.2.3. Các loại bộ nhớ thường dùng trong hệ thống nhúng IoT",
+              "level_3_id": "2.2.3",
+              "content": "Các loại bộ nhớ thường dùng trong hệ thống nhúng IoT bao gồm:\n\n- Flash Memory: là loại bộ nhớ không bay hơi (non-volatile memory) phổ biến nhất hiện nay, được sử dụng để lưu trữ chương trình và dữ liệu cố định. Flash Memory có ưu điểm là có thể ghi/xóa nhiều lần, tốc độ truy cập tương đối nhanh và giá thành hợp lý.\n\n- SRAM (Static RAM): là loại bộ nhớ truy cập ngẫu nhiên có tốc độ truy cập nhanh, tiêu thụ năng lượng thấp (ở chế độ chờ) và không cần làm tươi dữ liệu định kỳ. SRAM thường được sử dụng làm bộ nhớ cache hoặc bộ nhớ dữ liệu chính trong các hệ thống nhúng yêu cầu tốc độ cao.\n\n- DRAM (Dynamic RAM): là loại bộ nhớ truy cập ngẫu nhiên có mật độ tích hợp cao, giá thành thấp nhưng tốc độ truy cập chậm hơn SRAM và cần phải làm tươi dữ liệu định kỳ. DRAM thường được sử dụng làm bộ nhớ dữ liệu chính trong các hệ thống nhúng có yêu cầu về dung lượng bộ nhớ lớn.\n\n- EEPROM (Electrically Erasable Programmable Read-Only Memory): là loại bộ nhớ không bay hơi có thể ghi/xóa bằng điện từng byte một. EEPROM thường được sử dụng để lưu trữ các dữ liệu cấu hình hoặc các dữ liệu cần thay đổi ít lần trong quá trình hoạt động của hệ thống."
+            },
+            {
+              "level_3_title": "2.2.4. Tổ chức bộ nhớ trong hệ thống nhúng",
+              "level_3_id": "2.2.4",
+              "content": "Việc tổ chức bộ nhớ trong hệ thống nhúng ảnh hưởng đến hiệu năng và độ tin cậy của hệ thống. Các kiến trúc tổ chức bộ nhớ phổ biến bao gồm:\n\n- Kiến trúc Von Neumann: sử dụng một không gian địa chỉ duy nhất cho cả chương trình và dữ liệu. Vi xử lý/vi điều khiển truy cập chương trình và dữ liệu thông qua cùng một bus. Kiến trúc này đơn giản nhưng có thể bị giới hạn về băng thông bộ nhớ (hiện tượng \"nút cổ chai\" Von Neumann).\n\n- Kiến trúc Harvard: sử dụng hai không gian địa chỉ riêng biệt cho chương trình và dữ liệu. Vi xử lý/vi điều khiển truy cập chương trình và dữ liệu thông qua hai bus riêng biệt. Kiến trúc này cho phép truy cập đồng thời chương trình và dữ liệu, giúp cải thiện hiệu năng hệ thống.\n\n- Kiến trúc Harvard sửa đổi (Modified Harvard Architecture): là sự kết hợp giữa kiến trúc Von Neumann và kiến trúc Harvard. Nó cho phép truy cập dữ liệu từ không gian địa chỉ chương trình và ngược lại, giúp tăng tính linh hoạt cho hệ thống."
+            }
+          ]
+        },
+        {
+          "level_2_title": "2.3. Các chuẩn giao tiếp phổ biến trong hệ thống nhúng",
+          "level_2_id": "2.3",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "2.3.1. Giao tiếp nối tiếp (Serial Communication)",
+              "level_3_id": "2.3.1",
+              "content": "Giao tiếp nối tiếp là phương thức truyền dữ liệu từng bit một qua một kênh truyền duy nhất. Giao tiếp nối tiếp thường được sử dụng để truyền dữ liệu giữa các thiết bị ở khoảng cách xa hoặc giữa các thiết bị có tốc độ truyền dữ liệu thấp. Các chuẩn giao tiếp nối tiếp phổ biến bao gồm:\n\n- UART (Universal Asynchronous Receiver/Transmitter): là chuẩn giao tiếp nối tiếp không đồng bộ, được sử dụng rộng rãi trong các hệ thống nhúng để truyền dữ liệu giữa vi điều khiển và các thiết bị ngoại vi như máy tính, module Bluetooth, module GPS... UART sử dụng hai đường truyền: TX (Transmit) để truyền dữ liệu và RX (Receive) để nhận dữ liệu.\n\n- SPI (Serial Peripheral Interface): là chuẩn giao tiếp nối tiếp đồng bộ, hoạt động theo mô hình master-slave. SPI sử dụng bốn đường truyền: SCLK (Serial Clock) để đồng bộ hóa dữ liệu, MOSI (Master Out Slave In) để truyền dữ liệu từ master sang slave, MISO (Master In Slave Out) để truyền dữ liệu từ slave sang master và SS (Slave Select) để chọn thiết bị slave. SPI có tốc độ truyền dữ liệu cao, thường được sử dụng để giao tiếp giữa vi điều khiển và các thiết bị ngoại vi như cảm biến, bộ nhớ Flash, màn hình hiển thị...\n\n- I2C (Inter-Integrated Circuit): là chuẩn giao tiếp nối tiếp đồng bộ, hoạt động theo mô hình master-slave, sử dụng hai đường truyền: SDA (Serial Data) để truyền dữ liệu và SCL (Serial Clock) để đồng bộ hóa dữ liệu. I2C cho phép kết nối nhiều thiết bị master và slave trên cùng một bus. I2C có tốc độ truyền dữ liệu trung bình, thường được sử dụng để giao tiếp giữa vi điều khiển và các thiết bị ngoại vi như cảm biến, EEPROM, RTC (Real-Time Clock)..."
+            },
+            {
+              "level_3_title": "2.3.2. Giao tiếp song song (Parallel Communication)",
+              "level_3_id": "2.3.2",
+              "content": "Giao tiếp song song là phương thức truyền dữ liệu nhiều bit cùng một lúc qua nhiều kênh truyền. Giao tiếp song song thường có tốc độ truyền dữ liệu cao hơn giao tiếp nối tiếp, nhưng yêu cầu nhiều đường truyền hơn và khoảng cách truyền ngắn hơn. Các chuẩn giao tiếp song song phổ biến bao gồm:\n\n- Bus địa chỉ (Address Bus): được sử dụng để truyền địa chỉ của ô nhớ hoặc thiết bị ngoại vi cần truy cập.\n\n- Bus dữ liệu (Data Bus): được sử dụng để truyền dữ liệu giữa vi xử lý/vi điều khiển và bộ nhớ hoặc các thiết bị ngoại vi.\n\n- Bus điều khiển (Control Bus): được sử dụng để truyền các tín hiệu điều khiển hoạt động của hệ thống, ví dụ như tín hiệu đọc/ghi bộ nhớ, tín hiệu ngắt, tín hiệu reset..."
+            },
+            {
+              "level_3_title": "2.3.3. Giao tiếp không dây (Wireless Communication)",
+              "level_3_id": "2.3.3",
+              "content": "Giao tiếp không dây là phương thức truyền dữ liệu qua sóng vô tuyến. Giao tiếp không dây được sử dụng rộng rãi trong các hệ thống IoT để kết nối các thiết bị với nhau và với Internet. Các chuẩn giao tiếp không dây phổ biến bao gồm:\n\n- Wi-Fi (Wireless Fidelity): là chuẩn mạng không dây cục bộ (WLAN) phổ biến nhất hiện nay, cung cấp tốc độ truyền dữ liệu cao và phạm vi phủ sóng rộng. Wi-Fi thường được sử dụng để kết nối các thiết bị IoT với Internet thông qua các điểm truy cập (Access Point).\n\n- Bluetooth: là chuẩn giao tiếp không dây tầm ngắn, được sử dụng để kết nối các thiết bị di động và các thiết bị ngoại vi. Bluetooth có phiên bản Bluetooth Low Energy (BLE) được tối ưu hóa cho các ứng dụng IoT công suất thấp.\n\n- Zigbee: là chuẩn giao tiếp không dây tầm ngắn, công suất thấp, được thiết kế cho các ứng dụng mạng cảm biến và điều khiển. Zigbee hoạt động trên topologie mạng lưới (mesh network), cho phép mở rộng phạm vi phủ sóng và tăng độ tin cậy của mạng.\n\n- LoRa (Long Range): là công nghệ giao tiếp không dây tầm xa, công suất thấp, được thiết kế cho các ứng dụng IoT diện rộng (LPWAN - Low-Power Wide-Area Network). LoRa cho phép truyền dữ liệu ở khoảng cách xa (hàng km) với mức tiêu thụ năng lượng rất thấp.\n\n- NB-IoT (Narrowband IoT): là chuẩn giao tiếp không dây diện rộng, công suất thấp, hoạt động trên băng tần được cấp phép. NB-IoT được thiết kế để kết nối số lượng lớn các thiết bị IoT với mạng di động."
+            }
+          ]
+        },
+        {
+          "level_2_title": "2.4. Cảm biến và cơ cấu chấp hành",
+          "level_2_id": "2.4",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "2.4.1. Cảm biến (Sensor)",
+              "level_3_id": "2.4.1",
+              "content": "Cảm biến là thiết bị có khả năng cảm nhận các đại lượng vật lý hoặc hóa học từ môi trường xung quanh và chuyển đổi chúng thành tín hiệu điện. Các tín hiệu này sau đó được vi xử lý/vi điều khiển thu thập và xử lý.\n\nCó rất nhiều loại cảm biến khác nhau, được phân loại theo nguyên lý hoạt động hoặc đại lượng đo, ví dụ như:\n\n- Cảm biến nhiệt độ: đo nhiệt độ môi trường (ví dụ: LM35, DHT11, DS18B20...).\n\n- Cảm biến độ ẩm: đo độ ẩm không khí (ví dụ: DHT11, DHT22...).\n\n- Cảm biến ánh sáng: đo cường độ ánh sáng (ví dụ: quang trở, cảm biến ánh sáng BH1750...).\n\n- Cảm biến âm thanh: phát hiện âm thanh (ví dụ: microphone electret...).\n\n- Cảm biến chuyển động: phát hiện chuyển động của vật thể (ví dụ: cảm biến PIR HC-SR501...).\n\n- Cảm biến khoảng cách: đo khoảng cách tới vật thể (ví dụ: cảm biến siêu âm HC-SR04, cảm biến hồng ngoại...).\n\n- Cảm biến gia tốc: đo gia tốc của vật thể (ví dụ: MPU6050, ADXL345...).\n\n- Cảm biến khí: phát hiện nồng độ các loại khí trong không khí (ví dụ: MQ-2, MQ-7, MQ-135...)."
+            },
+            {
+              "level_3_title": "2.4.2. Cơ cấu chấp hành (Actuator)",
+              "level_3_id": "2.4.2",
+              "content": "Cơ cấu chấp hành là thiết bị có khả năng nhận tín hiệu điều khiển từ vi xử lý/vi điều khiển và chuyển đổi chúng thành các tác động vật lý lên môi trường. Các tác động này có thể là chuyển động cơ học, thay đổi nhiệt độ, phát sáng, phát âm thanh...\n\nCó nhiều loại cơ cấu chấp hành khác nhau, ví dụ như:\n\n- Động cơ điện: tạo ra chuyển động quay hoặc tịnh tiến (ví dụ: động cơ DC, động cơ bước, động cơ servo...).\n\n- Rơ le: đóng/ngắt mạch điện (ví dụ: rơ le điện từ, rơ le bán dẫn...).\n\n- Đèn LED: phát sáng (ví dụ: đèn LED đơn, đèn LED RGB, dải đèn LED...).\n\n- Loa/Còi: phát âm thanh (ví dụ: loa piezzo, còi báo động...).\n\n- Màn hình hiển thị: hiển thị thông tin (ví dụ: màn hình LCD, màn hình OLED, màn hình LED matrix...)."
+            },
+            {
+              "level_3_title": "2.4.3. Giao tiếp giữa cảm biến/cơ cấu chấp hành và vi điều khiển",
+              "level_3_id": "2.4.3",
+              "content": "Cảm biến và cơ cấu chấp hành giao tiếp với vi điều khiển thông qua các cổng I/O (Input/Output). Các tín hiệu giao tiếp có thể là tín hiệu số (digital) hoặc tín hiệu tương tự (analog).\n\n- Tín hiệu số: có hai mức logic: mức cao (High - thường là 5V hoặc 3.3V) và mức thấp (Low - 0V). Cảm biến số cung cấp tín hiệu đầu ra là tín hiệu số, cơ cấu chấp hành số được điều khiển bằng tín hiệu số.\n\n- Tín hiệu tương tự: có giá trị biến thiên liên tục trong một khoảng xác định. Cảm biến tương tự cung cấp tín hiệu đầu ra là tín hiệu tương tự. Để xử lý tín hiệu tương tự, vi điều khiển cần có bộ chuyển đổi tương tự sang số (ADC - Analog-to-Digital Converter). Một số cơ cấu chấp hành có thể được điều khiển bằng tín hiệu tương tự thông qua bộ chuyển đổi số sang tương tự (DAC - Digital-to-Analog Converter) hoặc sử dụng kỹ thuật điều chế độ rộng xung (PWM - Pulse Width Modulation)."
+            }
+          ]
+        },
+        {
+          "level_2_title": "2.5. Câu hỏi và bài tập",
+          "level_2_id": "2.5",
+          "content": "1. Phân biệt vi xử lý và vi điều khiển.\n\n2. Trình bày các loại bộ nhớ thường dùng trong hệ thống nhúng.\n\n3. Trình bày các chuẩn giao tiếp nối tiếp phổ biến trong hệ thống nhúng (UART, SPI, I2C).\n\n4. Tìm hiểu về một số loại cảm biến và cơ cấu chấp hành thường dùng trong các ứng dụng IoT.\n\n5. Thiết kế sơ đồ khối của một hệ thống IoT đơn giản (ví dụ: hệ thống đo nhiệt độ và độ ẩm hiển thị lên màn hình LCD)."
+        }
+      ]
+    },
+    {
+      "level_1_title": "CHƯƠNG 3. HỆ ĐIỀU HÀNH CHO HỆ THỐNG NHÚNG IOT",
+      "level_1_id": "3",
+      "children": [
+        {
+          "level_2_title": "3.1. Khái niệm về hệ điều hành nhúng",
+          "level_2_id": "3.1",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "3.1.1. Hệ điều hành nhúng là gì?",
+              "level_3_id": "3.1.1",
+              "content": "Hệ điều hành nhúng (Embedded Operating System - EOS) là một hệ điều hành chuyên dụng được thiết kế để chạy trên các hệ thống nhúng. Khác với các hệ điều hành đa dụng thông thường (ví dụ: Windows, macOS, Linux trên máy tính cá nhân), hệ điều hành nhúng thường được tối ưu hóa cho các yêu cầu cụ thể của hệ thống nhúng, ví dụ như:\n\n- Kích thước nhỏ gọn: để tiết kiệm bộ nhớ và không gian lưu trữ.\n\n- Hiệu năng cao: để đáp ứng các yêu cầu về tốc độ xử lý và thời gian thực.\n\n- Tiêu thụ năng lượng thấp: để kéo dài tuổi thọ pin trong các thiết bị di động.\n\n- Độ tin cậy cao: để đảm bảo hoạt động ổn định trong các môi trường khắc nghiệt.\n\n- Tính tùy biến cao: để có thể dễ dàng cấu hình và loại bỏ các thành phần không cần thiết."
+            },
+            {
+              "level_3_title": "3.1.2. Vai trò của hệ điều hành nhúng",
+              "level_3_id": "3.1.2",
+              "content": "Hệ điều hành nhúng đóng vai trò là một lớp phần mềm trung gian giữa phần cứng và các ứng dụng. Nó cung cấp các dịch vụ và cơ chế để quản lý tài nguyên hệ thống và điều phối hoạt động của các ứng dụng, ví dụ như:\n\n- Quản lý tiến trình (Process Management): tạo, hủy, lập lịch và đồng bộ hóa các tiến trình/luồng.\n\n- Quản lý bộ nhớ (Memory Management): cấp phát, thu hồi và bảo vệ bộ nhớ.\n\n- Quản lý thiết bị (Device Management): cung cấp giao diện thống nhất để truy cập các thiết bị phần cứng thông qua các trình điều khiển thiết bị.\n\n- Quản lý tập tin (File Management): cung cấp cơ chế lưu trữ, truy xuất và quản lý dữ liệu trên các thiết bị lưu trữ.\n\n- Cung cấp các dịch vụ mạng: hỗ trợ các giao thức mạng để kết nối và trao đổi dữ liệu.\n\n- Cung cấp các giao diện lập trình ứng dụng (API): cho phép các nhà phát triển ứng dụng sử dụng các dịch vụ của hệ điều hành."
+            },
+            {
+              "level_3_title": "3.1.3. Phân loại hệ điều hành nhúng",
+              "level_3_id": "3.1.3",
+              "content": "Hệ điều hành nhúng có thể được phân loại theo nhiều tiêu chí khác nhau, ví dụ như:\n\n- Theo tính thời gian thực: hệ điều hành thời gian thực (RTOS) và hệ điều hành không thời gian thực.\n\n- Theo kiến trúc: hệ điều hành nguyên khối (monolithic kernel), hệ điều hành vi nhân (microkernel), hệ điều hành lai (hybrid kernel).\n\n- Theo nguồn gốc: hệ điều hành thương mại, hệ điều hành mã nguồn mở."
+            }
+          ]
+        },
+        {
+          "level_2_title": "3.2. Hệ điều hành thời gian thực (RTOS)",
+          "level_2_id": "3.2",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "3.2.1. Khái niệm về thời gian thực",
+              "level_3_id": "3.2.1",
+              "content": "Thời gian thực (real-time) là một thuộc tính của hệ thống, trong đó tính đúng đắn của hệ thống không chỉ phụ thuộc vào kết quả logic của các phép toán, mà còn phụ thuộc vào thời điểm mà các kết quả đó được đưa ra.\n\nCác hệ thống thời gian thực thường được chia thành hai loại:\n\n- Hệ thống thời gian thực cứng (Hard Real-Time System): yêu cầu các tác vụ phải được hoàn thành trong một khoảng thời gian xác định (deadline) một cách tuyệt đối. Nếu không hoàn thành đúng hạn, có thể dẫn đến hậu quả nghiêm trọng. Ví dụ: hệ thống điều khiển túi khí trên ô tô, hệ thống kiểm soát không lưu...\n\n- Hệ thống thời gian thực mềm (Soft Real-Time System): cho phép các tác vụ thỉnh thoảng bị trễ hạn mà không gây ra hậu quả nghiêm trọng, nhưng hiệu năng của hệ thống sẽ bị giảm sút. Ví dụ: hệ thống truyền phát video trực tuyến, các trò chơi điện tử..."
+            },
+            {
+              "level_3_title": "3.2.2. Đặc điểm của RTOS",
+              "level_3_id": "3.2.2",
+              "content": "RTOS (Real-Time Operating System) là một hệ điều hành được thiết kế để hỗ trợ các ứng dụng thời gian thực. RTOS có các đặc điểm chính sau:\n\n- Tính quyết định (Determinism): RTOS phải đảm bảo rằng thời gian phản hồi của hệ thống đối với các sự kiện là có thể dự đoán được. Điều này có nghĩa là thời gian thực hiện các dịch vụ hệ thống và thời gian trễ ngắt phải được giới hạn.\n\n- Khả năng lập lịch ưu tiên (Priority-based Scheduling): RTOS sử dụng các thuật toán lập lịch dựa trên độ ưu tiên của các tác vụ. Tác vụ có độ ưu tiên cao hơn sẽ được ưu tiên thực hiện trước. RTOS phải hỗ trợ cơ chế lập lịch ưu tiên preemptive, nghĩa là một tác vụ đang chạy có thể bị ngắt bởi một tác vụ có độ ưu tiên cao hơn.\n\n- Cơ chế đồng bộ và giao tiếp giữa các tác vụ (Inter-Task Communication and Synchronization): RTOS cung cấp các cơ chế để các tác vụ có thể trao đổi dữ liệu và phối hợp hoạt động với nhau một cách an toàn và hiệu quả, ví dụ như semaphore, mutex, message queue, event flag...\n\n- Quản lý bộ nhớ hiệu quả: RTOS thường sử dụng các cơ chế quản lý bộ nhớ đơn giản và hiệu quả, ví dụ như cấp phát bộ nhớ tĩnh, để tránh các vấn đề về phân mảnh bộ nhớ và đảm bảo tính quyết định của hệ thống.\n\n- Kích thước nhỏ gọn: RTOS thường có kích thước nhân (kernel) nhỏ gọn để tiết kiệm tài nguyên hệ thống."
+            },
+            {
+              "level_3_title": "3.2.3. Một số RTOS phổ biến cho IoT",
+              "level_3_id": "3.2.3",
+              "content": "Có nhiều RTOS khác nhau được sử dụng trong các hệ thống IoT, ví dụ như:\n\n- FreeRTOS: là một RTOS mã nguồn mở phổ biến, nhẹ và miễn phí, hỗ trợ nhiều kiến trúc vi điều khiển khác nhau. FreeRTOS được sử dụng rộng rãi trong các ứng dụng IoT công suất thấp.\n\n- Zephyr: là một RTOS mã nguồn mở được phát triển bởi Linux Foundation, được thiết kế cho các thiết bị IoT có hạn chế về tài nguyên. Zephyr hỗ trợ nhiều kiến trúc phần cứng và các chuẩn giao tiếp không dây phổ biến.\n\n- Mbed OS: là một RTOS mã nguồn mở được phát triển bởi ARM, được thiết kế cho các thiết bị IoT dựa trên kiến trúc ARM Cortex-M. Mbed OS cung cấp một hệ sinh thái phát triển phong phú, bao gồm các công cụ, thư viện và dịch vụ đám mây.\n\n- ThreadX: là một RTOS thương mại của Express Logic (nay thuộc Microsoft), được biết đến với hiệu năng cao, kích thước nhỏ gọn và độ tin cậy cao. ThreadX được sử dụng trong nhiều thiết bị điện tử tiêu dùng và công nghiệp.\n\n- VxWorks: là một RTOS thương mại của Wind River Systems, được sử dụng rộng rãi trong các hệ thống nhúng đòi hỏi độ tin cậy và an toàn cao, ví dụ như trong lĩnh vực hàng không vũ trụ, quân sự, y tế..."
+            }
+          ]
+        },
+        {
+          "level_2_title": "3.3. Hệ điều hành Linux nhúng (Embedded Linux)",
+          "level_2_id": "3.3",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "3.3.1. Giới thiệu về Embedded Linux",
+              "level_3_id": "3.3.1",
+              "content": "Embedded Linux là việc sử dụng hệ điều hành Linux trong các hệ thống nhúng. Linux là một hệ điều hành mã nguồn mở, mạnh mẽ, linh hoạt và có một cộng đồng phát triển lớn. Việc sử dụng Linux trong các hệ thống nhúng mang lại nhiều lợi ích, ví dụ như:\n\n- Tiết kiệm chi phí: Linux là phần mềm mã nguồn mở và miễn phí.\n\n- Tính linh hoạt cao: Linux có thể được tùy biến để phù hợp với các yêu cầu cụ thể của hệ thống nhúng.\n\n- Hỗ trợ phần cứng rộng rãi: Linux hỗ trợ nhiều kiến trúc vi xử lý và các thiết bị ngoại vi khác nhau.\n\n- Hệ sinh thái phần mềm phong phú: Có rất nhiều ứng dụng, thư viện và công cụ phát triển có sẵn cho Linux.\n\n- Cộng đồng hỗ trợ lớn: Có một cộng đồng lớn các nhà phát triển và người dùng Linux sẵn sàng hỗ trợ và chia sẻ kiến thức."
+            },
+            {
+              "level_3_title": "3.3.2. Kiến trúc của Embedded Linux",
+              "level_3_id": "3.3.2",
+              "content": "Một hệ thống Embedded Linux thường bao gồm các thành phần sau:\n\n- Bootloader: là chương trình đầu tiên được chạy khi hệ thống khởi động, chịu trách nhiệm khởi tạo phần cứng và nạp nhân hệ điều hành vào bộ nhớ.\n\n- Kernel Linux: là nhân của hệ điều hành, chịu trách nhiệm quản lý tài nguyên hệ thống và cung cấp các dịch vụ cho các ứng dụng.\n\n- Root Filesystem: là hệ thống tập tin chứa các thư viện, tiện ích và ứng dụng cần thiết cho hoạt động của hệ thống.\n\n- Toolchain: là bộ công cụ phát triển (trình biên dịch, trình liên kết, trình gỡ lỗi...) được sử dụng để xây dựng nhân hệ điều hành và các ứng dụng cho hệ thống đích."
+            },
+            {
+              "level_3_title": "3.3.3. Ứng dụng của Embedded Linux trong IoT",
+              "level_3_id": "3.3.3",
+              "content": "Embedded Linux được sử dụng rộng rãi trong các thiết bị IoT có yêu cầu về hiệu năng cao và tính năng phong phú, ví dụ như:\n\n- Các thiết bị gateway IoT: đóng vai trò cầu nối giữa các thiết bị IoT và đám mây.\n\n- Các thiết bị nhà thông minh: ví dụ như smart TV, smart speaker, camera an ninh...\n\n- Các hệ thống công nghiệp: ví dụ như hệ thống điều khiển robot, hệ thống giám sát dây chuyền sản xuất...\n\n- Các thiết bị y tế: ví dụ như máy siêu âm, máy chụp cắt lớp..."
+            },
+            {
+              "level_3_title": "3.3.4. Các bản phân phối Embedded Linux phổ biến",
+              "level_3_id": "3.3.4",
+              "content": "Có nhiều bản phân phối (distribution) Embedded Linux khác nhau, ví dụ như:\n\n- Yocto Project: là một dự án mã nguồn mở cung cấp các công cụ và mẫu để xây dựng các bản phân phối Linux tùy chỉnh cho các hệ thống nhúng. Yocto Project là tiêu chuẩn công nghiệp cho việc phát triển Embedded Linux.\n\n- OpenWrt/LEDE: là một bản phân phối Linux dành cho các thiết bị mạng nhúng như router, access point... OpenWrt có tính tùy biến cao và hỗ trợ nhiều gói phần mềm khác nhau.\n\n- Raspbian/Raspberry Pi OS: là bản phân phối Linux chính thức cho máy tính nhúng Raspberry Pi, dựa trên Debian.\n\n- Android Things: là một phiên bản của hệ điều hành Android được thiết kế cho các thiết bị IoT, được phát triển bởi Google."
+            }
+          ]
+        },
+        {
+          "level_2_title": "3.4. Câu hỏi và bài tập",
+          "level_2_id": "3.4",
+          "content": "1. Trình bày khái niệm và vai trò của hệ điều hành nhúng.\n\n2. Phân biệt hệ điều hành thời gian thực cứng và hệ điều hành thời gian thực mềm.\n\n3. Trình bày các đặc điểm chính của RTOS.\n\n4. Tìm hiểu về một số RTOS phổ biến cho IoT (ví dụ: FreeRTOS, Zephyr).\n\n5. Trình bày kiến trúc của một hệ thống Embedded Linux.\n\n6. Tìm hiểu về dự án Yocto Project và vai trò của nó trong việc phát triển Embedded Linux."
+        }
+      ]
+    },
+    {
+      "level_1_title": "CHƯƠNG 4. LẬP TRÌNH HỆ THỐNG NHÚNG IOT",
+      "level_1_id": "4",
+      "children": [
+        {
+          "level_2_title": "4.1. Ngôn ngữ lập trình cho hệ thống nhúng",
+          "level_2_id": "4.1",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "4.1.1. Ngôn ngữ C/C++",
+              "level_3_id": "4.1.1",
+              "content": "C và C++ là hai ngôn ngữ lập trình phổ biến nhất trong lĩnh vực hệ thống nhúng. Chúng có nhiều ưu điểm phù hợp với các yêu cầu của hệ thống nhúng, ví dụ như:\n\n- Hiệu năng cao: C/C++ là các ngôn ngữ biên dịch, cho phép tạo ra mã máy tối ưu, chạy nhanh và tiêu thụ ít tài nguyên.\n\n- Kiểm soát phần cứng tốt: C/C++ cung cấp các tính năng cho phép truy cập trực tiếp vào bộ nhớ và các thanh ghi phần cứng, giúp người lập trình có thể kiểm soát chi tiết hoạt động của hệ thống.\n\n- Tính di động cao: Mã nguồn C/C++ có thể được biên dịch lại để chạy trên nhiều kiến trúc vi xử lý/vi điều khiển khác nhau với ít thay đổi.\n\n- Cộng đồng lớn và tài liệu phong phú: C/C++ là các ngôn ngữ lâu đời, có một cộng đồng phát triển lớn và rất nhiều tài liệu, thư viện hỗ trợ.\n\nC thường được sử dụng cho các hệ thống nhúng có tài nguyên hạn chế hoặc đòi hỏi hiệu năng cao nhất. C++ bổ sung các tính năng hướng đối tượng, giúp việc phát triển các phần mềm phức tạp trở nên dễ dàng hơn, nhưng cũng có thể làm tăng kích thước và độ phức tạp của chương trình."
+            },
+            {
+              "level_3_title": "4.1.2. Ngôn ngữ Python",
+              "level_3_id": "4.1.2",
+              "content": "Python là một ngôn ngữ lập trình thông dịch, cấp cao, dễ học và dễ sử dụng. Python ngày càng trở nên phổ biến trong lĩnh vực IoT, đặc biệt là trong các ứng dụng xử lý dữ liệu, học máy và phát triển các nguyên mẫu nhanh chóng. Ưu điểm của Python:\n\n- Dễ học và dễ sử dụng: Cú pháp của Python đơn giản, rõ ràng, giúp người lập trình có thể nhanh chóng viết và thử nghiệm mã.\n\n- Thư viện phong phú: Python có một hệ sinh thái thư viện khổng lồ, bao gồm các thư viện cho xử lý dữ liệu, học máy, giao tiếp mạng, giao tiếp với phần cứng... (ví dụ: NumPy, Pandas, Scikit-learn, Flask, Django, RPi.GPIO...).\n\n- Tính đa nền tảng: Python có thể chạy trên nhiều hệ điều hành khác nhau, bao gồm cả các hệ điều hành nhúng như Linux.\n\nTuy nhiên, Python là một ngôn ngữ thông dịch, do đó hiệu năng của nó thường thấp hơn so với C/C++, và nó cũng tiêu thụ nhiều tài nguyên hơn. Do đó, Python thường không được sử dụng cho các ứng dụng thời gian thực cứng hoặc các hệ thống có tài nguyên rất hạn chế. Một số phiên bản Python tối ưu cho hệ thống nhúng như MicroPython hoặc CircuitPython đã được phát triển để khắc phục một phần các hạn chế này."
+            },
+            {
+              "level_3_title": "4.1.3. Các ngôn ngữ khác",
+              "level_3_id": "4.1.3",
+              "content": "Ngoài C/C++ và Python, còn có nhiều ngôn ngữ lập trình khác được sử dụng trong hệ thống nhúng IoT, ví dụ như:\n\n- Java: Ngôn ngữ lập trình hướng đối tượng, đa nền tảng, có tính bảo mật cao. Java thường được sử dụng trong các thiết bị IoT có tài nguyên tương đối mạnh, ví dụ như các thiết bị chạy Android Things, hoặc các gateway IoT.\n\n- JavaScript (Node.js): Ngôn ngữ lập trình kịch bản, thường được sử dụng để phát triển các ứng dụng phía server hoặc các ứng dụng IoT yêu cầu khả năng xử lý sự kiện bất đồng bộ cao.\n\n- Rust: Ngôn ngữ lập trình hệ thống mới nổi, tập trung vào an toàn bộ nhớ, hiệu năng cao và tính đồng thời. Rust đang ngày càng được quan tâm trong lĩnh vực hệ thống nhúng như một sự thay thế tiềm năng cho C/C++."
+            }
+          ]
+        },
+        {
+          "level_2_title": "4.2. Kỹ thuật lập trình hệ thống nhúng",
+          "level_2_id": "4.2",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "4.2.1. Lập trình điều khiển I/O",
+              "level_3_id": "4.2.1",
+              "content": "Lập trình điều khiển I/O là kỹ thuật cơ bản nhất trong lập trình hệ thống nhúng. Nó liên quan đến việc đọc trạng thái của các chân đầu vào (ví dụ: nút nhấn, cảm biến số) và điều khiển trạng thái của các chân đầu ra (ví dụ: đèn LED, rơ le).\n\nĐể điều khiển I/O, người lập trình cần phải cấu hình các chân I/O (ví dụ: là đầu vào hay đầu ra, có điện trở kéo lên/kéo xuống hay không...), sau đó sử dụng các lệnh đọc/ghi thanh ghi hoặc các hàm thư viện để đọc/ghi trạng thái của các chân này."
+            },
+            {
+              "level_3_title": "4.2.2. Lập trình ngắt (Interrupt Programming)",
+              "level_3_id": "4.2.2",
+              "content": "Ngắt là một cơ chế cho phép vi xử lý/vi điều khiển tạm dừng việc thực hiện chương trình chính để phản hồi lại một sự kiện quan trọng xảy ra bên ngoài hoặc bên trong hệ thống. Khi có ngắt xảy ra, vi xử lý/vi điều khiển sẽ lưu trạng thái hiện tại, nhảy đến thực hiện một đoạn chương trình con phục vụ ngắt (Interrupt Service Routine - ISR), sau đó quay trở lại thực hiện tiếp chương trình chính.\n\nLập trình ngắt giúp hệ thống phản ứng nhanh chóng với các sự kiện, đồng thời giúp tiết kiệm thời gian xử lý của CPU (thay vì phải liên tục kiểm tra trạng thái của các sự kiện - kỹ thuật polling). Tuy nhiên, lập trình ngắt cũng phức tạp hơn và dễ gây lỗi nếu không được thiết kế cẩn thận (ví dụ: vấn đề ưu tiên ngắt, vấn đề chia sẻ dữ liệu giữa ISR và chương trình chính...)."
+            },
+            {
+              "level_3_title": "4.2.3. Lập trình định thời (Timer Programming)",
+              "level_3_id": "4.2.3",
+              "content": "Bộ định thời (Timer) là một thành phần phần cứng quan trọng trong vi điều khiển, được sử dụng để đo khoảng thời gian, tạo ra các sự kiện định kỳ, tạo xung PWM...\n\nLập trình định thời liên quan đến việc cấu hình các thanh ghi của timer (ví dụ: chế độ hoạt động, giá trị đếm, nguồn xung nhịp...), sau đó sử dụng timer để thực hiện các chức năng mong muốn. Ví dụ: sử dụng timer để tạo ra một ngắt sau mỗi khoảng thời gian nhất định để thực hiện một tác vụ định kỳ (ví dụ: đọc cảm biến); sử dụng timer để đo độ rộng của một xung tín hiệu đầu vào; sử dụng timer để tạo ra tín hiệu PWM để điều khiển tốc độ động cơ hoặc độ sáng đèn LED."
+            },
+            {
+              "level_3_title": "4.2.4. Lập trình giao tiếp",
+              "level_3_id": "4.2.4",
+              "content": "Lập trình giao tiếp liên quan đến việc sử dụng các chuẩn giao tiếp (UART, SPI, I2C...) để truyền nhận dữ liệu giữa vi điều khiển và các thiết bị khác. Người lập trình cần phải cấu hình các thanh ghi của module giao tiếp tương ứng (ví dụ: tốc độ baud, chế độ master/slave, định dạng dữ liệu...), sau đó sử dụng các lệnh hoặc hàm thư viện để gửi và nhận dữ liệu."
+            },
+            {
+              "level_3_title": "4.2.5. Lập trình thời gian thực với RTOS",
+              "level_3_id": "4.2.5",
+              "content": "Khi sử dụng RTOS, việc lập trình hệ thống nhúng sẽ thay đổi đáng kể. Chương trình sẽ được chia thành nhiều tác vụ (task) chạy đồng thời, mỗi tác vụ thực hiện một chức năng cụ thể. Người lập trình cần phải sử dụng các dịch vụ do RTOS cung cấp để quản lý các tác vụ, đồng bộ hóa và giao tiếp giữa các tác vụ.\n\nCác kỹ thuật chính trong lập trình với RTOS bao gồm:\n\n- Tạo và quản lý tác vụ: xác định độ ưu tiên, kích thước ngăn xếp... cho từng tác vụ.\n\n- Đồng bộ hóa tác vụ: sử dụng semaphore, mutex... để đảm bảo các tác vụ truy cập tài nguyên chia sẻ một cách an toàn, tránh xung đột.\n\n- Giao tiếp giữa các tác vụ: sử dụng message queue, mailbox... để truyền dữ liệu giữa các tác vụ.\n\n- Quản lý thời gian: sử dụng các dịch vụ của RTOS để tạo trễ, đo thời gian, thiết lập timeout...\n\n- Quản lý ngắt: viết ISR để xử lý các ngắt phần cứng và giao tiếp với các tác vụ thông qua các cơ chế của RTOS."
+            }
+          ]
+        },
+        {
+          "level_2_title": "4.3. Phát triển ứng dụng IoT",
+          "level_2_id": "4.3",
+          "content": "",
+          "children": [
+            {
+              "level_3_title": "4.3.1. Thu thập dữ liệu từ cảm biến",
+              "level_3_id": "4.3.1",
+              "content": "Ứng dụng IoT thường bắt đầu bằng việc thu thập dữ liệu từ môi trường thông qua các cảm biến. Vi điều khiển sẽ đọc dữ liệu từ các cảm biến (thông qua các cổng I/O số, analog hoặc các chuẩn giao tiếp như I2C, SPI), xử lý sơ bộ dữ liệu (ví dụ: lọc nhiễu, chuyển đổi đơn vị...) và lưu trữ dữ liệu tạm thời vào bộ nhớ."
+            },
+            {
+              "level_3_title": "4.3.2. Kết nối mạng và truyền dữ liệu",
+              "level_3_id": "4.3.2",
+              "content": "Sau khi thu thập dữ liệu, thiết bị IoT cần kết nối với mạng (ví dụ: qua Wi-Fi, Bluetooth, LoRa...) để truyền dữ liệu lên đám mây hoặc đến các thiết bị khác. Việc này đòi hỏi sử dụng các module truyền thông không dây và các giao thức mạng phù hợp.\n\nCác giao thức tầng ứng dụng phổ biến được sử dụng trong IoT bao gồm:\n\n- MQTT (Message Queuing Telemetry Transport): giao thức nhắn tin publish/subscribe nhẹ, hiệu quả, được thiết kế cho các thiết bị có băng thông hạn chế và kết nối không ổn định. MQTT được sử dụng rộng rãi để truyền dữ liệu từ các thiết bị IoT lên đám mây.\n\n- CoAP (Constrained Application Protocol): giao thức ứng dụng web được thiết kế cho các thiết bị có tài nguyên hạn chế và mạng công suất thấp. CoAP dựa trên mô hình client/server, tương tự như HTTP nhưng nhẹ hơn nhiều.\n\n- HTTP/HTTPS (Hypertext Transfer Protocol/Secure): giao thức web phổ biến nhất hiện nay. HTTP/HTTPS có thể được sử dụng trong IoT, đặc biệt là cho các thiết bị có tài nguyên mạnh hơn hoặc khi cần tương tác với các dịch vụ web hiện có, tuy nhiên nó thường có overhead lớn hơn so với MQTT hay CoAP."
+            },
+            {
+              "level_3_title": "4.3.3. Xử lý dữ liệu trên đám mây (Cloud Computing)",
+              "level_3_id": "4.3.3",
+              "content": "Dữ liệu từ các thiết bị IoT được truyền lên các nền tảng đám mây (Cloud Platform) để lưu trữ, xử lý và phân tích. Các nền tảng đám mây cung cấp các dịch vụ như:\n\n- Lưu trữ dữ liệu: cơ sở dữ liệu (SQL, NoSQL), kho dữ liệu (Data Warehouse), hồ dữ liệu (Data Lake)... để lưu trữ lượng dữ liệu lớn từ các thiết bị IoT.\n\n- Xử lý dữ liệu: các công cụ xử lý dữ liệu theo thời gian thực (stream processing) hoặc xử lý dữ liệu theo lô (batch processing) để lọc, tổng hợp, biến đổi dữ liệu.\n\n- Phân tích dữ liệu: các công cụ phân tích dữ liệu, học máy, trí tuệ nhân tạo để trích xuất thông tin hữu ích từ dữ liệu, phát hiện các mẫu, dự đoán xu hướng...\n\n- Trực quan hóa dữ liệu: các công cụ để tạo ra các biểu đồ, bảng điều khiển (dashboard) để hiển thị dữ liệu một cách trực quan cho người dùng.\n\nCác nền tảng đám mây phổ biến cho IoT bao gồm: Amazon Web Services (AWS) IoT, Microsoft Azure IoT, Google Cloud IoT, IBM Watson IoT..."
+            },
+            {
+              "level_3_title": "4.3.4. Phát triển ứng dụng người dùng",
+              "level_3_id": "4.3.4",
+              "content": "Ứng dụng người dùng (ví dụ: ứng dụng di động, ứng dụng web) cho phép người dùng tương tác với hệ thống IoT, ví dụ như xem dữ liệu từ các cảm biến, điều khiển các cơ cấu chấp hành, nhận các cảnh báo, cấu hình hệ thống...\n\nCác ứng dụng người dùng thường giao tiếp với nền tảng đám mây thông qua các API (Application Programming Interface) để truy cập dữ liệu và gửi các lệnh điều khiển."
+            }
+          ]
+        },
+        {
+          "level_2_title": "4.4. Câu hỏi và bài tập",
+          "level_2_id": "4.4",
+          "content": "1. So sánh ưu nhược điểm của ngôn ngữ C/C++ và Python trong lập trình hệ thống nhúng IoT.\n\n2. Trình bày các kỹ thuật lập trình cơ bản trong hệ thống nhúng (điều khiển I/O, ngắt, định thời, giao tiếp).\n\n3. Tìm hiểu về các giao thức mạng phổ biến trong IoT (MQTT, CoAP, HTTP).\n\n4. Tìm hiểu về một nền tảng đám mây cho IoT (ví dụ: AWS IoT, Azure IoT) và các dịch vụ mà nó cung cấp.\n\n5. Xây dựng một ứng dụng IoT đơn giản: sử dụng vi điều khiển (ví dụ: ESP32, Arduino) đọc dữ liệu từ cảm biến nhiệt độ/độ ẩm, gửi dữ liệu lên một nền tảng đám mây (ví dụ: ThingsBoard, Blynk) qua Wi-Fi, và hiển thị dữ liệu trên một ứng dụng di động hoặc web."
+        }
+      ]
+    }
+  ]
+}
