@@ -18,6 +18,8 @@ export const ROUTES = {
   DASHBOARD: '/home',
   COURSES: '/courses',
   ALL_COURSES: '/all-courses',
+  NOTIFICATIONS: '/notifications',
+  MESSAGES: '/messages',
   PROFILE: '/profile',
   COMMUNITY: '/community',
   STUDY_PROFILE: '/study-profile',
