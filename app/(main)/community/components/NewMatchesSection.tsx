@@ -76,9 +76,14 @@ export default function NewMatchesSection({
       }
 
       const data = await response.json();
-      
-      // Redirect to chat/match page
-      router.push(ROUTES.COURSE_MATCH(matchingCourseId));
+
+      // Nếu đã ghép đôi thành công, chuyển sang trang tin nhắn trực tiếp
+      if (data.status === "matched" && data.matchedUserId) {
+        router.push(`/messages?user=${data.matchedUserId}`);
+      } else {
+        // Ngược lại, giữ behavior cũ: chuyển sang trang match theo khóa học
+        router.push(ROUTES.COURSE_MATCH(matchingCourseId));
+      }
     } catch (error) {
       console.error("[NewMatchesSection] Match error:", error);
       alert("Có lỗi xảy ra. Vui lòng thử lại.");

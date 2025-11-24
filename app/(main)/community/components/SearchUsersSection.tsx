@@ -26,7 +26,7 @@ export default function SearchUsersSection() {
   const [searching, setSearching] = useState(false);
   const [matchingUserId, setMatchingUserId] = useState<string | null>(null);
   const [currentUserCourses, setCurrentUserCourses] = useState<Array<{ courseId: string; level: string | null }>>([]);
-  
+
   // Load current user courses khi component mount
   useEffect(() => {
     const loadCurrentUserCourses = async () => {
@@ -36,7 +36,7 @@ export default function SearchUsersSection() {
             .from("user_courses")
             .select("course_id, courses(id, level)")
             .eq("user_id", user.id);
-          
+
           if (courses) {
             // Đảm bảo không có duplicate course_id
             const courseIdSet = new Set<string>();
@@ -64,13 +64,13 @@ export default function SearchUsersSection() {
         console.error("[SearchUsersSection] Error loading current user courses:", error);
       }
     };
-    
+
     loadCurrentUserCourses();
   }, [supabase, user]);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!searchTerm.trim() || searchTerm.trim().length < 2) {
       alert("Vui lòng nhập ít nhất 2 ký tự để tìm kiếm");
       return;
@@ -84,7 +84,7 @@ export default function SearchUsersSection() {
           .from("user_courses")
           .select("course_id, courses(id, level)")
           .eq("user_id", user.id);
-        
+
         if (courses) {
           // Đảm bảo không có duplicate course_id
           const courseIdSet = new Set<string>();
@@ -108,9 +108,9 @@ export default function SearchUsersSection() {
           console.log("[SearchUsersSection] Reloaded current user courses:", formattedCourses.length);
         }
       }
-      
+
       const { data: { session } } = await supabase.auth.getSession();
-      
+
       const response = await fetch(
         `/api/search-users?q=${encodeURIComponent(searchTerm.trim())}`,
         {
@@ -199,9 +199,14 @@ export default function SearchUsersSection() {
       }
 
       const data = await response.json();
-      
-      // Redirect to chat/match page
-      router.push(ROUTES.COURSE_MATCH(matchingCourseId));
+
+      // Nếu đã ghép đôi thành công, chuyển sang trang tin nhắn trực tiếp
+      if (data.status === "matched" && data.matchedUserId) {
+        router.push(`/messages?user=${data.matchedUserId}`);
+      } else {
+        // Ngược lại, giữ behavior cũ: chuyển sang trang match theo khóa học
+        router.push(ROUTES.COURSE_MATCH(matchingCourseId));
+      }
     } catch (error) {
       console.error("[SearchUsersSection] Match error:", error);
       alert("Có lỗi xảy ra. Vui lòng thử lại.");
@@ -264,7 +269,7 @@ export default function SearchUsersSection() {
               avatar_url: null,
               courses: currentUserCourses,
             };
-            
+
             const searchedUser: MatchingUser = {
               id: user.id,
               full_name: user.full_name,
@@ -272,12 +277,12 @@ export default function SearchUsersSection() {
               avatar_url: user.avatar_url,
               courses: user.courses,
             };
-            
+
             // Sử dụng hàm findCommonCourses từ matching utils để tính đúng số khóa học chung
             // Hàm này sẽ so sánh course_id giữa currentUser và searchedUser
             const commonCoursesList = findCommonCourses(currentUser, searchedUser);
             const commonCoursesCount = commonCoursesList.length;
-            
+
             // Debug logging để verify với database
             console.log(`[SearchUsersSection] User ${user.id} (${user.full_name || user.username || user.email}):`, {
               currentUserCoursesCount: currentUserCourses.length,
@@ -287,7 +292,7 @@ export default function SearchUsersSection() {
               commonCoursesCount: commonCoursesCount,
               commonCourseIds: commonCoursesList,
             });
-            
+
             return (
               <UserCard
                 key={user.id}

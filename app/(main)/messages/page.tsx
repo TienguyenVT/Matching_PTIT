@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { useAuth } from "@/providers/auth-provider";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
@@ -33,15 +34,18 @@ type Conversation = {
 };
 
 export default function MessagesPage() {
+
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState("");
     const [conversations, setConversations] = useState<Conversation[]>([]);
     const [selectedConversation, setSelectedConversation] = useState<string | null>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const { user } = useAuth();
     const supabase = createClientComponentClient();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const queryUserId = searchParams.get("user");
 
     // Fetch conversations
     useEffect(() => {
@@ -49,19 +53,27 @@ export default function MessagesPage() {
 
         const fetchConversations = async () => {
             try {
+                setLoading(true);
                 const { data: conversationsData, error: conversationsError } = await supabase
-                    .rpc('get_user_conversations', { user_id: user.id });
-
+                    .rpc('get_user_conversations', { p_user_id: user.id });
+                console.log('[messages] conversationsData:', conversationsData, 'error:', conversationsError);
                 if (conversationsError) throw conversationsError;
-                setConversations(conversationsData || []);
+                const list = conversationsData || [];
+                setConversations(list);
 
-                // Select the first conversation if none is selected
-                if (conversationsData?.length > 0 && !selectedConversation) {
-                    setSelectedConversation(conversationsData[0].user_id);
+                // Chọn cuộc trò chuyện ban đầu
+                if (list.length > 0 && !selectedConversation) {
+                    // Ưu tiên userId từ query (?user=...)
+                    const hasQueryUser = queryUserId && list.some((c: Conversation) => c.user_id === queryUserId);
+                    const targetId = hasQueryUser ? queryUserId! : list[0].user_id;
+                    setSelectedConversation(targetId);
                 }
+
             } catch (error) {
                 console.error('Error fetching conversations:', error);
                 toast.error('Lỗi khi tải danh sách trò chuyện');
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -102,7 +114,7 @@ export default function MessagesPage() {
                 setLoading(true);
                 const { data: messagesData, error: messagesError } = await supabase
                     .from('messages')
-                    .select('*, sender_profile:profiles!messages_sender_id_fkey(full_name, avatar_url)')
+                    .select('*')
                     .or(`and(sender_id.eq.${user.id},receiver_id.eq.${selectedConversation}),and(sender_id.eq.${selectedConversation},receiver_id.eq.${user.id})`)
                     .order('created_at', { ascending: true });
 

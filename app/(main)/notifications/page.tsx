@@ -27,6 +27,7 @@ export default function NotificationsPage() {
     const [loading, setLoading] = useState(true);
     const { user } = useAuth();
     const supabase = supabaseBrowser();
+    const router = useRouter();
 
     useEffect(() => {
         if (!user) return;
@@ -109,6 +110,7 @@ export default function NotificationsPage() {
             console.error('Lỗi khi đánh dấu tất cả đã đọc:', err);
         }
     };
+
     const handleMatchAction = async (notificationId: string, action: 'accept' | 'reject', senderId: string) => {
         try {
             // Lấy thông tin người dùng hiện tại
@@ -137,19 +139,19 @@ export default function NotificationsPage() {
                         }
                     })
                     .eq('id', notificationId);
-                await supabase
-                    .from('conversations')
-                    .upsert(
-                        [
-                            {
-                                user1_id: user?.id,
-                                user2_id: senderId,
-                                last_message: 'Bắt đầu trò chuyện',
-                                updated_at: new Date().toISOString()
-                            }
-                        ],
-                        { onConflict: 'user1_id,user2_id' }
-                    );
+
+                // Tạo cuộc trò chuyện trực tiếp bằng cách gửi tin nhắn đầu tiên
+                if (user?.id && senderId) {
+                    await supabase
+                        .from('messages')
+                        .insert({
+                            sender_id: user.id,
+                            receiver_id: senderId,
+                            content: 'Xin chào',
+                            read: false,
+                        });
+                }
+
                 // Gửi thông báo chấp nhận cho người gửi yêu cầu
                 await supabase
                     .from('notifications')
@@ -164,6 +166,11 @@ export default function NotificationsPage() {
                             from_user: user?.id
                         }
                     });
+
+                // Điều hướng sang trang tin nhắn với người vừa ghép đôi
+                if (senderId) {
+                    router.push(`/messages?user=${senderId}`);
+                }
             } else {
                 // Xử lý khi từ chối
                 await supabase
