@@ -35,11 +35,13 @@ export async function POST(req: NextRequest) {
       .order('created_at', { ascending: true });
 
     let roomId: string | null = null;
+    let matchedUserId: string | null = null;
     if (openRooms) {
       for (const r of openRooms as any[]) {
         const members = r.members || [];
         if (members.length === 1 && members[0].user_id !== user.id) {
           roomId = r.id;
+          matchedUserId = members[0].user_id;
           break;
         }
       }
@@ -51,8 +53,22 @@ export async function POST(req: NextRequest) {
         .from('chat_members')
         .insert({ room_id: roomId, user_id: user.id });
       if (joinErr) return NextResponse.json({ error: joinErr.message }, { status: 400 });
+
       await svc.from('chat_rooms').update({ status: 'matched' }).eq('id', roomId);
-      return NextResponse.json({ roomId, status: 'matched' });
+
+      // Create initial direct message between matched users so it appears in /messages
+      if (matchedUserId) {
+        await svc
+          .from('messages')
+          .insert({
+            sender_id: user.id,
+            receiver_id: matchedUserId,
+            content: 'Xin chào',
+            read: false,
+          });
+      }
+
+      return NextResponse.json({ roomId, status: 'matched', matchedUserId });
     }
 
     // Create new open room and add current user

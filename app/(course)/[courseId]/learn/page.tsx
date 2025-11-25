@@ -6,7 +6,7 @@ import { ROUTES } from '@/lib/routes';
 async function getCourse(courseId: string) {
   console.log('[LearnPage] Starting getCourse, courseId:', courseId);
   const supabase = supabaseServer();
-  
+
   const { data: course, error: courseError } = await supabase
     .from('courses')
     .select('id,title,description,cover_url,level')
@@ -45,22 +45,22 @@ async function getCourse(courseId: string) {
     console.log('[LearnPage] Contents found:', contents?.length || 0, 'items');
   }
 
-  return { 
-    course, 
+  return {
+    course,
     modules: modules ?? [],
-    contents: contents ?? [] 
+    contents: contents ?? []
   };
 }
 
 export default async function LearnPage({ params }: { params: { courseId: string } }) {
   console.log('[LearnPage] Page rendering started, courseId:', params.courseId);
-  
+
   const user = await requireAuth(ROUTES.LOGIN);
   console.log('[LearnPage] User authenticated:', user.id);
-  
+
   const { courseId } = params;
   const { course, modules, contents } = await getCourse(courseId);
-  
+
   if (!course) {
     console.error('[LearnPage] Course not found:', courseId);
     notFound();
@@ -114,9 +114,9 @@ export default async function LearnPage({ params }: { params: { courseId: string
                           <li key={content.id} className="text-xs text-gray-600">
                             <span className="mr-1 rounded bg-gray-100 px-1 py-0.5 text-xs uppercase">{content.kind}</span>
                             {content.title}
-              </li>
-            ))}
-          </ol>
+                          </li>
+                        ))}
+                      </ol>
                     ) : (
                       <p className="text-xs text-gray-400">Chưa có bài học</p>
                     )}

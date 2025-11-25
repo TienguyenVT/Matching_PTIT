@@ -18,16 +18,19 @@ export const ROUTES = {
   DASHBOARD: '/home',
   COURSES: '/courses',
   ALL_COURSES: '/all-courses',
+  NOTIFICATIONS: '/notifications',
+  MESSAGES: '/messages',
   PROFILE: '/profile',
   COMMUNITY: '/community',
   STUDY_PROFILE: '/study-profile',
   ADMIN: '/admin',
+  ALL_MEMBER: '/all-member',
 
   // Dynamic routes - Course related
   COURSE_DETAIL: (courseId: string) => `/course/${courseId}/detail`,
   COURSE_LEARN: (courseId: string) => `/course/${courseId}/learn`,
   COURSE_MATCH: (courseId: string) => `/course/${courseId}/match`,
-  
+
   // Dynamic routes - Profile related
   STUDY_PROFILE_USER: (userId: string) => `/study-profile?userId=${userId}`,
 } as const;
@@ -44,6 +47,7 @@ export const PROTECTED_ROUTES = [
   ROUTES.PROFILE,
   ROUTES.COMMUNITY,
   ROUTES.STUDY_PROFILE,
+  ROUTES.ALL_MEMBER,
 ] as const;
 
 /**
@@ -61,7 +65,7 @@ export function isProtectedRoute(pathname: string): boolean {
   if (PROTECTED_ROUTES.includes(pathname as any)) {
     return true;
   }
-  
+
   // Dynamic protected routes (course routes)
   if (pathname.startsWith('/course/') && (
     pathname.endsWith('/detail') ||
@@ -70,7 +74,7 @@ export function isProtectedRoute(pathname: string): boolean {
   )) {
     return true;
   }
-  
+
   return false;
 }
 
