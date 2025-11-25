@@ -7,6 +7,43 @@ import { writeFile, unlink } from 'fs/promises';
 import path from 'path';
 import { tmpdir } from 'os';
 
+// Helper functions for optional quiz JSON processing
+const ROMAN_MAP: Record<string, number> = {
+  I: 1,
+  II: 2,
+  III: 3,
+  IV: 4,
+  V: 5,
+  VI: 6,
+  VII: 7,
+  VIII: 8,
+  IX: 9,
+  X: 10,
+};
+
+function parseChapterIndex(chapterId: unknown, fallbackIndex: number): number {
+  if (typeof chapterId === 'number' && Number.isFinite(chapterId)) {
+    return chapterId;
+  }
+  if (typeof chapterId === 'string') {
+    const trimmed = chapterId.trim().toUpperCase();
+    if (ROMAN_MAP[trimmed] != null) {
+      return ROMAN_MAP[trimmed];
+    }
+    const asNum = parseInt(trimmed, 10);
+    if (!Number.isNaN(asNum)) {
+      return asNum;
+    }
+  }
+  return fallbackIndex + 1;
+}
+
+function parseQuizJSON(raw: string) {
+  const json = JSON.parse(raw);
+  const tests = Array.isArray(json.tests) ? json.tests : [];
+  return { tests };
+}
+
 /**
  * API endpoint để xử lý JSON upload và tạo khóa học tự động
  * POST /api/admin/process-json
@@ -30,6 +67,7 @@ export async function POST(req: NextRequest) {
     // Parse form data
     const formData = await req.formData();
     const file = formData.get('file') as File;
+    const quizFile = formData.get('quizFile') as File | null;
     const courseTitle = formData.get('courseTitle') as string | null;
     const courseDescription = formData.get('courseDescription') as string | null;
     const courseLevel = formData.get('courseLevel') as string | null;
@@ -56,6 +94,40 @@ export async function POST(req: NextRequest) {
         { error: 'File quá lớn. Kích thước tối đa là 10MB.' },
         { status: 400 }
       );
+    }
+
+    // Optional quiz JSON validation & pre-parse (nếu admin upload kèm bài kiểm tra)
+    let parsedQuiz: { tests: any[] } | null = null;
+    if (quizFile) {
+      if (!quizFile.name.toLowerCase().endsWith('.json') && quizFile.type !== 'application/json') {
+        return NextResponse.json(
+          { error: 'File bài kiểm tra phải là định dạng JSON.' },
+          { status: 400 }
+        );
+      }
+      if (quizFile.size > maxSize) {
+        return NextResponse.json(
+          { error: 'File bài kiểm tra quá lớn. Kích thước tối đa là 10MB.' },
+          { status: 400 }
+        );
+      }
+
+      try {
+        const rawQuiz = await quizFile.text();
+        parsedQuiz = parseQuizJSON(rawQuiz);
+      } catch (error: any) {
+        return NextResponse.json(
+          { error: `Lỗi phân tích JSON bài kiểm tra: ${error.message || 'Parse error'}` },
+          { status: 400 }
+        );
+      }
+
+      if (!parsedQuiz.tests || parsedQuiz.tests.length === 0) {
+        return NextResponse.json(
+          { error: 'JSON bài kiểm tra không có mảng tests hợp lệ.' },
+          { status: 400 }
+        );
+      }
     }
 
     // Save file to temp directory
@@ -132,6 +204,7 @@ export async function POST(req: NextRequest) {
     // Create modules and contents
     let moduleOrder = 0;
     let totalLessons = 0;
+    const createdModules: { id: string; chapter_number: number | null; title: string }[] = [];
 
     for (const chapter of analysisResult.chapters) {
       moduleOrder++;
@@ -154,6 +227,12 @@ export async function POST(req: NextRequest) {
         console.error(`Error creating module ${moduleOrder}:`, moduleError);
         continue; // Skip this module but continue with others
       }
+
+      createdModules.push({
+        id: module.id,
+        chapter_number: chapter.chapterNumber,
+        title: module.title,
+      });
 
       // Create lessons (sections) for this module
       let lessonOrder = 0;
@@ -200,6 +279,118 @@ export async function POST(req: NextRequest) {
       console.log(`Created ${lessonOrder} lessons for module ${module.title}`);
     }
 
+    // Nếu admin upload kèm file JSON bài kiểm tra, tạo luôn quiz content cho khóa học này
+    let quizStats: { quizzes: number; questions: number; skippedChapters: string[] } | null = null;
+    if (parsedQuiz && parsedQuiz.tests.length > 0 && createdModules.length > 0) {
+      const moduleByChapter = new Map<number, { id: string; chapter_number: number | null; title: string }>();
+      for (const m of createdModules) {
+        if (m.chapter_number != null) {
+          moduleByChapter.set(m.chapter_number, m);
+        }
+      }
+
+      let createdQuizzes = 0;
+      let totalQuestions = 0;
+      const skippedChapters: string[] = [];
+
+      for (let i = 0; i < parsedQuiz.tests.length; i++) {
+        const chapterTest = parsedQuiz.tests[i];
+        const chapterIndex = parseChapterIndex(chapterTest.chapter_id, i);
+        const module = moduleByChapter.get(chapterIndex);
+
+        if (!module) {
+          if (chapterTest.chapter_id != null) {
+            skippedChapters.push(String(chapterTest.chapter_id));
+          }
+          continue;
+        }
+
+        const rawQuestions = Array.isArray(chapterTest.questions) ? chapterTest.questions : [];
+        if (!rawQuestions.length) {
+          continue;
+        }
+
+        const questions = rawQuestions
+          .map((q: any) => {
+            if (!q || !q.question || !q.options) {
+              return null;
+            }
+            const letters = ['A', 'B', 'C', 'D'];
+            const options = letters
+              .map((l) => {
+                const value = q.options[l];
+                return typeof value === 'string' ? value.trim() : '';
+              })
+              .filter((v) => v.length > 0);
+            if (!options.length) {
+              return null;
+            }
+            let correctIndex = -1;
+            if (typeof q.answer === 'string') {
+              const idx = letters.indexOf(q.answer.trim().toUpperCase());
+              if (idx >= 0 && idx < options.length) {
+                correctIndex = idx;
+              }
+            } else if (typeof q.answer === 'number' && q.answer >= 0 && q.answer < options.length) {
+              correctIndex = q.answer;
+            }
+            if (correctIndex < 0) {
+              correctIndex = 0;
+            }
+            return {
+              question: String(q.question).trim(),
+              options,
+              correctAnswer: correctIndex,
+              explanation: typeof q.explanation === 'string' ? q.explanation : undefined,
+            };
+          })
+          .filter((q: any) => q && q.question && q.options && q.options.length > 0);
+
+        if (!questions.length) {
+          continue;
+        }
+
+        const { data: content, error: contentError } = await supabaseAdmin
+          .from('course_contents')
+          .insert({
+            course_id: course.id,
+            module_id: module.id,
+            title: chapterTest.chapter_title || `Bài kiểm tra chương ${chapterIndex}`,
+            kind: 'quiz',
+            order_index: 1000 + chapterIndex,
+            storage_path: null,
+          })
+          .select()
+          .single();
+
+        if (contentError || !content) {
+          continue;
+        }
+
+        const { error: quizError } = await supabaseAdmin
+          .from('quiz_content')
+          .insert({
+            content_id: content.id,
+            questions,
+          });
+
+        if (quizError) {
+          continue;
+        }
+
+        createdQuizzes += 1;
+        totalQuestions += questions.length;
+      }
+
+      if (createdQuizzes > 0) {
+        quizStats = {
+          quizzes: createdQuizzes,
+          questions: totalQuestions,
+          skippedChapters,
+        };
+      }
+    }
+
     // Cleanup temp file
     if (tempFilePath) {
       try {
@@ -218,7 +409,8 @@ export async function POST(req: NextRequest) {
       },
       statistics: {
         modules: moduleOrder,
-        lessons: totalLessons
+        lessons: totalLessons,
+        ...(quizStats || {}),
       }
     });
 
