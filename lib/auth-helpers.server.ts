@@ -72,8 +72,17 @@ export async function requireAdminAPI(
   }
   
   // Kiểm tra admin role
-  const supabase = supabaseServer();
-  const isAdmin = await isUserAdmin(supabase, user.id);
+  let isAdmin = false;
+
+  // Ưu tiên dùng thông tin role trong JWT (user_metadata)
+  const metaRole = (user as any)?.user_metadata?.role as string | undefined;
+  if (metaRole === 'admin') {
+    isAdmin = true;
+  } else {
+    // Fallback: kiểm tra role từ bảng profiles qua Supabase server-side client
+    const supabase = supabaseServer();
+    isAdmin = await isUserAdmin(supabase, user.id);
+  }
   
   if (!isAdmin) {
     console.log(`[auth-helpers] User ${user.id} attempted to access admin API without permission`);

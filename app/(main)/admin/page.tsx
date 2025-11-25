@@ -7,6 +7,7 @@ import { ROUTES } from '@/lib/routes';
 import { requireAdminAccess } from '@/lib/auth-helpers.client';
 import { useAuth } from '@/providers/auth-provider';
 import JSONUploadForm from './components/JSONUploadForm';
+import QuizJSONUploadForm from './components/QuizJSONUploadForm';
 
 interface BatchProcessResult {
   success: boolean;
@@ -224,11 +225,24 @@ export default function AdminPage() {
           </svg>
           <h2 className="text-lg font-semibold text-gray-800">Tải lên và xử lý JSON</h2>
         </div>
-        <JSONUploadForm
-          onUploadSuccess={handleUploadSuccess}
-          onUploadError={handleUploadError}
-          supabase={supabase}
-        />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="border border-gray-100 rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-gray-800 mb-3">Nội dung khóa học</h3>
+            <JSONUploadForm
+              onUploadSuccess={handleUploadSuccess}
+              onUploadError={handleUploadError}
+              supabase={supabase}
+            />
+          </div>
+          <div className="border border-gray-100 rounded-lg p-4">
+            <h3 className="text-sm font-semibold text-gray-800 mb-3">Bài kiểm tra theo chương</h3>
+            <QuizJSONUploadForm
+              onUploadSuccess={handleUploadSuccess}
+              onUploadError={handleUploadError}
+              supabase={supabase}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Batch Process Section */}
