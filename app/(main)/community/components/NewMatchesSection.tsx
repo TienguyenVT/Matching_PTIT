@@ -3,8 +3,6 @@
 import { useState } from "react";
 import UserCard from "./UserCard";
 import { supabaseBrowser } from "@/lib/supabase/client";
-import { ROUTES } from "@/lib/routes";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/providers/auth-provider";
 import type { MatchScore } from "@/lib/utils/matching";
 
@@ -18,7 +16,6 @@ export default function NewMatchesSection({
   loading = false,
 }: NewMatchesSectionProps) {
   const supabase = supabaseBrowser();
-  const router = useRouter();
   const { user } = useAuth(); // ✅ Use shared state
   const [matchingUserId, setMatchingUserId] = useState<string | null>(null);
 
@@ -28,6 +25,14 @@ export default function NewMatchesSection({
     setMatchingUserId(targetUser.id);
 
     try {
+      // Đảm bảo người dùng đã đăng nhập
+      const { data: { user: currentUser } } = await supabase.auth.getUser();
+      if (!currentUser) {
+        alert("Vui lòng đăng nhập để gửi yêu cầu ghép đôi.");
+        setMatchingUserId(null);
+        return;
+      }
+
       // Tìm khóa học chung đầu tiên để matching
       // Nếu có courseId từ previous match, dùng nó
       // Nếu không, dùng khóa học chung đầu tiên
@@ -56,37 +61,42 @@ export default function NewMatchesSection({
       }
 
       if (!matchingCourseId) {
-        alert("Không tìm thấy khóa học chung để ghép đôi.");
+        alert("Không tìm thấy khóa học chung để gửi yêu cầu ghép đôi.");
         setMatchingUserId(null);
         return;
       }
 
-      // Call existing match-user API
-      const response = await fetch("/api/match-user", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ courseId: matchingCourseId }),
-      });
+      // Gửi yêu cầu ghép đôi thông qua bảng notifications (flow request/accept)
+      const { error } = await supabase
+        .from("notifications")
+        .insert([
+          {
+            user_id: targetUser.id,
+            title: "Yêu cầu ghép đôi",
+            message: `${currentUser.user_metadata?.full_name || "Ai đó"} muốn ghép đôi với bạn`,
+            type: "match_request",
+            read: false,
+            metadata: {
+              from_user: currentUser.id,
+              course_id: matchingCourseId || null,
+            },
+          },
+        ]);
 
-      if (!response.ok) {
-        const error = await response.json();
-        alert(error.error || "Không thể ghép đôi. Vui lòng thử lại.");
+      if (error) {
+        console.error("[NewMatchesSection] Error sending match request:", error);
+        alert("Không thể gửi yêu cầu ghép đôi. Vui lòng thử lại.");
         setMatchingUserId(null);
         return;
       }
 
-      const data = await response.json();
-
-      // Nếu đã ghép đôi thành công, chuyển sang trang tin nhắn trực tiếp
-      if (data.status === "matched" && data.matchedUserId) {
-        router.push(`/messages?user=${data.matchedUserId}`);
-      } else {
-        // Ngược lại, giữ behavior cũ: chuyển sang trang match theo khóa học
-        router.push(ROUTES.COURSE_MATCH(matchingCourseId));
-      }
+      alert("Đã gửi yêu cầu ghép đôi. Vui lòng chờ người dùng kia chấp nhận trong mục Thông báo.");
     } catch (error) {
       console.error("[NewMatchesSection] Match error:", error);
       alert("Có lỗi xảy ra. Vui lòng thử lại.");
+      setMatchingUserId(null);
+    } finally {
+      // Reset trạng thái sau khi hoàn tất
       setMatchingUserId(null);
     }
   };

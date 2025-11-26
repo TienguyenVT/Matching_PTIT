@@ -42,7 +42,20 @@ export default function MatchPage({ params }: { params: { courseId: string } }) 
 
   const onMatch = async () => {
     setStatus('matching');
-    const res = await fetch('/api/match-user', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ courseId }) });
+    // Lấy session để gửi Bearer token cho API match-user
+    const { data: { session } } = await supabase.auth.getSession();
+
+    const res = await fetch('/api/match-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(session?.access_token && {
+          Authorization: `Bearer ${session.access_token}`,
+        }),
+      },
+      credentials: 'include',
+      body: JSON.stringify({ courseId }),
+    });
     if (res.ok) {
       const j = await res.json();
       setRoomId(j.roomId);

@@ -68,53 +68,28 @@ export async function GET(req: NextRequest) {
     const currentUserRole = currentUserProfile?.role || 'user';
     console.log("[community-matches] Current user role:", currentUserRole);
 
-    // 1. Lấy người dùng đã matching (từ chat_rooms với status = 'matched')
-    // Lấy tất cả rooms mà current user là thành viên
-    const { data: userRooms } = await supabase
-      .from("chat_members")
-      .select("room_id, chat_rooms(id, course_id, status, created_at)")
-      .eq("user_id", user.id);
+    // 1. Lấy người dùng đã có cuộc trò chuyện (xem như đã ghép đôi)
+    // Sử dụng RPC get_user_conversations (đã dùng ở trang /messages)
+    const { data: conversations, error: convError } = await supabase
+      .rpc('get_user_conversations', { p_user_id: user.id });
 
-    // ✅ OPTIMIZED: Batch fetch all data to avoid N+1 queries
+    if (convError) {
+      console.error('[community-matches] Error fetching conversations:', convError);
+    }
+
     let previousMatches: any[] = [];
-    
-    if (userRooms && userRooms.length > 0) {
-      // Get all matched room IDs
-      const matchedRoomIds = userRooms
-        .filter((ur: any) => ur.chat_rooms?.status === 'matched')
-        .map((ur: any) => ur.chat_rooms.id);
-      
-      if (matchedRoomIds.length > 0) {
-        // Batch fetch all chat members with their profiles in ONE query
-        const { data: allMembers } = await supabase
-          .from("chat_members")
-          .select(`
-            room_id,
-            user_id,
-            profiles!inner (
-              id,
-              full_name,
-              email,
-              avatar_url,
-              role
-            )
-          `)
-          .in("room_id", matchedRoomIds)
-          .neq("user_id", user.id);
-        
-        // Map the results with room info
-        if (allMembers) {
-          previousMatches = allMembers.map((member: any) => {
-            const room = userRooms.find((ur: any) => ur.chat_rooms?.id === member.room_id)?.chat_rooms as any;
-            return {
-              ...member.profiles,
-              roomId: member.room_id,
-              courseId: room?.course_id,
-              matchedAt: room?.created_at,
-            };
-          });
-        }
-      }
+
+    if (conversations && (conversations as any[]).length > 0) {
+      previousMatches = (conversations as any[]).map((c: any) => ({
+        id: c.user_id,
+        full_name: c.full_name || null,
+        email: null,
+        avatar_url: c.avatar_url || null,
+        // Các field bên dưới chỉ để tương thích type, UI không sử dụng
+        roomId: '',
+        courseId: '',
+        matchedAt: c.updated_at,
+      }));
     }
 
     // Remove duplicates and sort by matchedAt DESC
@@ -162,9 +137,9 @@ export async function GET(req: NextRequest) {
         level: uc.courses?.level || null,
       }));
 
-    // Filter out users who already matched with current user
+    // Filter out users who already matched với current user (đã có cuộc trò chuyện)
     const matchedUserIds = new Set(
-      previousMatches.map((m) => m.id)
+      uniqueMatches.map((m) => m.id)
     );
 
     // 3. Lấy danh sách TẤT CẢ người dùng khả dụng (đã đăng ký ít nhất 1 khóa học)

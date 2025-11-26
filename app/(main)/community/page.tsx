@@ -23,7 +23,7 @@ interface PreviousMatch {
 export default function CommunityPage() {
   const supabase = supabaseBrowser();
   const router = useRouter();
-  const { user } = useAuth(); // ✅ Use shared state
+  const { user, loading: authLoading } = useAuth(); // ✅ Use shared state
   const [previousMatches, setPreviousMatches] = useState<PreviousMatch[]>([]);
   const [totalPreviousMatches, setTotalPreviousMatches] = useState(0);
   const [newMatches, setNewMatches] = useState<MatchScore[]>([]);
@@ -31,6 +31,11 @@ export default function CommunityPage() {
 
   useEffect(() => {
     const loadData = async () => {
+      // Chờ trạng thái auth khởi tạo xong trước khi quyết định redirect
+      if (authLoading) {
+        return;
+      }
+
       if (!user) {
         router.replace(ROUTES.LOGIN);
         return;
@@ -74,7 +79,7 @@ export default function CommunityPage() {
     };
 
     loadData();
-  }, [supabase, router, user]);
+  }, [supabase, router, user, authLoading]);
 
   return (
     <div className="p-4 md:p-6 space-y-6">
