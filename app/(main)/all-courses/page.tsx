@@ -146,7 +146,7 @@ export default function AllCoursesPage() {
           {filteredCourses.map((course) => (
             <div
               key={course.id}
-              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+              className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
             >
               {/* Course Image */}
               <Link href={ROUTES.COURSE_DETAIL(course.id)}>
@@ -173,7 +173,7 @@ export default function AllCoursesPage() {
               </Link>
 
               {/* Course Content */}
-              <div className="p-4">
+              <div className="flex flex-col flex-1 p-4">
                 <Link href={ROUTES.COURSE_DETAIL(course.id)}>
                   <div className="flex items-start gap-2 mb-2">
                     <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
@@ -185,13 +185,13 @@ export default function AllCoursesPage() {
 
                 {/* Button Actions */}
                 {enrolledIds.has(course.id) ? (
-                  <Link href={ROUTES.COURSE_DETAIL(course.id)}>
+                  <Link href={ROUTES.COURSE_DETAIL(course.id)} className="mt-auto block">
                     <div className="w-full text-center py-2 px-4 bg-teal-600 hover:bg-teal-700 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
                       Xem chi tiết
                     </div>
                   </Link>
                 ) : (
-                  <div className="flex gap-2">
+                  <div className="mt-auto flex gap-2">
                     <button
                       onClick={(e) => handleRegisterCourse(course.id, e)}
                       disabled={registering === course.id}

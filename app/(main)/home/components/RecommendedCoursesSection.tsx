@@ -37,7 +37,9 @@ export default function RecommendedCoursesSection({
     );
   }
 
-  const enrolledCourseIds = new Set(userCourses?.map((uc: any) => uc.courseId));
+  const enrolledCourseIds = new Set(
+    userCourses?.map((uc: any) => uc.courseId || uc.course_id)
+  );
   const recommendedCourses = courses.filter(c => !enrolledCourseIds.has(c.id));
 
   return (
