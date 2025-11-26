@@ -67,6 +67,11 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   const [isEnrolled, setIsEnrolled] = useState(false);
   const [expandedModules, setExpandedModules] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab] = useState<'knowledge' | 'exercises' | 'products' | 'report'>('knowledge');
+  const [userAnswers, setUserAnswers] = useState<number[]>([]);
+  const [showQuizResults, setShowQuizResults] = useState(false);
+  const [quizScore, setQuizScore] = useState<number | null>(null);
+  const [quizSummary, setQuizSummary] = useState<{ correct: number[]; incorrect: number[] }>({ correct: [], incorrect: [] });
+  const [completedContentIds, setCompletedContentIds] = useState<string[]>([]);
 
   useEffect(() => {
     const load = async () => {
@@ -110,8 +115,6 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         console.log('[DetailPage] Modules loaded:', modulesData?.length || 0, 'modules');
       }
 
-      setModules(modulesData || []);
-
       // Load contents
       console.log('[DetailPage] Loading course contents...');
       const { data: contentsData, error: contentsError } = await supabase
@@ -126,14 +129,65 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         console.log('[DetailPage] Contents loaded:', contentsData?.length || 0, 'items');
       }
 
-      setContents(contentsData || []);
+      const safeModules = (modulesData || []) as CourseModule[];
+      const safeContents = (contentsData || []) as CourseContent[];
 
-      // Set first content as selected (loadContentDetails sẽ được gọi tự động qua useEffect)
-      if (contentsData && contentsData.length > 0) {
-        setSelectedContent(contentsData[0]);
-      } else if (modulesData && modulesData.length > 0) {
-        // Auto-expand first module
-        setExpandedModules(new Set([modulesData[0].id]));
+      // Load learning progress for this user & course (optional if table exists)
+      let initialCompletedIds: string[] = [];
+      try {
+        const { data: progressData, error: progressError } = await supabase
+          .from('user_content_progress')
+          .select('content_id, is_completed')
+          .eq('user_id', user.id)
+          .eq('course_id', courseId);
+
+        if (progressError) {
+          console.warn('[DetailPage] Error loading learning progress (optional):', progressError);
+        } else if (progressData) {
+          initialCompletedIds = (progressData as any[])
+            .filter((row) => (row as any).is_completed)
+            .map((row) => (row as any).content_id as string)
+            .filter(Boolean);
+        }
+      } catch (progressErr) {
+        console.warn('[DetailPage] Exception while loading learning progress (optional):', progressErr);
+      }
+
+      setModules(safeModules);
+      setContents(safeContents);
+      setCompletedContentIds(initialCompletedIds);
+
+      // Set first content as selected theo đúng thứ tự chương/bài, ưu tiên doc/video trước quiz
+      if (safeModules.length > 0 && safeContents.length > 0) {
+        const initialGrouped = safeModules
+          .map((module) => ({
+            ...module,
+            contents: safeContents
+              .filter((content) => content.module_id === module.id)
+              .sort((a, b) => a.order_index - b.order_index),
+          }))
+          .filter((module) => module.contents.length > 0)
+          .sort((a, b) => a.order_index - b.order_index);
+
+        if (initialGrouped.length > 0) {
+          const firstModule = initialGrouped[0];
+          const docsAndVideos = firstModule.contents.filter(
+            (c) => c.kind === 'doc' || c.kind === 'video'
+          );
+          const firstContent =
+            docsAndVideos.length > 0 ? docsAndVideos[0] : firstModule.contents[0];
+
+          setSelectedContent(firstContent);
+          setExpandedModules(new Set([firstModule.id]));
+        } else if (safeContents.length > 0) {
+          // Fallback: chọn phần tử đầu tiên nếu không nhóm được theo module
+          setSelectedContent(safeContents[0]);
+        }
+      } else if (safeContents.length > 0) {
+        setSelectedContent(safeContents[0]);
+      } else if (safeModules.length > 0) {
+        // Auto-expand first module nếu chưa có nội dung
+        setExpandedModules(new Set([safeModules[0].id]));
       }
 
       // Check if enrolled
@@ -175,6 +229,10 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         } else {
           setLessonContent(data);
           setQuizContent(null);
+          setUserAnswers([]);
+          setShowQuizResults(false);
+          setQuizScore(null);
+          setQuizSummary({ correct: [], incorrect: [] });
         }
       } else if (kind === 'quiz') {
         // Load quiz content
@@ -187,13 +245,28 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         if (error) {
           console.error('Error loading quiz content:', error);
         } else {
-          setQuizContent(data);
+          if (data) {
+            const quizData = data as QuizContent;
+            setQuizContent(quizData);
+            const questions = quizData.questions || [];
+            setUserAnswers(new Array(questions.length).fill(-1));
+          } else {
+            setQuizContent(null);
+            setUserAnswers([]);
+          }
           setLessonContent(null);
+          setShowQuizResults(false);
+          setQuizScore(null);
+          setQuizSummary({ correct: [], incorrect: [] });
         }
       } else {
         // Video: không có content chi tiết
         setLessonContent(null);
         setQuizContent(null);
+        setUserAnswers([]);
+        setShowQuizResults(false);
+        setQuizScore(null);
+        setQuizSummary({ correct: [], incorrect: [] });
       }
     } catch (error) {
       console.error('Error loading content details:', error);
@@ -274,6 +347,110 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
       .sort((a, b) => a.order_index - b.order_index)
   })).filter(module => module.contents.length > 0);
 
+  const orderedModules = [...groupedModules].sort((a, b) => a.order_index - b.order_index);
+
+  const flatContents: CourseContent[] = orderedModules.flatMap((module) => {
+    const docsAndVideos = module.contents
+      .filter((c) => c.kind === 'doc' || c.kind === 'video')
+      .sort((a, b) => a.order_index - b.order_index);
+    const quizzes = module.contents
+      .filter((c) => c.kind === 'quiz')
+      .sort((a, b) => a.order_index - b.order_index);
+    return [...docsAndVideos, ...quizzes];
+  });
+
+  const findIndexById = (id: string | null | undefined) =>
+    id ? flatContents.findIndex((c) => c.id === id) : -1;
+
+  const currentIndex = findIndexById(selectedContent?.id);
+
+  const highestCompletedIndex =
+    flatContents.length === 0 || completedContentIds.length === 0
+      ? -1
+      : Math.max(
+          -1,
+          ...completedContentIds
+            .map((id) => findIndexById(id))
+            .filter((idx) => idx >= 0)
+        );
+
+  const unlockedUntilIndex =
+    flatContents.length > 0
+      ? Math.min(
+          Math.max(highestCompletedIndex + 1, 0),
+          flatContents.length - 1
+        )
+      : -1;
+
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex >= 0 && currentIndex < flatContents.length - 1;
+
+  const canSelectContent = (content: CourseContent) => {
+    const idx = findIndexById(content.id);
+    return idx <= unlockedUntilIndex;
+  };
+
+  const goToContent = (target: CourseContent | null) => {
+    if (!target) return;
+    if (!canSelectContent(target)) {
+      alert('Bạn cần hoàn thành các bài học trước đó trước khi truy cập nội dung này.');
+      return;
+    }
+    setSelectedContent(target);
+    setActiveTab('knowledge');
+  };
+
+  const goToPrev = () => {
+    if (!hasPrev) return;
+    const target = flatContents[currentIndex - 1];
+    setSelectedContent(target);
+    setActiveTab('knowledge');
+  };
+
+  const persistCompletion = async (content: CourseContent, score: number | null = null) => {
+    try {
+      if (!user) return;
+
+      const payload: any = {
+        user_id: user.id,
+        course_id: courseId,
+        content_id: content.id,
+        is_completed: true,
+        last_attempt_at: new Date().toISOString(),
+      };
+
+      if (score !== null) {
+        payload.last_score = score;
+      }
+
+      const { error } = await supabase
+        .from('user_content_progress')
+        .upsert(payload, { onConflict: 'user_id,course_id,content_id' });
+
+      if (error) {
+        console.error('[DetailPage] Error saving learning progress:', error);
+      }
+    } catch (err) {
+      console.error('[DetailPage] Exception while saving learning progress:', err);
+    }
+  };
+
+  const markCurrentContentCompleted = (score: number | null = null) => {
+    if (!selectedContent) return;
+    const idx = findIndexById(selectedContent.id);
+    if (idx < 0) return;
+    setCompletedContentIds((prev) => {
+      if (prev.includes(selectedContent.id)) return prev;
+      return [...prev, selectedContent.id];
+    });
+
+    // Fire-and-forget persistence to server
+    persistCompletion(selectedContent, score);
+  };
+
+  const isNextLocked =
+    hasNext && currentIndex + 1 > unlockedUntilIndex;
+
   const toggleModule = (moduleId: string) => {
     setExpandedModules(prev => {
       const next = new Set(prev);
@@ -295,6 +472,69 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
       return module ? module.title : selectedContent.title;
     }
     return 'ÔN TẬP'; // Giá trị mặc định
+  };
+
+  const handleSelectAnswer = (questionIndex: number, optionIndex: number) => {
+    setUserAnswers(prev => {
+      const next = [...prev];
+      next[questionIndex] = optionIndex;
+      return next;
+    });
+  };
+
+  const handleSubmitQuiz = () => {
+    if (!quizContent || !quizContent.questions || quizContent.questions.length === 0) {
+      return;
+    }
+
+    const total = quizContent.questions.length;
+    const correctQuestions: number[] = [];
+    const incorrectQuestions: number[] = [];
+
+    quizContent.questions.forEach((q, idx) => {
+      if (userAnswers[idx] === q.correctAnswer) {
+        correctQuestions.push(idx + 1);
+      } else {
+        incorrectQuestions.push(idx + 1);
+      }
+    });
+
+    const correctCount = correctQuestions.length;
+    const scoreOn10 = total > 0 ? (correctCount / total) * 10 : 0;
+
+    setQuizScore(scoreOn10);
+    setQuizSummary({ correct: correctQuestions, incorrect: incorrectQuestions });
+    setShowQuizResults(true);
+    markCurrentContentCompleted(scoreOn10);
+  };
+
+  const startQuizForCurrentModule = () => {
+    if (!selectedContent) {
+      return;
+    }
+
+    const currentModule = groupedModules.find(m =>
+      m.contents.some(c => c.id === selectedContent.id)
+    );
+
+    if (!currentModule) {
+      return;
+    }
+
+    const quizForModule = currentModule.contents.find(c => c.kind === 'quiz');
+
+    if (!quizForModule) {
+      alert('Chưa có bài kiểm tra cho chương này.');
+      return;
+    }
+    const quizIndex = flatContents.findIndex((c) => c.id === quizForModule.id);
+    if (quizIndex > unlockedUntilIndex && quizIndex !== -1) {
+      alert('Bạn cần học xong toàn bộ nội dung chương này trước khi làm bài kiểm tra.');
+      return;
+    }
+
+    setSelectedContent(quizForModule);
+    setActiveTab('knowledge');
   };
 
   return (
@@ -330,19 +570,42 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                     </button>
                     {expandedModules.has(module.id) && (
                       <div className="px-3 pb-2 space-y-1">
-                        {module.contents.map((content) => (
-                          <button
-                            key={content.id}
-                            onClick={() => setSelectedContent(content)}
-                            className={`w-full text-left p-2 rounded text-sm ${selectedContent?.id === content.id
-                              ? 'bg-green-50 text-green-700'
-                              : 'text-gray-600 hover:bg-gray-50'
+                        {module.contents.map((content) => {
+                          const contentIndex = flatContents.findIndex((c) => c.id === content.id);
+                          const isLocked = contentIndex !== -1 && contentIndex > unlockedUntilIndex;
+                          const isActive = selectedContent?.id === content.id;
+                          return (
+                            <button
+                              key={content.id}
+                              onClick={() => {
+                                if (!isLocked) {
+                                  goToContent(content);
+                                } else {
+                                  alert('Vui lòng hoàn thành các bài học trước đó trước khi mở bài này.');
+                                }
+                              }}
+                              disabled={isLocked}
+                              className={`w-full text-left p-2 rounded text-sm ${
+                                isActive
+                                  ? 'bg-green-50 text-green-700'
+                                  : isLocked
+                                    ? 'text-gray-400 cursor-not-allowed opacity-60'
+                                    : 'text-gray-600 hover:bg-gray-50'
                               }`}
-                          >
-                            <span className="mr-1 text-xs uppercase">{content.kind === 'doc' ? '📄' : content.kind === 'quiz' ? '📝' : '🎥'}</span>
-                            {content.title}
-                          </button>
-                        ))}
+                            >
+                              <span className="mr-1 text-xs uppercase">
+                                {isLocked
+                                  ? '🔒'
+                                  : content.kind === 'doc'
+                                  ? '📄'
+                                  : content.kind === 'quiz'
+                                  ? '📝'
+                                  : '🎥'}
+                              </span>
+                              {content.title}
+                            </button>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -377,19 +640,28 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
 
             {/* Action Buttons */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <button className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+              <button
+                onClick={() => setActiveTab('knowledge')}
+                className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
                 <span className="text-xs">Xem kiến thức</span>
               </button>
-              <button className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+              <button
+                onClick={() => setActiveTab('exercises')}
+                className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
                 <span className="text-xs">Làm bài tập</span>
               </button>
-              <button className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+              <button
+                onClick={startQuizForCurrentModule}
+                className="flex flex-col items-center gap-2 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
+              >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                 </svg>
@@ -449,29 +721,49 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                             {q.options.map((option, optIdx) => (
                               <label
                                 key={optIdx}
-                                className={`flex items-center gap-2 p-2 rounded cursor-pointer ${optIdx === q.correctAnswer
-                                  ? 'bg-green-50 border border-green-200'
-                                  : 'hover:bg-gray-50'
+                                className={`flex items-center gap-2 p-2 rounded cursor-pointer ${
+                                  showQuizResults
+                                    ? optIdx === q.correctAnswer
+                                      ? 'bg-green-50 border border-green-200'
+                                      : userAnswers[idx] === optIdx
+                                        ? 'bg-red-50 border border-red-200'
+                                        : 'hover:bg-gray-50'
+                                    : userAnswers[idx] === optIdx
+                                      ? 'bg-teal-50 border border-teal-200'
+                                      : 'hover:bg-gray-50'
                                   }`}
                               >
                                 <input
                                   type="radio"
                                   name={`question-${idx}`}
                                   value={optIdx}
-                                  checked={optIdx === q.correctAnswer}
-                                  disabled
+                                  checked={userAnswers[idx] === optIdx}
+                                  disabled={showQuizResults}
+                                  onChange={() => handleSelectAnswer(idx, optIdx)}
                                   className="text-teal-600"
                                 />
-                                <span className={`${optIdx === q.correctAnswer ? 'font-medium text-green-700' : 'text-gray-700'}`}>
+                                <span
+                                  className={`${
+                                    showQuizResults
+                                      ? optIdx === q.correctAnswer
+                                        ? 'font-medium text-green-700'
+                                        : userAnswers[idx] === optIdx
+                                          ? 'font-medium text-red-700'
+                                          : 'text-gray-700'
+                                      : userAnswers[idx] === optIdx
+                                        ? 'font-medium text-teal-700'
+                                        : 'text-gray-700'
+                                  }`}
+                                >
                                   {String.fromCharCode(65 + optIdx)}. {option}
                                 </span>
-                                {optIdx === q.correctAnswer && (
+                                {showQuizResults && optIdx === q.correctAnswer && (
                                   <span className="ml-auto text-green-600 text-sm">✓ Đáp án đúng</span>
                                 )}
                               </label>
                             ))}
                           </div>
-                          {q.explanation && (
+                          {showQuizResults && q.explanation && (
                             <div className="ml-8 mt-3 p-3 bg-blue-50 border border-blue-200 rounded">
                               <p className="text-sm text-blue-800">
                                 <strong>Giải thích:</strong> {q.explanation}
@@ -480,6 +772,40 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                           )}
                         </div>
                       ))}
+                      <div className="mt-6 flex flex-col gap-4 border-t border-gray-200 pt-4">
+                        <div className="flex justify-between items-center">
+                          <button
+                            type="button"
+                            onClick={handleSubmitQuiz}
+                            disabled={showQuizResults || quizContent.questions.length === 0}
+                            className="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            Nộp bài và xem kết quả
+                          </button>
+                          {showQuizResults && quizScore !== null && (
+                            <div className="text-right text-sm">
+                              <p className="font-semibold text-gray-800">
+                                Điểm: <span className="text-green-700">{quizScore.toFixed(1)} / 10</span>
+                              </p>
+                              <p className="text-gray-600">
+                                Đúng {quizSummary.correct.length}/{quizContent.questions.length} câu
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        {showQuizResults && (
+                          <div className="text-sm text-gray-700 space-y-1">
+                            <p>
+                              Câu đúng:{' '}
+                              {quizSummary.correct.length > 0 ? quizSummary.correct.join(', ') : 'Không có'}
+                            </p>
+                            <p>
+                              Câu sai:{' '}
+                              {quizSummary.incorrect.length > 0 ? quizSummary.incorrect.join(', ') : 'Không có'}
+                            </p>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 ) : selectedContent?.kind === 'video' ? (
@@ -501,6 +827,57 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                 ) : (
                   <div className="bg-gray-50 rounded-lg p-6">
                     <p className="text-gray-500 text-sm">Nội dung bài học đang được cập nhật</p>
+                  </div>
+                )}
+
+                {/* Điều hướng bài học trước / tiếp theo */}
+                {!loadingContent && flatContents.length > 0 && currentIndex >= 0 && (
+                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                    <button
+                      type="button"
+                      onClick={goToPrev}
+                      disabled={!hasPrev}
+                      className="px-4 py-2 text-sm rounded-md border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Bài trước
+                    </button>
+                    <span className="text-xs text-gray-500">
+                      Bài {currentIndex + 1} / {flatContents.length}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (!hasNext) return;
+                        const nextContent = flatContents[currentIndex + 1];
+                        if (!nextContent) return;
+
+                        if (selectedContent?.kind === 'doc' || selectedContent?.kind === 'video') {
+                          // Đánh dấu đã hoàn thành bài hiện tại rồi chuyển sang bài tiếp theo
+                          markCurrentContentCompleted();
+                          setSelectedContent(nextContent);
+                          setActiveTab('knowledge');
+                          return;
+                        }
+
+                        const idxNext = currentIndex + 1;
+                        const lockedNext = idxNext > unlockedUntilIndex;
+                        if (lockedNext) {
+                          alert('Bạn cần hoàn thành nội dung hiện tại trước khi sang bài tiếp theo.');
+                          return;
+                        }
+
+                        setSelectedContent(nextContent);
+                        setActiveTab('knowledge');
+                      }}
+                      disabled={
+                        !hasNext ||
+                        loadingContent ||
+                        (selectedContent?.kind === 'quiz' && isNextLocked)
+                      }
+                      className="px-4 py-2 text-sm rounded-md bg-green-600 text-white hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Bài tiếp theo
+                    </button>
                   </div>
                 )}
               </div>

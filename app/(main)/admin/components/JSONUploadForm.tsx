@@ -11,12 +11,14 @@ interface JSONUploadFormProps {
 
 export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabase }: JSONUploadFormProps) {
   const [file, setFile] = useState<File | null>(null);
+  const [quizFile, setQuizFile] = useState<File | null>(null);
   const [courseTitle, setCourseTitle] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
   const [courseLevel, setCourseLevel] = useState('Beginner');
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const quizFileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -34,6 +36,26 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
       if (!courseTitle) {
         const fileName = selectedFile.name.replace(/\.json$/i, '');
         setCourseTitle(fileName);
+      }
+    }
+  };
+
+  const handleQuizFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      if (selectedFile.type !== 'application/json' && !selectedFile.name.toLowerCase().endsWith('.json')) {
+        alert('Vui lòng chọn file JSON bài kiểm tra.');
+        return;
+      }
+      if (selectedFile.size > 10 * 1024 * 1024) {
+        alert('File bài kiểm tra quá lớn. Kích thước tối đa là 10MB.');
+        return;
+      }
+      setQuizFile(selectedFile);
+      // Nếu chưa có courseTitle, auto-fill từ tên file test (bỏ _Test nếu có)
+      if (!courseTitle) {
+        const baseName = selectedFile.name.replace(/\.json$/i, '').replace(/_Test$/i, '');
+        setCourseTitle(baseName);
       }
     }
   };
@@ -65,6 +87,9 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
 
       const formData = new FormData();
       formData.append('file', file);
+      if (quizFile) {
+        formData.append('quizFile', quizFile);
+      }
       if (courseTitle) formData.append('courseTitle', courseTitle);
       if (courseDescription) formData.append('courseDescription', courseDescription);
       if (courseLevel) formData.append('courseLevel', courseLevel);
@@ -104,16 +129,27 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
 
       // Reset form
       setFile(null);
+      setQuizFile(null);
       setCourseTitle('');
       setCourseDescription('');
       setCourseLevel('Beginner');
       if (fileInputRef.current) {
         fileInputRef.current.value = '';
       }
+      if (quizFileInputRef.current) {
+        quizFileInputRef.current.value = '';
+      }
 
-      alert(`Khóa học "${data.course.title}" đã được tạo thành công!\n` +
-            `- ${data.statistics.modules} học phần\n` +
-            `- ${data.statistics.lessons} bài học`);
+      const stats = data.statistics || {};
+      let message = `Khóa học "${data.course.title}" đã được tạo thành công!\n` +
+        `- ${stats.modules} học phần\n` +
+        `- ${stats.lessons} bài học`;
+
+      if (typeof stats.quizzes === 'number' && typeof stats.questions === 'number') {
+        message += `\n- ${stats.quizzes} bài kiểm tra (${stats.questions} câu hỏi)`;
+      }
+
+      alert(message);
 
     } catch (error: any) {
       console.error('Upload error:', error);
@@ -141,6 +177,27 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           required
           className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 disabled:opacity-50"
         />
+        <p className="mt-1 text-xs text-gray-500">
+          Chọn file JSON nội dung khóa học (từ thư mục <code className="bg-gray-100 px-1 rounded">documents/Courses</code>).
+        </p>
+      </div>
+
+      {/* Optional Quiz File Upload */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          File JSON bài kiểm tra (tùy chọn)
+        </label>
+        <input
+          ref={quizFileInputRef}
+          type="file"
+          accept=".json,application/json"
+          onChange={handleQuizFileChange}
+          disabled={uploading}
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 disabled:opacity-50"
+        />
+        <p className="mt-1 text-xs text-gray-500">
+          Nếu chọn, hệ thống sẽ tự động tạo bài kiểm tra theo chương cho khóa học này (từ thư mục <code className="bg-gray-100 px-1 rounded">documents/Test</code> với tên file giống nội dung khóa học).
+        </p>
       </div>
 
       {/* Course Title */}
