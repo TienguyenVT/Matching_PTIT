@@ -58,7 +58,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Lấy role của current user để filter kết quả
+    // Lấy role của current user (hiện tại chỉ dùng cho logging / mở rộng sau này)
     const { data: currentUserProfile } = await supabase
       .from("profiles")
       .select("role")
@@ -100,8 +100,7 @@ export async function GET(req: NextRequest) {
             )
           `)
           .in("room_id", matchedRoomIds)
-          .neq("user_id", user.id)
-          .eq("profiles.role", currentUserRole);
+          .neq("user_id", user.id);
         
         // Map the results with room info
         if (allMembers) {
@@ -204,8 +203,8 @@ export async function GET(req: NextRequest) {
         ? item.profiles[0]
         : item.profiles;
       
-      // Skip nếu profile không tồn tại hoặc không cùng role
-      if (!profile || profile.role !== currentUserRole) continue;
+      // Skip nếu profile không tồn tại
+      if (!profile) continue;
       
       // Track course_id for each user_id (for debugging)
       if (!courseIdTracking.has(userId)) {

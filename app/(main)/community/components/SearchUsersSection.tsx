@@ -34,8 +34,9 @@ export default function SearchUsersSection() {
         if (user) {
           const { data: courses } = await supabase
             .from("user_courses")
-            .select("course_id, courses(id, level)")
-            .eq("user_id", user.id);
+            .select("course_id, courses(id, level, is_active)")
+            .eq("user_id", user.id)
+            .eq("courses.is_active", true);
 
           if (courses) {
             // Đảm bảo không có duplicate course_id
@@ -82,8 +83,9 @@ export default function SearchUsersSection() {
       if (user) {
         const { data: courses } = await supabase
           .from("user_courses")
-          .select("course_id, courses(id, level)")
-          .eq("user_id", user.id);
+          .select("course_id, courses(id, level, is_active)")
+          .eq("user_id", user.id)
+          .eq("courses.is_active", true);
 
         if (courses) {
           // Đảm bảo không có duplicate course_id
