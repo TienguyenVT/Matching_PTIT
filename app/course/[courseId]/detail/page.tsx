@@ -129,12 +129,33 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         console.log('[DetailPage] Contents loaded:', contentsData?.length || 0, 'items');
       }
 
-      const safeModules = modulesData || [];
-      const safeContents = contentsData || [];
+      const safeModules = (modulesData || []) as CourseModule[];
+      const safeContents = (contentsData || []) as CourseContent[];
+
+      // Load learning progress for this user & course (optional if table exists)
+      let initialCompletedIds: string[] = [];
+      try {
+        const { data: progressData, error: progressError } = await supabase
+          .from('user_content_progress')
+          .select('content_id, is_completed')
+          .eq('user_id', user.id)
+          .eq('course_id', courseId);
+
+        if (progressError) {
+          console.warn('[DetailPage] Error loading learning progress (optional):', progressError);
+        } else if (progressData) {
+          initialCompletedIds = (progressData as any[])
+            .filter((row) => (row as any).is_completed)
+            .map((row) => (row as any).content_id as string)
+            .filter(Boolean);
+        }
+      } catch (progressErr) {
+        console.warn('[DetailPage] Exception while loading learning progress (optional):', progressErr);
+      }
 
       setModules(safeModules);
       setContents(safeContents);
-      setCompletedContentIds([]);
+      setCompletedContentIds(initialCompletedIds);
 
       // Set first content as selected theo đúng thứ tự chương/bài, ưu tiên doc/video trước quiz
       if (safeModules.length > 0 && safeContents.length > 0) {
@@ -386,7 +407,35 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     setActiveTab('knowledge');
   };
 
-  const markCurrentContentCompleted = () => {
+  const persistCompletion = async (content: CourseContent, score: number | null = null) => {
+    try {
+      if (!user) return;
+
+      const payload: any = {
+        user_id: user.id,
+        course_id: courseId,
+        content_id: content.id,
+        is_completed: true,
+        last_attempt_at: new Date().toISOString(),
+      };
+
+      if (score !== null) {
+        payload.last_score = score;
+      }
+
+      const { error } = await supabase
+        .from('user_content_progress')
+        .upsert(payload, { onConflict: 'user_id,course_id,content_id' });
+
+      if (error) {
+        console.error('[DetailPage] Error saving learning progress:', error);
+      }
+    } catch (err) {
+      console.error('[DetailPage] Exception while saving learning progress:', err);
+    }
+  };
+
+  const markCurrentContentCompleted = (score: number | null = null) => {
     if (!selectedContent) return;
     const idx = findIndexById(selectedContent.id);
     if (idx < 0) return;
@@ -394,6 +443,9 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
       if (prev.includes(selectedContent.id)) return prev;
       return [...prev, selectedContent.id];
     });
+
+    // Fire-and-forget persistence to server
+    persistCompletion(selectedContent, score);
   };
 
   const isNextLocked =
@@ -453,7 +505,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     setQuizScore(scoreOn10);
     setQuizSummary({ correct: correctQuestions, incorrect: incorrectQuestions });
     setShowQuizResults(true);
-    markCurrentContentCompleted();
+    markCurrentContentCompleted(scoreOn10);
   };
 
   const startQuizForCurrentModule = () => {
