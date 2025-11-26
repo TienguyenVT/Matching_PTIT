@@ -37,8 +37,10 @@ export default function HomePage() {
     }
   }, [user, authLoading, router]);
   
-  // Compute enrolled course IDs
-  const enrolledIds = new Set(userCourses.map(uc => uc.course_id));
+  // Compute enrolled course IDs (support both raw and transformed shapes)
+  const enrolledIds = new Set(
+    userCourses.map((uc: any) => uc.courseId || uc.course_id)
+  );
   
   // Get enrolled courses details
   const enrolled = allCourses
@@ -104,7 +106,7 @@ export default function HomePage() {
             <Link
               key={course.id}
               href={ROUTES.COURSE_DETAIL(course.id)}
-              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 block"
+              className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
             >
               {/* Course Image */}
               <div 
@@ -123,7 +125,7 @@ export default function HomePage() {
               </div>
 
               {/* Course Content */}
-              <div className="p-4">
+              <div className="flex flex-col flex-1 p-4">
                 <div className="flex items-start gap-2 mb-2">
                   <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
                   <h3 className="font-semibold text-gray-800 line-clamp-2">{course.title}</h3>
@@ -136,7 +138,7 @@ export default function HomePage() {
                   <span>Khóa học đang diễn ra</span>
                 </div>
 
-                <div className="w-full text-center py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors text-sm font-medium">
+                <div className="mt-auto w-full text-center py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors text-sm font-medium">
                   Xem chi tiết
                 </div>
               </div>
@@ -179,7 +181,7 @@ export default function HomePage() {
             {suggested.map((course) => (
               <div
                 key={course.id}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
               >
                 {/* Course Image */}
                 <Link href={ROUTES.COURSE_DETAIL(course.id)}>
@@ -200,7 +202,7 @@ export default function HomePage() {
                 </Link>
 
                 {/* Course Content */}
-                <div className="p-4">
+                <div className="flex flex-col flex-1 p-4">
                   <Link href={ROUTES.COURSE_DETAIL(course.id)}>
                     <div className="flex items-start gap-2 mb-2">
                       <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
@@ -211,7 +213,7 @@ export default function HomePage() {
                   <p className="text-sm text-gray-500 mb-4 line-clamp-2">{course.description}</p>
 
                   {/* Button Actions */}
-                  <div className="flex gap-2">
+                  <div className="mt-auto flex gap-2">
                     <button
                       onClick={(e) => handleRegisterCourse(course.id, e)}
                       disabled={registering === course.id}
