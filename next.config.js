@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
+
+// Detect environment
+const isDev = process.env.NODE_ENV === 'development';
+const isProd = process.env.NODE_ENV === 'production';
+
 const nextConfig = {
-  // Enable React strict mode for better debugging
-  reactStrictMode: true,
+  // ✅ Only enable React strict mode in development (prevents double renders in prod)
+  reactStrictMode: isDev,
   
   // Optimize images
   images: {
@@ -13,9 +18,20 @@ const nextConfig = {
   },
 
   // Optimize bundle size
-  webpack: (config, { isServer }) => {
+  webpack: (config, { dev, isServer }) => {
+    config.devtool = dev ? 'cheap-module-source-map' : false;
+    // ✅ Disable HMR in production to fix WebSocket errors
+    if (!dev && !isServer) {
+      config.plugins = config.plugins.filter(
+        (plugin) => plugin.constructor.name !== 'HotModuleReplacementPlugin'
+      );
+      // Remove source maps in production
+      config.devtool = false;
+    }
+    
     // Only modify splitChunks, let Next.js handle other optimizations
-    if (!isServer) {
+    // Apply aggressive vendor/common chunking only in production browser builds
+    if (!isServer && !dev) {
       config.optimization.splitChunks = {
         chunks: 'all',
         cacheGroups: {
@@ -58,7 +74,7 @@ const nextConfig = {
     // Alias for smaller lodash imports
     config.resolve.alias = {
       ...config.resolve.alias,
-      'lodash': 'lodash-es',
+      lodash: 'lodash-es',
     };
 
     return config;
@@ -81,6 +97,36 @@ const nextConfig = {
 
   // SWC minification (faster than Terser)
   swcMinify: true,
+  
+  // ✅ Disable powered by header for security
+  poweredByHeader: false,
+  
+  // ✅ Configure CORS headers for API routes
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*',
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, Authorization',
+          },
+          {
+            key: 'Access-Control-Max-Age',
+            value: '86400', // Cache preflight for 24 hours
+          },
+        ],
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
