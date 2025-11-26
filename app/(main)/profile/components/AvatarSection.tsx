@@ -32,7 +32,11 @@ interface AvatarSectionProps {
   onToggleExpandedAvatars: () => void;
   onFullNameChange: (value: string) => void;
   onSaveProfile: () => void;
+  onResetChanges: () => void;
   saving: boolean;
+  hasChanges: boolean;
+  feedback: { type: "success" | "error"; message: string } | null;
+  onClearFeedback: () => void;
 }
 
 export default function AvatarSection({
@@ -47,7 +51,11 @@ export default function AvatarSection({
   onToggleExpandedAvatars,
   onFullNameChange,
   onSaveProfile,
+  onResetChanges,
   saving,
+  hasChanges,
+  feedback,
+  onClearFeedback,
 }: AvatarSectionProps) {
   const getAvatarDisplay = () => {
     if (selectedAvatar) {
@@ -102,6 +110,7 @@ export default function AvatarSection({
         <button
           onClick={onToggleAvatarSelector}
           className="px-3 py-2 text-sm bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+          aria-label={showAvatarSelector ? "Đóng chọn ảnh đại diện" : "Mở bộ chọn ảnh đại diện"}
         >
           {showAvatarSelector ? "Đóng" : "Đổi ảnh đại diện"}
         </button>
@@ -123,6 +132,8 @@ export default function AvatarSection({
                       ? "border-green-500 ring-2 ring-green-200"
                       : "border-gray-200 hover:border-gray-400"
                   }`}
+                  aria-label={`Chọn ảnh đại diện ${avatar.id}${selectedAvatar === avatar.url ? ' (đã chọn)' : ''}`}
+                  title={`Avatar ${avatar.id}`}
                 >
                   <img
                     src={avatar.url}
@@ -155,12 +166,15 @@ export default function AvatarSection({
               <button
                 onClick={onToggleExpandedAvatars}
                 className="relative aspect-square rounded-lg overflow-hidden border-2 border-gray-200 hover:border-gray-400 transition-all bg-gray-50 flex items-center justify-center"
+                aria-label="Xem thêm ảnh đại diện"
+                title="Xem thêm"
               >
                 <svg
                   className="w-8 h-8 text-gray-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -174,12 +188,15 @@ export default function AvatarSection({
               <button
                 onClick={onToggleExpandedAvatars}
                 className="relative aspect-square rounded-lg overflow-hidden border-2 border-gray-200 hover:border-gray-400 transition-all bg-gray-50 flex items-center justify-center"
+                aria-label="Thu gọn danh sách ảnh đại diện"
+                title="Thu gọn"
               >
                 <svg
                   className="w-8 h-8 text-gray-500"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
+                  aria-hidden="true"
                 >
                   <path
                     strokeLinecap="round"
@@ -195,14 +212,52 @@ export default function AvatarSection({
       )}
 
       <div className="space-y-4 mt-6">
-        <div className="pt-4">
-          <button
-            onClick={onSaveProfile}
-            disabled={saving}
-            className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors"
+        {feedback && (
+          <div
+            role="alert"
+            className={`flex items-center justify-between px-4 py-3 rounded-md text-sm border ${
+              feedback.type === "success"
+                ? "bg-green-50 text-green-700 border-green-200"
+                : "bg-red-50 text-red-700 border-red-200"
+            }`}
           >
-            {saving ? "Đang lưu..." : "Lưu thay đổi"}
-          </button>
+            <span>{feedback.message}</span>
+            <button
+              type="button"
+              onClick={onClearFeedback}
+              className="p-1 text-inherit hover:text-current hover:underline"
+              aria-label="Đóng thông báo"
+            >
+              Đóng
+            </button>
+          </div>
+        )}
+
+        <div className="pt-2 flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div className="flex gap-2">
+            <button
+              onClick={onSaveProfile}
+              disabled={saving || !hasChanges}
+              className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors"
+              aria-label={saving ? "Đang lưu thay đổi" : "Lưu thay đổi hồ sơ"}
+            >
+              {saving ? "Đang lưu..." : "Lưu thay đổi"}
+            </button>
+            <button
+              type="button"
+              onClick={onResetChanges}
+              disabled={saving || !hasChanges}
+              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+              aria-label="Hủy thay đổi"
+            >
+              Hủy
+            </button>
+          </div>
+          {!hasChanges && !saving && (
+            <p className="text-xs text-gray-500">
+              Không có thay đổi nào để lưu.
+            </p>
+          )}
         </div>
       </div>
     </div>
