@@ -1,9 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ROUTES, getFullAuthRedirect } from '@/lib/routes';
+import { useAuth } from '@/providers/auth-provider';
 
 export default function LoginPage() {
   const supabase = supabaseBrowser();
@@ -11,6 +13,15 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
+
+  // Nếu user đã đăng nhập, tự động chuyển sang dashboard
+  useEffect(() => {
+    if (!authLoading && user) {
+      router.replace(ROUTES.DASHBOARD);
+    }
+  }, [authLoading, user, router]);
 
   const onGoogle = async () => {
     setError(null);
@@ -24,15 +35,22 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
-    
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) {
-      console.error('Supabase login error:', error);
-      setError(error.message || 'Lỗi đăng nhập. Vui lòng kiểm tra lại email và mật khẩu.');
-    } else {
-      window.location.href = ROUTES.DASHBOARD;
+
+    try {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (error) {
+        console.error('Supabase login error:', error);
+        setError(error.message || 'Lỗi đăng nhập. Vui lòng kiểm tra lại email và mật khẩu.');
+        return;
+      }
+
+      router.replace(ROUTES.DASHBOARD);
+    } catch (err) {
+      console.error('Unexpected login error:', err);
+      setError('Có lỗi xảy ra khi đăng nhập. Vui lòng thử lại sau.');
+    } finally {
+      setLoading(false);
     }
   };
 
