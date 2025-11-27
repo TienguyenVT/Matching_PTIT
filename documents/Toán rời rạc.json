@@ -1,0 +1,281 @@
+{
+    "document_title": "Toán rời rạc",
+    "structure_type": "Chương/Mục",
+    "data": [
+      {
+        "level_1_title": "CHƯƠNG 1. LOGIC, TẬP HỢP VÀ ỨNG DỤNG",
+        "level_1_id": "1",
+        "children": [
+          {
+            "level_2_title": "1.1. Giới thiệu chung",
+            "level_2_id": "1.1",
+            "content": "Tổ hợp là một lĩnh vực quan trọng của toán học rời rạc đề cập tới nhiều vấn đề khác nhau của toán học. Lý thuyết Tổ hợp nghiên cứu việc phân bố các phần tử vào các tập hợp. Thông thường các phần tử của tập hợp là hữu hạn và việc phân bố chúng phải thoả mãn những điều kiện nhất định nào đó tuỳ theo yêu cầu của bài toán. Mỗi cách phân bố được coi là một “cấu hình của tổ hợp”. Các cấu hình tổ hợp được xem xét như một lời giải của bài toán đếm, bài toán liệt kê, bài toán tồn tại hay bài toán tối ưu.\n\nBài toán đếm: đây là dạng bài toán nhằm trả lời câu hỏi “có bao nhiêu cấu hình thoả mãn điều kiện đã nêu?”. Bài toán đếm được áp dụng có hiệu quả vào những công việc mang tính chất đánh giá như xác suất xảy ra của một sự kiện, thời gian tính toán hay độ phức tạp của một chương trình máy tính.\n\nBài toán liệt kê: bài toán liệt kê quan tâm đến tất cả các cấu hình có thể có được, vì vậy lời giải của nó được biểu diễn dưới dạng thuật toán “vét cạn” tất cả các cấu hình. Bài toán liệt kê thường được làm nền cho nhiều bài toán khác. Hiện nay, một số bài toán tồn tại, bài toán tối ưu, bài toán đếm vẫn chưa có cách nào giải quyết ngoài phương pháp liệt kê. Phương pháp liệt kê càng trở nên quan trọng hơn khi nó được hỗ trợ bởi các hệ thống máy tính.\n\nBài toán tối ưu: khác với bài toán liệt kê, bài toán tối ưu chỉ quan tâm tới cấu hình “tốt nhất theo một nghĩa nào đó. Đây là một bài toán có nhiều ứng dụng thực tiễn được giải quyết bằng lý thuyết tổ hợp.\n\nBài toán tồn tại: nếu như bài toán đếm thực hiện đếm bao nhiêu cấu hình có thể có, bài toán liệt kê xem xét tất cả các cấu hình có thể có, bài toán tối ưu chỉ ra một cấu hình tốt nhất. Bài toán tồn tại hướng đến giải quyết những vấn đề còn nghi vấn. Điều này có nghĩa là ngay kể cả vấn đề có hay không một cấu hình cũng chưa biết. Những bài toán này thường là những bài toán khó. Do vậy máy tính được xem là công cụ hữu hiệu nhất giải quyết bài toán tồn tại.",
+            "children": []
+          },
+          {
+            "level_2_title": "1.2. Những kiến thức cơ bản về Logic mệnh đề",
+            "level_2_id": "1.2",
+            "content": "Các qui tắc cơ bản của Logic cho ta ý nghĩa chính xác của các mệnh đề. Những qui tắc của logic chính là công cụ cơ sở để chúng ta có thể xây dựng nên các ngôn ngữ lập trình, các bảng mạch máy tính, kiểm chứng tính đúng đắn của chương trình và nhiều ứng dụng quan trọng khác.",
+            "children": [
+              {
+                "level_3_title": "1.2.1. Định nghĩa & phép toán",
+                "level_3_id": "1.2.1",
+                "content": "Đối tượng nghiên cứu của logic là các mệnh đề. Một mệnh đề được hiểu là một câu khẳng định hoặc đúng hoặc sai chứ không thể vừa đúng vừa sai.\nVí dụ: Những câu khẳng định sau đây là một mệnh đề:\n- “Hà nội là thủ đô của Việt nam.\"\n- $1+1=2$\n- $2+2=3$\nCác mệnh đề “Hà nội là thủ đô của việt nam\", \"$1+1=2$\" là những mệnh đề đúng, mệnh đề \"$2+2=3$\" là sai. Nhưng những câu trong ví dụ sau sẽ không phải là một mệnh đề vì những câu đó không cho ta khẳng định đúng cũng chẳng cho ta khẳng định sai:\n- “Bây giờ là mấy giờ?”\n- “Hãy suy nghĩ điều này cho kỹ lưỡng\"\n- $x+1=2$\n- $x+y=z$\nTa ký hiệu những chữ cái A, B, C, D, p, q, r, s... là những mệnh đề. Giá trị của một mệnh đề đúng được ký hiệu là T (True), giá trị mệnh đề sai được ký hiệu là F (False). Tập giá trị {T, F} còn được gọi là giá trị chân lý của một mệnh đề.\n\nĐịnh nghĩa 1. Cho p là một mệnh đề. Phép phủ định mệnh đề p cũng là một mệnh đề (ký hiệu là $\\overline{p}$ hoặc $\\neg p$). Mệnh đề $\\overline{p}$ có giá trị F khi và chỉ khi mệnh đề p nhận giá trị T, nhận giá trị T khi và chỉ khi p nhận giá trị F.\n\nĐịnh nghĩa 2. Cho p và q là hai mệnh đề. Phép hội giữa mệnh đề p với mệnh đề q là một mệnh đề (ký hiệu $p \\wedge q$). Mệnh đề $p \\wedge q$ có giá trị T khi và chỉ khi cả p và q đều nhận giá trị T, có giá trị F khi và chỉ khi hoặc p, hoặc q, hoặc cả hai nhận giá trị F.\n\nĐịnh nghĩa 3. Cho p và q là hai mệnh đề. Phép tuyển giữa mệnh đề p với mệnh đề q là một mệnh đề (ký hiệu $p \\vee q$). Mệnh đề $p \\vee q$ có giá trị T khi và chỉ khi ít nhất một trong hai mệnh đề p, q nhận giá trị T, có giá trị F khi và chỉ khi cả p, q đều nhận giá trị F.\n\nĐịnh nghĩa 4. Cho p và q là hai mệnh đề. Phép tuyển loại trừ (XOR) giữa mệnh p với mệnh đề q (được ký hiệu là $p \\oplus q$) là một mệnh đề. Mệnh đề $p \\oplus q$ chỉ đúng khi một trong p hoặc q đúng, và sai trong các trường hợp còn lại (cùng đúng hoặc cùng sai).\n\nĐịnh nghĩa 5. Cho p và q là hai mệnh đề. Phép kéo theo giữa mệnh đề p với mệnh đề q (ký hiệu $p \\rightarrow q$) là một mệnh đề. Mệnh đề $p \\rightarrow q$ chỉ nhận giá trị F khi và chỉ khi p nhận giá trị T và q nhận giá trị F. Các trường hợp còn lại nó nhận giá trị T.\n\nĐịnh nghĩa 6. Cho p và q là hai mệnh đề. Phép tương đương giữa mệnh đề p với mệnh đề q là một mệnh đề (ký hiệu $p \\leftrightarrow q$). Mệnh đề $p \\leftrightarrow q$ có giá trị đúng khi p và q có cùng giá trị chân lý (cùng T hoặc cùng F) và sai trong các trường hợp còn lại.\n\nBảng giá trị chân lý của các phép toán:\n| p | q | $p \\wedge q$ | $p \\vee q$ | $p \\oplus q$ | $p \\rightarrow q$ | $p \\leftrightarrow q$ |\n|---|---|---|---|---|---|---|\n| T | T | T | T | F | T | T |\n| T | F | F | T | T | F | F |\n| F | T | F | T | T | T | F |\n| F | F | F | F | F | T | T |",
+                "children": []
+              },
+              {
+                "level_3_title": "1.2.2. Sự tương đương giữa các mệnh đề",
+                "level_3_id": "1.2.2",
+                "content": "Một vấn đề hết sức quan trọng trong lập luận toán học là việc thay thế một mệnh đề bằng một mệnh đề khác có cùng giá trị chân lý. Hai mệnh đề có cùng một giá trị chân lý chúng ta có thể hiểu theo cách thông thường là chúng tương đương nhau về ngữ nghĩa. Do vậy, ta sẽ tiếp cận và phân loại các mệnh đề phức hợp thông qua các giá trị chân lý của chúng.\n\nĐịnh nghĩa 7. Một mệnh đề phức hợp luôn luôn đúng với bất kể các giá trị chân lý của các mệnh đề thành phần được gọi là hằng đúng (tautology). Một mệnh đề luôn luôn sai với mọi giá trị chân lý của các mệnh đề thành phần được gọi là mâu thuẫn (contradiction).\nVí dụ: mệnh đề phức hợp $p \\vee \\overline{p}$ là hằng đúng (luôn T), $p \\wedge \\overline{p}$ là mâu thuẫn (luôn F).\n\nĐịnh nghĩa 8. Hai mệnh đề p, q được gọi là tương đương logic với nhau (ký hiệu: $p \\Leftrightarrow q$, hoặc $p \\equiv q$) khi và chỉ khi các cột cho giá trị chân lý của chúng giống nhau trong bảng chân lý. Hay nói cách khác, mệnh đề $p \\leftrightarrow q$ là một hằng đúng.\n\nCác luật tương đương logic cơ bản cần ghi nhớ:\n1. Luật đồng nhất:\n   - $p \\wedge T \\Leftrightarrow p$\n   - $p \\vee F \\Leftrightarrow p$\n2. Luật nuốt (Dominance laws):\n   - $p \\vee T \\Leftrightarrow T$\n   - $p \\wedge F \\Leftrightarrow F$\n3. Luật luỹ đẳng (Idempotent laws):\n   - $p \\vee p \\Leftrightarrow p$\n   - $p \\wedge p \\Leftrightarrow p$\n4. Luật phủ định kép (Double negation law):\n   - $\\overline{\\overline{p}} \\Leftrightarrow p$\n5. Luật giao hoán (Commutative laws):\n   - $p \\vee q \\Leftrightarrow q \\vee p$\n   - $p \\wedge q \\Leftrightarrow q \\wedge p$\n6. Luật kết hợp (Associative laws):\n   - $(p \\vee q) \\vee r \\Leftrightarrow p \\vee (q \\vee r)$\n   - $(p \\wedge q) \\wedge r \\Leftrightarrow p \\wedge (q \\wedge r)$\n7. Luật phân phối (Distributive laws):\n   - $p \\vee (q \\wedge r) \\Leftrightarrow (p \\vee q) \\wedge (p \\vee r)$\n   - $p \\wedge (q \\vee r) \\Leftrightarrow (p \\wedge q) \\vee (p \\wedge r)$\n8. Luật De Morgan:\n   - $\\overline{(p \\wedge q)} \\Leftrightarrow \\overline{p} \\vee \\overline{q}$\n   - $\\overline{(p \\vee q)} \\Leftrightarrow \\overline{p} \\wedge \\overline{q}$\n\nCác tương đương logic quan trọng khác liên quan đến phép kéo theo:\n- $p \\rightarrow q \\Leftrightarrow \\overline{p} \\vee q$\n- $p \\rightarrow q \\Leftrightarrow \\overline{q} \\rightarrow \\overline{p}$ (Luật phản đảo)\n- $p \\leftrightarrow q \\Leftrightarrow (p \\rightarrow q) \\wedge (q \\rightarrow p)$",
+                "children": []
+              },
+              {
+                "level_3_title": "1.2.3. Dạng chuẩn tắc",
+                "level_3_id": "1.2.3",
+                "content": "Các công thức (mệnh đề) tương đương được xem như các biểu diễn khác nhau của cùng một mệnh đề. Để dễ dàng viết các chương trình máy tính thao tác trên các công thức, chúng ta cần chuẩn hóa các công thức, đưa chúng về dạng biểu diễn chuẩn được gọi là dạng chuẩn hội (Conjunctive Normal Form - CNF) hoặc dạng chuẩn tuyển (Disjunctive Normal Form - DNF).\n\nMột công thức được gọi là ở dạng chuẩn hội nếu nó là hội (AND) của các mệnh đề tuyển (OR) sơ cấp. (Ví dụ: $(p \\vee q) \\wedge (\\overline{p} \\vee r)$).\n\nPhương pháp để biến đổi một công thức bất kỳ về dạng chuẩn hội bằng cách áp dụng các thủ tục sau:\n1. Bỏ các phép kéo theo ($\\rightarrow$) và tương đương ($\\leftrightarrow$) bằng cách thay $(p \\rightarrow q)$ bởi $\\overline{p} \\vee q$, và $(p \\leftrightarrow q)$ bởi $(p \\rightarrow q) \\wedge (q \\rightarrow p)$.\n2. Chuyển các phép phủ định ($\\neg$) vào sát các ký hiệu mệnh đề sơ cấp bằng cách áp dụng luật De Morgan và thay $\\overline{\\overline{p}}$ bởi p.\n3. Áp dụng luật phân phối thay các công thức có dạng $(p \\vee (q \\wedge r))$ bởi $(p \\vee q) \\wedge (p \\vee r)$ để đưa về hội của các tuyển.\n\nVí dụ: Chuẩn hóa công thức $(p \\rightarrow q) \\vee \\overline{(r \\vee s)}$ về dạng chuẩn hội.\nLời giải:\n$(p \\rightarrow q) \\vee \\overline{(r \\vee s)}$\n$\\Leftrightarrow (\\overline{p} \\vee q) \\vee (\\overline{r} \\wedge \\overline{s})$ (Bỏ $\\rightarrow$ và dùng De Morgan)\n$\\Leftrightarrow (\\overline{p} \\vee q \\vee \\overline{r}) \\wedge (\\overline{p} \\vee q \\vee \\overline{s})$ (Áp dụng luật phân phối)\nĐây là dạng chuẩn hội.",
+                "children": []
+              }
+            ]
+          },
+          {
+            "level_2_title": "1.3. Vị từ và lượng từ",
+            "level_2_id": "1.3",
+            "content": "Trong toán học hay trong các chương trình máy tính chúng ta rất hay gặp những khẳng định chưa phải là một mệnh đề vì giá trị chân lý của nó phụ thuộc vào biến số. Những khẳng định đó đều có liên quan đến các biến. Chẳng hạn khẳng định: $P(x) = \"x > 3\"$ không phải là một mệnh đề nhưng tại những giá trị cụ thể của x (ví dụ $x=4$) thì $P(4)$ là \"4 > 3\" lại là một mệnh đề (đúng).\n\nHàm $P(x)$ được gọi là hàm mệnh đề hay vị từ. Một vị từ có thể có một hoặc nhiều biến (ví dụ $Q(x, y, z) = \"x^2 + y^2 = z^2\"$). Giá trị chân lý của hàm mệnh đề tại những giá trị cụ thể của biến được xác định như những mệnh đề thông thường.\n\nTổng quát, giả sử M là một tập hợp các phần tử nào đó. M thường được gọi là trường hay miền xác định (domain of discourse). Biểu thức $P(x)$ gọi là vị từ xác định trên trường M nếu khi thay x bởi một phần tử bất kỳ $a \\in M$ thì $P(a)$ là một mệnh đề.\n\nPhương pháp lượng hoá (lượng từ) là cách biến một hàm mệnh đề thành một mệnh đề mà không cần gán giá trị cụ thể cho biến. Hai lượng từ quan trọng:\n\n1. Lượng từ với mọi (Universal quantifier): Ký hiệu là $\\forall$. Mệnh đề $\\forall x P(x)$ có nghĩa là \"Với mọi x thuộc trường đang xét, P(x) là đúng\". Mệnh đề này chỉ đúng khi P(x) đúng với tất cả mọi phần tử x trong miền xác định, và sai nếu có ít nhất một phần tử $x_0$ mà $P(x_0)$ sai (phản ví dụ).\n\n2. Lượng từ tồn tại (Existential quantifier): Ký hiệu là $\\exists$. Mệnh đề $\\exists x P(x)$ có nghĩa là \"Tồn tại ít nhất một phần tử x trong trường đang xét sao cho P(x) là đúng\". Mệnh đề này đúng nếu tìm được ít nhất một giá trị x làm cho P(x) đúng, và sai nếu P(x) sai với mọi x.\n\nVí dụ về dịch câu ngôn ngữ tự nhiên sang biểu thức logic:\nCâu: “Bạn không được lái xe máy nếu bạn cao dưới 1.5 mét trừ phi bạn trên 18 tuổi”.\nĐặt các mệnh đề sơ cấp:\n- p: Bạn được lái xe máy.\n- q: Bạn cao dưới 1.5m.\n- r: Bạn trên 18 tuổi.\nCâu trên có thể dịch là: Nếu (cao dưới 1.5m VÀ KHÔNG trên 18 tuổi) thì (KHÔNG được lái xe). \nBiểu thức logic: $(q \\wedge \\overline{r}) \rightarrow \\overline{p}$.\n(Hoặc một cách diễn đạt khác tương đương tùy theo cách hiểu \"trừ phi\" - unless. Thường \"p unless q\" tương đương $\\overline{q} \\rightarrow p$ hoặc $p \\vee q$. Ở đây \"không được lái... trừ phi trên 18\" có thể hiểu là \"nếu không trên 18 thì không được lái...\".)",
+            "children": []
+          },
+          {
+            "level_2_title": "1.4. Một số ứng dụng trên máy tính",
+            "level_2_id": "1.4",
+            "content": "Các phép toán bít: Các hệ thống máy tính thường dùng các bit (binary digit - 0 hoặc 1) để biểu diễn thông tin. Các phép toán logic có thể áp dụng trực tiếp cho các bit:\n- 1 tương ứng với True (T), 0 tương ứng với False (F).\n- Phép AND bít (kí hiệu &, tương ứng $\\wedge$): $1 \\& 1 = 1$, $1 \\& 0 = 0$, $0 \\& 1 = 0$, $0 \\& 0 = 0$.\n- Phép OR bít (kí hiệu |, tương ứng $\\vee$): $1 | 1 = 1$, $1 | 0 = 1$, $0 | 1 = 1$, $0 | 0 = 0$.\n- Phép XOR bít (kí hiệu ^, tương ứng $\\oplus$): $1 \\oplus 1 = 0$, $1 \\oplus 0 = 1$, $0 \\oplus 1 = 1$, $0 \\oplus 0 = 0$.\nCác phép toán này có thể thực hiện trên các xâu bít (bit strings) có cùng độ dài bằng cách thực hiện phép toán tương ứng trên từng cặp bít ở vị trí tương ứng.\n\nThuật toán các phép tính số nguyên:\nBiểu diễn số nguyên dưới dạng nhị phân: $a = (a_{n-1}a_{n-2}...a_1a_0)_2 = \\sum_{i=0}^{n-1} a_i 2^i$.\n- Thuật toán cộng hai số nhị phân a và b: Thực hiện cộng từ bít thấp nhất $a_0, b_0$ có kèm theo số nhớ (carry). $a_i + b_i + c_{i-1} = c_i \\times 2 + s_i$, trong đó $s_i$ là bít tổng tại vị trí i, $c_i$ là bít nhớ mang sang vị trí $i+1$.\n- Thuật toán nhân hai số nhị phân a và b: Dựa trên việc tính các tích riêng. Nếu $b_j = 1$, tích riêng thứ j là a dịch trái j vị trí (tương đương nhân với $2^j$). Nếu $b_j = 0$, tích riêng là 0. Sau đó cộng tất cả các tích riêng lại để được kết quả cuối cùng.",
+            "children": []
+          },
+          {
+            "level_2_title": "1.5. Những kiến thức cơ bản về lý thuyết tập hợp",
+            "level_2_id": "1.5",
+            "content": "",
+            "children": [
+              {
+                "level_3_title": "1.5.1. Khái niệm & định nghĩa",
+                "level_3_id": "1.5.1",
+                "content": "Tập hợp là một khái niệm cơ bản dùng để chỉ một nhóm các đối tượng. Các đối tượng trong tập hợp gọi là các phần tử. Ký hiệu $x \\in A$ nghĩa là x là một phần tử của tập hợp A, $x \\notin A$ nghĩa là x không phải là phần tử của A.\n\n- Tập rỗng: Tập hợp không chứa phần tử nào, ký hiệu là $\\emptyset$ hoặc {}.\n- Tập hợp bằng nhau: Hai tập A và B bằng nhau ($A=B$) nếu chúng có cùng các phần tử. $\\forall x (x \\in A \\leftrightarrow x \\in B)$.\n- Tập con: A là tập con của B ($A \\subseteq B$) nếu mọi phần tử của A đều là phần tử của B. $\\forall x (x \\in A \\rightarrow x \\in B)$.\n- Tập con thực sự: Nếu $A \\subseteq B$ và $A \\neq B$, ta nói A là tập con thực sự của B, ký hiệu $A \\subset B$.\n- Bản số (Cardinality): Nếu S là tập hữu hạn có n phần tử khác nhau, thì n là bản số của S, ký hiệu $|S| = n$.\n- Tập luỹ thừa (Power set): Tập luỹ thừa của S, ký hiệu $P(S)$ hoặc $2^S$, là tập hợp chứa tất cả các tập con của S. Nếu $|S| = n$ thì $|P(S)| = 2^n$.\n- Tích Đề-các (Cartesian product): Tích Đề-các của hai tập A và B, ký hiệu $A \\times B$, là tập hợp tất cả các cặp có thứ tự (a, b) với $a \\in A$ và $b \\in B$. $A \\times B = \\{(a, b) | a \\in A \\wedge b \\in B\\}$."
+              },
+              {
+                "level_3_title": "1.5.2. Các phép toán trên tập hợp",
+                "level_3_id": "1.5.2",
+                "content": "Cho A, B là các tập hợp nằm trong tập vũ trụ U.\n1. Phép hợp (Union): $A \\cup B = \\{x | x \\in A \\vee x \\in B\\}$.\n2. Phép giao (Intersection): $A \\cap B = \\{x | x \\in A \\wedge x \\in B\\}$. Hai tập A, B gọi là rời nhau nếu $A \\cap B = \\emptyset$.\n3. Phép hiệu (Difference): $A - B = \\{x | x \\in A \\wedge x \\notin B\\}$ (phần tử thuộc A nhưng không thuộc B).\n4. Phép phần bù (Complement): Phần bù của A trong U, ký hiệu $\\overline{A}$ = $U - A = \\{x | x \\notin A\\}$."
+              },
+              {
+                "level_3_title": "1.5.3. Các hằng đẳng thức trên tập hợp",
+                "level_3_id": "1.5.3",
+                "content": "Các phép toán tập hợp thoả mãn các luật tương tự như logic mệnh đề (do có sự đẳng cấu giữa đại số tập hợp và đại số logic):\n\n| Tên gọi | Hằng đẳng thức |\n|---|---|\n| Luật đồng nhất | $A \\cup \\emptyset = A$; $A \\cap U = A$ |\n| Luật nuốt | $A \\cup U = U$; $A \\cap \\emptyset = \\emptyset$ |\n| Luật luỹ đẳng | $A \\cup A = A$; $A \\cap A = A$ |\n| Luật bù | $\\overline{\\overline{A}} = A$ |\n| Luật giao hoán | $A \\cup B = B \\cup A$; $A \\cap B = B \\cap A$ |\n| Luật kết hợp | $(A \\cup B) \\cup C = A \\cup (B \\cup C)$; $(A \\cap B) \\cap C = A \\cap (B \\cap C)$ |\n| Luật phân phối | $A \\cup (B \\cap C) = (A \\cup B) \\cap (A \\cup C)$; $A \\cap (B \\cup C) = (A \\cap B) \\cup (A \\cap C)$ |\n| Luật De Morgan | $\\overline{A \\cup B} = \\overline{A} \\cap \\overline{B}$; $\\overline{A \\cap B} = \\overline{A} \\cup \\overline{B}$ |"
+              }
+            ]
+          },
+          {
+            "level_2_title": "1.6. Biểu diễn tập hợp trên máy tính",
+            "level_2_id": "1.6",
+            "content": "Để biểu diễn các tập hợp hữu hạn trên máy tính, ta có thể dùng các cấu trúc dữ liệu như mảng, danh sách liên kết. Tuy nhiên, để thực hiện hiệu quả các phép toán hợp, giao, hiệu, ta thường dùng \"xâu bít\" (bit string) nếu tập vũ trụ U nhỏ và đã biết trước.\nGiả sử $U = \\{u_1, u_2, ..., u_n\\}$ được sắp thứ tự. Một tập con $A \\subseteq U$ có thể được biểu diễn bởi một xâu bít có độ dài n, trong đó bit thứ i bằng 1 nếu $u_i \\in A$, và bằng 0 nếu $u_i \\notin A$.\nVí dụ: $U = \\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\\}$. Tập $A = \\{1, 3, 5, 7, 9\\}$ (số lẻ) được biểu diễn bởi xâu bít: `1010101010`.\nKhi đó:\n- $A \\cup B$ tương ứng với phép OR bít trên hai xâu biểu diễn.\n- $A \\cap B$ tương ứng với phép AND bít.\n- $\\overline{A}$ tương ứng với phép NOT bít (đảo bít).\n- $A - B$ tương ứng với $A \\cap \\overline{B}$ (phép AND giữa xâu A và xâu đảo của B).",
+            "children": []
+          },
+          {
+            "level_2_title": "1.7. Những nội dung cần ghi nhớ",
+            "level_2_id": "1.7",
+            "content": "Chương 1 đã trình bày các nền tảng cơ bản:\n1. Logic mệnh đề: Các phép toán $\\neg, \\wedge, \\vee, \\oplus, \\rightarrow, \\leftrightarrow$, bảng chân lý, các luật tương đương logic.\n2. Logic vị từ: Khái niệm vị từ P(x), các lượng từ $\\forall, \\exists$, cách dịch câu thông thường sang biểu thức logic.\n3. Lý thuyết tập hợp: Các định nghĩa cơ bản (tập con, hợp, giao, hiệu, phần bù), bản số, tập luỹ thừa, tích Đề-các, và các hằng đẳng thức tập hợp (tương tự logic).\n4. Ứng dụng: Phép toán bít, biểu diễn tập hợp bằng xâu bít.",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 2. BÀI TOÁN ĐẾM",
+        "level_1_id": "2",
+        "children": [
+          {
+            "level_2_title": "2.1. Những nguyên lý đếm cơ bản",
+            "level_2_id": "2.1",
+            "content": "",
+            "children": [
+              {
+                "level_3_title": "2.1.1. Nguyên lý cộng",
+                "level_3_id": "2.1.1",
+                "content": "Nếu một công việc có thể được thực hiện theo $n_1$ cách theo phương án 1, hoặc $n_2$ cách theo phương án 2, ..., hoặc $n_m$ cách theo phương án m, và các phương án này là loại trừ lẫn nhau (không thể thực hiện đồng thời hai phương án), thì tổng số cách thực hiện công việc đó là $n_1 + n_2 + ... + n_m$.\n\nTheo ngôn ngữ tập hợp: Nếu $A_1, A_2, ..., A_m$ là các tập hợp hữu hạn đôi một rời nhau ($A_i \\cap A_j = \\emptyset$ với mọi $i \\neq j$), thì số phần tử của tập hợp của chúng là tổng số phần tử của từng tập:\n$|A_1 \\cup A_2 \\cup ... \\cup A_m| = |A_1| + |A_2| + ... + |A_m|$."
+              },
+              {
+                "level_3_title": "2.1.2. Nguyên lý nhân",
+                "level_3_id": "2.1.2",
+                "content": "Nếu một công việc có thể được chia thành m giai đoạn liên tiếp, trong đó giai đoạn 1 có $n_1$ cách thực hiện, giai đoạn 2 có $n_2$ cách thực hiện, ..., giai đoạn m có $n_m$ cách thực hiện, thì tổng số cách thực hiện cả công việc đó là $n_1 \\times n_2 \\times ... \\times n_m$.\n\nTheo ngôn ngữ tập hợp: Số phần tử của tích Đề-các các tập hữu hạn là tích các bản số của chúng:\n$|A_1 \\times A_2 \\times ... \\times A_m| = |A_1| \\cdot |A_2| \\cdot ... \\cdot |A_m|$."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.2. Nguyên lý bù trừ",
+            "level_2_id": "2.2",
+            "content": "Khi đếm số phần tử của hợp các tập hợp không rời nhau, ta phải dùng nguyên lý bù trừ để tránh đếm lặp.\n- Với 2 tập A, B: $|A \\cup B| = |A| + |B| - |A \\cap B|$.\n- Với 3 tập A, B, C: $|A \\cup B \\cup C| = |A| + |B| + |C| - (|A \\cap B| + |A \\cap C| + |B \\cap C|) + |A \\cap B \\cap C|$.\n- Tổng quát (Nguyên lý bù trừ): $|A_1 \\cup A_2 \\cup ... \\cup A_n| = \\sum |A_i| - \\sum |A_i \\cap A_j| + \\sum |A_i \\cap A_j \\cap A_k| - ... + (-1)^{n-1} |A_1 \\cap ... \\cap A_n|$.\nVí dụ ứng dụng: Bài toán đếm số các số nguyên không vượt quá n và không chia hết cho các số nguyên tố cho trước; bài toán tính số các hoán vị mất thứ tự (derangements).",
+            "children": []
+          },
+          {
+            "level_2_title": "2.3. Đếm các hoán vị và tổ hợp",
+            "level_2_id": "2.3",
+            "content": "",
+            "children": [
+              {
+                "level_3_title": "2.3.1. Chỉnh hợp lặp",
+                "level_3_id": "2.3.1",
+                "content": "Một chỉnh hợp lặp chập k của n phần tử là một bộ có thứ tự gồm k thành phần, trong đó mỗi thành phần được lấy từ tập n phần tử đã cho (có thể lặp lại). Số các chỉnh hợp lặp chập k của n phần tử là $n^k$."
+              },
+              {
+                "level_3_title": "2.3.2. Chỉnh hợp không lặp",
+                "level_3_id": "2.3.2",
+                "content": "Một chỉnh hợp không lặp chập k của n phần tử là một bộ có thứ tự gồm k thành phần được lấy từ n phần tử đã cho, trong đó các thành phần phải đôi một khác nhau ($k \\le n$). Số các chỉnh hợp không lặp chập k của n phần tử, ký hiệu $P(n, k)$ hoặc $A_n^k$, là:\n$P(n, k) = n(n-1)(n-2)...(n-k+1) = \\frac{n!}{(n-k)!}$"
+              },
+              {
+                "level_3_title": "2.3.3. Hoán vị",
+                "level_3_id": "2.3.3",
+                "content": "Một hoán vị của n phần tử là một cách sắp xếp có thứ tự tất cả n phần tử đó. Đây là trường hợp đặc biệt của chỉnh hợp không lặp khi $k=n$. Số các hoán vị của n phần tử là:\n$P(n, n) = n! = n \\cdot (n-1) \\cdot ... \\cdot 2 \\cdot 1$."
+              },
+              {
+                "level_3_title": "2.3.4. Tổ hợp",
+                "level_3_id": "2.3.4",
+                "content": "Một tổ hợp chập k của n phần tử là một tập con gồm k phần tử (không quan tâm thứ tự) được chọn từ n phần tử đã cho. Số các tổ hợp chập k của n phần tử, ký hiệu $C(n, k)$ hoặc $\\binom{n}{k}$, là:\n$C(n, k) = \\frac{P(n, k)}{k!} = \\frac{n!}{k!(n-k)!}$\nCác tính chất cơ bản:\n- $C(n, k) = C(n, n-k)$\n- $C(n, k) = C(n-1, k-1) + C(n-1, k)$ (Công thức Pascal)\n- Định lý nhị thức Newton: $(x+y)^n = \\sum_{k=0}^n C(n, k) x^{n-k} y^k$"
+              },
+              {
+                "level_3_title": "2.3.5. Tổ hợp lặp",
+                "level_3_id": "2.3.5",
+                "content": "Một tổ hợp lặp chập k của n phần tử là một cách chọn ra k phần tử từ n loại phần tử khác nhau, trong đó mỗi loại có thể được chọn nhiều lần (không quan tâm thứ tự chọn). Số tổ hợp lặp chập k của n phần tử là $C(n+k-1, k)$.\nVí dụ: Số nghiệm nguyên không âm của phương trình $x_1 + x_2 + ... + x_n = k$ chính là số tổ hợp lặp chập k của n phần tử, bằng $C(n+k-1, k)$."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.4. Hệ thức truy hồi",
+            "level_2_id": "2.4",
+            "content": "",
+            "children": [
+              {
+                "level_3_title": "2.4.1. Định nghĩa và ví dụ",
+                "level_3_id": "2.4.1",
+                "content": "Hệ thức truy hồi (recurrence relation) đối với dãy số $\\{a_n\\}$ là một công thức biểu diễn số hạng $a_n$ thông qua một hay nhiều số hạng đi trước nó (ví dụ $a_{n-1}, a_{n-2}, ...$). Để xác định duy nhất một dãy số thoả mãn hệ thức truy hồi, cần có các điều kiện ban đầu (giá trị của một vài số hạng đầu tiên).\nVí dụ: Dãy Fibonacci được định nghĩa bởi $f_n = f_{n-1} + f_{n-2}$ với $f_0 = 0, f_1 = 1$."
+              },
+              {
+                "level_3_title": "2.4.2. Giải công thức truy hồi tuyến tính thuần nhất với hệ số hằng số",
+                "level_3_id": "2.4.2",
+                "content": "Hệ thức có dạng: $a_n = c_1 a_{n-1} + c_2 a_{n-2} + ... + c_k a_{n-k}$, trong đó $c_i$ là các hằng số.\nPhương pháp giải:\n1. Thiết lập phương trình đặc trưng: $r^k - c_1 r^{k-1} - c_2 r^{k-2} - ... - c_k = 0$.\n2. Tìm các nghiệm của phương trình đặc trưng.\n   - Nếu có k nghiệm phân biệt $r_1, r_2, ..., r_k$, nghiệm tổng quát là: $a_n = \\alpha_1 r_1^n + \\alpha_2 r_2^n + ... + \\alpha_k r_k^n$.\n   - Nếu có nghiệm bội, ví dụ $r_1$ là nghiệm bội m, thì phần đóng góp của nó vào nghiệm tổng quát có dạng: $(\\alpha_{1,0} + \\alpha_{1,1} n + ... + \\alpha_{1, m-1} n^{m-1}) r_1^n$.\n3. Dùng các điều kiện ban đầu để tìm các hằng số $\\alpha_i$."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.5. Qui về các bài toán đơn giản",
+            "level_2_id": "2.5",
+            "content": "Nhiều bài toán đếm phức tạp có thể được giải quyết bằng cách chia nhỏ thành các bài toán đơn giản hơn (phương pháp chia để trị), hoặc thiết lập hệ thức truy hồi dựa trên mối quan hệ giữa bài toán kích thước n và các bài toán kích thước nhỏ hơn.\nVí dụ: Bài toán tháp Hà Nội, bài toán đếm số xâu nhị phân không chứa 2 bit 0 liên tiếp, v.v. thường dẫn đến các hệ thức truy hồi tuyến tính.",
+            "children": []
+          },
+          {
+            "level_2_title": "2.6. Phương pháp liệt kê",
+            "level_2_id": "2.6",
+            "content": "Khi không có công thức tính toán trực tiếp đơn giản, ta có thể phải liệt kê tất cả các cấu hình để đếm chúng. Phương pháp này thường cần sự hỗ trợ của máy tính. Cần có thuật toán để sinh ra các cấu hình một cách có hệ thống (không lặp, không sót). Các ví dụ bao gồm liệt kê các hình vuông Latinh, liệt kê các cấu hình đồ thị, v.v.",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 3. BÀI TOÁN LIỆT KÊ",
+        "level_1_id": "3",
+        "children": [
+          {
+            "level_2_title": "3.1. Giới thiệu bài toán",
+            "level_2_id": "3.1",
+            "content": "Bài toán liệt kê yêu cầu đưa ra danh sách rõ ràng tất cả các cấu hình tổ hợp thoả mãn một tính chất nào đó (ví dụ: liệt kê tất cả các hoán vị của {1, 2, 3}, liệt kê các tập con của một tập hợp). Một thuật toán liệt kê tốt cần đảm bảo hai nguyên tắc:\n1. Không lặp lại bất kỳ cấu hình nào.\n2. Không bỏ sót bất kỳ cấu hình nào.",
+            "children": []
+          },
+          {
+            "level_2_title": "3.2. Thuật toán và độ phức tạp tính toán",
+            "level_2_id": "3.2",
+            "content": "Thuật toán là một dãy hữu hạn các bước mô tả chính xác các phép toán cần thực hiện để giải quyết một vấn đề. Các tính chất của thuật toán: tính đơn định, tính dừng, tính đúng, tính phổ dụng, tính khả thi.\nĐộ phức tạp tính toán của thuật toán thường được đánh giá thông qua số lượng phép toán sơ cấp cần thực hiện, biểu diễn dưới dạng hàm số của kích thước đầu vào n, thường dùng ký hiệu Big-O ($O(n), O(n^2), O(2^n)$, v.v.) để mô tả tốc độ tăng trưởng của thời gian chạy khi n tăng.",
+            "children": []
+          },
+          {
+            "level_2_title": "3.3. Phương pháp sinh",
+            "level_2_id": "3.3",
+            "content": "Phương pháp sinh (Generating method) áp dụng khi ta có thể xác định một thứ tự (thường là thứ tự từ điển) trên tập các cấu hình. Ý tưởng cơ bản:\n1. Xác định cấu hình đầu tiên và cấu hình cuối cùng theo thứ tự đó.\n2. Xây dựng thuật toán \"sinh cấu hình kế tiếp\": từ một cấu hình hiện tại, tìm ra cấu hình liền ngay sau nó trong thứ tự đã chọn.\nLặp lại bước sinh kế tiếp bắt đầu từ cấu hình đầu tiên cho đến khi gặp cấu hình cuối cùng.\nCác ví dụ điển hình:\n- Sinh các xâu nhị phân độ dài n: Từ $00...0$ đến $11...1$. Quy tắc sinh kế tiếp: tìm bit 0 đầu tiên từ phải sang, đổi nó thành 1 và đặt tất cả các bit phía sau nó thành 0.\n- Sinh các hoán vị của n phần tử: Từ $(1, 2, ..., n)$ đến $(n, n-1, ..., 1)$. Quy tắc sinh hoán vị kế tiếp dựa trên việc tìm cặp nghịch thế và đổi chỗ phù hợp.\n- Sinh các tổ hợp chập k của n phần tử: Biểu diễn tổ hợp dưới dạng dãy tăng các chỉ số. Từ $(1, 2, ..., k)$ đến $(n-k+1, ..., n)$.",
+            "children": []
+          },
+          {
+            "level_2_title": "3.4. Thuật toán quay lui (Back track)",
+            "level_2_id": "3.4",
+            "content": "Quay lui là một chiến lược tìm kiếm lời giải bằng cách xây dựng dần từng thành phần của cấu hình. Giả sử cấu hình cần tìm là một vector $(x_1, x_2, ..., x_n)$. Ta thử chọn giá trị cho $x_1$, sau đó thử chọn $x_2$, v.v. Nếu tại bước thứ i, ta nhận thấy không thể chọn giá trị nào hợp lệ cho $x_i$ để dẫn đến một lời giải hoàn chỉnh, ta \"quay lui\" lại bước $i-1$ để chọn một giá trị khác cho $x_{i-1}$.\nThuật toán này thường được cài đặt bằng đệ quy. Nó tương đương với việc duyệt sâu (DFS) trên cây không gian trạng thái của bài toán.\nVí dụ áp dụng: Bài toán xếp hậu (đặt n quân hậu lên bàn cờ nxn sao cho không quân nào ăn quân nào), bài toán mã đi tuần, liệt kê các hoán vị, tổ hợp (cũng có thể dùng quay lui thay cho phương pháp sinh).",
+            "children": []
+          },
+          {
+            "level_2_title": "3.5. Những nội dung cần ghi nhớ",
+            "level_2_id": "3.5",
+            "content": "Cần nắm vững hai phương pháp liệt kê chính:\n1. Phương pháp sinh: Hiệu quả khi cần duyệt tuần tự tất cả cấu hình và có quy tắc chuyển đổi rõ ràng.\n2. Phương pháp quay lui: Linh hoạt hơn, có thể áp dụng cho nhiều bài toán phức tạp có các điều kiện ràng buộc khó, nhưng có thể chậm nếu không gian tìm kiếm quá lớn (cần cắt tỉa nhánh - xem nhánh cận ở chương sau).",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 4. BÀI TOÁN TỐI ƯU",
+        "level_1_id": "4",
+        "children": [
+          {
+            "level_2_title": "4.1. Giới thiệu bài toán",
+            "level_2_id": "4.1",
+            "content": "Bài toán tối ưu tổ hợp là tìm cấu hình tốt nhất (theo một tiêu chuẩn nào đó, ví dụ như chi phí nhỏ nhất, lợi nhuận lớn nhất) trong số các cấu hình thoả mãn các điều kiện cho trước. Tập các cấu hình thoả mãn điều kiện gọi là không gian phương án, cấu hình tốt nhất gọi là phương án tối ưu.\nCác ví dụ kinh điển:\n- Bài toán cái túi (Knapsack problem): Chọn các đồ vật để cho vào túi sao cho tổng trọng lượng không quá sức chứa của túi và tổng giá trị là lớn nhất.\n- Bài toán người du lịch (Traveling Salesman Problem - TSP): Tìm chu trình đi qua tất cả các thành phố, mỗi thành phố đúng một lần và quay về nơi xuất phát sao cho tổng độ dài đường đi là ngắn nhất.",
+            "children": []
+          },
+          {
+            "level_2_title": "4.2. Phương pháp duyệt toàn bộ",
+            "level_2_id": "4.2",
+            "content": "Phương pháp đơn giản nhất để giải bài toán tối ưu là liệt kê tất cả các phương án có thể, tính giá trị hàm mục tiêu cho từng phương án và chọn ra phương án tốt nhất. Tuy nhiên, phương pháp này chỉ khả thi khi không gian phương án nhỏ, vì số lượng cấu hình thường tăng theo hàm mũ hoặc giai thừa đối với kích thước bài toán (sự bùng nổ tổ hợp).",
+            "children": []
+          },
+          {
+            "level_2_title": "4.3. Thuật toán nhánh cận",
+            "level_2_id": "4.3",
+            "content": "Nhánh cận (Branch and Bound) là một kỹ thuật cải tiến của quay lui để giải các bài toán tối ưu. Nó sử dụng một hàm đánh giá (cận) để ước lượng giá trị tốt nhất có thể đạt được từ một phương án bộ phận. Nếu đánh giá này cho thấy một nhánh tìm kiếm không thể dẫn đến phương án tốt hơn phương án tốt nhất hiện có (kỷ lục), ta có thể cắt bỏ (tỉa) nhánh đó, không cần duyệt tiếp.\n- Cận dưới (Lower Bound - cho bài toán tìm Min): Nếu cận dưới của một nhánh lớn hơn hoặc bằng giá trị kỷ lục hiện tại, nhánh đó bị cắt.\n- Cận trên (Upper Bound - cho bài toán tìm Max): Nếu cận trên của một nhánh nhỏ hơn hoặc bằng giá trị kỷ lục hiện tại, nhánh đó bị cắt.\nHiệu quả của thuật toán nhánh cận phụ thuộc rất nhiều vào chất lượng của hàm đánh giá cận.",
+            "children": []
+          },
+          {
+            "level_2_title": "4.4. Kỹ thuật rút gọn giải quyết bài toán người du lịch",
+            "level_2_id": "4.4",
+            "content": "Đối với bài toán người du lịch (TSP tìm đường đi ngắn nhất), một phương pháp nhánh cận hiệu quả sử dụng kỹ thuật \"rút gọn ma trận chi phí\".\nÝ tưởng: Nếu ta trừ đi một hằng số từ tất cả các phần tử của một hàng (hoặc một cột) của ma trận chi phí, thì hành trình tối ưu vẫn không thay đổi, chỉ có tổng chi phí giảm đi đúng hằng số đó. Ta có thể rút gọn ma trận bằng cách trừ mỗi hàng cho phần tử nhỏ nhất của hàng đó, rồi trừ mỗi cột cho phần tử nhỏ nhất của cột đó, để ma trận có ít nhất một số 0 trên mỗi hàng và cột. Tổng các giá trị đã trừ đi chính là một cận dưới (Lower Bound) cho chi phí của mọi hành trình.\nQuá trình phân nhánh có thể dựa trên việc chọn một cạnh (đi từ thành phố i đến j) để đưa vào hành trình hoặc loại bỏ khỏi hành trình, và cập nhật lại ma trận chi phí và cận dưới tương ứng.",
+            "children": []
+          },
+          {
+            "level_2_title": "4.5. Những điểm cần ghi nhớ",
+            "level_2_id": "4.5",
+            "content": "Cần nắm vững:\n- Mô hình bài toán tối ưu tổ hợp.\n- Sự hạn chế của phương pháp duyệt toàn bộ do bùng nổ tổ hợp.\n- Nguyên lý của thuật toán nhánh cận: cách phân nhánh, cách tính cận, quy tắc cắt tỉa.\n- Áp dụng nhánh cận cho các bài toán cụ thể như cái túi, TSP.",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG 5. BÀI TOÁN TỒN TẠI",
+        "level_1_id": "5",
+        "children": [
+          {
+            "level_2_title": "5.1. Giới thiệu bài toán",
+            "level_2_id": "5.1",
+            "content": "Bài toán tồn tại không yêu cầu đếm hay liệt kê, mà chỉ cần trả lời câu hỏi \"Có tồn tại hay không một cấu hình thoả mãn tính chất đã cho?\". Đôi khi việc chứng minh tồn tại không đồng nghĩa với việc chỉ ra cách xây dựng cấu hình đó (chứng minh không cấu trúc).\nCác ví dụ nổi tiếng: Bài toán 36 sĩ quan của Euler (không tồn tại hai hình vuông Latinh trực giao cấp 6), Định lý bốn màu (tồn tại cách tô màu mọi bản đồ phẳng chỉ với 4 màu).",
+            "children": []
+          },
+          {
+            "level_2_title": "5.2. Phương pháp phản chứng",
+            "level_2_id": "5.2",
+            "content": "Để chứng minh một cấu hình tồn tại (hoặc một tính chất luôn đúng), ta có thể giả sử ngược lại là nó không tồn tại (hoặc tính chất đó sai), sau đó dùng các suy luận logic để dẫn đến một điều mâu thuẫn. Điều mâu thuẫn này cho thấy giả thiết phản chứng là sai, do đó khẳng định ban đầu là đúng.",
+            "children": []
+          },
+          {
+            "level_2_title": "5.3. Nguyên lý Dirichlet",
+            "level_2_id": "5.3",
+            "content": "Nguyên lý Dirichlet (hay nguyên lý chuồng bồ câu - Pigeonhole Principle): Nếu xếp $n+1$ đối tượng vào $n$ hộp, thì chắc chắn tồn tại ít nhất một hộp chứa từ 2 đối tượng trở lên.\nTổng quát: Nếu xếp N đối tượng vào k hộp, thì tồn tại ít nhất một hộp chứa ít nhất $\\lceil N/k \\rceil$ đối tượng.\nNguyên lý này là một công cụ mạnh để chứng minh sự tồn tại mà không cần chỉ ra cụ thể. Ví dụ: Trong một nhóm 367 người, chắc chắn có ít nhất hai người có cùng ngày sinh nhật (vì chỉ có 366 ngày sinh có thể có).",
+            "children": []
+          },
+          {
+            "level_2_title": "5.4. Những nội dung cần ghi nhớ",
+            "level_2_id": "5.4",
+            "content": "Các phương pháp chứng minh tồn tại:\n- Xây dựng trực tiếp (chỉ ra một cấu hình cụ thể).\n- Phương pháp phản chứng.\n- Sử dụng nguyên lý Dirichlet để chứng minh sự tồn tại \"không cấu trúc\".",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }

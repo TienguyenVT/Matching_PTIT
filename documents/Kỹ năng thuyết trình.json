@@ -1,0 +1,225 @@
+{
+    "document_title": "BÀI GIẢNG KỸ NĂNG THUYẾT TRÌNH",
+    "structure_type": "Chương/Mục",
+    "data": [
+      {
+        "level_1_title": "CHƯƠNG I: TỔNG QUAN VỀ THUYẾT TRÌNH",
+        "level_1_id": "I",
+        "children": [
+          {
+            "level_2_title": "1.1. Khái niệm về thuyết trình",
+            "level_2_id": "1.1",
+            "content": "Thuyết trình là trình bày bằng lời trước nhiều người nghe về một vấn đề nào đó nhằm cung cấp thông tin hoặc thuyết phục, gây ảnh hưởng đến người nghe. Kỹ năng thuyết trình thực chất là khả năng vận dụng những kiến thức, kỹ năng cần thiết vào quá trình trình bày, để diễn đạt vấn đề, giúp người khác dễ dàng hiểu được nội dung muốn trình bày.",
+            "children": []
+          },
+          {
+            "level_2_title": "1.2. Lịch sử của thuyết trình",
+            "level_2_id": "1.2",
+            "content": "Trong lịch sử loài người, nghệ thuật thuyết trình đã trở thành một công cụ giao tiếp hiệu quả. Từ thời Ai Cập cổ đại, Hy Lạp và La Mã, thuyết trình đã đóng vai trò quan trọng. Aristotle đã xác định ba thủ pháp cho người thuyết trình: sự chuẩn xác, truyền cảm và hợp lý. Ngày nay, thuyết trình phát triển đa dạng trong nhiều lĩnh vực với sự hỗ trợ của công nghệ thông tin.",
+            "children": []
+          },
+          {
+            "level_2_title": "1.3. Phân loại các bài thuyết trình",
+            "level_2_id": "1.3",
+            "content": "Có thể phân loại thuyết trình dựa trên mục đích chính của bài nói.",
+            "children": [
+              {
+                "level_3_title": "1.3.1. Thuyết trình cung cấp thông tin",
+                "level_3_id": "1.3.1",
+                "content": "Mục đích chính là chia sẻ hiểu biết, kiến thức về một chủ đề với thính giả. Ví dụ: giảng bài, báo cáo công việc, hướng dẫn sử dụng phần mềm."
+              },
+              {
+                "level_3_title": "1.3.2. Thuyết trình để thuyết phục",
+                "level_3_id": "1.3.2",
+                "content": "Đưa ra các lý lẽ làm cho người nghe chấp nhận hoặc hành động theo ý kiến của người nói. Ví dụ: nhân viên bán hàng thuyết phục khách hàng, tranh cử."
+              },
+              {
+                "level_3_title": "1.3.3. Thuyết trình gây cảm hứng",
+                "level_3_id": "1.3.3",
+                "content": "Ở cấp độ cao hơn thuyết phục, người thuyết trình thôi thúc thính giả thực hiện theo những gì vừa được nghe, tạo động lực mạnh mẽ."
+              },
+              {
+                "level_3_title": "1.3.4. Thuyết trình để giải trí",
+                "level_3_id": "1.3.4",
+                "content": "Liên quan đến các phát biểu trong các dịp đặc biệt như đám cưới, lễ trao giải, thường mang tính hài hước, cảm động để tạo dấu ấn."
+              }
+            ]
+          },
+          {
+            "level_2_title": "1.4. Yêu cầu khi thuyết trình",
+            "level_2_id": "1.4",
+            "content": "Một bài thuyết trình hiệu quả cần đáp ứng các yêu cầu cơ bản sau.",
+            "children": [
+              {
+                "level_3_title": "1.4.1. Có mục tiêu rõ ràng",
+                "level_3_id": "1.4.1",
+                "content": "Cần xác định rõ muốn người nghe hiểu gì, thực hiện gì sau bài thuyết trình."
+              },
+              {
+                "level_3_title": "1.4.2. Phù hợp với đối tượng",
+                "level_3_id": "1.4.2",
+                "content": "Phân tích người nghe về kiến thức, mối quan tâm, ngôn ngữ để điều chỉnh nội dung phù hợp."
+              },
+              {
+                "level_3_title": "1.4.3. Có cấu trúc logic và nhất quán",
+                "level_3_id": "1.4.3",
+                "content": "Bài thuyết trình thường có 3 phần: Mở đầu, nội dung và kết thúc. Các ý tưởng cần được sắp xếp khoa học."
+              },
+              {
+                "level_3_title": "1.4.4. Sử dụng ngôn ngữ và phi ngôn ngữ phù hợp",
+                "level_3_id": "1.4.4",
+                "content": "Kết hợp lời nói rõ ràng, mạch lạc với ngôn ngữ cơ thể (dáng điệu, ánh mắt) để tăng tính hấp dẫn."
+              },
+              {
+                "level_3_title": "1.4.5. Thời gian phân bổ hợp lý",
+                "level_3_id": "1.4.5",
+                "content": "Phân bổ thời gian đều đặn cho các phần, tránh nói quá dài dòng hoặc quá nhanh."
+              }
+            ]
+          },
+          {
+            "level_2_title": "1.5. Lợi ích của việc học kỹ năng thuyết trình",
+            "level_2_id": "1.5",
+            "content": "Kỹ năng thuyết trình mang lại nhiều lợi ích trong học tập, công việc và cuộc sống.",
+            "children": [
+              {
+                "level_3_title": "1.5.1. Vai trò của thuyết trình",
+                "level_3_id": "1.5.1",
+                "content": "Là công cụ giao tiếp hiệu quả, đóng vai trò to lớn trong sự thành công của cá nhân và có thể tạo ra thu nhập cao."
+              },
+              {
+                "level_3_title": "1.5.2. Lợi ích đối với sinh viên",
+                "level_3_id": "1.5.2",
+                "content": "Giúp sinh viên tự tin, rèn luyện kỹ năng giao tiếp, dễ dàng truyền đạt ý tưởng và tạo tiền đề cho sự thành công trong tương lai."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG II: CHUẨN BỊ BÀI THUYẾT TRÌNH",
+        "level_1_id": "II",
+        "children": [
+          {
+            "level_2_title": "2.1. Chọn chủ đề và xác định mục đích bài thuyết trình",
+            "level_2_id": "2.1",
+            "content": "Bước đầu tiên quan trọng là lựa chọn chủ đề phù hợp với kiến thức của bản thân và sự quan tâm của thính giả. Cần xác định mục đích chung (thông tin, thuyết phục...) và mục tiêu cụ thể (người nghe sẽ biết gì/làm gì sau bài nói). Cần xây dựng ý tưởng trung tâm thành một câu đơn cô đọng.",
+            "children": []
+          },
+          {
+            "level_2_title": "2.2. Tìm hiểu thính giả",
+            "level_2_id": "2.2",
+            "content": "Phân tích thính giả (họ là ai, nhu cầu, trình độ, thái độ...) để xây dựng nội dung phù hợp. Cần phân loại người nghe (thính giác, thị giác, trực giác hoặc theo thái độ: thân thiện, trung lập, thờ ơ, chống đối) để có cách tiếp cận hiệu quả.",
+            "children": []
+          },
+          {
+            "level_2_title": "2.3. Thu thập tư liệu cho bài thuyết trình",
+            "level_2_id": "2.3",
+            "content": "Thu thập các thông tin phải biết, cần biết và nên biết. Các nguồn thông tin bao gồm: kiến thức kinh nghiệm bản thân, thư viện, internet, và phỏng vấn. Cần nghiên cứu và chọn lọc tài liệu một cách hiệu quả, đảm bảo tính chính xác.",
+            "children": []
+          },
+          {
+            "level_2_title": "2.4. Xây dựng nội dung bài thuyết trình",
+            "level_2_id": "2.4",
+            "content": "Xây dựng cấu trúc bài thuyết trình gồm 3 phần: Mở bài (gây ấn tượng, giới thiệu chủ đề, tạo sự tín nhiệm), Thân bài (trình bày các luận điểm chính với lập luận chặt chẽ, logic), và Kết bài (tóm tắt nội dung, đưa ra thông điệp cốt lõi, kêu gọi hành động).",
+            "children": [
+               {
+                "level_3_title": "2.4.1. Phác thảo đề cương",
+                "level_3_id": "2.4.1",
+                "content": "Chọn lựa kết cấu phù hợp (theo thời gian, không gian, chủ đề, vấn đề-giải pháp...). Phác thảo các ý chính và ý phụ."
+              },
+              {
+                "level_3_title": "2.4.2. Cấu trúc bài thuyết trình",
+                "level_3_id": "2.4.2",
+                "content": "Chi tiết hóa 3 phần: Mở bài (chiếm khoảng 10% thời gian), Thân bài (khoảng 85%), Kết luận (khoảng 5%)."
+              }
+            ]
+          },
+          {
+            "level_2_title": "2.5. Chuẩn bị các điều kiện cho buổi thuyết trình",
+            "level_2_id": "2.5",
+            "content": "Bao gồm chuẩn bị tài liệu hỗ trợ (handouts), phương tiện nghe nhìn (máy chiếu, bảng, âm thanh), kiểm tra địa điểm thuyết trình, sắp xếp chỗ ngồi, và chuẩn bị về hình thức, tâm lý cá nhân (trang phục, sự tự tin).",
+            "children": []
+          },
+          {
+            "level_2_title": "2.6. Luyện tập thuyết trình",
+            "level_2_id": "2.6",
+            "content": "Luyện tập là yếu tố then chốt. Cần tập trình bày rõ ràng, luyện giọng nói, luyện tập theo nhóm và xin ý kiến phản hồi để hoàn thiện.",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG III: THỰC HIỆN BÀI THUYẾT TRÌNH",
+        "level_1_id": "III",
+        "children": [
+          {
+            "level_2_title": "3.1. Lên kế hoạch cho bài thuyết trình",
+            "level_2_id": "3.1",
+            "content": "Lập bản kế hoạch tóm tắt để ghi nhớ tuần tự các bước và các ý chính cần trình bày.",
+            "children": []
+          },
+          {
+            "level_2_title": "3.2. Mở đầu bài thuyết trình",
+            "level_2_id": "3.2",
+            "content": "Thực hiện chào hỏi, tự giới thiệu, giới thiệu chủ đề và cấu trúc bài nói. Sử dụng các kỹ thuật gây chú ý như đặt câu hỏi, kể chuyện, đưa ra số liệu gây sốc. Tránh mở đầu bằng lời xin lỗi hoặc tỏ ra thiếu tự tin.",
+            "children": []
+          },
+          {
+            "level_2_title": "3.3. Trình bày nội dung bài thuyết trình",
+            "level_2_id": "3.3",
+            "content": "Trình bày các ý chính theo trình tự logic. Sử dụng ngôn ngữ đơn giản, dễ hiểu, kết hợp các ví dụ minh họa. Có thể sử dụng các phương pháp: đọc từ bản thảo (khi cần chính xác tuyệt đối), đọc thuộc lòng (cho bài ngắn), nói tùy hứng (không chuẩn bị trước), hoặc nói ứng biến (có chuẩn bị dàn ý nhưng diễn đạt tự nhiên tại thời điểm nói).",
+            "children": []
+          },
+          {
+            "level_2_title": "3.4. Kết thúc bài thuyết trình",
+            "level_2_id": "3.4",
+            "content": "Tóm tắt lại các điểm chính, đưa ra kết luận mạnh mẽ và ấn tượng. Kêu gọi hành động hoặc đưa ra một nhận định thú vị để lưu lại dấu ấn. Cảm ơn thính giả.",
+            "children": []
+          },
+          {
+            "level_2_title": "3.5. Đánh giá kết quả bài thuyết trình",
+            "level_2_id": "3.5",
+            "content": "Tự đánh giá sau khi thuyết trình dựa trên các tiêu chí: nội dung, bố cục, sự chặt chẽ, sự hấp dẫn, kỹ thuật trình bày, sử dụng công cụ hỗ trợ, và khả năng phản hồi câu hỏi. Việc đánh giá giúp rút kinh nghiệm cho các lần sau.",
+            "children": []
+          }
+        ]
+      },
+      {
+        "level_1_title": "CHƯƠNG IV: MỘT SỐ KỸ NĂNG NÂNG CAO HIỆU QUẢ THUYẾT TRÌNH",
+        "level_1_id": "IV",
+        "children": [
+          {
+            "level_2_title": "4.1. Kỹ năng sử dụng phi ngôn ngữ",
+            "level_2_id": "4.1",
+            "content": "Ngôn ngữ cơ thể (ánh mắt, nét mặt, cử chỉ tay, tư thế đứng, di chuyển) đóng vai trò quan trọng (chiếm tới 55% hiệu quả truyền đạt). Cần sử dụng ánh mắt thân thiện, bao quát; nét mặt tươi tắn; cử chỉ tay tự nhiên; tư thế đứng vững chãi và di chuyển hợp lý. Giọng nói cần rõ ràng, có ngữ điệu, tốc độ vừa phải.",
+            "children": []
+          },
+          {
+            "level_2_title": "4.2. Kỹ năng kiểm soát sự lo lắng",
+            "level_2_id": "4.2",
+            "content": "Lo lắng là tâm lý bình thường. Nguyên nhân có thể do chuẩn bị không tốt, thiếu kiến thức, hoặc áp lực từ thính giả. Để kiểm soát, cần chuẩn bị kỹ càng, chọn chủ đề quen thuộc, tập luyện trước, hít thở sâu, và suy nghĩ tích cực.",
+            "children": []
+          },
+          {
+            "level_2_title": "4.3. Kỹ năng trao đổi với người nghe",
+            "level_2_id": "4.3",
+            "content": "Bao gồm kỹ năng đặt câu hỏi (câu hỏi đóng/mở, các cấp độ nhận thức) để tăng tương tác, và kỹ năng trả lời câu hỏi của thính giả (lắng nghe cẩn thận, trả lời thẳng thắn, chân thành, kiểm soát thời gian hỏi đáp).",
+            "children": []
+          },
+          {
+            "level_2_title": "4.4. Kỹ năng thuyết phục",
+            "level_2_id": "4.4",
+            "content": "Thuyết phục bằng sự thông cảm, thấu hiểu; bằng sự tin tưởng (tìm điểm tương đồng, khách quan); bằng sự lôi cuốn (khen ngợi chân thành); bằng uy tín cá nhân; và bằng cách tạo sự khan hiếm cho ý tưởng/đề nghị của mình.",
+            "children": []
+          },
+          {
+            "level_2_title": "4.5. Kỹ năng sử dụng phương tiện hỗ trợ",
+            "level_2_id": "4.5",
+            "content": "Sử dụng các phương tiện như bảng phấn, bảng trắng, flipchart, máy chiếu đa năng để trực quan hóa thông tin, giúp người nghe dễ hiểu và ghi nhớ. Cần tuân thủ các nguyên tắc thiết kế slide (đơn giản, rõ ràng, không quá nhiều chữ) và sử dụng thành thạo các thiết bị.",
+            "children": []
+          }
+        ]
+      }
+    ]
+  }

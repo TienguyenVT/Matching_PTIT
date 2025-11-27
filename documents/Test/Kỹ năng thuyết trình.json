@@ -1,0 +1,636 @@
+{
+  "document_title": "PHƯƠNG PHÁP LUẬN NGHIÊN CỨU KHOA HỌC",
+  "test_type": "Multiple Choice Questions",
+  "tests": [
+    {
+      "chapter_id": "I",
+      "chapter_title": "CHƯƠNG I: ĐẠI CƯƠNG VỀ NGHIÊN CỨU KHOA HỌC",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Theo định nghĩa về mặt thao tác, nghiên cứu khoa học là quá trình gì?",
+          "options": {
+            "A": "Quá trình đọc và tổng hợp tài liệu.",
+            "B": "Quá trình hình thành và chứng minh luận điểm khoa học.",
+            "C": "Quá trình thực hiện các thí nghiệm trong phòng lab.",
+            "D": "Quá trình viết báo cáo và công bố kết quả."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1: Về mặt thao tác, có thể định nghĩa, nghiên cứu khoa học là quá trình hình thành và chứng minh luận điểm khoa học."
+        },
+        {
+          "id": 2,
+          "question": "Loại nghiên cứu nào nhằm đưa ra một hệ thống tri thức về nhận dạng và đánh giá sự vật?",
+          "options": {
+            "A": "Nghiên cứu giải thích",
+            "B": "Nghiên cứu giải pháp",
+            "C": "Nghiên cứu mô tả",
+            "D": "Nghiên cứu dự báo"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.2.1: Nghiên cứu mô tả là nghiên cứu nhằm đưa ra một hệ thống tri thức về nhận dạng một sự vật, đánh giá một sự vật."
+        },
+        {
+          "id": 3,
+          "question": "Nghiên cứu giải thích tập trung vào nội dung gì?",
+          "options": {
+            "A": "Nhận dạng trạng thái tương lai của sự vật.",
+            "B": "Sáng tạo các giải pháp công nghệ.",
+            "C": "Giải thích nguồn gốc, động thái, cấu trúc tương tác và quy luật chung.",
+            "D": "Đánh giá sơ bộ về sự vật."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.2.1: Nghiên cứu giải thích là những nghiên cứu nhằm giải thích nguồn gốc; động thái; cấu trúc tương tác; hậu quả; quy luật chung chi phối quá trình vận động của sự vật."
+        },
+        {
+          "id": 4,
+          "question": "Nghiên cứu dự báo có chức năng gì?",
+          "options": {
+            "A": "Nhận dạng trạng thái của sự vật trong tương lai.",
+            "B": "Tìm hiểu lịch sử của sự vật.",
+            "C": "Phân tích cấu trúc hiện tại của sự vật.",
+            "D": "Đưa ra các giải pháp khắc phục sự cố."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 1.2.1: Nghiên cứu dự báo là những nghiên cứu nhằm nhận dạng trạng thái của sự vật trong tương lai."
+        },
+        {
+          "id": 5,
+          "question": "Kết quả của nghiên cứu cơ bản thường dẫn tới điều gì?",
+          "options": {
+            "A": "Tạo ra một sản phẩm thương mại.",
+            "B": "Hình thành một hệ thống lý thuyết mới.",
+            "C": "Tạo ra quy trình sản xuất hàng loạt.",
+            "D": "Giải quyết một sự cố kỹ thuật cụ thể."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.2: Kết quả nghiên cứu cơ bản có thể là các khám phá, phát hiện, phát minh, dẫn tới hình thành một hệ thống lý thuyết mới."
+        },
+        {
+          "id": 6,
+          "question": "Giai đoạn 'Tạo vật mẫu' (prototype) thuộc loại hình nghiên cứu nào?",
+          "options": {
+            "A": "Nghiên cứu cơ bản",
+            "B": "Nghiên cứu ứng dụng",
+            "C": "Triển khai (Triển khai thực nghiệm)",
+            "D": "Nghiên cứu lý thuyết"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.2.2: Triển khai gồm 3 giai đoạn, trong đó giai đoạn đầu tiên là Tạo vật mẫu (prototype)."
+        },
+        {
+          "id": 7,
+          "question": "Giai đoạn 'làm pilot' trong triển khai thực nghiệm có mục đích gì?",
+          "options": {
+            "A": "Tạo ra sản phẩm đơn lẻ đầu tiên.",
+            "B": "Tìm kiếm và thử nghiệm công nghệ để sản xuất sản phẩm theo mẫu.",
+            "C": "Kiểm chứng độ tin cậy của công nghệ trên quy mô lớn.",
+            "D": "Nghiên cứu thị trường tiêu thụ."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.2: Tạo công nghệ còn gọi là giai đoạn “làm pilot”, là giai đoạn tìm kiếm và thử nghiệm công nghệ để sản xuất ra sản phẩm theo mẫu."
+        },
+        {
+          "id": 8,
+          "question": "Sản xuất 'Série 0' (Loạt 0) là giai đoạn nhằm mục đích gì?",
+          "options": {
+            "A": "Sản xuất đại trà để bán ra thị trường.",
+            "B": "Kiểm chứng độ tin cậy của công nghệ trên quy mô nhỏ.",
+            "C": "Tạo ra bản vẽ thiết kế.",
+            "D": "Thử nghiệm ý tưởng ban đầu."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.2: Sản xuất thử loạt nhỏ, còn gọi là sản xuất “Série 0\". Đây là giai đoạn kiểm chứng độ tin cậy của công nghệ trên quy mô nhỏ."
+        },
+        {
+          "id": 9,
+          "question": "Nghiên cứu ứng dụng sử dụng kết quả từ đâu?",
+          "options": {
+            "A": "Từ kinh nghiệm dân gian.",
+            "B": "Từ quy luật được phát hiện trong nghiên cứu cơ bản.",
+            "C": "Từ các báo cáo tài chính.",
+            "D": "Từ các dự báo xã hội học."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.2: Nghiên cứu ứng dụng là sự vận dụng quy luật được phát hiện từ nghiên cứu cơ bản để giải thích một sự vật hoặc tạo ra những nguyên lý mới."
+        },
+        {
+          "id": 10,
+          "question": "Trong một đề tài nghiên cứu thực tế, có thể tồn tại bao nhiêu loại hình nghiên cứu?",
+          "options": {
+            "A": "Chỉ duy nhất một loại.",
+            "B": "Bắt buộc phải có đủ 3 loại: Cơ bản, Ứng dụng, Triển khai.",
+            "C": "Có thể chỉ một loại hoặc kết hợp nhiều loại nghiên cứu.",
+            "D": "Không tồn tại loại nghiên cứu nào cụ thể."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.2.2: Trên thực tế, trong một đề tài có thể chỉ tồn tại một loại nghiên cứu... song cũng có thể tồn tại cả một số loại nghiên cứu nào đó."
+        }
+      ]
+    },
+    {
+      "chapter_id": "II",
+      "chapter_title": "CHƯƠNG II: TRÌNH TỰ LOGIC CỦA NGHIÊN CỨU KHOA HỌC",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Bước đầu tiên trong trình tự logic của nghiên cứu khoa học là gì?",
+          "options": {
+            "A": "Xác định mục tiêu nghiên cứu.",
+            "B": "Phát hiện vấn đề để lựa chọn chủ đề nghiên cứu.",
+            "C": "Đặt giả thuyết nghiên cứu.",
+            "D": "Tìm kiếm luận cứ."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên Chương II (phần mở đầu): Bước 1 là Phát hiện vấn đề (Problem), để lựa chọn chủ đề (topic) nghiên cứu."
+        },
+        {
+          "id": 2,
+          "question": "Sự kiện khoa học (Scientific Fact) là gì?",
+          "options": {
+            "A": "Là những sự kiện đã được chứng minh là đúng hoàn toàn.",
+            "B": "Là sự kiện chứa đựng mâu thuẫn giữa lý thuyết vốn tồn tại và thực tế.",
+            "C": "Là các sự kiện chính trị xã hội nổi bật.",
+            "D": "Là kết quả cuối cùng của nghiên cứu."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.1.1: Vấn đề nghiên cứu được phát hiện nhờ các sự kiện thông thường, trong đó chứa đựng những mâu thuẫn giữa lý thuyết vốn tồn tại và thực tế. Loại sự kiện như thế được gọi là sự kiện khoa học."
+        },
+        {
+          "id": 3,
+          "question": "Tên đề tài nghiên cứu khoa học cần tránh điều gì?",
+          "options": {
+            "A": "Phản ánh cô đọng nội dung nghiên cứu.",
+            "B": "Mang một ý nghĩa duy nhất.",
+            "C": "Sử dụng những cụm từ có độ bất định cao (Về..., Thử bàn về...).",
+            "D": "Ngắn gọn, súc tích."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.1.6: Tên đề tài không nên đặt bằng những cụm từ có độ bất định cao về thông tin. Ví dụ: Về ...; Thử bàn về...; Góp bàn về..."
+        },
+        {
+          "id": 4,
+          "question": "Câu hỏi nghiên cứu thực chất nhằm giải quyết mối quan tâm nào?",
+          "options": {
+            "A": "Cần bao nhiêu tiền để nghiên cứu?",
+            "B": "Cần chứng minh điều gì?",
+            "C": "Ai sẽ tham gia nghiên cứu?",
+            "D": "Nghiên cứu trong bao lâu?"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.2.1: Câu hỏi nghiên cứu đặt cho người nghiên cứu mối quan tâm: 'Cần chứng minh điều gì?'."
+        },
+        {
+          "id": 5,
+          "question": "Giả thuyết nghiên cứu (Hypothesis) là gì?",
+          "options": {
+            "A": "Là kết luận cuối cùng của đề tài.",
+            "B": "Là một kết luận giả định về bản chất sự vật để chứng minh hoặc bác bỏ.",
+            "C": "Là số liệu thực tế thu thập được.",
+            "D": "Là phương pháp thực hiện nghiên cứu."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.2.2: Giả thuyết nghiên cứu... là một kết luận giả định về bản chất sự vật, do người nghiên cứu đưa ra để chứng minh hoặc bác bỏ."
+        },
+        {
+          "id": 6,
+          "question": "Cấu trúc chung của một phán đoán logic là gì?",
+          "options": {
+            "A": "S là P",
+            "B": "S khác P",
+            "C": "S và P",
+            "D": "S hoặc P"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 2.2.2: Phán đoán có cấu trúc chung là 'S là P', trong đó S là chủ từ, P là vị từ."
+        },
+        {
+          "id": 7,
+          "question": "Trong cấu trúc logic của phép chứng minh, 'Luận cứ' trả lời cho câu hỏi nào?",
+          "options": {
+            "A": "Cần chứng minh điều gì?",
+            "B": "Chứng minh bằng cách nào?",
+            "C": "Chứng minh bằng cái gì?",
+            "D": "Ai chứng minh?"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.3.1: Luận cứ trả lời câu hỏi: 'Chứng minh bằng cái gì?'."
+        },
+        {
+          "id": 8,
+          "question": "Luận cứ lý thuyết bao gồm những gì?",
+          "options": {
+            "A": "Các quan sát và thực nghiệm của tác giả.",
+            "B": "Các khái niệm, tiên đề, định lý, định luật đã được chứng minh.",
+            "C": "Các số liệu khảo sát từ bảng hỏi.",
+            "D": "Các dự đoán của chuyên gia."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3.2: Luận cứ lý thuyết... bao gồm các khái niệm, các tiên đề, định lý, định luật, quy luật, tức các mối liên hệ, đã được khoa học chứng minh là đúng."
+        },
+        {
+          "id": 9,
+          "question": "Có 3 hướng tiếp cận thực tiễn để thu thập thông tin, đó là?",
+          "options": {
+            "A": "Khảo sát trực tiếp, Phương pháp chuyên gia, Phương pháp thực nghiệm.",
+            "B": "Đọc sách, Đọc báo, Xem tivi.",
+            "C": "Phân tích, Tổng hợp, So sánh.",
+            "D": "Lịch sử, Logic, Hệ thống."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 2.3.3: Có thể có 3 hướng tiếp cận thực tiễn: Khảo sát trực tiếp...; Phương pháp chuyên gia...; Phương pháp thực nghiệm."
+        },
+        {
+          "id": 10,
+          "question": "Mục tiêu nghiên cứu trả lời cho câu hỏi nào?",
+          "options": {
+            "A": "Nghiên cứu cái gì?",
+            "B": "Nghiên cứu ở đâu?",
+            "C": "Nghiên cứu khi nào?",
+            "D": "Nghiên cứu với ai?"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 2.1.3: Mục tiêu trả lời câu hỏi 'Nghiên cứu cái gì?'."
+        }
+      ]
+    },
+    {
+      "chapter_id": "III",
+      "chapter_title": "CHƯƠNG III: PHƯƠNG PHÁP THU THẬP THÔNG TIN",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Khi không thể trực tiếp thu thập thông tin trên đối tượng khảo sát (ví dụ sự kiện lịch sử), người nghiên cứu dùng phương pháp nào?",
+          "options": {
+            "A": "Phương pháp thực nghiệm.",
+            "B": "Phương pháp quan sát trực tiếp.",
+            "C": "Phương pháp chuyên gia.",
+            "D": "Phương pháp thử và sai."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.1: Khi đó, người nghiên cứu phải thu thập thông tin một cách gián tiếp qua những người trung gian. Người ta gọi chung là phương pháp chuyên gia."
+        },
+        {
+          "id": 2,
+          "question": "Phương pháp lấy mẫu mà mỗi đơn vị có cơ hội hiện diện trong mẫu bằng nhau gọi là gì?",
+          "options": {
+            "A": "Lấy mẫu hệ thống.",
+            "B": "Lấy mẫu ngẫu nhiên (Random sampling).",
+            "C": "Lấy mẫu phân tầng.",
+            "D": "Lấy mẫu từng cụm."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1.1: Lấy mẫu ngẫu nhiên (Random sampling), là cách chọn mẫu sao cho mỗi đơn vị lấy mẫu có một cơ hội hiện diện trong mẫu bằng nhau."
+        },
+        {
+          "id": 3,
+          "question": "Sự khác biệt giữa Giả thuyết (Hypothesis) và Giả thiết (Assumption) là gì?",
+          "options": {
+            "A": "Giả thuyết cần chứng minh, Giả thiết là điều kiện giả định không cần chứng minh.",
+            "B": "Giả thuyết không cần chứng minh, Giả thiết cần chứng minh.",
+            "C": "Hai khái niệm này là một, không có khác biệt.",
+            "D": "Giả thuyết dùng trong khoa học tự nhiên, Giả thiết dùng trong khoa học xã hội."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 3.1.2: Giả thuyết cần được chứng minh hoặc bác bỏ; Còn giả thiết là điều kiện giả định của nghiên cứu... Giả thiết không cần phải chứng minh."
+        },
+        {
+          "id": 4,
+          "question": "Trong phân tích nguồn tài liệu, tài liệu cấp I là gì?",
+          "options": {
+            "A": "Tài liệu dịch thuật.",
+            "B": "Tài liệu tóm tắt, tổng quan.",
+            "C": "Tài liệu nguyên gốc của chính tác giả viết.",
+            "D": "Sách giáo khoa."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.2.2: Nguồn tài liệu cấp I, gồm những tài liệu nguyên gốc của chính tác giả hoặc nhóm tác giả viết."
+        },
+        {
+          "id": 5,
+          "question": "Phương pháp Delphi trong hội nghị khoa học là hình thức của phương pháp nào?",
+          "options": {
+            "A": "Phương pháp thực nghiệm.",
+            "B": "Tấn công não (Brainstorming) phân nhóm.",
+            "C": "Quan sát mô tả.",
+            "D": "Phỏng vấn sâu."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.3.3: Để nâng cao hiệu quả tấn công não, người ta tấn công não phân nhóm... Gọi đó là phương pháp Delphi."
+        },
+        {
+          "id": 6,
+          "question": "Ưu điểm của phương pháp quan sát là gì?",
+          "options": {
+            "A": "Nhanh chóng và chủ động.",
+            "B": "Thu thập thông tin về bản chất sự vật mà không làm biến đổi trạng thái của nó.",
+            "C": "Có thể áp dụng cho các sự kiện đã lùi vào quá khứ.",
+            "D": "Không tốn kém chi phí."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.3.1: Trong phương pháp quan sát, người nghiên cứu chỉ quan sát những gì đã và đang tồn tại, không có bất cứ sự can thiệp nào gây biến đổi trạng thái."
+        },
+        {
+          "id": 7,
+          "question": "Phương pháp thực nghiệm 'Thử và Sai' (Trial-and-error) hoạt động như thế nào?",
+          "options": {
+            "A": "Thử, thấy sai, thử lại cho đến khi đạt kết quả.",
+            "B": "Chia thực nghiệm thành nhiều bước nhỏ logic.",
+            "C": "Mô phỏng trên máy tính trước khi làm thật.",
+            "D": "Dựa hoàn toàn vào tính toán lý thuyết."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 3.4.3: Thực nghiệm 'Thử và Sai'... là 'thử'; thử xong thấy 'sai'; tiếp đó 'thử lại'; lại 'sai'; lại 'thử', cho đến khi đạt được kết quả cuối cùng."
+        },
+        {
+          "id": 8,
+          "question": "Sai số hệ thống trong quan sát là do đâu?",
+          "options": {
+            "A": "Do cảm nhận chủ quan của người quan sát.",
+            "B": "Do các yếu tố kỹ thuật khách quan.",
+            "C": "Do hệ thống quyết định, hệ thống càng lớn sai số càng lớn.",
+            "D": "Do chọn sai mẫu khảo sát."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.6.3: Sai số hệ thống: do hệ thống quyết định. Hệ thống càng lớn thì sai số quan sát càng lớn."
+        },
+        {
+          "id": 9,
+          "question": "Trắc nghiệm được coi là phương pháp gì?",
+          "options": {
+            "A": "Phương pháp thực nghiệm hoàn toàn.",
+            "B": "Phương pháp bán thực nghiệm.",
+            "C": "Phương pháp nghiên cứu tài liệu.",
+            "D": "Phương pháp phi thực nghiệm."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.5: Trắc nghiệm là một phương pháp bán thực nghiệm."
+        },
+        {
+          "id": 10,
+          "question": "Xử lý thông tin định tính nhằm mục đích gì?",
+          "options": {
+            "A": "Tính toán các con số thống kê.",
+            "B": "Vẽ biểu đồ hình cột.",
+            "C": "Nhận dạng bản chất và mối liên hệ bản chất giữa các sự kiện.",
+            "D": "Xác định sai số ngẫu nhiên."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.6.2: Mục đích của xử lý định tính là nhận dạng bản chất và mối liên hệ bản chất giữa các sự kiện."
+        }
+      ]
+    },
+    {
+      "chapter_id": "IV",
+      "chapter_title": "CHƯƠNG IV: TRÌNH BÀY LUẬN ĐIỂM KHOA HỌC",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Một bài báo khoa học thông thường nên có độ dài khoảng bao nhiêu?",
+          "options": {
+            "A": "Dưới 500 chữ.",
+            "B": "Khoảng 1500-2000 chữ.",
+            "C": "Trên 5000 chữ.",
+            "D": "Không giới hạn số chữ."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.1: Một bài báo khoa học chỉ nên viết trong khoảng 1500-2000 chữ (3-4 trang khổ A4)."
+        },
+        {
+          "id": 2,
+          "question": "Môđun cuối cùng trong cấu trúc nội dung của bài báo khoa học là gì?",
+          "options": {
+            "A": "Lịch sử nghiên cứu.",
+            "B": "Phương pháp và Luận cứ.",
+            "C": "Kết luận và Khuyến nghị.",
+            "D": "Phân tích kết quả."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.1: Môđun 7: Kết luận và Khuyến nghị."
+        },
+        {
+          "id": 3,
+          "question": "Tổng luận khoa học khác với thông báo khoa học ở điểm nào?",
+          "options": {
+            "A": "Tổng luận ngắn hơn thông báo.",
+            "B": "Tổng luận là bản mô tả khái quát toàn bộ sự kiện, thành tựu và vấn đề liên quan đến chủ đề.",
+            "C": "Tổng luận không được đưa ra ý kiến cá nhân.",
+            "D": "Tổng luận chỉ dùng để trình bày miệng."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.2: Tổng luận khoa học là bản mô tả khái quát toàn bộ sự kiện, thành tựu và vấn đề liên quan đến một chủ đề nghiên cứu."
+        },
+        {
+          "id": 4,
+          "question": "Đặc điểm của 'Chuyên khảo khoa học' là gì?",
+          "options": {
+            "A": "Tập trung vào một chủ đề nhưng không nhất thiết hợp thành hệ thống lý thuyết nhất quán.",
+            "B": "Phải là sự tổng kết có hệ thống toàn bộ phương hướng nghiên cứu.",
+            "C": "Giữa các phần phải có luận điểm nhất quán.",
+            "D": "Chỉ bao gồm các bảng biểu số liệu."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.3.1: Chuyên khảo... tập trung vào một chủ đề đã được lựa chọn, nhưng không nhất thiết hợp thành một hệ thống lý thuyết."
+        },
+        {
+          "id": 5,
+          "question": "Bố cục chung của báo cáo kết quả nghiên cứu gồm 3 phần nào?",
+          "options": {
+            "A": "Mở đầu, Nội dung, Kết luận.",
+            "B": "Phần khai tập, Phần bài chính, Phần phụ đính.",
+            "C": "Lý thuyết, Thực hành, Kết quả.",
+            "D": "Chương 1, Chương 2, Chương 3."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4.1: Về nguyên tắc tổ chức bố cục, các báo cáo bao gồm 3 môđun: Phần khai tập, Phần bài chính, Phần phụ đính."
+        },
+        {
+          "id": 6,
+          "question": "Phương pháp thuyết trình 'Diễn dịch' đi theo trình tự nào?",
+          "options": {
+            "A": "Đi từ cái riêng đến cái chung.",
+            "B": "Đi từ cái riêng đến cái riêng.",
+            "C": "Đi từ cái chung đến cái riêng.",
+            "D": "Đi từ thực tế đến lý thuyết."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.5: Diễn dịch (đi từ cái chung đến cái riêng)."
+        },
+        {
+          "id": 7,
+          "question": "Văn phong khoa học thường sử dụng thể loại ngôn ngữ nào?",
+          "options": {
+            "A": "Thể chủ động, giàu cảm xúc.",
+            "B": "Thể bị động, khách quan, tránh thể hiện tình cảm.",
+            "C": "Thể văn xuôi nghệ thuật.",
+            "D": "Ngôn ngữ đời sống hàng ngày."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.6 (Văn phong): Lời văn trong tài liệu khoa học thường được dùng ở thể bị động... trình bày một cách khách quan... tránh thể hiện tình cảm yêu ghét."
+        },
+        {
+          "id": 8,
+          "question": "Mục đích của việc trích dẫn khoa học là gì?",
+          "options": {
+            "A": "Để làm bài viết dài hơn.",
+            "B": "Để thể hiện tính chuẩn xác, trách nhiệm, pháp lý và đạo đức.",
+            "C": "Để chứng tỏ tác giả đọc nhiều sách.",
+            "D": "Để trang trí cho văn bản đẹp hơn."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.6 (Trích dẫn): Ý nghĩa của trích dẫn: Ý nghĩa khoa học, Ý nghĩa trách nhiệm, Ý nghĩa pháp lý, Ý nghĩa đạo đức."
+        },
+        {
+          "id": 9,
+          "question": "Phần 'Phụ đính' (Back Matter) của báo cáo thường chứa nội dung gì?",
+          "options": {
+            "A": "Lời nói đầu và mục lục.",
+            "B": "Luận cứ lý thuyết và thực tiễn.",
+            "C": "Phụ lục, hình vẽ, biểu đồ, giải thích thuật ngữ.",
+            "D": "Kết luận và khuyến nghị."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.4.1: Phần phụ đính... có thể có các phụ lục, hình vẽ, biểu đồ, phần giải thích thuật ngữ, phần tra cứu."
+        },
+        {
+          "id": 10,
+          "question": "Phương pháp thuyết trình đi từ cái riêng đến cái chung gọi là gì?",
+          "options": {
+            "A": "Diễn dịch.",
+            "B": "Quy nạp.",
+            "C": "Loại suy.",
+            "D": "Phân tích."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.5: Quy nạp (đi từ cái riêng đến cái chung)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "V",
+      "chapter_title": "CHƯƠNG V: TỔ CHỨC THỰC HIỆN ĐỀ TÀI",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Bước đầu tiên trong việc tổ chức thực hiện đề tài là gì?",
+          "options": {
+            "A": "Xây dựng đề cương.",
+            "B": "Lựa chọn đề tài.",
+            "C": "Thu thập thông tin.",
+            "D": "Dự toán kinh phí."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1: Việc lựa chọn đề tài có một ý nghĩa rất quan trọng. Trước hết cần xác định nhiệm vụ nghiên cứu."
+        },
+        {
+          "id": 2,
+          "question": "Đâu KHÔNG phải là một tiêu chí để lựa chọn đề tài?",
+          "options": {
+            "A": "Ý nghĩa khoa học.",
+            "B": "Tính cấp thiết.",
+            "C": "Sự phù hợp sở thích.",
+            "D": "Độ dài của tên đề tài."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 5.1: Tiêu chí gồm: ý nghĩa khoa học, ý nghĩa thực tiễn, tính cấp thiết, điều kiện đảm bảo, sự phù hợp sở thích."
+        },
+        {
+          "id": 3,
+          "question": "Nội dung của đề cương nghiên cứu cần thuyết minh những gì?",
+          "options": {
+            "A": "Kết quả nghiên cứu chi tiết.",
+            "B": "Tên đề tài, lý do, mục tiêu, giả thuyết, phương pháp, kế hoạch.",
+            "C": "Biên bản nghiệm thu đề tài.",
+            "D": "Nhận xét của hội đồng phản biện."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: Nội dung đề cương cần thuyết minh: Tên đề tài, Lý do chọn đề tài... Mục tiêu, Phạm vi, Mẫu, Vấn đề, Giả thuyết, Phương pháp."
+        },
+        {
+          "id": 4,
+          "question": "Công việc thu thập và xử lý thông tin thường được tiến hành khi nào?",
+          "options": {
+            "A": "Trước khi chọn đề tài.",
+            "B": "Sau khi viết báo cáo tổng kết.",
+            "C": "Sau khi đề tài đã được cấp kinh phí.",
+            "D": "Trong quá trình nghiệm thu."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.3: Công việc này thường được tiến hành sau khi đề tài đã được cấp kinh phí."
+        },
+        {
+          "id": 5,
+          "question": "Báo cáo kết thúc đề tài có vai trò gì?",
+          "options": {
+            "A": "Là cơ sở để các hội đồng nghiệm thu đánh giá.",
+            "B": "Là tài liệu duy nhất để xin kinh phí.",
+            "C": "Là bản nháp để thảo luận nội bộ.",
+            "D": "Là văn bản pháp lý để ký hợp đồng."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 5.4: Báo cáo kết thúc đề tài là cơ sở để các hội đồng nghiệm thu đánh giá."
+        },
+        {
+          "id": 6,
+          "question": "Thể thức nghiệm thu đề tài thường bao gồm hoạt động nào?",
+          "options": {
+            "A": "Tác giả tự đánh giá và công bố.",
+            "B": "Thành lập hội đồng nghiệm thu, nghe báo cáo và bỏ phiếu.",
+            "C": "Đăng báo và chờ phản hồi của độc giả.",
+            "D": "Gửi báo cáo cho nhà tài trợ và kết thúc."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.5: Thể thức nghiệm thu: có chuyên gia phản biện, thành lập hội đồng nghiệm thu, hội đồng nghe báo cáo và bỏ phiếu."
+        },
+        {
+          "id": 7,
+          "question": "Ngoại trừ các kết quả mật (an ninh, quốc phòng), kết quả nghiên cứu cần được xử lý thế nào?",
+          "options": {
+            "A": "Giữ bí mật nội bộ.",
+            "B": "Công bố trên báo, tạp chí chuyên ngành hoặc truyền thông.",
+            "C": "Lưu trữ trong kho lưu trữ quốc gia và không công bố.",
+            "D": "Bán cho doanh nghiệp độc quyền."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.6: Trừ những kết quả có tính hệ trọng về an ninh và quốc phòng, mọi kết quả nghiên cứu cần được công bố."
+        },
+        {
+          "id": 8,
+          "question": "Trong dự toán kinh phí của đề cương, các khoản chi thường bao gồm?",
+          "options": {
+            "A": "Tiền thưởng cho tác giả.",
+            "B": "Lương, chi phí nghiên cứu, mua tài liệu, hội nghị, thiết bị.",
+            "C": "Chi phí du lịch giải trí.",
+            "D": "Chi phí quảng cáo sản phẩm."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: Lập dự toán kinh phí (lương, chi phí nghiên cứu, mua tài liệu, hội nghị, thiết bị...)."
+        },
+        {
+          "id": 9,
+          "question": "Trình tự thực hiện các bước trong đề tài nghiên cứu có đặc điểm gì?",
+          "options": {
+            "A": "Rất chặt chẽ, không thể thay đổi.",
+            "B": "Giống hệt quy trình sản xuất công nghiệp.",
+            "C": "Không quá chặt chẽ, có thể linh hoạt điều chỉnh.",
+            "D": "Hoàn toàn ngẫu hứng, không cần kế hoạch."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên Chương V (mở đầu): Các bước thực hiện đề tài không quá chặt chẽ như việc điều hành một công nghệ sản xuất, có thể linh hoạt điều chỉnh."
+        },
+        {
+          "id": 10,
+          "question": "Việc lập danh sách cộng tác viên nằm trong bước nào của tổ chức thực hiện đề tài?",
+          "options": {
+            "A": "Lựa chọn đề tài.",
+            "B": "Xây dựng đề cương và lập kế hoạch nghiên cứu.",
+            "C": "Thu thập và xử lý thông tin.",
+            "D": "Đánh giá và nghiệm thu."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: Ngoài ra cần: Lập danh sách cộng tác viên... (nằm trong mục Xây dựng đề cương)."
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ import { ROUTES } from '@/lib/routes';
 async function getCourse(courseId: string) {
   console.log('[LearnPage] Starting getCourse, courseId:', courseId);
   const supabase = supabaseServer();
-  
+
   const { data: course, error: courseError } = await supabase
     .from('courses')
     .select('id,title,description,cover_url,level')
@@ -19,9 +19,23 @@ async function getCourse(courseId: string) {
     console.log('[LearnPage] Course found:', course?.title || 'null');
   }
 
+  // Load modules
+  const { data: modules, error: modulesError } = await supabase
+    .from('course_modules')
+    .select('id,title,chapter_number,order_index')
+    .eq('course_id', courseId)
+    .order('order_index');
+
+  if (modulesError) {
+    console.error('[LearnPage] Modules fetch error:', modulesError);
+  } else {
+    console.log('[LearnPage] Modules found:', modules?.length || 0, 'modules');
+  }
+
+  // Load contents
   const { data: contents, error: contentsError } = await supabase
     .from('course_contents')
-    .select('id,title,kind,storage_path,order_index')
+    .select('id,title,kind,storage_path,order_index,module_id')
     .eq('course_id', courseId)
     .order('order_index');
 
@@ -31,18 +45,22 @@ async function getCourse(courseId: string) {
     console.log('[LearnPage] Contents found:', contents?.length || 0, 'items');
   }
 
-  return { course, contents: contents ?? [] };
+  return {
+    course,
+    modules: modules ?? [],
+    contents: contents ?? []
+  };
 }
 
 export default async function LearnPage({ params }: { params: { courseId: string } }) {
   console.log('[LearnPage] Page rendering started, courseId:', params.courseId);
-  
+
   const user = await requireAuth(ROUTES.LOGIN);
   console.log('[LearnPage] User authenticated:', user.id);
-  
+
   const { courseId } = params;
-  const { course, contents } = await getCourse(courseId);
-  
+  const { course, modules, contents } = await getCourse(courseId);
+
   if (!course) {
     console.error('[LearnPage] Course not found:', courseId);
     notFound();
@@ -80,15 +98,33 @@ export default async function LearnPage({ params }: { params: { courseId: string
 
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
         <aside className="rounded-lg bg-white p-4 shadow-level1 md:col-span-1">
-          <h2 className="text-sm font-medium uppercase tracking-wide">Nội dung</h2>
-          <ol className="mt-3 space-y-2">
-            {contents.map((c: any) => (
-              <li key={c.id} className="rounded-md border border-gray-200 p-2 text-sm">
-                <span className="mr-2 rounded bg-gray-100 px-2 py-0.5 text-xs uppercase">{c.kind}</span>
-                {c.title}
-              </li>
-            ))}
-          </ol>
+          <h2 className="text-sm font-medium uppercase tracking-wide">Chương trình học</h2>
+          <div className="mt-3 space-y-2">
+            {modules.length === 0 ? (
+              <p className="text-sm text-gray-500">Chưa có học phần</p>
+            ) : (
+              modules.map((module: any) => {
+                const moduleContents = contents.filter((c: any) => c.module_id === module.id);
+                return (
+                  <div key={module.id} className="border border-gray-200 rounded-md p-2">
+                    <h3 className="text-sm font-medium text-gray-800 mb-2">{module.title}</h3>
+                    {moduleContents.length > 0 ? (
+                      <ol className="space-y-1 ml-2">
+                        {moduleContents.map((content: any) => (
+                          <li key={content.id} className="text-xs text-gray-600">
+                            <span className="mr-1 rounded bg-gray-100 px-1 py-0.5 text-xs uppercase">{content.kind}</span>
+                            {content.title}
+                          </li>
+                        ))}
+                      </ol>
+                    ) : (
+                      <p className="text-xs text-gray-400">Chưa có bài học</p>
+                    )}
+                  </div>
+                );
+              })
+            )}
+          </div>
         </aside>
         <section className="rounded-lg bg-white p-4 shadow-level1 md:col-span-2">
           {contents.length === 0 ? (

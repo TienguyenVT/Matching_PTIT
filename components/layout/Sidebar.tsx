@@ -1,8 +1,10 @@
 "use client";
 
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
+import { useAuth } from "@/providers/auth-provider";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -11,15 +13,25 @@ interface SidebarProps {
 
 export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  
+  // Use global auth context - no duplicate API calls!
+  const { role } = useAuth();
+  const isAdmin = useMemo(() => role === 'admin', [role]);
 
   const menuItems = [
     {
       section: "HỌC TẬP",
-      items: [
-        { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
-        { label: "Cộng đồng",href: ROUTES.COMMUNITY, icon: "👥" },
-        { label: "Hồ sơ học tập", href: ROUTES.PROFILE, icon: "👤" },
-      ],
+      items: isAdmin
+        ? [
+            { label: "Khóa học", href: ROUTES.COURSES, icon: "📚" },
+            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: "➕" },
+            { label: "Tài khoản", href: ROUTES.PROFILE, icon: "👤" },
+          ]
+        : [
+            { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
+            { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: "👥" },
+            { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
+          ],
     },
   ];
 
@@ -44,6 +56,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         transition-transform duration-300 ease-in-out
         h-screen overflow-y-auto
         flex flex-col
+        pt-16 md:pt-0
       `}
       >
         {/* Logo */}
@@ -60,26 +73,6 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               Matching PTIT
             </span>
           </div>
-          {/* Mobile Close Button */}
-          <button
-            onClick={onClose}
-            className="p-1.5 hover:bg-gray-100 rounded-md md:hidden"
-            aria-label="Đóng sidebar"
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
         </div>
 
         <div className="p-4 flex-1 overflow-y-auto">

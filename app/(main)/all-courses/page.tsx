@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { supabaseBrowser } from '@/lib/supabase/client';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ROUTES } from '@/lib/routes';
+import { useAuth } from '@/providers/auth-provider';
+import { useCourses, useUserCourses, useEnrollCourse } from '@/hooks/use-courses';
 
 type Course = {
   id: string;
@@ -18,61 +19,29 @@ type Course = {
 type FilterType = 'all' | 'enrolled' | 'not-enrolled';
 
 export default function AllCoursesPage() {
-  const supabase = supabaseBrowser();
   const router = useRouter();
-  const [allCourses, setAllCourses] = useState<Course[]>([]);
-  const [enrolledIds, setEnrolledIds] = useState<Set<string>>(new Set());
+  const { user, loading: authLoading } = useAuth(); // ✅ Use shared state at component level
+  
+  // ✅ Use React Query hooks for caching & deduplication
+  const { data: allCourses = [], isLoading: coursesLoading } = useCourses({
+    orderBy: 'created_at',
+  });
+  const { data: userCourses = [], isLoading: userCoursesLoading, refetch: refetchUserCourses } = useUserCourses();
+  const enrollMutation = useEnrollCourse();
+  
   const [filter, setFilter] = useState<FilterType>('all');
-  const [loading, setLoading] = useState(true);
   const [registering, setRegistering] = useState<string | null>(null);
+  
+  const loading = authLoading || coursesLoading || userCoursesLoading;
 
-  useEffect(() => {
-    const load = async () => {
-      console.log('[AllCoursesPage] Starting load...');
-      
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { 
-        console.log('[AllCoursesPage] No user found, redirecting to login');
-        router.replace(ROUTES.LOGIN); 
-        return; 
-      }
-      console.log('[AllCoursesPage] User authenticated:', user.id);
-
-      // Lấy các khóa học đã đăng ký
-      console.log('[AllCoursesPage] Fetching enrolled course IDs...');
-      const { data: myIds, error: idsError } = await supabase
-        .from('user_courses')
-        .select('course_id')
-        .eq('user_id', user.id);
-      
-      if (idsError) {
-        console.error('[AllCoursesPage] Error fetching enrolled IDs:', idsError);
-      }
-      
-      const enrolledSet = new Set((myIds ?? []).map((r: any) => r.course_id));
-      console.log('[AllCoursesPage] Enrolled course IDs:', enrolledSet.size);
-      setEnrolledIds(enrolledSet);
-
-      // Lấy tất cả các khóa học active
-      console.log('[AllCoursesPage] Fetching all active courses...');
-      const { data: allActive, error: allActiveError } = await supabase
-        .from('courses')
-        .select('id,title,description,cover_url,level,created_at')
-        .eq('is_active', true)
-        .order('created_at', { ascending: false });
-
-      if (allActiveError) {
-        console.error('[AllCoursesPage] Error fetching all active courses:', allActiveError);
-      } else {
-        console.log('[AllCoursesPage] All active courses loaded:', allActive?.length || 0);
-      }
-
-      setAllCourses(allActive ?? []);
-      console.log('[AllCoursesPage] Load complete');
-      setLoading(false);
-    };
-    load();
-  }, [supabase, router]);
+  // ✅ Compute enrolled IDs from cached data
+  const enrolledIds = new Set(userCourses.map((uc: any) => uc.course_id || uc.courseId));
+  
+  // Handle authentication
+  if (!authLoading && !user) {
+    router.replace(ROUTES.LOGIN);
+    return null;
+  }
 
   const getFilteredCourses = () => {
     if (filter === 'enrolled') {
@@ -87,29 +56,22 @@ export default function AllCoursesPage() {
     e.preventDefault();
     e.stopPropagation();
     
+    if (!user) {
+      router.push(ROUTES.LOGIN);
+      return;
+    }
+    
     setRegistering(courseId);
     
     try {
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) {
-        router.push(ROUTES.LOGIN);
-        return;
-      }
-
-      const { error } = await supabase
-        .from('user_courses')
-        .insert([{ user_id: user.id, course_id: courseId }]);
-
-      if (error) {
-        console.error('[AllCoursesPage] Error registering course:', error);
-        alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
-      } else {
-        console.log('[AllCoursesPage] Course registered successfully:', courseId);
-        // Cập nhật enrolledIds
-        setEnrolledIds(prev => new Set(prev).add(courseId));
-      }
+      // ✅ Use mutation hook for better cache management
+      await enrollMutation.mutateAsync(courseId);
+      console.log('[AllCoursesPage] Course registered successfully:', courseId);
+      
+      // Refetch user courses to update UI
+      await refetchUserCourses();
     } catch (error) {
-      console.error('[AllCoursesPage] Error:', error);
+      console.error('[AllCoursesPage] Error registering course:', error);
       alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
     } finally {
       setRegistering(null);
@@ -184,7 +146,7 @@ export default function AllCoursesPage() {
           {filteredCourses.map((course) => (
             <div
               key={course.id}
-              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+              className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
             >
               {/* Course Image */}
               <Link href={ROUTES.COURSE_DETAIL(course.id)}>
@@ -211,7 +173,7 @@ export default function AllCoursesPage() {
               </Link>
 
               {/* Course Content */}
-              <div className="p-4">
+              <div className="flex flex-col flex-1 p-4">
                 <Link href={ROUTES.COURSE_DETAIL(course.id)}>
                   <div className="flex items-start gap-2 mb-2">
                     <div className="w-1 h-5 bg-red-500 rounded mt-1 flex-shrink-0"></div>
@@ -223,13 +185,13 @@ export default function AllCoursesPage() {
 
                 {/* Button Actions */}
                 {enrolledIds.has(course.id) ? (
-                  <Link href={ROUTES.COURSE_DETAIL(course.id)}>
+                  <Link href={ROUTES.COURSE_DETAIL(course.id)} className="mt-auto block">
                     <div className="w-full text-center py-2 px-4 bg-teal-600 hover:bg-teal-700 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
                       Xem chi tiết
                     </div>
                   </Link>
                 ) : (
-                  <div className="flex gap-2">
+                  <div className="mt-auto flex gap-2">
                     <button
                       onClick={(e) => handleRegisterCourse(course.id, e)}
                       disabled={registering === course.id}

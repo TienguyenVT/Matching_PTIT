@@ -2,19 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import { supabaseBrowser } from '@/lib/supabase/client';
+import { useAuth } from '@/providers/auth-provider';
 
 export default function MatchPage({ params }: { params: { courseId: string } }) {
   const courseId = params.courseId;
   const supabase = supabaseBrowser();
-  const [userId, setUserId] = useState<string | null>(null);
+  const { user } = useAuth(); // ✅ Use shared state
+  const userId = user?.id ?? null; // ✅ Get userId from shared state
   const [roomId, setRoomId] = useState<string | null>(null);
   const [status, setStatus] = useState<'idle' | 'matching' | 'open' | 'matched'>('idle');
   const [messages, setMessages] = useState<any[]>([]);
   const [text, setText] = useState('');
-
-  useEffect(() => {
-    supabase.auth.getUser().then(({ data }) => setUserId(data.user?.id ?? null));
-  }, [supabase]);
 
   useEffect(() => {
     if (!roomId) return;
@@ -44,7 +42,20 @@ export default function MatchPage({ params }: { params: { courseId: string } }) 
 
   const onMatch = async () => {
     setStatus('matching');
-    const res = await fetch('/api/match-user', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ courseId }) });
+    // Lấy session để gửi Bearer token cho API match-user
+    const { data: { session } } = await supabase.auth.getSession();
+
+    const res = await fetch('/api/match-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(session?.access_token && {
+          Authorization: `Bearer ${session.access_token}`,
+        }),
+      },
+      credentials: 'include',
+      body: JSON.stringify({ courseId }),
+    });
     if (res.ok) {
       const j = await res.json();
       setRoomId(j.roomId);

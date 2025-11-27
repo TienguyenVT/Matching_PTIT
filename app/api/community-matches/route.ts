@@ -8,6 +8,9 @@ import {
   type MatchScore,
 } from "@/lib/utils/matching";
 
+// Mark route as dynamic (uses cookies for auth)
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/community-matches
  * Lấy danh sách người dùng đã matching và matching mới
@@ -55,46 +58,38 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // 1. Lấy người dùng đã matching (từ chat_rooms với status = 'matched')
-    // Lấy tất cả rooms mà current user là thành viên
-    const { data: userRooms } = await supabase
-      .from("chat_members")
-      .select("room_id, chat_rooms(id, course_id, status, created_at)")
-      .eq("user_id", user.id);
+    // Lấy role của current user (hiện tại chỉ dùng cho logging / mở rộng sau này)
+    const { data: currentUserProfile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+    
+    const currentUserRole = currentUserProfile?.role || 'user';
+    console.log("[community-matches] Current user role:", currentUserRole);
 
-    const previousMatches: any[] = [];
-    if (userRooms) {
-      for (const userRoom of userRooms) {
-        const room = userRoom.chat_rooms as any;
-        if (!room || room.status !== "matched") continue;
+    // 1. Lấy người dùng đã có cuộc trò chuyện (xem như đã ghép đôi)
+    // Sử dụng RPC get_user_conversations (đã dùng ở trang /messages)
+    const { data: conversations, error: convError } = await supabase
+      .rpc('get_user_conversations', { p_user_id: user.id });
 
-        // Lấy thành viên khác trong room
-        const { data: otherMembers } = await supabase
-          .from("chat_members")
-          .select("user_id")
-          .eq("room_id", room.id)
-          .neq("user_id", user.id)
-          .limit(1);
+    if (convError) {
+      console.error('[community-matches] Error fetching conversations:', convError);
+    }
 
-        if (otherMembers && otherMembers.length > 0) {
-          const otherUserId = otherMembers[0].user_id;
-          // Get user profile
-          const { data: profile } = await supabase
-            .from("profiles")
-            .select("id, full_name, email, avatar_url")
-            .eq("id", otherUserId)
-            .single();
+    let previousMatches: any[] = [];
 
-          if (profile) {
-            previousMatches.push({
-              ...profile,
-              roomId: room.id,
-              courseId: room.course_id,
-              matchedAt: room.created_at,
-            });
-          }
-        }
-      }
+    if (conversations && (conversations as any[]).length > 0) {
+      previousMatches = (conversations as any[]).map((c: any) => ({
+        id: c.user_id,
+        full_name: c.full_name || null,
+        email: null,
+        avatar_url: c.avatar_url || null,
+        // Các field bên dưới chỉ để tương thích type, UI không sử dụng
+        roomId: '',
+        courseId: '',
+        matchedAt: c.updated_at,
+      }));
     }
 
     // Remove duplicates and sort by matchedAt DESC
@@ -142,17 +137,18 @@ export async function GET(req: NextRequest) {
         level: uc.courses?.level || null,
       }));
 
-    // Filter out users who already matched with current user
+    // Filter out users who already matched với current user (đã có cuộc trò chuyện)
     const matchedUserIds = new Set(
-      previousMatches.map((m) => m.id)
+      uniqueMatches.map((m) => m.id)
     );
 
     // 3. Lấy danh sách TẤT CẢ người dùng khả dụng (đã đăng ký ít nhất 1 khóa học)
     // Query từ bảng user_courses để kiểm tra course_id trùng lặp giữa các user_id
+    // Filter theo role: chỉ lấy user cùng role
     console.log("[community-matches] Fetching all available users from user_courses...");
     const { data: allAvailableUsers, error: allUsersError } = await supabase
       .from("user_courses")
-      .select("user_id, course_id, courses(id, level), profiles(id, full_name, email, avatar_url)")
+      .select("user_id, course_id, courses(id, level), profiles(id, full_name, email, avatar_url, role)")
       .neq("user_id", user.id);
 
     if (allUsersError) {
@@ -176,6 +172,14 @@ export async function GET(req: NextRequest) {
     for (const item of filteredUsers) {
       const userId = item.user_id;
       const courseId = item.course_id;
+      
+      // Handle both array and object cases for profiles
+      const profile = Array.isArray(item.profiles)
+        ? item.profiles[0]
+        : item.profiles;
+      
+      // Skip nếu profile không tồn tại
+      if (!profile) continue;
       
       // Track course_id for each user_id (for debugging)
       if (!courseIdTracking.has(userId)) {

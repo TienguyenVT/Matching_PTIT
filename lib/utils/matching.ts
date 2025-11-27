@@ -48,10 +48,13 @@ export function findCommonCourses(
     return [];
   }
   
+  // Hỗ trợ cả hai dạng field: courseId (chuẩn trong app) và course_id (raw từ DB)
+  const getCourseId = (c: any): string | null => c?.courseId || c?.course_id || null;
+
   // Loại bỏ duplicate course_id và null/undefined values
   const user1CourseIds = new Set(
     user1.courses
-      .map((c) => c?.courseId)
+      .map((c) => getCourseId(c))
       .filter((id): id is string => Boolean(id))
   );
   
@@ -59,7 +62,7 @@ export function findCommonCourses(
   // Filter để tìm những course_id có trong Set của user1
   // Đây chính là logic kiểm tra course_id trùng lặp
   const user2CourseIds = user2.courses
-    .map((c) => c?.courseId)
+    .map((c) => getCourseId(c))
     .filter((id): id is string => Boolean(id));
   
   // Tìm common courses
