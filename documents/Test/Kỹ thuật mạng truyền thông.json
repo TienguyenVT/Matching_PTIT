@@ -1,0 +1,890 @@
+{
+  "document_title": "KỸ THUẬT MẠNG TRUYỀN THÔNG",
+  "test_type": "Multiple Choice Questions",
+  "tests": [
+    {
+      "chapter_id": "1",
+      "chapter_title": "CHƯƠNG 1. GIỚI THIỆU CHUNG",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Ba đặc điểm chính để phân biệt mạng LAN với các loại mạng khác là gì?",
+          "options": {
+            "A": "Kích thước, giá thành và số lượng người dùng.",
+            "B": "Kích thước, công nghệ truyền dẫn và cấu trúc liên kết.",
+            "C": "Tốc độ, bảo mật và giao thức định tuyến.",
+            "D": "Loại cáp, hệ điều hành và phần mềm ứng dụng."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.1: LAN được phân biệt với các loại mạng khác bởi ba đặc điểm: (1) kích thước, (2) công nghệ truyền dẫn, và (3) cấu trúc liên kết."
+        },
+        {
+          "id": 2,
+          "question": "Trong mạng LAN dạng Bus, cơ chế nào là cần thiết để giải quyết xung đột đường truyền?",
+          "options": {
+            "A": "Cơ chế chuyển mạch gói.",
+            "B": "Cơ chế định tuyến động.",
+            "C": "Cơ chế điều khiển truy nhập (ví dụ CSMA/CD).",
+            "D": "Cơ chế phân mảnh gói tin."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.1.1: Trong mạng dạng bus... Một cơ chế điều khiển là cần thiết để giải quyết xung đột khi hai máy hoặc nhiều hơn muốn truyền dữ liệu đồng thời."
+        },
+        {
+          "id": 3,
+          "question": "Mạng diện rộng (WAN) thường bao gồm hai thành phần chính nào trong phân mạng (subnet)?",
+          "options": {
+            "A": "Máy trạm và máy chủ.",
+            "B": "Đường dây truyền dẫn và phần tử chuyển mạch (bộ định tuyến).",
+            "C": "Hub và Switch.",
+            "D": "Cáp quang và sóng vô tuyến."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.3: Trong hầu hết các mạng diện rộng, một mạng con bao gồm hai thành phần khác nhau: đường dây và phần tử chuyển mạch."
+        },
+        {
+          "id": 4,
+          "question": "Nguyên tắc hoạt động 'lưu và chuyển tiếp' (store-and-forward) trong mạng chuyển mạch gói nghĩa là gì?",
+          "options": {
+            "A": "Gói tin được lưu vĩnh viễn tại bộ định tuyến trung gian.",
+            "B": "Gói tin được truyền thẳng từ nguồn đến đích không qua trung gian.",
+            "C": "Gói tin được bộ định tuyến nhận, lưu tạm thời, kiểm tra và chờ đường ra rỗi mới chuyển đi.",
+            "D": "Gói tin được lưu vào ổ cứng của máy chủ trước khi gửi đi."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.1.3: Các gói tin sẽ được bộ định tuyến trung gian nhận, lưu tạm ở đó cho đến khi đầu ra theo yêu cầu rỗi, và sau đó được chuyển tiếp đi."
+        },
+        {
+          "id": 5,
+          "question": "Mục đích chính của việc phân lớp giao thức trong thiết kế mạng là gì?",
+          "options": {
+            "A": "Để tăng tốc độ truyền dữ liệu.",
+            "B": "Để giảm độ phức tạp trong thiết kế và ẩn đi các chi tiết kỹ thuật bên trong.",
+            "C": "Để tăng số lượng người dùng truy cập.",
+            "D": "Để tiết kiệm chi phí phần cứng."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.1: Để giảm độ phức tạp trong thiết kế, hầu hết các mạng được tổ chức theo mô hình phân lớp... ẩn đi các chi tiết về các trạng thái hay giải thuật sử dụng bên trong."
+        },
+        {
+          "id": 6,
+          "question": "Dịch vụ hướng kết nối (connection-oriented) hoạt động tương tự như hệ thống nào?",
+          "options": {
+            "A": "Hệ thống bưu chính.",
+            "B": "Hệ thống phát thanh.",
+            "C": "Hệ thống điện thoại.",
+            "D": "Hệ thống truyền hình cáp."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.2.3: Dịch vụ hướng kết nối được xây dựng theo ý tưởng của hệ thống điện thoại."
+        },
+        {
+          "id": 7,
+          "question": "Sự khác biệt cơ bản giữa Dịch vụ (Service) và Giao thức (Protocol) là gì?",
+          "options": {
+            "A": "Dịch vụ là quy tắc trao đổi gói tin, Giao thức là hoạt động cung cấp cho lớp trên.",
+            "B": "Dịch vụ là tập hợp các hoạt động lớp dưới cung cấp cho lớp trên, Giao thức là quy tắc trao đổi giữa các thực thể ngang hàng.",
+            "C": "Dịch vụ dùng cho mạng LAN, Giao thức dùng cho mạng WAN.",
+            "D": "Không có sự khác biệt, hai khái niệm này là một."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.4: Dịch vụ là tập hợp các hoạt động nguyên thủy mà một lớp cung cấp cho lớp trên... Giao thức là bộ các quy tắc quản lý định dạng và ý nghĩa của các gói tin được trao đổi bởi các thực thể ngang hàng."
+        },
+        {
+          "id": 8,
+          "question": "Mô hình tham chiếu OSI có bao nhiêu lớp và thứ tự từ dưới lên trên là gì?",
+          "options": {
+            "A": "4 lớp: Truy nhập mạng, Internet, Giao vận, Ứng dụng.",
+            "B": "5 lớp: Vật lý, Liên kết dữ liệu, Mạng, Giao vận, Ứng dụng.",
+            "C": "7 lớp: Vật lý, Liên kết dữ liệu, Mạng, Giao vận, Phiên, Trình diễn, Ứng dụng.",
+            "D": "7 lớp: Ứng dụng, Trình diễn, Phiên, Giao vận, Mạng, Liên kết dữ liệu, Vật lý."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.3.1: Mô hình này có 7 lớp... Vật lý (1) -> Ứng dụng (7)."
+        },
+        {
+          "id": 9,
+          "question": "Trong mô hình TCP/IP, lớp nào tương ứng với ba lớp (Ứng dụng, Trình diễn, Phiên) của mô hình OSI?",
+          "options": {
+            "A": "Lớp Giao vận.",
+            "B": "Lớp Liên mạng.",
+            "C": "Lớp Truy nhập mạng.",
+            "D": "Lớp Ứng dụng."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 1.3.2.1: Lớp Ứng dụng TCP/IP tương ứng với ba lớp (Ứng dụng, Trình diễn, Phiên) trong OSI."
+        },
+        {
+          "id": 10,
+          "question": "Chức năng chính của lớp Giao vận (Transport Layer) là gì?",
+          "options": {
+            "A": "Định tuyến gói tin qua mạng.",
+            "B": "Truyền các bit qua đường truyền vật lý.",
+            "C": "Đảm bảo truyền dẫn tin cậy từ đầu cuối đến đầu cuối (end-to-end).",
+            "D": "Cung cấp giao diện cho người sử dụng."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.3.1.4 và 1.3.2.4: Nhiệm vụ là đảm bảo truyền dẫn từ đầu cuối đến đầu cuối không có lỗi và không bị mất gói tin."
+        }
+      ]
+    },
+    {
+      "chapter_id": "2",
+      "chapter_title": "CHƯƠNG 2. LỚP VẬT LÍ VÀ LIÊN KẾT DỮ LIỆU",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Định lý Nyquist phát biểu điều gì về giới hạn dung lượng kênh truyền không nhiễu?",
+          "options": {
+            "A": "Tốc độ bit không giới hạn nếu băng thông đủ lớn.",
+            "B": "Tốc độ baud tối đa không thể vượt quá hai lần băng thông của kênh.",
+            "C": "Dung lượng kênh phụ thuộc vào tỉ lệ tín hiệu trên nhiễu (S/N).",
+            "D": "Tốc độ truyền luôn bằng tần số sóng mang."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.1.1.4: Định lý Nyquist: tốc độ baud tối đa không thể vượt quá hai lần băng thông của kênh (với kênh không nhiễu)."
+        },
+        {
+          "id": 2,
+          "question": "Trong truyền thông dị bộ (asynchronous), yếu tố nào được sử dụng để đồng bộ hóa từng kí tự?",
+          "options": {
+            "A": "Đường dây đồng hồ riêng biệt.",
+            "B": "Mã hóa Manchester.",
+            "C": "Bit khởi động (start bit) và bit kết thúc (stop bit).",
+            "D": "Gói tin Hello."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.1.2.3: Truyền từng kí tự, sử dụng bit khởi động (start bit) và bit kết thúc (stop bit/interval) để đồng bộ cho mỗi kí tự."
+        },
+        {
+          "id": 3,
+          "question": "Kỹ thuật nào được sử dụng để phân tách khung (framing) bằng cách chèn các bit đặc biệt để tránh nhầm lẫn dữ liệu với cờ?",
+          "options": {
+            "A": "Đếm kí tự.",
+            "B": "Bit stuffing (chèn bit).",
+            "C": "Byte stuffing (chèn byte).",
+            "D": "Mã hóa BPRZ."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.2.2: Sử dụng cờ bắt đầu và kết thúc với kĩ thuật bit stuffing (chèn bit 0 sau năm bit 1 liên tiếp)."
+        },
+        {
+          "id": 4,
+          "question": "Phương pháp điều khiển truy nhập đường truyền CSMA/CD hoạt động như thế nào?",
+          "options": {
+            "A": "Trạm truyền dữ liệu khi nhận được thẻ bài (token).",
+            "B": "Trạm lắng nghe đường truyền, nếu rỗi thì truyền; nếu phát hiện xung đột thì ngừng và chờ ngẫu nhiên.",
+            "C": "Trạm được cấp phát khe thời gian cố định để truyền.",
+            "D": "Trạm truyền dữ liệu liên tục và bộ trung tâm sẽ lọc xung đột."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.2.5.2: Máy tính kiểm tra đường truyền... nếu rỗi thì truyền. Nếu có xung đột, ngừng truyền, chờ một thời gian ngẫu nhiên rồi thử lại."
+        },
+        {
+          "id": 5,
+          "question": "Độ dài của địa chỉ MAC trong khung Ethernet là bao nhiêu?",
+          "options": {
+            "A": "32 bit (4 bytes).",
+            "B": "48 bit (6 bytes).",
+            "C": "64 bit (8 bytes).",
+            "D": "128 bit (16 bytes)."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3.3: Destination Address (6 bytes), Source Address (6 bytes)."
+        },
+        {
+          "id": 6,
+          "question": "Chuẩn Ethernet 100Base-TX sử dụng loại cáp nào?",
+          "options": {
+            "A": "Cáp đồng trục.",
+            "B": "Cáp quang.",
+            "C": "Cáp xoắn đôi (Twisted pair).",
+            "D": "Sóng vô tuyến."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.3.5: Fast Ethernet (100Mb/s, gồm 100Base-TX...)."
+        },
+        {
+          "id": 7,
+          "question": "Trong mạng WLAN theo chuẩn IEEE 802.11, cơ chế nào được dùng để hạn chế xung đột?",
+          "options": {
+            "A": "CSMA/CD.",
+            "B": "CSMA/CA.",
+            "C": "Token Passing.",
+            "D": "ALOHA."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.4.7: Sử dụng CSMA/CA (Đa truy nhập cảm nhận sóng mang tránh xung đột)."
+        },
+        {
+          "id": 8,
+          "question": "VLAN (Virtual LAN) mang lại lợi ích gì chính?",
+          "options": {
+            "A": "Tăng tốc độ truyền dẫn vật lý.",
+            "B": "Giảm miền quảng bá (broadcast domain) và tăng cường bảo mật.",
+            "C": "Thay thế hoàn toàn Router.",
+            "D": "Cho phép truyền đi xa hơn mà không cần Repeater."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.5.1: VLAN... giúp giảm miền quảng bá, tăng bảo mật và dễ quản lý."
+        },
+        {
+          "id": 9,
+          "question": "Chuẩn nào được sử dụng để gắn thẻ (tagging) VLAN trên đường Trunk?",
+          "options": {
+            "A": "IEEE 802.3.",
+            "B": "IEEE 802.5.",
+            "C": "IEEE 802.11.",
+            "D": "IEEE 802.1Q."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 2.5.2: Kết nối các VLAN qua đường Trunk (sử dụng chuẩn 802.1Q hoặc ISL để gắn thẻ VLAN vào khung)."
+        },
+        {
+          "id": 10,
+          "question": "Mô hình mạng WLAN nào sử dụng Điểm truy nhập (Access Point)?",
+          "options": {
+            "A": "Mạng độc lập (Ad-hoc / IBSS).",
+            "B": "Mạng cơ sở (BSS).",
+            "C": "Mạng ngang hàng (Peer-to-Peer).",
+            "D": "Mạng Bus."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.4.3: Mô hình mạng cơ sở (BSS - có AP)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "3",
+      "chapter_title": "CHƯƠNG 3. LỚP MẠNG",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Chức năng quan trọng nhất của lớp Mạng là gì?",
+          "options": {
+            "A": "Kiểm soát lỗi khung.",
+            "B": "Định tuyến (Routing) gói tin.",
+            "C": "Mã hóa dữ liệu.",
+            "D": "Quản lý phiên làm việc."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.2: Định tuyến là chức năng quan trọng nhất của lớp Mạng, lựa chọn đường đi tối ưu cho gói tin."
+        },
+        {
+          "id": 2,
+          "question": "Giao thức IP (Internet Protocol) cung cấp loại dịch vụ nào?",
+          "options": {
+            "A": "Hướng kết nối, tin cậy.",
+            "B": "Phi kết nối, tin cậy.",
+            "C": "Phi kết nối, nỗ lực tốt nhất (best-effort).",
+            "D": "Hướng kết nối, thời gian thực."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.4.1: IP là giao thức phi kết nối, không tin cậy, nỗ lực tốt nhất (best-effort)."
+        },
+        {
+          "id": 3,
+          "question": "Giao thức định tuyến RIP sử dụng thuật toán nào?",
+          "options": {
+            "A": "Trạng thái liên kết (Link State).",
+            "B": "Vectơ khoảng cách (Distance Vector).",
+            "C": "Vectơ đường đi (Path Vector).",
+            "D": "Dijkstra."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.4.4: Giao thức định tuyến RIP... Giao thức vectơ khoảng cách."
+        },
+        {
+          "id": 4,
+          "question": "Giao thức OSPF sử dụng loại gói tin nào để cập nhật trạng thái mạng?",
+          "options": {
+            "A": "Gói tin quảng bá toàn bộ bảng định tuyến.",
+            "B": "LSA (Link State Advertisement).",
+            "C": "Gói tin Hello định kỳ.",
+            "D": "Gói tin Echo Request."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.2.5 và 3.4.5: Sử dụng LSA (Link State Advertisement) để cập nhật trạng thái các liên kết."
+        },
+        {
+          "id": 5,
+          "question": "Giao thức nào được sử dụng để xác định địa chỉ MAC từ một địa chỉ IP đã biết?",
+          "options": {
+            "A": "RARP.",
+            "B": "DNS.",
+            "C": "ARP.",
+            "D": "DHCP."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.4.3: ARP chuyển đổi địa chỉ IP sang địa chỉ vật lý (MAC)."
+        },
+        {
+          "id": 6,
+          "question": "Giao thức ICMP được sử dụng chính để làm gì?",
+          "options": {
+            "A": "Truyền tải dữ liệu người dùng.",
+            "B": "Định tuyến gói tin.",
+            "C": "Thông báo lỗi và kiểm soát hoạt động mạng.",
+            "D": "Phân giải tên miền."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.4.2: Dùng để thông báo lỗi (Destination unreachable...) và truy vấn (Echo request...)."
+        },
+        {
+          "id": 7,
+          "question": "Địa chỉ IPv6 có độ dài bao nhiêu bit?",
+          "options": {
+            "A": "32 bit.",
+            "B": "48 bit.",
+            "C": "64 bit.",
+            "D": "128 bit."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 3.5.1: Không gian địa chỉ 128 bit."
+        },
+        {
+          "id": 8,
+          "question": "Giao thức định tuyến BGP thuộc loại nào?",
+          "options": {
+            "A": "IGP (Interior Gateway Protocol).",
+            "B": "EGP (Exterior Gateway Protocol).",
+            "C": "Static Routing.",
+            "D": "Hybrid Routing."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.4.6: Giao thức định tuyến ngoài (EGP) chuẩn của Internet."
+        },
+        {
+          "id": 9,
+          "question": "Kỹ thuật CIDR (Classless Inter-Domain Routing) giúp giải quyết vấn đề gì?",
+          "options": {
+            "A": "Thiếu hụt địa chỉ MAC.",
+            "B": "Hạn chế của phân lớp địa chỉ IP truyền thống (A, B, C).",
+            "C": "Tốc độ truyền dữ liệu chậm.",
+            "D": "Bảo mật kém của IPv4."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.4.1: CIDR cho phép định tuyến không phân lớp."
+        },
+        {
+          "id": 10,
+          "question": "Trong định tuyến Vectơ khoảng cách, hiện tượng 'đếm vô hạn' (count-to-infinity) liên quan đến vấn đề gì?",
+          "options": {
+            "A": "Tắc nghẽn mạng.",
+            "B": "Lặp vòng định tuyến (Routing loop).",
+            "C": "Quá tải bộ nhớ Router.",
+            "D": "Mất gói tin."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.2.4: Dễ bị lặp vòng định tuyến (routing loop) và đếm vô hạn."
+        }
+      ]
+    },
+    {
+      "chapter_id": "4",
+      "chapter_title": "CHƯƠNG 4. LỚP GIAO VẬN",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Giao thức TCP sử dụng cơ chế nào để thiết lập kết nối tin cậy?",
+          "options": {
+            "A": "Bắt tay hai bước.",
+            "B": "Bắt tay ba bước (Three-way handshake).",
+            "C": "Gửi gói tin Hello.",
+            "D": "Quảng bá yêu cầu kết nối."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.2 và 4.3.6: Sử dụng bắt tay ba bước (three-way handshake) để thiết lập kết nối tin cậy."
+        },
+        {
+          "id": 2,
+          "question": "Lớp Giao vận sử dụng thông tin gì để phân biệt các ứng dụng trên cùng một máy chủ?",
+          "options": {
+            "A": "Địa chỉ IP.",
+            "B": "Địa chỉ MAC.",
+            "C": "Số hiệu cổng (Port number).",
+            "D": "Số trình tự (Sequence number)."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.2.1 và 4.3.1: Sử dụng TSAP (ví dụ: cổng - port) để xác định các ứng dụng cụ thể."
+        },
+        {
+          "id": 3,
+          "question": "Giao thức UDP có đặc điểm gì nổi bật?",
+          "options": {
+            "A": "Hướng kết nối, đảm bảo thứ tự.",
+            "B": "Tin cậy, có cơ chế truyền lại.",
+            "C": "Phi kết nối, không tin cậy, đơn giản, nhanh.",
+            "D": "Sử dụng cửa sổ trượt để điều khiển luồng."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.4: UDP (User Datagram Protocol) là giao thức phi kết nối, không tin cậy, đơn giản, nhanh."
+        },
+        {
+          "id": 4,
+          "question": "Cơ chế 'Cửa sổ trượt' (Sliding Window) trong TCP được dùng để làm gì?",
+          "options": {
+            "A": "Điều khiển luồng (Flow Control).",
+            "B": "Định tuyến gói tin.",
+            "C": "Mã hóa dữ liệu.",
+            "D": "Phân giải tên miền."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.3.3: Sử dụng cửa sổ trượt kích thước biến thiên để bên nhận điều khiển lượng dữ liệu bên gửi có thể gửi (Điều khiển luồng)."
+        },
+        {
+          "id": 5,
+          "question": "Tiêu đề của gói tin UDP có kích thước bao nhiêu?",
+          "options": {
+            "A": "20 bytes.",
+            "B": "8 bytes.",
+            "C": "64 bytes.",
+            "D": "Tùy biến."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4.2: Tiêu đề đơn giản chỉ có 8 byte."
+        },
+        {
+          "id": 6,
+          "question": "Để giải phóng kết nối TCP một cách an toàn, thủ tục nào thường được sử dụng?",
+          "options": {
+            "A": "Ngắt kết nối đột ngột.",
+            "B": "Thủ tục bốn bước (FIN - ACK).",
+            "C": "Time-out.",
+            "D": "Gửi gói tin RST."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3.6: Giải phóng bằng thủ tục bốn bước (FIN -> ACK, FIN -> ACK)."
+        },
+        {
+          "id": 7,
+          "question": "Trong TCP, số trình tự (Sequence Number) dùng để làm gì?",
+          "options": {
+            "A": "Định danh ứng dụng.",
+            "B": "Kiểm tra lỗi bit.",
+            "C": "Sắp xếp lại các phân đoạn dữ liệu và phát hiện mất gói.",
+            "D": "Xác định mức độ ưu tiên."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.3.2 và 4.3.4: Số trình tự giúp bên nhận sắp xếp lại dữ liệu và bên gửi biết gói nào đã được nhận (thông qua ACK)."
+        },
+        {
+          "id": 8,
+          "question": "Bộ định thời nào trong TCP được dùng để truyền lại gói tin khi không nhận được xác nhận (ACK)?",
+          "options": {
+            "A": "Persistence timer.",
+            "B": "Keepalive timer.",
+            "C": "Retransmission timer.",
+            "D": "Time-wait timer."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.3.5: Bao gồm bộ định thời truyền lại (retransmission)... để phát hiện và truyền lại các phân đoạn."
+        },
+        {
+          "id": 9,
+          "question": "Ứng dụng nào sau đây thường sử dụng giao thức UDP?",
+          "options": {
+            "A": "Truyền tệp tin (FTP).",
+            "B": "Duyệt web (HTTP).",
+            "C": "Gửi thư điện tử (SMTP).",
+            "D": "Truyền thoại/video thời gian thực (VoIP/Streaming)."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 4.4: UDP... dùng cho các ứng dụng không yêu cầu độ tin cậy cao hoặc yêu cầu thời gian thực."
+        },
+        {
+          "id": 10,
+          "question": "Cờ nào trong tiêu đề TCP được bật lên để yêu cầu thiết lập kết nối?",
+          "options": {
+            "A": "FIN.",
+            "B": "ACK.",
+            "C": "SYN.",
+            "D": "RST."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.3.6: Thiết lập bằng bắt tay ba bước (SYN -> ...)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "5",
+      "chapter_title": "CHƯƠNG 5. CÁC LỚP TRÊN",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Chức năng chính của Lớp Phiên (Session Layer) là gì?",
+          "options": {
+            "A": "Định tuyến gói tin.",
+            "B": "Kiểm soát hội thoại, đồng bộ hóa và quản lý phiên làm việc.",
+            "C": "Mã hóa dữ liệu.",
+            "D": "Cung cấp giao diện người dùng."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1: Cung cấp cơ chế kiểm soát hội thoại, đồng bộ hóa và quản lý hoạt động giữa các ứng dụng."
+        },
+        {
+          "id": 2,
+          "question": "Lớp Trình diễn (Presentation Layer) chịu trách nhiệm về vấn đề gì?",
+          "options": {
+            "A": "Vận chuyển tin cậy.",
+            "B": "Cú pháp và định dạng dữ liệu (mã hóa, nén, chuyển đổi).",
+            "C": "Địa chỉ logic.",
+            "D": "Điều khiển truy nhập đường truyền."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: Đảm bảo các hệ thống khác nhau có thể hiểu được dữ liệu của nhau, xử lý các vấn đề về cú pháp và định dạng dữ liệu."
+        },
+        {
+          "id": 3,
+          "question": "ASN.1 (Abstract Syntax Notation One) được sử dụng ở lớp nào?",
+          "options": {
+            "A": "Lớp Ứng dụng.",
+            "B": "Lớp Trình diễn.",
+            "C": "Lớp Phiên.",
+            "D": "Lớp Giao vận."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2.2: Sử dụng ASN.1... để định nghĩa các kiểu dữ liệu một cách độc lập với máy tính (thuộc Lớp Trình diễn)."
+        },
+        {
+          "id": 4,
+          "question": "Giao thức DNS hoạt động ở lớp nào?",
+          "options": {
+            "A": "Lớp Mạng.",
+            "B": "Lớp Giao vận.",
+            "C": "Lớp Ứng dụng.",
+            "D": "Lớp Liên kết dữ liệu."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.3.4: Các giao thức và dịch vụ lớp Ứng dụng... DNS..."
+        },
+        {
+          "id": 5,
+          "question": "Mô hình kiến trúc mạng nào mà trong đó các máy tính có vai trò vừa là khách vừa là chủ?",
+          "options": {
+            "A": "Client/Server.",
+            "B": "Master/Slave.",
+            "C": "Peer-to-Peer (Ngang hàng).",
+            "D": "Mainframe/Terminal."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.3.3: Kiến trúc ngang hàng... Các máy có vai trò ngang nhau, vừa là khách vừa là chủ."
+        },
+        {
+          "id": 6,
+          "question": "Giao thức nào được sử dụng để truyền tải các trang web?",
+          "options": {
+            "A": "FTP.",
+            "B": "SMTP.",
+            "C": "HTTP.",
+            "D": "SNMP."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.3.4: WWW (HTTP)."
+        },
+        {
+          "id": 7,
+          "question": "Trong Lớp Phiên, khái niệm 'Thẻ bài' (Token) dùng để làm gì?",
+          "options": {
+            "A": "Xác thực người dùng.",
+            "B": "Quản lý quyền truyền dữ liệu trong hội thoại.",
+            "C": "Đánh dấu gói tin ưu tiên.",
+            "D": "Mã hóa phiên làm việc."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1.2: Sử dụng... các thẻ bài (token) để quản lý quyền truyền dữ liệu."
+        },
+        {
+          "id": 8,
+          "question": "Giao thức SMTP được sử dụng cho dịch vụ nào?",
+          "options": {
+            "A": "Truyền tệp tin.",
+            "B": "Quản trị mạng.",
+            "C": "Thư điện tử (E-mail).",
+            "D": "Cấp phát địa chỉ IP động."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.3.4: E-mail (SMTP, POP3)."
+        },
+        {
+          "id": 9,
+          "question": "Việc mã hóa và giải mã dữ liệu thường được thực hiện ở lớp nào trong mô hình OSI?",
+          "options": {
+            "A": "Lớp Ứng dụng.",
+            "B": "Lớp Trình diễn.",
+            "C": "Lớp Phiên.",
+            "D": "Lớp Giao vận."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.3.1.6 và 5.2: Nhiệm vụ của nó [Lớp Trình diễn] là mã hóa dữ liệu... (ví dụ nén dữ liệu, chuyển đổi mã ký tự)."
+        },
+        {
+          "id": 10,
+          "question": "Giao thức nào dùng để quản trị và giám sát các thiết bị mạng?",
+          "options": {
+            "A": "DHCP.",
+            "B": "DNS.",
+            "C": "SNMP.",
+            "D": "Telnet."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.3.4: SNMP (quản trị mạng)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "6",
+      "chapter_title": "CHƯƠNG 6. KĨ THUẬT VÀ THIẾT BỊ MẠNG IP",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Thiết bị Repeater (Bộ lặp) hoạt động ở lớp nào của mô hình OSI?",
+          "options": {
+            "A": "Lớp Vật lý.",
+            "B": "Lớp Liên kết dữ liệu.",
+            "C": "Lớp Mạng.",
+            "D": "Lớp Giao vận."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 6.2.1: Hoạt động ở lớp Vật lý, tái tạo và khuếch đại tín hiệu."
+        },
+        {
+          "id": 2,
+          "question": "Sự khác biệt chính giữa Hub và Switch là gì?",
+          "options": {
+            "A": "Hub thông minh hơn Switch.",
+            "B": "Hub chia sẻ băng thông (miền xung đột chung), Switch cung cấp băng thông riêng cho mỗi cổng.",
+            "C": "Hub hoạt động ở lớp 2, Switch hoạt động ở lớp 1.",
+            "D": "Switch chỉ dùng cho mạng không dây."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.2.1 và 6.2.2: Hub là bộ lặp đa cổng (lớp 1)... Bộ chuyển mạch (Switch) là cầu nối đa cổng, cung cấp băng thông riêng cho mỗi cổng."
+        },
+        {
+          "id": 3,
+          "question": "Thiết bị Router (Bộ định tuyến) sử dụng thông tin gì để chuyển tiếp gói tin?",
+          "options": {
+            "A": "Địa chỉ MAC.",
+            "B": "Địa chỉ IP.",
+            "C": "Số cổng dịch vụ.",
+            "D": "Tên miền."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.3.1: Chuyển tiếp gói tin dựa trên địa chỉ IP và bảng định tuyến."
+        },
+        {
+          "id": 4,
+          "question": "Thiết bị nào có khả năng ngăn chặn các miền quảng bá (broadcast domain)?",
+          "options": {
+            "A": "Hub.",
+            "B": "Repeater.",
+            "C": "Switch.",
+            "D": "Router."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên kiến thức về Router (mục 6.3): Router hoạt động ở lớp 3 và không chuyển tiếp gói tin quảng bá (broadcast) mặc định, do đó chia tách miền quảng bá."
+        },
+        {
+          "id": 5,
+          "question": "Bộ nhớ NVRAM trong Router dùng để lưu trữ cái gì?",
+          "options": {
+            "A": "Hệ điều hành IOS.",
+            "B": "Bảng định tuyến đang hoạt động.",
+            "C": "File cấu hình khởi động (Startup-config).",
+            "D": "Chương trình kiểm tra phần cứng (POST)."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 6.3.2: NVRAM (lưu file cấu hình startup)."
+        },
+        {
+          "id": 6,
+          "question": "Thiết bị Gateway hoạt động ở lớp nào?",
+          "options": {
+            "A": "Chỉ lớp Mạng.",
+            "B": "Chỉ lớp Ứng dụng.",
+            "C": "Tất cả các lớp (từ lớp 1 đến lớp 7).",
+            "D": "Chỉ lớp Liên kết dữ liệu."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 6.4: Hoạt động ở tất cả các lớp (đến lớp 7), dùng để chuyển đổi giao thức."
+        },
+        {
+          "id": 7,
+          "question": "Chức năng chính của Bridge (Cầu nối) là gì?",
+          "options": {
+            "A": "Khuếch đại tín hiệu.",
+            "B": "Định tuyến gói tin IP.",
+            "C": "Lọc lưu lượng dựa trên địa chỉ MAC để chia tách miền xung đột.",
+            "D": "Chuyển đổi giao thức."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 6.2.2: Cầu nối (Bridge) lọc lưu lượng dựa trên địa chỉ MAC để chia tách các miền xung đột."
+        },
+        {
+          "id": 8,
+          "question": "Trong Router Cisco, hệ điều hành IOS thường được lưu ở đâu?",
+          "options": {
+            "A": "ROM.",
+            "B": "RAM.",
+            "C": "NVRAM.",
+            "D": "FLASH.",
+            "answer": "D",
+            "explanation": "Dựa trên mục 6.3.2: FLASH (lưu hệ điều hành IOS)."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 6.3.2: FLASH (lưu hệ điều hành IOS)."
+        },
+        {
+          "id": 9,
+          "question": "Cổng kết nối mạng của máy tính được gọi là gì?",
+          "options": {
+            "A": "NIC (Network Interface Card).",
+            "B": "Repeater.",
+            "C": "Bridge.",
+            "D": "Transceiver."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 6.1.2: Các thành phần mạng... Card mạng (NIC)."
+        },
+        {
+          "id": 10,
+          "question": "Switch hoạt động ở lớp nào của mô hình OSI (phổ biến nhất)?",
+          "options": {
+            "A": "Lớp 1 (Vật lý).",
+            "B": "Lớp 2 (Liên kết dữ liệu).",
+            "C": "Lớp 3 (Mạng).",
+            "D": "Lớp 4 (Giao vận)."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.2.2: Hoạt động ở lớp Liên kết dữ liệu (và Vật lý)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "7",
+      "chapter_title": "CHƯƠNG 7. CÔNG NGHỆ CHUYỂN MẠCH NHÃN ĐA GIAO THỨC MPLS",
+      "questions": [
+        {
+          "id": 1,
+          "question": "MPLS chuyển tiếp gói tin dựa trên cái gì?",
+          "options": {
+            "A": "Địa chỉ IP đích.",
+            "B": "Địa chỉ MAC đích.",
+            "C": "Nhãn (Label).",
+            "D": "Số cổng TCP/UDP."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 7.1.2: Sử dụng nhãn (label) để chuyển tiếp gói tin."
+        },
+        {
+          "id": 2,
+          "question": "Thiết bị LSR (Label Switching Router) trong mạng MPLS có chức năng gì?",
+          "options": {
+            "A": "Chỉ định tuyến IP truyền thống.",
+            "B": "Gắn nhãn ở biên mạng.",
+            "C": "Hoán đổi nhãn và chuyển tiếp gói tin trong lõi mạng.",
+            "D": "Quản lý VPN."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 7.2.3: Các LSR lõi hoán đổi nhãn."
+        },
+        {
+          "id": 3,
+          "question": "FEC (Forwarding Equivalence Class) trong MPLS là gì?",
+          "options": {
+            "A": "Một nhóm các gói tin được xử lý chuyển tiếp giống nhau.",
+            "B": "Một giao thức định tuyến.",
+            "C": "Một loại thiết bị phần cứng.",
+            "D": "Một thuật toán mã hóa."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 7.2.1: FEC (Forwarding Equivalence Class) - Nhóm tương đương chuyển tiếp."
+        },
+        {
+          "id": 4,
+          "question": "Thiết bị nào chịu trách nhiệm gắn nhãn (Push) khi gói tin đi vào mạng MPLS?",
+          "options": {
+            "A": "LSR lõi.",
+            "B": "LER lối vào (Ingress LER).",
+            "C": "LER lối ra (Egress LER).",
+            "D": "Máy chủ DNS."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.2.3: LER lối vào phân loại gói vào FEC, gắn nhãn và chuyển vào LSP."
+        },
+        {
+          "id": 5,
+          "question": "Giao thức nào được IETF chuẩn hóa để phân phối nhãn trong MPLS?",
+          "options": {
+            "A": "RIP.",
+            "B": "OSPF.",
+            "C": "LDP (Label Distribution Protocol).",
+            "D": "HTTP."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 7.3.1: Giao thức chuẩn của IETF để phân phối nhãn giữa các LSR là LDP."
+        },
+        {
+          "id": 6,
+          "question": "MPLS tách biệt hai mặt phẳng (plane) nào?",
+          "options": {
+            "A": "Mặt phẳng điều khiển và mặt phẳng dữ liệu.",
+            "B": "Mặt phẳng người dùng và mặt phẳng quản trị.",
+            "C": "Mặt phẳng vật lý và mặt phẳng logic.",
+            "D": "Mặt phẳng định tuyến và mặt phẳng chuyển mạch."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 7.1.2: Tách biệt mặt phẳng điều khiển (định tuyến) và mặt phẳng dữ liệu (chuyển tiếp)."
+        },
+        {
+          "id": 7,
+          "question": "Kỹ thuật lưu lượng (Traffic Engineering - TE) trong MPLS giúp ích gì?",
+          "options": {
+            "A": "Tăng tốc độ xử lý CPU.",
+            "B": "Tối ưu hóa việc sử dụng tài nguyên mạng, tránh tắc nghẽn.",
+            "C": "Giảm chi phí phần cứng.",
+            "D": "Thay thế giao thức IP."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.4.2: Sử dụng MPLS để điều khiển luồng lưu lượng nhằm tối ưu hóa việc sử dụng tài nguyên mạng, tránh tắc nghẽn."
+        },
+        {
+          "id": 8,
+          "question": "Trong mô hình MPLS-VPN, bao nhiêu nhãn thường được sử dụng trong ngăn xếp nhãn (Label stack)?",
+          "options": {
+            "A": "1 nhãn.",
+            "B": "2 nhãn (nhãn ngoài cho mạng lõi, nhãn trong cho VPN).",
+            "C": "3 nhãn.",
+            "D": "Không dùng nhãn."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.4.3: Sử dụng ngăn xếp 2 nhãn: nhãn ngoài để chuyển tiếp qua mạng lõi MPLS, nhãn trong để xác định VPN/site đích."
+        },
+        {
+          "id": 9,
+          "question": "Giao thức RSVP-TE là phần mở rộng của RSVP để hỗ trợ chức năng gì?",
+          "options": {
+            "A": "Định tuyến IP.",
+            "B": "Phân phối nhãn và dành trước tài nguyên cho MPLS-TE.",
+            "C": "Bảo mật mạng.",
+            "D": "Quản lý địa chỉ IP."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.3.2: Mở rộng RSVP (RSVP-TE) để hỗ trợ phân phối nhãn và dành trước tài nguyên cho MPLS-TE."
+        },
+        {
+          "id": 10,
+          "question": "LSP (Label Switched Path) là gì?",
+          "options": {
+            "A": "Một giao thức định tuyến.",
+            "B": "Một đường dẫn được thiết lập trước cho gói tin di chuyển qua mạng MPLS dựa trên nhãn.",
+            "C": "Một loại router biên.",
+            "D": "Một bảng cơ sở dữ liệu nhãn."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.2.1 và 7.2.3: LSP là đường dẫn chuyển mạch nhãn mà gói tin đi qua sau khi được gắn nhãn."
+        }
+      ]
+    }
+  ]
+}

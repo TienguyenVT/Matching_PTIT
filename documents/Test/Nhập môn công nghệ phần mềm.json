@@ -1,0 +1,1392 @@
+{
+  "document_title": "Nhập môn công nghệ phần mềm",
+  "test_type": "Multiple Choice Questions",
+  "tests": [
+    {
+      "chapter_id": "1",
+      "chapter_title": "CHƯƠNG 1: MỞ ĐẦU",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Thuật ngữ 'Công nghệ phần mềm' (Software Engineering) được đưa ra lần đầu tiên vào năm nào và bởi ai?",
+          "options": {
+            "A": "Năm 1968 bởi NATO",
+            "B": "Năm 1967 bởi nhóm NATO",
+            "C": "Năm 1970 bởi IBM",
+            "D": "Năm 1960 bởi một nhóm các nhà khoa học máy tính"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.3: Năm 1967 nhóm NATO đưa ra thuật ngữ Công nghệ phần mềm (Software Engineering)."
+        },
+        {
+          "id": 2,
+          "question": "Theo thống kê của Hewlett-Packard (1992), bao nhiêu phần trăm chi phí phần mềm dành cho bảo trì?",
+          "options": {
+            "A": "10-30%",
+            "B": "40-60%",
+            "C": "60-80%",
+            "D": "20-40%"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.5: Hewlett-Packard (1992): ... 40-60% chi phí phần mềm dành cho bảo trì."
+        },
+        {
+          "id": 3,
+          "question": "Loại bảo trì nào chiếm tỷ lệ cao nhất trong các dạng bảo trì?",
+          "options": {
+            "A": "Bảo trì sửa lỗi",
+            "B": "Bảo trì thích nghi",
+            "C": "Bảo trì hoàn thiện",
+            "D": "Tất cả đều bằng nhau"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.5: Bảo trì hoàn thiện [60,5%]: thêm chức năng để cải tiến sản phẩm."
+        },
+        {
+          "id": 4,
+          "question": "Đặc trưng nào sau đây KHÔNG phải là đặc trưng của phần mềm?",
+          "options": {
+            "A": "Phần mềm không mòn",
+            "B": "Phần mềm được sản xuất theo dây chuyền công nghiệp",
+            "C": "Phần mềm được phát triển mà không được sản xuất theo nghĩa thông thường",
+            "D": "Phần lớn phần mềm phát triển dựa theo yêu cầu của khách hàng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1: Phần mềm được phát triển mà không được sản xuất theo nghĩa thông thường."
+        },
+        {
+          "id": 5,
+          "question": "Giai đoạn nào trong vòng đời phần mềm tốn kém nhiều thời gian và chi phí nhất?",
+          "options": {
+            "A": "Pha thiết kế",
+            "B": "Pha cài đặt",
+            "C": "Pha kiểm thử",
+            "D": "Pha bảo trì"
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 1.5: Kết luận: Bảo trì là pha tốn kém nhiều thời gian và chi phí nhất."
+        },
+        {
+          "id": 6,
+          "question": "Phương pháp hướng đối tượng có ưu điểm gì so với phương pháp cấu trúc?",
+          "options": {
+            "A": "Chỉ quan tâm đến dữ liệu",
+            "B": "Chỉ quan tâm đến hành động",
+            "C": "Kết hợp cả dữ liệu và hành động, chuyển pha 'êm dịu' hơn",
+            "D": "Phù hợp với phần mềm nhỏ dưới 5.000 dòng mã"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.8: Phương pháp hướng đối tượng (Object-Oriented Paradigm): Cả dữ liệu và hành động đều quan trọng như nhau... Phương pháp HĐT chuyển pha 'êm dịu' hơn, giảm sai sót."
+        },
+        {
+          "id": 7,
+          "question": "Tại sao không thể áp dụng hoàn toàn kỹ nghệ xây dựng cầu đường vào xây dựng phần mềm?",
+          "options": {
+            "A": "Vì phần mềm rẻ hơn cầu đường",
+            "B": "Vì thông tin về CNPM thường không đầy đủ, không chắc chắn và độ phức tạp cao hơn",
+            "C": "Vì phần mềm không quan trọng bằng cầu đường",
+            "D": "Vì kỹ sư phần mềm giỏi hơn kỹ sư xây dựng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.3: Thông tin về CNPM thường không đầy đủ, không chắc chắn. Độ phức tạp cao hơn."
+        },
+        {
+          "id": 8,
+          "question": "Theo số liệu của Kelly, Sherif và Hops (1992), lỗi thường xuất hiện nhiều nhất ở đâu?",
+          "options": {
+            "A": "Trong chương trình nguồn",
+            "B": "Trong tài liệu thiết kế",
+            "C": "Trong tài liệu đặc tả",
+            "D": "Trong quá trình cài đặt"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.6: 1.9 lỗi trên một trang đặc tả, 0.9 lỗi trên một trang thiết kế, 0.3 lỗi trên một trang chương trình nguồn."
+        },
+        {
+          "id": 9,
+          "question": "Phần mềm hệ thống là gì?",
+          "options": {
+            "A": "Phần mềm quản lý kho, kế toán",
+            "B": "Phần mềm xử lý văn bản, đồ họa",
+            "C": "Tập hợp các chương trình phục vụ các chương trình khác, tương tác với phần cứng",
+            "D": "Phần mềm điều khiển lò vi sóng"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.2: Phần mềm hệ thống: Tập hợp các chương trình được viết để phục vụ các chương trình khác, tương tác với phần cứng."
+        },
+        {
+          "id": 10,
+          "question": "Cuộc khủng hoảng phần mềm được đề cập năm 1968 bao gồm vấn đề nào?",
+          "options": {
+            "A": "Phần mềm quá rẻ",
+            "B": "Phần mềm hoàn thành không đúng thời hạn, chi phí vượt dự toán",
+            "C": "Phần mềm quá đơn giản",
+            "D": "Lập trình viên thất nghiệp"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.3: Phần mềm hoàn thành không đúng thời hạn. Chi phí vượt dự toán ban đầu."
+        }
+      ]
+    },
+    {
+      "chapter_id": "2",
+      "chapter_title": "CHƯƠNG 2: CÁC PHA PHÁT TRIỂN PHẦN MỀM",
+      "questions": [
+        {
+          "id": 1,
+          "question": "SQA là viết tắt của từ gì?",
+          "options": {
+            "A": "Software Question Answer",
+            "B": "Software Quality Assurance",
+            "C": "Software Quantity Assessment",
+            "D": "System Quality Assurance"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.2: SQA (Software Quality Assurance): Nhóm đảm bảo chất lượng phần mềm."
+        },
+        {
+          "id": 2,
+          "question": "Hoạt động 'Kiểm chứng' (Validation) được thực hiện khi nào?",
+          "options": {
+            "A": "Vào cuối mỗi pha phát triển",
+            "B": "Trước khi giao sản phẩm cho khách hàng",
+            "C": "Ngay khi bắt đầu dự án",
+            "D": "Sau khi sản phẩm đã bị loại bỏ"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.1: Validation (Kiểm chứng): Thực hiện trước khi giao sản phẩm cho khách hàng."
+        },
+        {
+          "id": 3,
+          "question": "Mục tiêu chính của pha yêu cầu là gì?",
+          "options": {
+            "A": "Viết mã nguồn chương trình",
+            "B": "Xác định nhu cầu thực sự và ràng buộc của khách hàng",
+            "C": "Thiết kế kiến trúc hệ thống",
+            "D": "Kiểm thử sản phẩm cuối cùng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3: Người phát triển phải xác định nhu cầu thực sự và ràng buộc của khách hàng."
+        },
+        {
+          "id": 4,
+          "question": "CMM mức 2 (Repeatable) có đặc điểm gì?",
+          "options": {
+            "A": "Ad hoc, hỗn loạn",
+            "B": "Tiến trình được tài liệu hóa và chuẩn hóa",
+            "C": "Quản lý dự án cơ bản, có thể lặp lại thành công ở dự án tương tự",
+            "D": "Cải tiến liên tục dựa trên số liệu định lượng"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.8: Mức 2 (Repeatable): Quản lý dự án cơ bản. Có thể lặp lại thành công ở các dự án tương tự."
+        },
+        {
+          "id": 5,
+          "question": "Yêu cầu đối với tài liệu đặc tả là gì?",
+          "options": {
+            "A": "Ngắn gọn, súc tích",
+            "B": "Không nhập nhằng, đầy đủ, phi mâu thuẫn, theo dõi được",
+            "C": "Chứa mã nguồn chi tiết",
+            "D": "Chỉ cần khách hàng hiểu là được"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.4: Yêu cầu của đặc tả: Không nhập nhằng, Đầy đủ, Phi mâu thuẫn, Theo dõi được (Traceability)."
+        },
+        {
+          "id": 6,
+          "question": "Thiết kế kiến trúc trong pha thiết kế làm nhiệm vụ gì?",
+          "options": {
+            "A": "Thiết kế chi tiết thuật toán",
+            "B": "Phân rã sản phẩm thành các mô đun",
+            "C": "Viết mã nguồn cho các mô đun",
+            "D": "Kiểm thử đơn vị"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.5: Thiết kế kiến trúc: Phân rã sản phẩm thành các mô đun."
+        },
+        {
+          "id": 7,
+          "question": "Tại sao không có 'pha kiểm thử' riêng biệt?",
+          "options": {
+            "A": "Vì kiểm thử không quan trọng",
+            "B": "Vì kiểm thử là hoạt động thực hiện trong MỌI pha",
+            "C": "Vì đã có khách hàng kiểm thử",
+            "D": "Vì lập trình viên viết code không bao giờ sai"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.1: Không có 'pha kiểm thử' riêng biệt vì kiểm thử là hoạt động thực hiện trong MỌI pha."
+        },
+        {
+          "id": 8,
+          "question": "Kế hoạch quản lý dự án phần mềm (SPMP) thường được hình thành khi nào?",
+          "options": {
+            "A": "Trước khi gặp khách hàng",
+            "B": "Sau khi đặc tả hoàn thành",
+            "C": "Sau khi viết xong mã nguồn",
+            "D": "Khi kết thúc dự án"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.4: Kế hoạch quản lý dự án phần mềm (SPMP) được hình thành sau khi đặc tả hoàn thành."
+        },
+        {
+          "id": 9,
+          "question": "CMM mức 5 (Optimizing) tập trung vào điều gì?",
+          "options": {
+            "A": "Quản lý dự án cơ bản",
+            "B": "Chuẩn hóa quy trình",
+            "C": "Đo lường chi tiết",
+            "D": "Cải tiến tiến trình liên tục dựa trên phản hồi định lượng"
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 2.8: Mức 5 (Optimizing): Cải tiến tiến trình liên tục dựa trên phản hồi định lượng."
+        },
+        {
+          "id": 10,
+          "question": "Tài liệu pha tích hợp bao gồm những gì?",
+          "options": {
+            "A": "Bản mẫu nhanh",
+            "B": "Tài liệu đặc tả yêu cầu",
+            "C": "Mã nguồn có chú thích, các test cases",
+            "D": "Biên bản họp với khách hàng"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.7: Tài liệu: Mã nguồn có chú thích, các test cases."
+        }
+      ]
+    },
+    {
+      "chapter_id": "3",
+      "chapter_title": "CHƯƠNG 3: CÁC MÔ HÌNH VÒNG ĐỜI PHẦN MỀM",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Mô hình nào được coi là dễ nhất nhưng tốn kém nhất và bảo trì là 'ác mộng'?",
+          "options": {
+            "A": "Mô hình thác nước",
+            "B": "Mô hình xây và sửa (Build and Fix)",
+            "C": "Mô hình xoắn ốc",
+            "D": "Mô hình lặp và tăng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.2: Đặc điểm: Không thiết kế, không đặc tả. Dễ nhất nhưng đắt nhất và bảo trì là ác mộng."
+        },
+        {
+          "id": 2,
+          "question": "Nhược điểm chính của mô hình thác nước (Waterfall) là gì?",
+          "options": {
+            "A": "Thiếu kỷ luật",
+            "B": "Không có tài liệu",
+            "C": "Khách hàng chỉ thấy sản phẩm ở cuối cùng, thay đổi yêu cầu muộn tốn kém",
+            "D": "Rất khó quản lý"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.3: Bất lợi: Khách hàng chỉ thấy sản phẩm ở cuối cùng. Thay đổi yêu cầu muộn tốn kém."
+        },
+        {
+          "id": 3,
+          "question": "Mô hình bản mẫu nhanh (Rapid Prototyping) giúp giảm rủi ro gì?",
+          "options": {
+            "A": "Rủi ro về kỹ thuật",
+            "B": "Rủi ro sai yêu cầu của khách hàng",
+            "C": "Rủi ro về nhân sự",
+            "D": "Rủi ro về chi phí phần cứng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.4: Giúp giảm rủi ro sai yêu cầu."
+        },
+        {
+          "id": 4,
+          "question": "Theo luật Miller, con người có thể xử lý bao nhiêu đơn vị thông tin cùng lúc?",
+          "options": {
+            "A": "Khoảng 3 đơn vị",
+            "B": "Khoảng 7 đơn vị",
+            "C": "Khoảng 15 đơn vị",
+            "D": "Không giới hạn"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.5: Luật Miller: con người chỉ xử lý được ~7 đơn vị thông tin cùng lúc."
+        },
+        {
+          "id": 5,
+          "question": "Mô hình xoắn ốc (Spiral) nhấn mạnh vào hoạt động nào?",
+          "options": {
+            "A": "Viết mã nguồn",
+            "B": "Phân tích rủi ro",
+            "C": "Kiểm thử đơn vị",
+            "D": "Viết tài liệu"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.7: Nhấn mạnh vào phân tích rủi ro."
+        },
+        {
+          "id": 6,
+          "question": "Mô hình UP (Unified Process) có đặc trưng gì?",
+          "options": {
+            "A": "Hướng dữ liệu",
+            "B": "Hướng hành động",
+            "C": "Hướng Use-case, lấy kiến trúc làm trung tâm, lặp và tăng dần",
+            "D": "Không sử dụng UML"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.6: Đặc trưng: Hướng Use-case, lấy kiến trúc làm trung tâm, lặp và tăng dần."
+        },
+        {
+          "id": 7,
+          "question": "Mô hình mã nguồn mở thành công nhờ yếu tố nào?",
+          "options": {
+            "A": "Sự đầu tư lớn từ chính phủ",
+            "B": "Số lượng lớn người dùng tham gia kiểm thử và đóng góp",
+            "C": "Quy trình quản lý chặt chẽ",
+            "D": "Không có lỗi phần mềm"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.8: Thành công nhờ số lượng lớn người dùng tham gia kiểm thử và đóng góp."
+        },
+        {
+          "id": 8,
+          "question": "Bốn pha chính của mô hình UP là gì?",
+          "options": {
+            "A": "Yêu cầu, Phân tích, Thiết kế, Cài đặt",
+            "B": "Khởi đầu, Khảo sát tỉ mỉ, Xây dựng, Chuyển giao",
+            "C": "Lập kế hoạch, Phân tích rủi ro, Kỹ thuật, Đánh giá",
+            "D": "Xây dựng, Sửa lỗi, Bảo trì, Loại bỏ"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.6: Bốn pha chính: Khởi đầu (Inception), Khảo sát tỉ mỉ (Elaboration), Xây dựng (Construction), Chuyển giao (Transition)."
+        },
+        {
+          "id": 9,
+          "question": "Mô hình Lặp và Tăng (Iterative and Incremental) có ưu điểm gì?",
+          "options": {
+            "A": "Không cần thiết kế",
+            "B": "Có sản phẩm hoạt động sớm, linh hoạt với thay đổi",
+            "C": "Dễ quản lý hơn mô hình thác nước",
+            "D": "Chi phí thấp nhất"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.5: Ưu điểm: Có sản phẩm hoạt động sớm, dễ kiểm thử, giảm rủi ro, linh hoạt với thay đổi."
+        },
+        {
+          "id": 10,
+          "question": "Tại sao thực tế phát triển phần mềm thường phải quay lui và sửa đổi?",
+          "options": {
+            "A": "Do lập trình viên kém",
+            "B": "Do có lỗi và yêu cầu thay đổi liên tục",
+            "C": "Do công cụ phát triển không tốt",
+            "D": "Do khách hàng khó tính"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1: Thực tế: Có lỗi, yêu cầu thay đổi liên tục... minh họa sự cần thiết của việc quay lui và sửa đổi."
+        }
+      ]
+    },
+    {
+      "chapter_id": "4",
+      "chapter_title": "CHƯƠNG 4: KIỂM THỬ",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Sự khác biệt giữa Xác minh (Verification) và Thẩm định (Validation) là gì?",
+          "options": {
+            "A": "Verification kiểm tra sản phẩm đúng nhu cầu, Validation kiểm tra làm đúng quy trình",
+            "B": "Verification kiểm tra làm đúng quy trình/đặc tả, Validation kiểm tra sản phẩm đúng nhu cầu khách hàng",
+            "C": "Hai khái niệm này là một",
+            "D": "Verification do khách hàng làm, Validation do lập trình viên làm"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2: Verification (Xác minh): Are we building the product right?... Validation (Thẩm định): Are we building the right product?"
+        },
+        {
+          "id": 2,
+          "question": "Phương pháp 'Kiểm tra kỹ lưỡng' (Inspection) có đặc điểm gì?",
+          "options": {
+            "A": "Không hình thức, không có vai trò rõ ràng",
+            "B": "Hình thức, có 5 bước và các vai trò rõ ràng, hiệu quả cao tìm lỗi sớm",
+            "C": "Chỉ thực hiện khi chạy chương trình",
+            "D": "Do khách hàng thực hiện"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3.1: Kiểm tra kỹ lưỡng (Inspection): Hình thức hơn, 5 bước... Có các vai trò rõ ràng... Hiệu quả cao trong việc tìm lỗi sớm."
+        },
+        {
+          "id": 3,
+          "question": "Theo Dijkstra, kiểm thử có giới hạn gì?",
+          "options": {
+            "A": "Chỉ tìm được lỗi cú pháp",
+            "B": "Chỉ có thể chỉ ra sự hiện diện của lỗi, không thể chỉ ra sự vắng mặt của chúng",
+            "C": "Không thể tìm được lỗi logic",
+            "D": "Tốn kém hơn chi phí phát triển"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3.2: Dijkstra: 'Kiểm thử chỉ có thể chỉ ra sự hiện diện của lỗi, không thể chỉ ra sự vắng mặt của chúng'."
+        },
+        {
+          "id": 4,
+          "question": "Tại sao lập trình viên không nên tự kiểm thử phần mềm của chính mình?",
+          "options": {
+            "A": "Vì họ không có thời gian",
+            "B": "Vì vấn đề tâm lý (khó tìm ra lỗi của chính mình)",
+            "C": "Vì họ không biết cách kiểm thử",
+            "D": "Vì quy định cấm"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4: Lập trình viên không nên tự test chính mình (tâm lý)."
+        },
+        {
+          "id": 5,
+          "question": "Kiểm thử không có sự thực thi (Static testing) bao gồm các phương pháp nào?",
+          "options": {
+            "A": "Chạy thử với dữ liệu mẫu",
+            "B": "Rà soát lướt qua (Walkthrough) và Kiểm tra kỹ lưỡng (Inspection)",
+            "C": "Kiểm thử hộp đen và hộp trắng",
+            "D": "Kiểm thử đơn vị và tích hợp"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3.1: Rà soát lướt qua (Walkthrough)... Kiểm tra kỹ lưỡng (Inspection)."
+        },
+        {
+          "id": 6,
+          "question": "Tính 'Mạnh mẽ' (Robustness) trong kiểm thử nghĩa là gì?",
+          "options": {
+            "A": "Phần mềm chạy nhanh",
+            "B": "Phần mềm dễ sử dụng",
+            "C": "Khả năng xử lý các trường hợp bất thường",
+            "D": "Phần mềm không bao giờ lỗi"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.4: Tính mạnh mẽ (xử lý trường hợp bất thường)."
+        },
+        {
+          "id": 7,
+          "question": "Khi nào việc kiểm thử dừng lại trong thực tế?",
+          "options": {
+            "A": "Khi tìm hết tất cả các lỗi",
+            "B": "Khi hết ngân sách/thời gian hoặc đạt mục tiêu chất lượng",
+            "C": "Khi lập trình viên thấy mệt",
+            "D": "Không bao giờ dừng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4: ...thực tế là khi hết ngân sách/thời gian hoặc đạt mục tiêu chất lượng."
+        },
+        {
+          "id": 8,
+          "question": "Kiểm chứng tính chính xác (toán học) thường được sử dụng khi nào?",
+          "options": {
+            "A": "Cho mọi phần mềm",
+            "B": "Cho phần mềm trò chơi",
+            "C": "Chỉ dùng khi rủi ro cực cao (ảnh hưởng tính mạng con người)",
+            "D": "Khi khách hàng yêu cầu"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.4: Chứng minh toán học khó, tốn kém, chỉ dùng khi rủi ro cực cao (tính mạng con người)."
+        },
+        {
+          "id": 9,
+          "question": "Phương pháp Rà soát lướt qua (Walkthrough) có đặc điểm gì?",
+          "options": {
+            "A": "Rất hình thức, có biên bản chi tiết",
+            "B": "Không hình thức, phát hiện lỗi nhưng không sửa tại chỗ",
+            "C": "Do máy tính thực hiện tự động",
+            "D": "Chỉ dành cho tài liệu thiết kế"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3.1: Rà soát lướt qua (Walkthrough): Không hình thức... phát hiện lỗi nhưng không sửa tại chỗ."
+        },
+        {
+          "id": 10,
+          "question": "Nhóm nào nên chịu trách nhiệm chính về đảm bảo chất lượng phần mềm?",
+          "options": {
+            "A": "Nhóm lập trình",
+            "B": "Nhóm SQA độc lập",
+            "C": "Nhóm quản lý dự án",
+            "D": "Khách hàng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.1: Đảm bảo chất lượng phần mềm (SQA) phải được thực hiện xuyên suốt tiến trình bởi nhóm độc lập với nhóm phát triển."
+        }
+      ]
+    },
+    {
+      "chapter_id": "5",
+      "chapter_title": "CHƯƠNG 5: LẬP KẾ HOẠCH VÀ ƯỚC LƯỢNG",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Mô hình COCOMO sử dụng yếu tố nào để điều chỉnh nỗ lực ước lượng?",
+          "options": {
+            "A": "Số lượng nhân viên",
+            "B": "Nhân tố chi phí (Effort Adjustment Factor - EAF)",
+            "C": "Thời gian hoàn thành",
+            "D": "Ngôn ngữ lập trình"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: COCOMO trung gian: E = a * (KDSI)^b * EAF (Effort Adjustment Factor - dựa trên 15 nhân tố chi phí)."
+        },
+        {
+          "id": 2,
+          "question": "Thước đo LOC (Lines of Code) có nhược điểm gì?",
+          "options": {
+            "A": "Khó đếm",
+            "B": "Phụ thuộc ngôn ngữ, khó xác định sớm, không rõ ràng",
+            "C": "Chỉ dùng được cho C++",
+            "D": "Không thể dùng để tính chi phí"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: LOC (Lines of Code): Dễ đếm nhưng phụ thuộc ngôn ngữ, khó xác định sớm, không rõ ràng."
+        },
+        {
+          "id": 3,
+          "question": "Điểm chức năng (Function Points - FP) dựa trên các yếu tố nào?",
+          "options": {
+            "A": "Số dòng mã nguồn",
+            "B": "Số lượng đầu vào, đầu ra, truy vấn, tệp chính, giao diện",
+            "C": "Số lượng nhân viên tham gia",
+            "D": "Thời gian thực hiện dự án"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: Dựa trên số lượng đầu vào, đầu ra, truy vấn, tệp chính, giao diện."
+        },
+        {
+          "id": 4,
+          "question": "Theo mô hình nón bất định, độ chính xác của ước lượng thay đổi như thế nào theo thời gian?",
+          "options": {
+            "A": "Không thay đổi",
+            "B": "Giảm dần khi dự án tiến triển",
+            "C": "Tăng dần khi dự án tiến triển",
+            "D": "Biến động ngẫu nhiên"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.1: Ước lượng ban đầu thường không chính xác, độ chính xác tăng dần khi dự án tiến triển."
+        },
+        {
+          "id": 5,
+          "question": "Kỹ thuật ước lượng nào dựa trên kinh nghiệm và so sánh tương tự?",
+          "options": {
+            "A": "Mô hình thuật toán",
+            "B": "Đánh giá chuyên gia",
+            "C": "Dưới lên",
+            "D": "COCOMO"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: Đánh giá chuyên gia: Dựa trên kinh nghiệm, so sánh tương tự."
+        },
+        {
+          "id": 6,
+          "question": "Thước đo FFP phù hợp cho loại phần mềm nào?",
+          "options": {
+            "A": "Phần mềm hệ thống",
+            "B": "Phần mềm xử lý dữ liệu trung bình",
+            "C": "Phần mềm trí tuệ nhân tạo",
+            "D": "Phần mềm nhúng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: FFP (Files, Flows, Processes): Cho phần mềm xử lý dữ liệu trung bình."
+        },
+        {
+          "id": 7,
+          "question": "COCOMO II được cập nhật để phù hợp với điều gì?",
+          "options": {
+            "A": "Phần mềm viết bằng Assembly",
+            "B": "Phần mềm hiện đại (OO, 4GL, COTS...)",
+            "C": "Phần mềm nhỏ",
+            "D": "Dự án phần cứng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: COCOMO II: Cập nhật cho phần mềm hiện đại (OO, 4GL, COTS, bản mẫu...)."
+        },
+        {
+          "id": 8,
+          "question": "Việc lập kế hoạch phát triển phần mềm nên tuân theo chuẩn nào?",
+          "options": {
+            "A": "ISO 9001",
+            "B": "IEEE 1058.1",
+            "C": "CMM mức 5",
+            "D": "Không cần theo chuẩn nào"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.3: Nên theo chuẩn IEEE 1058.1."
+        },
+        {
+          "id": 9,
+          "question": "Thành phần 'Gói công việc' (Work packages) nằm trong nội dung nào của kế hoạch dự án?",
+          "options": {
+            "A": "Mục tiêu",
+            "B": "Tổ chức dự án",
+            "C": "Quy trình quản lý",
+            "D": "Các thành phần của việc lập kế hoạch (theo IEEE 1058.1)"
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 5.3: Bao gồm: ... gói công việc (Work packages)..."
+        },
+        {
+          "id": 10,
+          "question": "Phương pháp ước lượng 'Dưới lên' thực hiện như thế nào?",
+          "options": {
+            "A": "Ước lượng tổng thể rồi chia nhỏ",
+            "B": "Chia nhỏ thành phần rồi cộng lại",
+            "C": "Dựa trên ý kiến chuyên gia",
+            "D": "Sử dụng công thức toán học"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: Dưới lên: Chia nhỏ thành phần rồi cộng lại."
+        }
+      ]
+    },
+    {
+      "chapter_id": "6",
+      "chapter_title": "CHƯƠNG 6: PHA XÁC ĐỊNH YÊU CẦU",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Use case mô hình hóa điều gì?",
+          "options": {
+            "A": "Cấu trúc dữ liệu của hệ thống",
+            "B": "Tương tác giữa tác nhân (Actor) và hệ thống",
+            "C": "Thuật toán xử lý",
+            "D": "Giao diện người dùng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.2: Use case: Mô hình tương tác giữa tác nhân (Actor - người dùng hoặc hệ thống khác) và hệ thống."
+        },
+        {
+          "id": 2,
+          "question": "Khó khăn lớn nhất trong việc xác định yêu cầu khách hàng là gì?",
+          "options": {
+            "A": "Khách hàng không chịu trả tiền",
+            "B": "Khách hàng không biết rõ mình muốn gì hoặc diễn đạt sai",
+            "C": "Công nghệ không đáp ứng được",
+            "D": "Thiếu nhân lực"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.1: Khách hàng không biết rõ mình muốn gì, hoặc diễn đạt sai."
+        },
+        {
+          "id": 3,
+          "question": "Yêu cầu phi chức năng là gì?",
+          "options": {
+            "A": "Hành động hệ thống phải làm",
+            "B": "Các ràng buộc về hiệu năng, tin cậy, bảo mật...",
+            "C": "Yêu cầu về phần cứng",
+            "D": "Yêu cầu về nhân sự"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.2: Phi chức năng (ràng buộc: hiệu năng, tin cậy, bảo mật...)."
+        },
+        {
+          "id": 4,
+          "question": "Mục đích của việc xây dựng 'Bản mẫu nhanh' (Rapid Prototyping) trong pha này là gì?",
+          "options": {
+            "A": "Để bán sản phẩm sớm",
+            "B": "Để làm rõ yêu cầu thông qua phản hồi của khách hàng",
+            "C": "Để kiểm thử hiệu năng",
+            "D": "Để thay thế tài liệu đặc tả"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.4: Xây dựng nhanh giao diện hoặc chức năng chính để khách hàng dùng thử và phản hồi. Giúp làm rõ yêu cầu."
+        },
+        {
+          "id": 5,
+          "question": "Trong Use case, 'Actor' có thể là gì?",
+          "options": {
+            "A": "Chỉ là người dùng",
+            "B": "Chỉ là hệ thống khác",
+            "C": "Người dùng hoặc hệ thống khác tương tác với phần mềm",
+            "D": "Lập trình viên"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 6.2: Actor - người dùng hoặc hệ thống khác."
+        },
+        {
+          "id": 6,
+          "question": "Hiện tượng 'nạp chồng tác nhân' là gì?",
+          "options": {
+            "A": "Một tác nhân làm quá nhiều việc",
+            "B": "Một người đóng nhiều vai trò (Actor) khác nhau",
+            "C": "Hệ thống có quá nhiều tác nhân",
+            "D": "Tác nhân không được xác định rõ"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.2: Tránh 'nạp chồng tác nhân' (một người đóng nhiều vai trò -> tách thành các actor riêng biệt)."
+        },
+        {
+          "id": 7,
+          "question": "Bước đầu tiên trong luồng công việc xác định yêu cầu là gì?",
+          "options": {
+            "A": "Vẽ biểu đồ Use case",
+            "B": "Hiểu lĩnh vực ứng dụng và xây dựng thuật ngữ",
+            "C": "Viết mã nguồn",
+            "D": "Thiết kế cơ sở dữ liệu"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.2: Các bước: Hiểu lĩnh vực ứng dụng (xây dựng thuật ngữ)..."
+        },
+        {
+          "id": 8,
+          "question": "Kỹ thuật nào KHÔNG dùng để thu thập yêu cầu?",
+          "options": {
+            "A": "Phỏng vấn",
+            "B": "Quan sát trực tiếp",
+            "C": "Nghiên cứu tài liệu hiện có",
+            "D": "Viết mã kiểm thử"
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 6.2: Kỹ thuật: Phỏng vấn, Bảng thăm dò, Quan sát trực tiếp, Nghiên cứu tài liệu..."
+        },
+        {
+          "id": 9,
+          "question": "Trong Case study khách sạn, 'Manager' đóng vai trò là gì?",
+          "options": {
+            "A": "Use case",
+            "B": "Actor",
+            "C": "Entity",
+            "D": "Boundary"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.10: Actors (Manager, Seller, Receptionist, Client)."
+        },
+        {
+          "id": 10,
+          "question": "Mục đích chính của pha xác định yêu cầu là trả lời câu hỏi nào?",
+          "options": {
+            "A": "Hệ thống làm như thế nào?",
+            "B": "Hệ thống phải làm gì?",
+            "C": "Hệ thống chạy nhanh không?",
+            "D": "Hệ thống giá bao nhiêu?"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 6.2: Mục đích: Trả lời 'Hệ thống phải làm gì?'."
+        }
+      ]
+    },
+    {
+      "chapter_id": "7",
+      "chapter_title": "CHƯƠNG 7: CÁC PHƯƠNG PHÁP PHÂN TÍCH TRUYỀN THỐNG",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Tài liệu đặc tả có vai trò gì quan trọng?",
+          "options": {
+            "A": "Là hướng dẫn sử dụng",
+            "B": "Là hợp đồng giữa khách hàng và người phát triển",
+            "C": "Là mã nguồn của chương trình",
+            "D": "Là biên bản nghiệm thu"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.1: Là hợp đồng giữa khách hàng và người phát triển."
+        },
+        {
+          "id": 2,
+          "question": "Phương pháp đặc tả 'Phi hình thức' sử dụng công cụ gì?",
+          "options": {
+            "A": "Toán học",
+            "B": "Ngôn ngữ tự nhiên",
+            "C": "Biểu đồ DFD",
+            "D": "Biểu đồ ERD"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.2: Phi hình thức: Ngôn ngữ tự nhiên."
+        },
+        {
+          "id": 3,
+          "question": "Nhược điểm của phương pháp đặc tả bằng ngôn ngữ tự nhiên là gì?",
+          "options": {
+            "A": "Khó hiểu",
+            "B": "Dễ nhập nhằng, mâu thuẫn",
+            "C": "Tốn kém",
+            "D": "Không thể hiện được yêu cầu"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.2: Dễ hiểu nhưng dễ nhập nhằng, mâu thuẫn."
+        },
+        {
+          "id": 4,
+          "question": "Biểu đồ DFD (Data Flow Diagram) được sử dụng trong phương pháp phân tích nào?",
+          "options": {
+            "A": "Phân tích hướng đối tượng",
+            "B": "Phân tích hướng cấu trúc",
+            "C": "Phân tích rủi ro",
+            "D": "Phân tích hình thức"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.2: Phân tích hướng cấu trúc (Structured Analysis): Sử dụng DFD để mô hình hóa luồng dữ liệu."
+        },
+        {
+          "id": 5,
+          "question": "Trong DFD, hình tròn (hoặc hình chữ nhật bo tròn) biểu diễn cái gì?",
+          "options": {
+            "A": "Nguồn dữ liệu",
+            "B": "Kho dữ liệu",
+            "C": "Tiến trình xử lý",
+            "D": "Dòng dữ liệu"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 7.2: Tiến trình xử lý (hình tròn/hình chữ nhật bo tròn)."
+        },
+        {
+          "id": 6,
+          "question": "Phương pháp đặc tả 'Hình thức' (Formal methods) có đặc điểm gì?",
+          "options": {
+            "A": "Dễ hiểu, rẻ tiền",
+            "B": "Sử dụng toán học, chính xác tuyệt đối nhưng khó hiểu và tốn kém",
+            "C": "Sử dụng biểu đồ trực quan",
+            "D": "Không cần tài liệu"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.2: Hình thức: Toán học (Z, Petri nets). Chính xác tuyệt đối nhưng khó hiểu, tốn kém."
+        },
+        {
+          "id": 7,
+          "question": "Trong DFD, cặp đường thẳng song song biểu diễn cái gì?",
+          "options": {
+            "A": "Tiến trình",
+            "B": "Kho dữ liệu",
+            "C": "Nguồn dữ liệu",
+            "D": "Luồng dữ liệu"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.2: Kho dữ liệu (cặp đường thẳng song song/hình chữ nhật hở)."
+        },
+        {
+          "id": 8,
+          "question": "Tài liệu đặc tả cần phải đảm bảo điều gì đối với lập trình viên?",
+          "options": {
+            "A": "Ngắn gọn",
+            "B": "Đầy đủ, chi tiết",
+            "C": "Dễ đọc",
+            "D": "Có hình ảnh đẹp"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.1: ...nhưng cũng phải đầy đủ, chi tiết (cho lập trình viên)."
+        },
+        {
+          "id": 9,
+          "question": "Phương pháp 'Nửa hình thức' sử dụng công cụ gì?",
+          "options": {
+            "A": "Ngôn ngữ tự nhiên",
+            "B": "Toán học cao cấp",
+            "C": "Các biểu đồ và ký hiệu chuẩn (DFD, ERD)",
+            "D": "Mã nguồn"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 7.2: Nửa hình thức: DFD, ERD. Sử dụng các biểu đồ và ký hiệu chuẩn."
+        },
+        {
+          "id": 10,
+          "question": "Mục tiêu chính của tài liệu đặc tả đối với khách hàng là gì?",
+          "options": {
+            "A": "Cho thấy thuật toán phức tạp",
+            "B": "Rõ ràng, dễ hiểu",
+            "C": "Thể hiện công nghệ mới nhất",
+            "D": "Dài dòng, chi tiết kỹ thuật"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 7.1: Phải rõ ràng, dễ hiểu (cho khách hàng)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "8",
+      "chapter_title": "CHƯƠNG 8: PHƯƠNG PHÁP PHÂN TÍCH HƯỚNG ĐỐI TƯỢNG",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Lớp thực thể (Entity classes) dùng để mô hình hóa cái gì?",
+          "options": {
+            "A": "Giao diện người dùng",
+            "B": "Thông tin lưu trữ lâu dài",
+            "C": "Logic điều khiển phức tạp",
+            "D": "Kết nối mạng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.1: Lớp thực thể (Entity classes): Mô hình thông tin lưu trữ lâu dài."
+        },
+        {
+          "id": 2,
+          "question": "Lớp biên (Boundary classes) có vai trò gì?",
+          "options": {
+            "A": "Lưu trữ dữ liệu",
+            "B": "Giao tiếp giữa hệ thống và tác nhân",
+            "C": "Thực hiện tính toán phức tạp",
+            "D": "Quản lý cơ sở dữ liệu"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.1: Lớp biên (Boundary classes): Giao tiếp giữa hệ thống và tác nhân."
+        },
+        {
+          "id": 3,
+          "question": "Kỹ thuật 'Trích rút danh từ' dùng để làm gì?",
+          "options": {
+            "A": "Tìm các phương thức cho lớp",
+            "B": "Tìm các ứng cử viên cho lớp thực thể",
+            "C": "Xác định quan hệ kế thừa",
+            "D": "Vẽ biểu đồ tuần tự"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.5: Trích rút danh từ: Tìm các danh từ trong mô tả bài toán -> ứng cử viên cho lớp."
+        },
+        {
+          "id": 4,
+          "question": "Thẻ CRC được dùng để làm gì?",
+          "options": {
+            "A": "Lưu trữ dữ liệu khách hàng",
+            "B": "Thảo luận, kiểm thử thiết kế lớp (Tên lớp, Trách nhiệm, Cộng tác)",
+            "C": "Viết mã nguồn",
+            "D": "Quản lý dự án"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.5: Thẻ CRC... Ghi tên lớp, trách nhiệm và các lớp cộng tác lên thẻ để thảo luận, kiểm thử thiết kế."
+        },
+        {
+          "id": 5,
+          "question": "Ba bước lặp trong quá trình trích rút lớp thực thể là gì?",
+          "options": {
+            "A": "Mô hình hóa chức năng, Mô hình hóa lớp, Mô hình hóa động",
+            "B": "Phân tích, Thiết kế, Cài đặt",
+            "C": "Yêu cầu, Đặc tả, Kiểm thử",
+            "D": "Biểu đồ Use case, Biểu đồ lớp, Biểu đồ thành phần"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 8.2: Ba bước lặp: 1. Mô hình hóa chức năng... 2. Mô hình hóa lớp... 3. Mô hình hóa động."
+        },
+        {
+          "id": 6,
+          "question": "Lớp điều khiển (Control classes) chịu trách nhiệm gì?",
+          "options": {
+            "A": "Hiển thị thông tin",
+            "B": "Lưu trữ dữ liệu vào đĩa",
+            "C": "Điều phối, thực hiện tính toán phức tạp, logic nghiệp vụ",
+            "D": "Giao tiếp với người dùng"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 8.1: Lớp điều khiển (Control classes): Điều phối, thực hiện các tính toán phức tạp, logic nghiệp vụ."
+        },
+        {
+          "id": 7,
+          "question": "Trong Case study khách sạn, lớp nào là lớp thực thể?",
+          "options": {
+            "A": "AddRoomForm",
+            "B": "Room",
+            "C": "BookingController",
+            "D": "MainInterface"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.9: Trích rút các lớp thực thể...: Hotel, Room, Client..."
+        },
+        {
+          "id": 8,
+          "question": "Quan hệ giữa 'Hotel' và 'Room' trong Case study khách sạn là gì?",
+          "options": {
+            "A": "1-1",
+            "B": "1-n (Một khách sạn có nhiều phòng)",
+            "C": "n-n",
+            "D": "Không có quan hệ"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.9: Xác định quan hệ giữa chúng (ví dụ: Hotel 1-n Room...)."
+        },
+        {
+          "id": 9,
+          "question": "Mục đích chính của luồng công việc phân tích là gì?",
+          "options": {
+            "A": "Thiết kế giao diện đẹp",
+            "B": "Hiểu sâu yêu cầu, mô tả yêu cầu thuận lợi cho thiết kế/cài đặt",
+            "C": "Tối ưu hóa mã nguồn",
+            "D": "Chọn ngôn ngữ lập trình"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.1: Mục đích: Hiểu sâu yêu cầu, mô tả yêu cầu để thuận lợi cho thiết kế/cài đặt."
+        },
+        {
+          "id": 10,
+          "question": "Trong mô hình hóa động, loại biểu đồ nào thường được sử dụng?",
+          "options": {
+            "A": "Biểu đồ lớp (Class Diagram)",
+            "B": "Biểu đồ tuần tự (Sequence Diagram) hoặc Biểu đồ trạng thái (Statechart)",
+            "C": "Biểu đồ triển khai (Deployment Diagram)",
+            "D": "Biểu đồ thành phần (Component Diagram)"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 8.2: Mô hình hóa động (Dynamic modeling): Xác định hành động/trạng thái (Statechart/Sequence Diagram)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "9",
+      "chapter_title": "CHƯƠNG 9: PHA THIẾT KẾ",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Tiêu chí chất lượng quan trọng trong thiết kế mô đun là gì?",
+          "options": {
+            "A": "Kết dính thấp, Kết nối cao",
+            "B": "Kết dính cao (Cohesion), Kết nối thấp (Coupling)",
+            "C": "Kích thước mô đun lớn",
+            "D": "Sử dụng nhiều biến toàn cục"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.1: Tiêu chí chất lượng: Kết dính (Cohesion - cao là tốt), Kết nối (Coupling - thấp là tốt)."
+        },
+        {
+          "id": 2,
+          "question": "Trong thiết kế hướng đối tượng, việc gán phương thức cho lớp dựa trên nguyên lý nào?",
+          "options": {
+            "A": "Ngẫu nhiên",
+            "B": "Ẩn giấu thông tin và trách nhiệm",
+            "C": "Tất cả phương thức vào một lớp",
+            "D": "Dựa vào tên lớp"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.4: ...gán phương thức cho lớp (dựa trên nguyên lý ẩn giấu thông tin, trách nhiệm)."
+        },
+        {
+          "id": 3,
+          "question": "Mô hình MVC cải tiến tách biệt những thành phần nào?",
+          "options": {
+            "A": "Input, Process, Output",
+            "B": "Model (Entity + DAO), View (Form), Controller (Điều phối)",
+            "C": "Client, Server, Database",
+            "D": "Header, Body, Footer"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.4: Mô hình MVC cải tiến: Tách biệt rõ ràng Model (Entity + DAO), View (Form), Controller (điều phối)."
+        },
+        {
+          "id": 4,
+          "question": "DAO (Data Access Object) dùng để làm gì?",
+          "options": {
+            "A": "Lưu trữ dữ liệu tạm thời",
+            "B": "Chứa logic truy cập cơ sở dữ liệu",
+            "C": "Hiển thị giao diện",
+            "D": "Xử lý logic nghiệp vụ"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.4: ...lớp truy cập CSDL (DAO)."
+        },
+        {
+          "id": 5,
+          "question": "Thiết kế kiến trúc bao gồm công việc gì?",
+          "options": {
+            "A": "Thiết kế thuật toán cho từng hàm",
+            "B": "Phân rã hệ thống thành các hệ thống con và mô đun",
+            "C": "Viết mã nguồn",
+            "D": "Thiết kế cơ sở dữ liệu chi tiết"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.1: Thiết kế kiến trúc (phân rã thành hệ thống con/mô đun)."
+        },
+        {
+          "id": 6,
+          "question": "Thiết kế chi tiết tập trung vào điều gì?",
+          "options": {
+            "A": "Giao diện giữa các hệ thống con",
+            "B": "Thuật toán và cấu trúc dữ liệu cho từng mô đun",
+            "C": "Kiến trúc tổng thể",
+            "D": "Yêu cầu người dùng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.1: Thiết kế chi tiết (thuật toán, cấu trúc dữ liệu cho từng mô đun)."
+        },
+        {
+          "id": 7,
+          "question": "POJO (Plain Old Java Object) trong mô hình DAO đóng vai trò gì?",
+          "options": {
+            "A": "Lớp truy cập CSDL",
+            "B": "Lớp chứa dữ liệu (Entity) thuần túy",
+            "C": "Lớp điều khiển",
+            "D": "Lớp giao diện"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.4: ...Thực thể thuần (POJO): Tách biệt lớp chứa dữ liệu (Entity)..."
+        },
+        {
+          "id": 8,
+          "question": "Đặc điểm của kết nối (Coupling) thấp là gì?",
+          "options": {
+            "A": "Các mô đun phụ thuộc chặt chẽ vào nhau",
+            "B": "Các mô đun ít phụ thuộc vào nhau, dễ thay đổi và bảo trì",
+            "C": "Mô đun thực hiện nhiều chức năng",
+            "D": "Khó tái sử dụng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.1: Kết nối (Coupling - thấp là tốt)."
+        },
+        {
+          "id": 9,
+          "question": "Trong thiết kế chi tiết phương thức, công cụ nào thường được sử dụng?",
+          "options": {
+            "A": "Biểu đồ Use case",
+            "B": "Mã giả (Pseudo-code) và biểu đồ hoạt động",
+            "C": "Biểu đồ triển khai",
+            "D": "Thẻ CRC"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.4: Thiết kế chi tiết các phương thức (dùng mã giả, biểu đồ hoạt động)."
+        },
+        {
+          "id": 10,
+          "question": "Tại sao cần tách biệt Model và View trong mô hình MVC?",
+          "options": {
+            "A": "Để làm phức tạp hệ thống",
+            "B": "Để dễ dàng thay đổi giao diện mà không ảnh hưởng đến logic dữ liệu và ngược lại",
+            "C": "Để tăng kết nối giữa các thành phần",
+            "D": "Để giảm hiệu năng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 9.4: Tách biệt rõ ràng Model... View... (giúp hệ thống linh hoạt, dễ bảo trì - suy luận từ nguyên lý thiết kế)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "10",
+      "chapter_title": "CHƯƠNG 10: PHA CÀI ĐẶT VÀ TÍCH HỢP",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Phương pháp tích hợp Top-down cần sử dụng thành phần giả lập nào?",
+          "options": {
+            "A": "Drivers",
+            "B": "Stubs",
+            "C": "Controllers",
+            "D": "Adapters"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 10.1: Top-down: Cần Stubs (mô đun giả lập cấp dưới)."
+        },
+        {
+          "id": 2,
+          "question": "Phương pháp tích hợp Bottom-up cần sử dụng thành phần giả lập nào?",
+          "options": {
+            "A": "Drivers",
+            "B": "Stubs",
+            "C": "Views",
+            "D": "Proxies"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 10.1: Bottom-up: Cần Drivers (mô đun giả lập cấp trên gọi nó)."
+        },
+        {
+          "id": 3,
+          "question": "Kiểm thử hộp trắng (White-box testing) dựa vào yếu tố nào?",
+          "options": {
+            "A": "Đặc tả yêu cầu",
+            "B": "Mã nguồn chương trình (cấu trúc bên trong)",
+            "C": "Giao diện người dùng",
+            "D": "Ý kiến khách hàng"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 10.2: Hộp trắng (White-box - dựa vào mã nguồn: phủ dòng lệnh, phủ nhánh)."
+        },
+        {
+          "id": 4,
+          "question": "Kiểm thử hộp đen (Black-box testing) dựa vào yếu tố nào?",
+          "options": {
+            "A": "Mã nguồn",
+            "B": "Đặc tả chức năng (đầu vào/đầu ra)",
+            "C": "Cấu trúc dữ liệu",
+            "D": "Thuật toán"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 10.2: Hộp đen (Black-box - dựa vào đặc tả: phân lớp tương đương, giá trị biên)."
+        },
+        {
+          "id": 5,
+          "question": "Ai là người thực hiện kiểm thử chấp nhận (Acceptance testing)?",
+          "options": {
+            "A": "Lập trình viên",
+            "B": "Nhóm SQA",
+            "C": "Khách hàng",
+            "D": "Quản lý dự án"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 10.3: Kiểm thử chấp nhận (Acceptance testing): Do khách hàng thực hiện trên dữ liệu thực."
+        },
+        {
+          "id": 6,
+          "question": "Kiểm thử đơn vị (Unit testing) thường kiểm thử cái gì?",
+          "options": {
+            "A": "Toàn bộ hệ thống",
+            "B": "Giao diện người dùng",
+            "C": "Từng mô đun hoặc hàm riêng lẻ",
+            "D": "Khả năng chịu tải"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 10.2: Kiểm thử đơn vị... (liên quan đến mô đun/hàm - suy luận từ ngữ cảnh)."
+        },
+        {
+          "id": 7,
+          "question": "Phương pháp tích hợp Sandwich là gì?",
+          "options": {
+            "A": "Chỉ dùng Top-down",
+            "B": "Chỉ dùng Bottom-up",
+            "C": "Kết hợp cả Top-down và Bottom-up",
+            "D": "Tích hợp tất cả cùng lúc (Big Bang)"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 10.1: Sandwich: Kết hợp cả hai."
+        },
+        {
+          "id": 8,
+          "question": "Chuẩn lập trình bao gồm những quy định gì?",
+          "options": {
+            "A": "Cách đặt tên biến, chú thích, thụt đầu dòng",
+            "B": "Loại máy tính sử dụng",
+            "C": "Giờ làm việc",
+            "D": "Lương thưởng"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 10.1: Chuẩn lập trình: Đặt tên biến có ý nghĩa, chú thích, thụt đầu dòng..."
+        },
+        {
+          "id": 9,
+          "question": "Kiểm thử sản phẩm (Product testing) do ai thực hiện?",
+          "options": {
+            "A": "Lập trình viên",
+            "B": "Nhóm SQA",
+            "C": "Khách hàng",
+            "D": "Giám đốc công ty"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 10.3: Kiểm thử sản phẩm (Product testing): Do SQA thực hiện."
+        },
+        {
+          "id": 10,
+          "question": "Ưu điểm của tích hợp Top-down là gì?",
+          "options": {
+            "A": "Kiểm thử kỹ các mô đun chức năng dưới cùng",
+            "B": "Cô lập lỗi tốt, thấy giao diện chính sớm",
+            "C": "Không cần viết mã giả lập",
+            "D": "Dễ thực hiện nhất"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 10.1: Top-down... Cô lập lỗi tốt, thấy giao diện chính sớm."
+        }
+      ]
+    },
+    {
+      "chapter_id": "11",
+      "chapter_title": "CHƯƠNG 11: PHA BẢO TRÌ",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Loại bảo trì nào chiếm tỷ trọng lớn nhất trong pha bảo trì?",
+          "options": {
+            "A": "Bảo trì sửa lỗi",
+            "B": "Bảo trì thích nghi",
+            "C": "Bảo trì hoàn thiện",
+            "D": "Bảo trì phòng ngừa"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 11.1: Bảo trì hoàn thiện (chiếm nhiều nhất ~60%)."
+        },
+        {
+          "id": 2,
+          "question": "Khó khăn thường gặp trong bảo trì phần mềm là gì?",
+          "options": {
+            "A": "Thiếu tài liệu hoặc tài liệu sai, mã nguồn cũ khó hiểu",
+            "B": "Không có lỗi để sửa",
+            "C": "Khách hàng không muốn thay đổi",
+            "D": "Công nghệ quá hiện đại"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 11.1: Khó khăn: Thường thiếu tài liệu hoặc tài liệu sai, mã nguồn cũ khó hiểu."
+        },
+        {
+          "id": 3,
+          "question": "Lỗi hồi quy (Regression fault) là gì?",
+          "options": {
+            "A": "Lỗi do phần cứng hỏng",
+            "B": "Lỗi sinh ra khi sửa một lỗi khác (sửa lợn lành thành lợn què)",
+            "C": "Lỗi từ pha yêu cầu",
+            "D": "Lỗi do người dùng gây ra"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 11.1: ...rủi ro sinh lỗi mới (lỗi hồi quy) khi sửa lỗi cũ."
+        },
+        {
+          "id": 4,
+          "question": "Kỹ nghệ ngược (Reverse Engineering) được dùng khi nào?",
+          "options": {
+            "A": "Khi bắt đầu dự án mới",
+            "B": "Khi mất tài liệu thiết kế/đặc tả, cần tái tạo từ mã nguồn",
+            "C": "Khi muốn viết lại mã nguồn",
+            "D": "Khi kiểm thử sản phẩm"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 11.1: Cần kỹ nghệ ngược (Reverse Engineering) nếu mất tài liệu: từ mã nguồn tái tạo thiết kế/đặc tả."
+        },
+        {
+          "id": 5,
+          "question": "Vấn đề 'lớp cơ sở mỏng manh' trong bảo trì hướng đối tượng nghĩa là gì?",
+          "options": {
+            "A": "Lớp cơ sở quá ít phương thức",
+            "B": "Sửa lớp cha (cơ sở) có thể ảnh hưởng không mong muốn đến tất cả các lớp con",
+            "C": "Lớp cơ sở dễ bị xóa",
+            "D": "Lớp cơ sở không thể kế thừa"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 11.2: ...vấn đề 'lớp cơ sở mỏng manh' (sửa lớp cha ảnh hưởng tất cả lớp con)."
+        },
+        {
+          "id": 6,
+          "question": "Tại sao bảo trì hệ phần mềm hướng đối tượng thực tế lại khó khăn?",
+          "options": {
+            "A": "Do tính đóng gói",
+            "B": "Do kế thừa sâu phức tạp, đa hình khó theo dõi luồng thực thi",
+            "C": "Do mã nguồn quá ngắn",
+            "D": "Do không có công cụ hỗ trợ"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 11.2: Thực tế khó khăn: Kế thừa sâu phức tạp, đa hình/liên kết động khó theo dõi luồng thực thi."
+        },
+        {
+          "id": 7,
+          "question": "Pha bảo trì chiếm khoảng bao nhiêu phần trăm chi phí phần mềm (theo thống kê cũ)?",
+          "options": {
+            "A": "10%",
+            "B": "30%",
+            "C": "67%",
+            "D": "90%"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 11.1: Là pha tốn kém nhất (67% chi phí)."
+        },
+        {
+          "id": 8,
+          "question": "Bảo trì thích nghi là gì?",
+          "options": {
+            "A": "Sửa lỗi phần mềm",
+            "B": "Thêm chức năng mới",
+            "C": "Thay đổi phần mềm để đáp ứng thay đổi của môi trường (phần cứng, luật pháp...)",
+            "D": "Viết lại phần mềm từ đầu"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.5 (tham chiếu lại): Bảo trì thích nghi... thay đổi phần mềm để đáp ứng thay đổi của môi trường."
+        },
+        {
+          "id": 9,
+          "question": "Để giảm khó khăn trong bảo trì, cần làm gì trong các pha trước?",
+          "options": {
+            "A": "Viết mã thật nhanh",
+            "B": "Tài liệu hóa đầy đủ, thiết kế mở, tuân thủ chuẩn lập trình",
+            "C": "Không cần làm gì cả",
+            "D": "Giấu mã nguồn kỹ"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 11.1 (suy luận từ nguyên nhân khó khăn): Cần tài liệu đúng, mã dễ hiểu -> cần làm tốt từ trước."
+        },
+        {
+          "id": 10,
+          "question": "Lợi ích lý thuyết của hướng đối tượng đối với bảo trì là gì?",
+          "options": {
+            "A": "Độc lập, tính đóng gói giúp dễ bảo trì",
+            "B": "Không cần tài liệu",
+            "C": "Chạy nhanh hơn",
+            "D": "Dễ học hơn"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 11.2: Lợi ích lý thuyết: Độc lập, đóng gói giúp dễ bảo trì."
+        }
+      ]
+    }
+  ]
+}

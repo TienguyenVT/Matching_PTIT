@@ -1,0 +1,510 @@
+{
+  "document_title": "Bài giảng Học phần: CƠ SỞ DỮ LIỆU",
+  "test_type": "Multiple Choice Questions",
+  "tests": [
+    {
+      "chapter_id": "1",
+      "chapter_title": "CHƯƠNG 1. ĐẠI CƯƠNG VỀ CÁC HỆ CƠ SỞ DỮ LIỆU",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Ai là người đề xuất mô hình dữ liệu quan hệ vào năm 1970, tạo bước ngoặt cho sự phát triển của các hệ thống cơ sở dữ liệu?",
+          "options": {
+            "A": "Charles Bachman",
+            "B": "Edgar Codd",
+            "C": "Peter Chen",
+            "D": "James Gray"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.1: Năm 1970, Edgar Codd... đề xuất một khung biểu diễn dữ liệu mới được gọi là mô hình dữ liệu quan hệ."
+        },
+        {
+          "id": 2,
+          "question": "Đâu KHÔNG phải là tính chất đặc trưng của một cơ sở dữ liệu?",
+          "options": {
+            "A": "Biểu diễn một vài khía cạnh nào đó của thế giới thực.",
+            "B": "Có liên hệ logic thống nhất.",
+            "C": "Là một tập hợp ngẫu nhiên các dữ liệu rời rạc.",
+            "D": "Được thiết kế để phục vụ một mục đích nào đó."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.1.2.1: Tập ngẫu nhiên của các dữ liệu không thể xem là một CSDL."
+        },
+        {
+          "id": 3,
+          "question": "Nhược điểm chính của việc quản lý dữ liệu bằng hệ thống tập tin (File System) so với CSDL là gì?",
+          "options": {
+            "A": "Chi phí phần cứng quá cao.",
+            "B": "Sự dư thừa dữ liệu và phụ thuộc giữa chương trình và dữ liệu.",
+            "C": "Không thể lưu trữ được dữ liệu văn bản.",
+            "D": "Không hỗ trợ người dùng đơn lẻ."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.2.2: Nhược điểm của hệ thống tệp tin... đó là sự dư thừa thông tin... và sự phụ thuộc giữa chương trình ứng dụng và dữ liệu."
+        },
+        {
+          "id": 4,
+          "question": "Thông tin về cấu trúc của CSDL (siêu dữ liệu - metadata) được lưu trữ ở đâu?",
+          "options": {
+            "A": "Trong các tệp chương trình ứng dụng.",
+            "B": "Trong bộ nhớ Cache của CPU.",
+            "C": "Trong từ điển hệ thống (System Dictionary).",
+            "D": "Trong các tệp nhật ký (Log files)."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.1.2.3: Định nghĩa này được lưu trữ trong từ điển hệ thống... Các thông tin được lưu giữ trong từ điển gọi là siêu dữ liệu."
+        },
+        {
+          "id": 5,
+          "question": "Theo mô hình trừu tượng 3 lớp, mức nào mô tả dữ liệu được lưu trữ vật lý như thế nào trên thiết bị nhớ?",
+          "options": {
+            "A": "Mức ngoài (External Schema).",
+            "B": "Mức quan niệm (Conceptual Schema).",
+            "C": "Mức logic (Logical Schema).",
+            "D": "Mức trong (Physical Schema)."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 1.1.2.4: Mức trong (Mức vật lý): Đây là mức lưu trữ CSDL. Tại mức này, vấn đề cần giải quyết là, dữ liệu gì và được lưu trữ như thế nào."
+        },
+        {
+          "id": 6,
+          "question": "Thành phần nào trong hệ quản trị CSDL đảm bảo rằng mọi thay đổi trong các tệp CSDL sẽ được tự động ghi lại vào từ điển dữ liệu?",
+          "options": {
+            "A": "Bộ xử lý câu hỏi.",
+            "B": "Hệ quản trị CSDL (DBMS).",
+            "C": "Hệ điều hành.",
+            "D": "Bộ quản lý giao dịch."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.3.2: Hệ quản trị cơ sở dữ liệu loại bỏ sự phụ thuộc giữa dữ liệu và cấu trúc... Mọi sự thay đổi trong các tệp cơ sở dữ liệu sẽ được tự động ghi lại vào từ điển dữ liệu."
+        },
+        {
+          "id": 7,
+          "question": "Người chịu trách nhiệm cho phép truy cập CSDL, điều phối và quản lý tài nguyên phần cứng/phần mềm được gọi là gì?",
+          "options": {
+            "A": "Người thiết kế CSDL.",
+            "B": "Người lập trình ứng dụng.",
+            "C": "Người quản trị CSDL (DBA).",
+            "D": "Người sử dụng cuối."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.1.3.4: Người quản trị CSDL chịu trách nhiệm cho phép truy nhập CSDL, điều phối và kiểm tra sử dụng CSDL, quản lý tài nguyên..."
+        },
+        {
+          "id": 8,
+          "question": "Ngôn ngữ nào được dùng để xác định lược đồ CSDL, định nghĩa các bảng và thuộc tính?",
+          "options": {
+            "A": "DML (Data Manipulation Language).",
+            "B": "DDL (Data Definition Language).",
+            "C": "DCL (Data Control Language).",
+            "D": "Ngôn ngữ lập trình C++."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.4: Ngôn ngữ định nghĩa dữ liệu (DDL) được dùng để xác định lược đồ cơ sở dữ liệu chẳng hạn dùng để định nghĩa một quan hệ."
+        },
+        {
+          "id": 9,
+          "question": "Hệ CSDL mà dữ liệu được lưu trữ trên máy tính trung tâm và nhiều người dùng từ xa truy cập thông qua thiết bị đầu cuối gọi là gì?",
+          "options": {
+            "A": "Hệ CSDL cá nhân.",
+            "B": "Hệ CSDL phân tán.",
+            "C": "Hệ CSDL trung tâm.",
+            "D": "Hệ CSDL khách - chủ."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.3.1: Hệ cơ sở dữ liệu trung tâm là hệ CSDL được cài đặt trên máy tính trung tâm... Nhiều người dùng từ xa có thể truy cập CSDL."
+        },
+        {
+          "id": 10,
+          "question": "Đâu là một ưu điểm của hệ CSDL phân tán?",
+          "options": {
+            "A": "Thiết kế đơn giản hơn hệ thống tập trung.",
+            "B": "Chi phí thấp hơn.",
+            "C": "Đảm bảo an ninh dễ dàng hơn.",
+            "D": "Độ tin cậy và tính sẵn sàng của dữ liệu cao.",
+            "answer": "D",
+            "explanation": "Dựa trên mục 1.3.2: Dữ liệu có tính sẵn sàng cao. Dữ liệu có tính tin cậy cao vì khi một nút gặp sự cố, có thể khôi phục được dữ liệu..."
+          }
+        }
+      ]
+    },
+    {
+      "chapter_id": "2",
+      "chapter_title": "CHƯƠNG 2. MÔ HÌNH DỮ LIỆU",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Mô hình dữ liệu nào biểu diễn dữ liệu dưới dạng cây, trong đó mỗi nút biểu diễn một thực thể?",
+          "options": {
+            "A": "Mô hình mạng (Network Model).",
+            "B": "Mô hình quan hệ (Relational Model).",
+            "C": "Mô hình phân cấp (Hierarchical Model).",
+            "D": "Mô hình hướng đối tượng (Object Oriented Model)."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.2: Mô hình là một cây, trong đó mỗi nút của cây biểu diễn một thực thể, giữa nút con với nút cha được liên hệ với nhau theo một mối quan hệ xác định."
+        },
+        {
+          "id": 2,
+          "question": "Trong mô hình mạng, mối quan hệ giữa các bản ghi được biểu diễn bằng cấu trúc nào?",
+          "options": {
+            "A": "Cây.",
+            "B": "Đồ thị có hướng.",
+            "C": "Bảng hai chiều.",
+            "D": "Đối tượng và lớp."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3: Mô hình dữ liệu mạng... là mô hình được biểu diễn bởi một đồ thị có hướng."
+        },
+        {
+          "id": 3,
+          "question": "Trong mô hình E-R, hình chữ nhật được dùng để ký hiệu cho khái niệm nào?",
+          "options": {
+            "A": "Thuộc tính (Attribute).",
+            "B": "Kiểu liên kết (Relationship).",
+            "C": "Tập thực thể (Entity Set).",
+            "D": "Thuộc tính đa trị."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.5.2.1: Ký hiệu: hình chữ nhật với tên gọi của thực thể."
+        },
+        {
+          "id": 4,
+          "question": "Thuộc tính mà giá trị của nó có thể được suy ra từ các thuộc tính khác (ví dụ: Tuổi suy ra từ Năm sinh) được gọi là gì?",
+          "options": {
+            "A": "Thuộc tính đơn.",
+            "B": "Thuộc tính đa trị.",
+            "C": "Thuộc tính khóa.",
+            "D": "Thuộc tính suy diễn."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 2.5.2.2: Thuộc tính suy diễn: Giá trị của loại thuộc tính này có thể được suy ra từ các thuộc tính hoặc thực thể liên hệ khác."
+        },
+        {
+          "id": 5,
+          "question": "Một tập thực thể không có đủ các thuộc tính để tạo thành khóa chính và phụ thuộc vào một thực thể khác gọi là gì?",
+          "options": {
+            "A": "Tập thực thể mạnh.",
+            "B": "Tập thực thể yếu.",
+            "C": "Tập thực thể liên kết.",
+            "D": "Tập thực thể con."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.5.2.5: Một tập thực thể có thể không có đủ các thuộc tính để cấu thành một khóa chính, được gọi là tập thực thể yếu."
+        },
+        {
+          "id": 6,
+          "question": "Trong mô hình quan hệ, một hàng (row) trong bảng được gọi là gì?",
+          "options": {
+            "A": "Thuộc tính (Attribute).",
+            "B": "Miền giá trị (Domain).",
+            "C": "Bộ (Tuple).",
+            "D": "Quan hệ (Relation)."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.6.1: Theo thuật ngữ mô hình quan hệ hình thức, mỗi hàng được gọi là một bộ (tuple)."
+        },
+        {
+          "id": 7,
+          "question": "Siêu khóa (Super Key) của một quan hệ là gì?",
+          "options": {
+            "A": "Một thuộc tính duy nhất xác định tất cả các thuộc tính khác.",
+            "B": "Tập hợp các thuộc tính giúp phân biệt duy nhất các bộ trong quan hệ.",
+            "C": "Tập hợp con nhỏ nhất của các thuộc tính xác định duy nhất các bộ.",
+            "D": "Khóa ngoại tham chiếu đến bảng khác."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.6.1.1: Tập hợp S có các thuộc tính như vậy [không có 2 bộ nào có cùng tổ hợp giá trị] được gọi là một siêu khóa."
+        },
+        {
+          "id": 8,
+          "question": "Khi ánh xạ mối quan hệ N-N (nhiều-nhiều) từ E-R sang mô hình quan hệ, ta cần làm gì?",
+          "options": {
+            "A": "Thêm khóa chính của bên này vào làm khóa ngoại của bên kia.",
+            "B": "Tạo một quan hệ mới chứa khóa chính của cả hai thực thể tham gia.",
+            "C": "Gộp hai thực thể thành một quan hệ duy nhất.",
+            "D": "Bỏ qua mối quan hệ này."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.6.3 (Bước 3): Với mỗi mối quan hệ nhị phân N-N... ta tạo một quan hệ R. Bao gồm tất cả các thuộc tính của khóa chính của S và T như các thuộc tính khóa ngoài trong R."
+        },
+        {
+          "id": 9,
+          "question": "Khi ánh xạ tập thực thể yếu sang mô hình quan hệ, khóa chính của quan hệ mới sẽ bao gồm những gì?",
+          "options": {
+            "A": "Chỉ các thuộc tính của thực thể yếu.",
+            "B": "Chỉ khóa chính của thực thể chủ.",
+            "C": "Tổ hợp khóa chính của thực thể chủ và thuộc tính phân biệt của thực thể yếu.",
+            "D": "Bất kỳ thuộc tính nào của thực thể yếu."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.6.3 (Bước 2): Khóa chính của R là tổ hợp của khóa chính của S và thuộc tính phân biệt của W."
+        },
+        {
+          "id": 10,
+          "question": "Nhược điểm của mô hình hướng đối tượng so với các mô hình khác là gì?",
+          "options": {
+            "A": "Không thể biểu diễn các kiểu dữ liệu phức tạp.",
+            "B": "Cấu trúc lưu trữ phức tạp và thiếu chuẩn chung thống nhất.",
+            "C": "Không hỗ trợ tính kế thừa.",
+            "D": "Dư thừa dữ liệu nhiều hơn mô hình phân cấp."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên bảng 2.7 và mục 2.4: Nhược điểm: Cấu trúc lưu trữ phức tạp... Phức tạp, chưa có chuẩn chung."
+        }
+      ]
+    },
+    {
+      "chapter_id": "3",
+      "chapter_title": "CHƯƠNG 3. NGÔN NGỮ ĐỊNH NGHĨA VÀ THAO TÁC DỮ LIỆU ĐỐI VỚI MÔ HÌNH QUAN HỆ",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Phép toán nào trong đại số quan hệ dùng để chọn ra các dòng (bộ) thỏa mãn điều kiện nhất định?",
+          "options": {
+            "A": "Phép chiếu (Projection - π).",
+            "B": "Phép chọn (Selection - σ).",
+            "C": "Phép kết nối (Join - ⨝).",
+            "D": "Phép tích Đề-các (Cartesian Product - x)."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.2.2: Phép chọn... là tập hợp các bộ của R thỏa mãn điều kiện P."
+        },
+        {
+          "id": 2,
+          "question": "Phép chiếu (Projection) trong đại số quan hệ, ký hiệu là π, có tác dụng gì?",
+          "options": {
+            "A": "Lấy ra các dòng thỏa mãn điều kiện.",
+            "B": "Kết hợp hai bảng dựa trên điều kiện chung.",
+            "C": "Lấy ra một tập con các cột (thuộc tính) của quan hệ.",
+            "D": "Lấy ra các bộ thuộc cả hai quan hệ."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.2.2: Phép chiếu... là một quan hệ T có lược đồ chỉ chứa các thuộc tính trong A [lấy các giá trị của thuộc tính A]."
+        },
+        {
+          "id": 3,
+          "question": "Để thực hiện phép hợp (Union) giữa hai quan hệ R và S, điều kiện cần thiết là gì?",
+          "options": {
+            "A": "R và S phải có cùng số lượng bộ.",
+            "B": "R và S phải có khóa chính giống nhau.",
+            "C": "R và S phải khả hợp (cùng bậc và cùng miền giá trị tương ứng).",
+            "D": "R và S phải có ít nhất một cột chung."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.2.1: Các phép toán này [hợp, giao, trừ] được định nghĩa trên hai quan hệ R và S phải khả hợp, tức là hai quan hệ này phải có cùng bậc và miền giá trị..."
+        },
+        {
+          "id": 4,
+          "question": "Lệnh nào sau đây thuộc nhóm Ngôn ngữ định nghĩa dữ liệu (DDL) trong SQL?",
+          "options": {
+            "A": "SELECT",
+            "B": "INSERT",
+            "C": "CREATE",
+            "D": "GRANT"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.3.2: Các lệnh DDL chính bao gồm: CREATE, ALTER, DROP, TRUNCATE."
+        },
+        {
+          "id": 5,
+          "question": "Lệnh SQL nào được sử dụng để xóa toàn bộ cấu trúc bảng và dữ liệu trong bảng đó?",
+          "options": {
+            "A": "DELETE TABLE",
+            "B": "DROP TABLE",
+            "C": "TRUNCATE TABLE",
+            "D": "REMOVE TABLE"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.4 và 3.3.2: Drop: Lệnh dùng để xóa cấu trúc và bản ghi được lưu trữ trong bảng (xóa đối tượng khỏi CSDL)."
+        },
+        {
+          "id": 6,
+          "question": "Để lấy dữ liệu từ cơ sở dữ liệu mà không làm thay đổi dữ liệu, ta dùng nhóm lệnh nào?",
+          "options": {
+            "A": "DQL (Data Query Language).",
+            "B": "DML (Data Manipulation Language).",
+            "C": "DDL (Data Definition Language).",
+            "D": "DCL (Data Control Language)."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 3.3.4: DQL được sử dụng để truy vấn dữ liệu từ CSDL. Lệnh cơ bản... là SELECT."
+        },
+        {
+          "id": 7,
+          "question": "Mệnh đề nào trong câu lệnh SELECT dùng để lọc dữ liệu theo nhóm (sau khi đã Group By)?",
+          "options": {
+            "A": "WHERE",
+            "B": "ORDER BY",
+            "C": "HAVING",
+            "D": "FROM"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.3.4: HAVING: Lọc các nhóm được tạo bởi GROUP BY."
+        },
+        {
+          "id": 8,
+          "question": "Lệnh nào dùng để cấp quyền truy cập cho người dùng trong SQL?",
+          "options": {
+            "A": "REVOKE",
+            "B": "GRANT",
+            "C": "ALLOW",
+            "D": "PERMIT"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1.4 (phần DCL): Grant: Lệnh được dùng để cấp quyền cho người dùng truy cập vào cơ sở dữ liệu."
+        },
+        {
+          "id": 9,
+          "question": "Phép chia quan hệ R(A, B) cho S(B) trả về kết quả là gì?",
+          "options": {
+            "A": "Các bộ (a, b) có trong R nhưng không có trong S.",
+            "B": "Các giá trị a sao cho (a, b) có trong R với mọi b thuộc S.",
+            "C": "Tích Đề-các của R và S.",
+            "D": "Các giá trị b chung của R và S."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.2.3: Phép chia... cho kết quả là một quan hệ T(A) chứa các bộ a sao cho với mọi bộ b trong S, bộ (a, b) đều có trong R."
+        },
+        {
+          "id": 10,
+          "question": "Trong câu lệnh SELECT, mệnh đề ORDER BY dùng để làm gì?",
+          "options": {
+            "A": "Lọc bản ghi.",
+            "B": "Nhóm bản ghi.",
+            "C": "Sắp xếp kết quả trả về.",
+            "D": "Kết nối bảng."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.3.4: ORDER BY: Sắp xếp kết quả trả về."
+        }
+      ]
+    },
+    {
+      "chapter_id": "4",
+      "chapter_title": "CHƯƠNG 4. LÝ THUYẾT THIẾT KẾ CƠ SỞ DỮ LIỆU QUAN HỆ",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Vấn đề nào xảy ra khi thông tin bị lặp lại nhiều lần trong CSDL, gây lãng phí bộ nhớ và khó khăn khi thay đổi dữ liệu?",
+          "options": {
+            "A": "Dị thường truy vấn.",
+            "B": "Dị thường cập nhật (Update Anomalies).",
+            "C": "Mất mát thông tin.",
+            "D": "Phụ thuộc hàm."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.1.2: Thông tin bị lặp lại... gây lãng phí không gian lưu trữ và quan trọng hơn là gây ra các dị thường cập nhật (chèn, xóa, sửa đổi)."
+        },
+        {
+          "id": 2,
+          "question": "Phụ thuộc hàm X → Y có nghĩa là gì?",
+          "options": {
+            "A": "Y xác định duy nhất giá trị của X.",
+            "B": "Giá trị của tập thuộc tính X xác định duy nhất giá trị của tập thuộc tính Y.",
+            "C": "X và Y không có mối liên hệ nào.",
+            "D": "X là khóa chính, Y là khóa ngoại."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.1: ...nếu t1[X] = t2[X] thì phải có t1[Y] = t2[Y]. Điều này có nghĩa là giá trị của tập thuộc tính X xác định duy nhất giá trị của tập thuộc tính Y."
+        },
+        {
+          "id": 3,
+          "question": "Luật nào sau đây KHÔNG thuộc hệ tiên đề Amstrong cơ bản?",
+          "options": {
+            "A": "Luật phản xạ (Reflexivity).",
+            "B": "Luật gia tăng (Augmentation).",
+            "C": "Luật bắc cầu (Transitivity).",
+            "D": "Luật bảo toàn (Preservation)."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 4.2.2: Hệ thống này bao gồm các quy tắc cơ bản sau: Luật phản xạ, Luật gia tăng, Luật bắc cầu."
+        },
+        {
+          "id": 4,
+          "question": "Bao đóng của tập thuộc tính X (ký hiệu X+) là gì?",
+          "options": {
+            "A": "Tập hợp tất cả các khóa của quan hệ.",
+            "B": "Tập hợp tất cả các thuộc tính mà X có thể xác định hàm (suy ra được từ X).",
+            "C": "Tập hợp tất cả các phụ thuộc hàm trong F.",
+            "D": "Tập hợp các thuộc tính không khóa."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.3: Bao đóng của một tập thuộc tính X... là tập hợp tất cả các thuộc tính A sao cho phụ thuộc hàm X → A có thể được suy ra từ F."
+        },
+        {
+          "id": 5,
+          "question": "Một quan hệ đạt dạng chuẩn 1NF khi nào?",
+          "options": {
+            "A": "Khi nó có khóa chính.",
+            "B": "Khi tất cả các thuộc tính đều nguyên tố (Atomic), không chứa nhóm lặp.",
+            "C": "Khi không có phụ thuộc bắc cầu.",
+            "D": "Khi không có phụ thuộc bộ phận."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4.1: Dạng chuẩn thứ nhất... yêu cầu rằng miền giá trị của tất cả các thuộc tính trong một quan hệ phải là nguyên tố... không thể phân chia."
+        },
+        {
+          "id": 6,
+          "question": "Để đạt dạng chuẩn 2NF, một quan hệ cần thỏa mãn điều kiện gì?",
+          "options": {
+            "A": "Đạt 1NF và không có thuộc tính không khóa nào phụ thuộc bộ phận vào khóa chính.",
+            "B": "Đạt 1NF và không có phụ thuộc bắc cầu.",
+            "C": "Mọi thuộc tính đều là khóa.",
+            "D": "Không có giá trị NULL."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.4.2: Một lược đồ quan hệ R ở dạng chuẩn 1NF được coi là ở dạng chuẩn 2NF nếu mọi thuộc tính không khóa... đều phụ thuộc hàm đầy đủ vào khóa chính."
+        },
+        {
+          "id": 7,
+          "question": "Dạng chuẩn 3NF loại bỏ loại phụ thuộc nào?",
+          "options": {
+            "A": "Phụ thuộc bộ phận.",
+            "B": "Phụ thuộc đa trị.",
+            "C": "Phụ thuộc bắc cầu (transitive dependency) của thuộc tính không khóa vào khóa chính.",
+            "D": "Phụ thuộc tầm thường."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.4.3: Dạng chuẩn thứ ba... nếu không có thuộc tính không khóa nào của R phụ thuộc bắc cầu vào khóa chính."
+        },
+        {
+          "id": 8,
+          "question": "Dạng chuẩn Boyce-Codd (BCNF) yêu cầu điều gì đối với mọi phụ thuộc hàm không tầm thường X → A?",
+          "options": {
+            "A": "A phải là thuộc tính khóa.",
+            "B": "X phải là siêu khóa (superkey).",
+            "C": "X không được chứa A.",
+            "D": "A phải phụ thuộc đầy đủ vào X."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4.4: Một lược đồ quan hệ R được coi là ở dạng chuẩn BCNF nếu với mọi phụ thuộc hàm không tầm thường X → A... X phải là một siêu khóa của R."
+        },
+        {
+          "id": 9,
+          "question": "Phép tách không mất mát thông tin (Lossless-Join Decomposition) đảm bảo điều gì?",
+          "options": {
+            "A": "Đảm bảo tính toàn vẹn tham chiếu.",
+            "B": "Khi kết nối tự nhiên các quan hệ con lại, ta thu được chính xác quan hệ ban đầu (không thừa, không thiếu bộ).",
+            "C": "Không làm mất các phụ thuộc hàm.",
+            "D": "Giữ nguyên số lượng bảng ban đầu."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3.3: Điều này đảm bảo rằng không có thông tin nào bị mất và không có bộ giả nào được tạo ra khi kết nối lại các quan hệ con."
+        },
+        {
+          "id": 10,
+          "question": "Một tập phụ thuộc hàm F được gọi là tối thiểu nếu thỏa mãn điều kiện nào?",
+          "options": {
+            "A": "Vế phải là thuộc tính đơn, không thể loại bỏ phụ thuộc hàm, không thể loại bỏ thuộc tính vế trái.",
+            "B": "Vế trái là thuộc tính đơn, vế phải là siêu khóa.",
+            "C": "Chứa ít phụ thuộc hàm nhất có thể.",
+            "D": "Chỉ chứa các phụ thuộc hàm hiển nhiên."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.2.5: Thỏa mãn 3 điều kiện: Vế phải là thuộc tính đơn; Không thể loại bỏ bất kỳ phụ thuộc hàm nào; Không thể loại bỏ bất kỳ thuộc tính nào từ vế trái."
+        }
+      ]
+    }
+  ]
+}

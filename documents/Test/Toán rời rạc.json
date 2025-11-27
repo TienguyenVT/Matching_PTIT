@@ -1,0 +1,636 @@
+{
+  "document_title": "Toán rời rạc",
+  "test_type": "Multiple Choice Questions",
+  "tests": [
+    {
+      "chapter_id": "1",
+      "chapter_title": "CHƯƠNG 1. LOGIC, TẬP HỢP VÀ ỨNG DỤNG",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Bài toán nào nhằm trả lời câu hỏi “có bao nhiêu cấu hình thoả mãn điều kiện đã nêu”?",
+          "options": {
+            "A": "Bài toán liệt kê",
+            "B": "Bài toán đếm",
+            "C": "Bài toán tối ưu",
+            "D": "Bài toán tồn tại"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1: Bài toán đếm là dạng bài toán nhằm trả lời câu hỏi “có bao nhiêu cấu hình thoả mãn điều kiện đã nêu?”."
+        },
+        {
+          "id": 2,
+          "question": "Mệnh đề P ^ Q (hội) chỉ đúng khi nào?",
+          "options": {
+            "A": "Khi P đúng hoặc Q đúng",
+            "B": "Khi P sai và Q sai",
+            "C": "Khi cả P và Q đều đúng",
+            "D": "Khi P đúng và Q sai"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.2.1: Mệnh đề p ^ q có giá trị T khi và chỉ khi cả p và q đều nhận giá trị T."
+        },
+        {
+          "id": 3,
+          "question": "Luật De Morgan nào sau đây là đúng?",
+          "options": {
+            "A": "Phủ định của (p ^ q) tương đương với (phủ định p) ^ (phủ định q)",
+            "B": "Phủ định của (p ^ q) tương đương với (phủ định p) v (phủ định q)",
+            "C": "Phủ định của (p v q) tương đương với (phủ định p) v (phủ định q)",
+            "D": "Phủ định của (p -> q) tương đương với p ^ (phủ định q)"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.2: Luật De Morgan: phủ định của (p ^ q) <=> (phủ định p) v (phủ định q)."
+        },
+        {
+          "id": 4,
+          "question": "Mệnh đề 'Với mọi x thuộc trường đang xét, P(x) là đúng' được ký hiệu là gì?",
+          "options": {
+            "A": "∃x P(x)",
+            "B": "∀x P(x)",
+            "C": "P(x) -> x",
+            "D": "x ∈ P"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.3: Lượng từ với mọi (Universal quantifier): Ký hiệu là ∀. Mệnh đề ∀x P(x)."
+        },
+        {
+          "id": 5,
+          "question": "Phép toán bít 1 XOR 1 bằng bao nhiêu?",
+          "options": {
+            "A": "0",
+            "B": "1",
+            "C": "2",
+            "D": "Không xác định"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 1.4: Phép XOR bít (kí hiệu ^, tương ứng ⊕): 1 ⊕ 1 = 0."
+        },
+        {
+          "id": 6,
+          "question": "Tập luỹ thừa của tập S, ký hiệu P(S), là tập hợp chứa cái gì?",
+          "options": {
+            "A": "Các phần tử của S",
+            "B": "Số lượng phần tử của S",
+            "C": "Tất cả các tập con của S",
+            "D": "Phần bù của S"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.5.1: Tập luỹ thừa của S... là tập hợp chứa tất cả các tập con của S."
+        },
+        {
+          "id": 7,
+          "question": "Nếu tập A có n phần tử, thì tập lũy thừa P(A) có bao nhiêu phần tử?",
+          "options": {
+            "A": "n",
+            "B": "n^2",
+            "C": "2^n",
+            "D": "2n"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.5.1: Nếu |S| = n thì |P(S)| = 2^n."
+        },
+        {
+          "id": 8,
+          "question": "Phép hiệu của hai tập hợp A và B (A - B) là tập hợp chứa các phần tử nào?",
+          "options": {
+            "A": "Thuộc cả A và B",
+            "B": "Thuộc A hoặc thuộc B",
+            "C": "Thuộc A nhưng không thuộc B",
+            "D": "Không thuộc A cũng không thuộc B"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.5.2: Phép hiệu (Difference): A - B = {x | x ∈ A ^ x ∉ B} (phần tử thuộc A nhưng không thuộc B)."
+        },
+        {
+          "id": 9,
+          "question": "Trong biểu diễn tập hợp bằng xâu bít, nếu phần tử thứ i của tập vũ trụ thuộc tập con A, thì bit thứ i trong xâu biểu diễn A là gì?",
+          "options": {
+            "A": "0",
+            "B": "1",
+            "C": "i",
+            "D": "-1"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.6: bit thứ i bằng 1 nếu u_i ∈ A."
+        },
+        {
+          "id": 10,
+          "question": "Mệnh đề nào sau đây là hằng đúng (tautology)?",
+          "options": {
+            "A": "p ^ (phủ định p)",
+            "B": "p v (phủ định p)",
+            "C": "p -> (phủ định p)",
+            "D": "p <-> (phủ định p)"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.2.2: Ví dụ: mệnh đề phức hợp p v (phủ định p) là hằng đúng (luôn T)."
+        }
+      ]
+    },
+    {
+      "chapter_id": "2",
+      "chapter_title": "CHƯƠNG 2. BÀI TOÁN ĐẾM",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Nguyên lý cộng được áp dụng khi nào?",
+          "options": {
+            "A": "Khi một công việc được chia thành các giai đoạn liên tiếp",
+            "B": "Khi các phương án thực hiện công việc là loại trừ lẫn nhau",
+            "C": "Khi cần đếm số phần tử của tích Đề-các",
+            "D": "Khi cần đếm số hoán vị"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.1.1: Nếu một công việc có thể được thực hiện theo n1 cách... hoặc nm cách... và các phương án này là loại trừ lẫn nhau."
+        },
+        {
+          "id": 2,
+          "question": "Nếu một công việc có 3 giai đoạn liên tiếp, giai đoạn 1 có 2 cách, giai đoạn 2 có 3 cách, giai đoạn 3 có 4 cách, thì tổng số cách thực hiện là bao nhiêu?",
+          "options": {
+            "A": "9",
+            "B": "24",
+            "C": "12",
+            "D": "29"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.1.2 (Nguyên lý nhân): Tổng số cách = 2 * 3 * 4 = 24."
+        },
+        {
+          "id": 3,
+          "question": "Công thức nào sau đây biểu diễn nguyên lý bù trừ cho 2 tập hợp A và B?",
+          "options": {
+            "A": "|A u B| = |A| + |B|",
+            "B": "|A u B| = |A| * |B|",
+            "C": "|A u B| = |A| + |B| - |A n B|",
+            "D": "|A u B| = |A| - |B| + |A n B|"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.2: Với 2 tập A, B: |A u B| = |A| + |B| - |A n B|."
+        },
+        {
+          "id": 4,
+          "question": "Chỉnh hợp lặp chập k của n phần tử có số lượng là bao nhiêu?",
+          "options": {
+            "A": "n!",
+            "B": "n^k",
+            "C": "n! / (n-k)!",
+            "D": "C(n, k)"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3.1: Số các chỉnh hợp lặp chập k của n phần tử là n^k."
+        },
+        {
+          "id": 5,
+          "question": "Công thức tính số chỉnh hợp không lặp chập k của n phần tử (P(n,k)) là gì?",
+          "options": {
+            "A": "n!",
+            "B": "n^k",
+            "C": "n! / k!",
+            "D": "n! / (n-k)!"
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 2.3.2: P(n, k) = n! / (n-k)!."
+        },
+        {
+          "id": 6,
+          "question": "Hoán vị của n phần tử là trường hợp đặc biệt của chỉnh hợp không lặp khi nào?",
+          "options": {
+            "A": "k = 0",
+            "B": "k = 1",
+            "C": "k = n",
+            "D": "k = n-1"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.3.3: Đây là trường hợp đặc biệt của chỉnh hợp không lặp khi k=n."
+        },
+        {
+          "id": 7,
+          "question": "Công thức tính số tổ hợp chập k của n phần tử (C(n, k)) là gì?",
+          "options": {
+            "A": "n! / (n-k)!",
+            "B": "n! / (k! * (n-k)!)",
+            "C": "n^k / k!",
+            "D": "n! / k!"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3.4: C(n, k) = n! / (k!(n-k)!)."
+        },
+        {
+          "id": 8,
+          "question": "Số tổ hợp lặp chập k của n phần tử được tính bằng công thức nào?",
+          "options": {
+            "A": "C(n, k)",
+            "B": "C(n+k-1, k)",
+            "C": "n^k",
+            "D": "P(n, k)"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3.5: Số tổ hợp lặp chập k của n phần tử là C(n+k-1, k)."
+        },
+        {
+          "id": 9,
+          "question": "Hệ thức truy hồi cho dãy Fibonacci là gì?",
+          "options": {
+            "A": "fn = fn-1 + n",
+            "B": "fn = fn-1 * fn-2",
+            "C": "fn = fn-1 + fn-2",
+            "D": "fn = 2 * fn-1"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.4.1: Dãy Fibonacci được định nghĩa bởi fn = fn-1 + fn-2."
+        },
+        {
+          "id": 10,
+          "question": "Để giải hệ thức truy hồi tuyến tính thuần nhất với hệ số hằng, bước đầu tiên là làm gì?",
+          "options": {
+            "A": "Tìm nghiệm riêng",
+            "B": "Thiết lập phương trình đặc trưng",
+            "C": "Thử các giá trị n nhỏ",
+            "D": "Dùng phương pháp sinh"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.4.2: Phương pháp giải: 1. Thiết lập phương trình đặc trưng."
+        }
+      ]
+    },
+    {
+      "chapter_id": "3",
+      "chapter_title": "CHƯƠNG 3. BÀI TOÁN LIỆT KÊ",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Hai nguyên tắc cơ bản của một thuật toán liệt kê tốt là gì?",
+          "options": {
+            "A": "Nhanh và tốn ít bộ nhớ",
+            "B": "Không lặp và không bỏ sót",
+            "C": "Đơn giản và dễ cài đặt",
+            "D": "Sử dụng đệ quy và khử đệ quy"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1: Một thuật toán liệt kê tốt cần đảm bảo hai nguyên tắc: 1. Không lặp lại bất kỳ cấu hình nào. 2. Không bỏ sót bất kỳ cấu hình nào."
+        },
+        {
+          "id": 2,
+          "question": "Phương pháp sinh (Generating method) áp dụng được khi nào?",
+          "options": {
+            "A": "Khi không gian cấu hình quá lớn",
+            "B": "Khi có thể xác định một thứ tự trên tập các cấu hình",
+            "C": "Khi bài toán yêu cầu tìm cấu hình tốt nhất",
+            "D": "Khi không có quy tắc chuyển đổi giữa các cấu hình"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.3: Phương pháp sinh... áp dụng khi ta có thể xác định một thứ tự (thường là thứ tự từ điển) trên tập các cấu hình."
+        },
+        {
+          "id": 3,
+          "question": "Trong phương pháp sinh xâu nhị phân độ dài n, cấu hình đầu tiên là gì?",
+          "options": {
+            "A": "11...1",
+            "B": "10...0",
+            "C": "00...0",
+            "D": "01...01"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.3: Sinh các xâu nhị phân độ dài n: Từ 00...0 đến 11...1."
+        },
+        {
+          "id": 4,
+          "question": "Quy tắc sinh kế tiếp cho xâu nhị phân là gì?",
+          "options": {
+            "A": "Tìm bit 0 đầu tiên từ trái sang, đổi thành 1",
+            "B": "Tìm bit 0 đầu tiên từ phải sang, đổi thành 1 và đặt các bit phía sau thành 0",
+            "C": "Cộng thêm 1 vào số nhị phân hiện tại",
+            "D": "Đảo ngược toàn bộ xâu bit"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.3: Quy tắc sinh kế tiếp: tìm bit 0 đầu tiên từ phải sang, đổi nó thành 1 và đặt tất cả các bit phía sau nó thành 0."
+        },
+        {
+          "id": 5,
+          "question": "Thuật toán quay lui (Backtracking) thường được cài đặt bằng kỹ thuật nào?",
+          "options": {
+            "A": "Vòng lặp",
+            "B": "Đệ quy",
+            "C": "Quy hoạch động",
+            "D": "Tham lam"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.4: Thuật toán này thường được cài đặt bằng đệ quy."
+        },
+        {
+          "id": 6,
+          "question": "Chiến lược của thuật toán quay lui tương đương với việc duyệt cây không gian trạng thái theo kiểu nào?",
+          "options": {
+            "A": "Duyệt theo chiều rộng (BFS)",
+            "B": "Duyệt theo chiều sâu (DFS)",
+            "C": "Duyệt ngẫu nhiên",
+            "D": "Duyệt ưu tiên"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.4: Nó tương đương với việc duyệt sâu (DFS) trên cây không gian trạng thái của bài toán."
+        },
+        {
+          "id": 7,
+          "question": "Bài toán xếp hậu (N-Queen) thường được giải quyết bằng phương pháp nào?",
+          "options": {
+            "A": "Quy hoạch động",
+            "B": "Chia để trị",
+            "C": "Quay lui (Backtracking)",
+            "D": "Tham lam"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.4: Ví dụ áp dụng: Bài toán xếp hậu... (trong phần Thuật toán quay lui)."
+        },
+        {
+          "id": 8,
+          "question": "Độ phức tạp tính toán của thuật toán thường được biểu diễn bằng ký hiệu nào?",
+          "options": {
+            "A": "Big-O",
+            "B": "Sigma",
+            "C": "Delta",
+            "D": "Pi"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 3.2: Độ phức tạp tính toán... thường dùng ký hiệu Big-O... để mô tả tốc độ tăng trưởng."
+        },
+        {
+          "id": 9,
+          "question": "Phương pháp sinh hoán vị kế tiếp dựa trên nguyên tắc nào?",
+          "options": {
+            "A": "Cộng 1 vào số hiện tại",
+            "B": "Tìm cặp nghịch thế và đổi chỗ phù hợp",
+            "C": "Đảo ngược mảng",
+            "D": "Chọn ngẫu nhiên một hoán vị mới"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.3: Quy tắc sinh hoán vị kế tiếp dựa trên việc tìm cặp nghịch thế và đổi chỗ phù hợp."
+        },
+        {
+          "id": 10,
+          "question": "Khi nào phương pháp quay lui có thể trở nên chậm?",
+          "options": {
+            "A": "Khi không gian tìm kiếm quá lớn",
+            "B": "Khi bài toán quá đơn giản",
+            "C": "Khi sử dụng đệ quy",
+            "D": "Khi kích thước đầu vào nhỏ"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 3.5: Phương pháp quay lui... có thể chậm nếu không gian tìm kiếm quá lớn."
+        }
+      ]
+    },
+    {
+      "chapter_id": "4",
+      "chapter_title": "CHƯƠNG 4. BÀI TOÁN TỐI ƯU",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Bài toán tối ưu tổ hợp nhằm mục đích gì?",
+          "options": {
+            "A": "Đếm số lượng cấu hình",
+            "B": "Tìm cấu hình tốt nhất theo một tiêu chuẩn nào đó",
+            "C": "Liệt kê tất cả các cấu hình",
+            "D": "Chứng minh sự tồn tại của cấu hình"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.1: Bài toán tối ưu tổ hợp là tìm cấu hình tốt nhất (theo một tiêu chuẩn nào đó...)."
+        },
+        {
+          "id": 2,
+          "question": "Bài toán cái túi (Knapsack problem) là ví dụ điển hình của loại bài toán nào?",
+          "options": {
+            "A": "Bài toán đếm",
+            "B": "Bài toán tồn tại",
+            "C": "Bài toán tối ưu",
+            "D": "Bài toán liệt kê"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.1: Các ví dụ kinh điển: Bài toán cái túi... (trong chương Bài toán tối ưu)."
+        },
+        {
+          "id": 3,
+          "question": "Hạn chế chính của phương pháp duyệt toàn bộ (Exhaustive search) là gì?",
+          "options": {
+            "A": "Không tìm được lời giải tối ưu",
+            "B": "Khó cài đặt",
+            "C": "Sự bùng nổ tổ hợp (số lượng cấu hình quá lớn)",
+            "D": "Yêu cầu bộ nhớ lớn"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.2: Tuy nhiên, phương pháp này chỉ khả thi khi không gian phương án nhỏ, vì số lượng cấu hình thường tăng theo hàm mũ... (sự bùng nổ tổ hợp)."
+        },
+        {
+          "id": 4,
+          "question": "Thuật toán nhánh cận (Branch and Bound) là cải tiến của thuật toán nào?",
+          "options": {
+            "A": "Sinh kế tiếp",
+            "B": "Quay lui (Backtracking)",
+            "C": "Chia để trị",
+            "D": "Quy hoạch động"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3: Nhánh cận (Branch and Bound) là một kỹ thuật cải tiến của quay lui để giải các bài toán tối ưu."
+        },
+        {
+          "id": 5,
+          "question": "Trong thuật toán nhánh cận cho bài toán tìm Min, nhánh sẽ bị cắt (tỉa) khi nào?",
+          "options": {
+            "A": "Cận dưới (Lower Bound) của nhánh > Giá trị kỷ lục hiện tại",
+            "B": "Cận dưới của nhánh < Giá trị kỷ lục hiện tại",
+            "C": "Cận trên của nhánh > Giá trị kỷ lục hiện tại",
+            "D": "Nhánh đó chưa tìm được lời giải"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.3: Cận dưới (Lower Bound - cho bài toán tìm Min): Nếu cận dưới của một nhánh lớn hơn hoặc bằng giá trị kỷ lục hiện tại, nhánh đó bị cắt."
+        },
+        {
+          "id": 6,
+          "question": "Hiệu quả của thuật toán nhánh cận phụ thuộc chủ yếu vào yếu tố nào?",
+          "options": {
+            "A": "Tốc độ máy tính",
+            "B": "Chất lượng của hàm đánh giá cận",
+            "C": "Cách biểu diễn dữ liệu",
+            "D": "Ngôn ngữ lập trình"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.3: Hiệu quả của thuật toán nhánh cận phụ thuộc rất nhiều vào chất lượng của hàm đánh giá cận."
+        },
+        {
+          "id": 7,
+          "question": "Kỹ thuật 'rút gọn ma trận chi phí' được dùng để giải bài toán nào?",
+          "options": {
+            "A": "Bài toán cái túi",
+            "B": "Bài toán người du lịch (TSP)",
+            "C": "Bài toán xếp hậu",
+            "D": "Bài toán mã đi tuần"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4: Đối với bài toán người du lịch (TSP...), một phương pháp nhánh cận hiệu quả sử dụng kỹ thuật 'rút gọn ma trận chi phí'."
+        },
+        {
+          "id": 8,
+          "question": "Trong kỹ thuật rút gọn ma trận, giá trị cận dưới (Lower Bound) được tính như thế nào?",
+          "options": {
+            "A": "Tổng các phần tử nhỏ nhất của mỗi hàng",
+            "B": "Tổng các giá trị đã trừ đi (để tạo số 0 trên hàng/cột)",
+            "C": "Giá trị nhỏ nhất trong toàn bộ ma trận",
+            "D": "Tổng đường chéo chính"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.4: Tổng các giá trị đã trừ đi chính là một cận dưới (Lower Bound) cho chi phí của mọi hành trình."
+        },
+        {
+          "id": 9,
+          "question": "Bài toán người du lịch (TSP) yêu cầu tìm hành trình như thế nào?",
+          "options": {
+            "A": "Đi qua mỗi thành phố đúng một lần và quay về nơi xuất phát với chi phí thấp nhất",
+            "B": "Đi qua tất cả các cạnh của đồ thị đúng một lần",
+            "C": "Đi từ thành phố A đến thành phố B nhanh nhất",
+            "D": "Tìm cây khung nhỏ nhất"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.1: Tìm chu trình đi qua tất cả các thành phố, mỗi thành phố đúng một lần và quay về nơi xuất phát sao cho tổng độ dài đường đi là ngắn nhất."
+        },
+        {
+          "id": 10,
+          "question": "Tập các cấu hình thoả mãn điều kiện của bài toán tối ưu được gọi là gì?",
+          "options": {
+            "A": "Tập nghiệm",
+            "B": "Không gian phương án",
+            "C": "Miền xác định",
+            "D": "Tập giá trị"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.1: Tập các cấu hình thoả mãn điều kiện gọi là không gian phương án."
+        }
+      ]
+    },
+    {
+      "chapter_id": "5",
+      "chapter_title": "CHƯƠNG 5. BÀI TOÁN TỒN TẠI",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Bài toán tồn tại nhằm trả lời câu hỏi nào?",
+          "options": {
+            "A": "Có bao nhiêu cấu hình?",
+            "B": "Cấu hình nào tốt nhất?",
+            "C": "Có tồn tại hay không một cấu hình thoả mãn tính chất đã cho?",
+            "D": "Làm thế nào để liệt kê các cấu hình?"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.1: Bài toán tồn tại... chỉ cần trả lời câu hỏi 'Có tồn tại hay không một cấu hình thoả mãn tính chất đã cho?'."
+        },
+        {
+          "id": 2,
+          "question": "Phương pháp chứng minh tồn tại mà không chỉ ra cách xây dựng cấu hình được gọi là gì?",
+          "options": {
+            "A": "Chứng minh cấu trúc",
+            "B": "Chứng minh không cấu trúc",
+            "C": "Chứng minh quy nạp",
+            "D": "Chứng minh tương đương"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1: Đôi khi việc chứng minh tồn tại không đồng nghĩa với việc chỉ ra cách xây dựng cấu hình đó (chứng minh không cấu trúc)."
+        },
+        {
+          "id": 3,
+          "question": "Định lý bốn màu là một ví dụ nổi tiếng của bài toán nào?",
+          "options": {
+            "A": "Bài toán đếm",
+            "B": "Bài toán tối ưu",
+            "C": "Bài toán tồn tại",
+            "D": "Bài toán liệt kê"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.1: Các ví dụ nổi tiếng: ... Định lý bốn màu (tồn tại cách tô màu mọi bản đồ phẳng chỉ với 4 màu)."
+        },
+        {
+          "id": 4,
+          "question": "Phương pháp phản chứng hoạt động như thế nào?",
+          "options": {
+            "A": "Xây dựng trực tiếp cấu hình cần tìm",
+            "B": "Giả sử điều cần chứng minh là sai, rồi suy ra mâu thuẫn",
+            "C": "Thử tất cả các trường hợp có thể",
+            "D": "Sử dụng nguyên lý quy nạp toán học"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2: ...ta có thể giả sử ngược lại là nó không tồn tại (hoặc tính chất đó sai), sau đó dùng các suy luận logic để dẫn đến một điều mâu thuẫn."
+        },
+        {
+          "id": 5,
+          "question": "Nguyên lý Dirichlet còn được gọi là nguyên lý gì?",
+          "options": {
+            "A": "Nguyên lý chuồng bồ câu (Pigeonhole Principle)",
+            "B": "Nguyên lý loại trừ",
+            "C": "Nguyên lý cực hạn",
+            "D": "Nguyên lý bất biến"
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 5.3: Nguyên lý Dirichlet (hay nguyên lý chuồng bồ câu - Pigeonhole Principle)."
+        },
+        {
+          "id": 6,
+          "question": "Theo nguyên lý Dirichlet, nếu xếp n+1 đối tượng vào n hộp, thì điều gì chắc chắn xảy ra?",
+          "options": {
+            "A": "Mỗi hộp có ít nhất 1 đối tượng",
+            "B": "Có một hộp chứa đúng 2 đối tượng",
+            "C": "Tồn tại ít nhất một hộp chứa từ 2 đối tượng trở lên",
+            "D": "Tất cả các hộp đều có đối tượng"
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.3: Nếu xếp n+1 đối tượng vào n hộp, thì chắc chắn tồn tại ít nhất một hộp chứa từ 2 đối tượng trở lên."
+        },
+        {
+          "id": 7,
+          "question": "Nếu xếp N đối tượng vào k hộp, thì tồn tại ít nhất một hộp chứa bao nhiêu đối tượng?",
+          "options": {
+            "A": "N/k",
+            "B": "phần nguyên trên của (N/k)",
+            "C": "phần nguyên dưới của (N/k)",
+            "D": "N - k"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.3: Tổng quát: Nếu xếp N đối tượng vào k hộp, thì tồn tại ít nhất một hộp chứa ít nhất ⌈N/k⌉ đối tượng."
+        },
+        {
+          "id": 8,
+          "question": "Trong một nhóm 367 người, chắc chắn có ít nhất bao nhiêu người có cùng ngày sinh nhật (giả sử năm có 366 ngày)?",
+          "options": {
+            "A": "1",
+            "B": "2",
+            "C": "3",
+            "D": "366"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.3: Ví dụ: Trong một nhóm 367 người, chắc chắn có ít nhất hai người có cùng ngày sinh nhật."
+        },
+        {
+          "id": 9,
+          "question": "Bài toán 36 sĩ quan của Euler có kết quả là gì?",
+          "options": {
+            "A": "Tồn tại cấu hình thỏa mãn",
+            "B": "Không tồn tại hai hình vuông Latinh trực giao cấp 6",
+            "C": "Có vô số cấu hình thỏa mãn",
+            "D": "Chưa có lời giải"
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1: Bài toán 36 sĩ quan của Euler (không tồn tại hai hình vuông Latinh trực giao cấp 6)."
+        },
+        {
+          "id": 10,
+          "question": "Phương pháp nào sau đây KHÔNG phải là phương pháp chứng minh tồn tại thường dùng?",
+          "options": {
+            "A": "Xây dựng trực tiếp",
+            "B": "Phản chứng",
+            "C": "Nguyên lý Dirichlet",
+            "D": "Quy hoạch động"
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 5.4: Các phương pháp chứng minh tồn tại: Xây dựng trực tiếp, Phương pháp phản chứng, Sử dụng nguyên lý Dirichlet."
+        }
+      ]
+    }
+  ]
+}
