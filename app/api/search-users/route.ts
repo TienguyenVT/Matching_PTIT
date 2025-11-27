@@ -116,8 +116,9 @@ export async function GET(req: NextRequest) {
       console.log("[search-users] Fetching user_courses from database...");
       const { data: allUserCourses, error: coursesError } = await supabase
         .from("user_courses")
-        .select("user_id, course_id, courses(id, level)")
-        .in("user_id", userIds);
+        .select("user_id, course_id, courses(id, level, is_active)")
+        .in("user_id", userIds)
+        .eq("courses.is_active", true);
 
       if (coursesError) {
         console.error("[search-users] Error fetching user_courses:", coursesError);

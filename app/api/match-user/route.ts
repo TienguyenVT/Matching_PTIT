@@ -2,14 +2,45 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supabaseServer } from '@/lib/supabase/server';
 import { supabaseServiceRole } from '@/lib/supabase/server';
 import { matchUserBody } from '@/lib/validators';
+import { createClient } from '@supabase/supabase-js';
 
 export async function POST(req: NextRequest) {
   try {
-    const supabase = supabaseServer();
-    // ✅ Server-side auth check
-    const { data: { user }, error: authError } = await supabase.auth.getUser();
-    if (authError || !user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    let user;
+    let supabase = supabaseServer();
+
+    // Ưu tiên: lấy user từ Bearer token (Authorization header)
+    const authHeader = req.headers.get('authorization');
+    if (authHeader?.startsWith('Bearer ')) {
+      const token = authHeader.split('Bearer ')[1];
+      const url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
+      const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
+
+      if (url && anon) {
+        // Tạo client tạm để verify token
+        const tempClient = createClient(url, anon);
+        const { data: { user: tokenUser }, error: tokenError } = await tempClient.auth.getUser(token);
+        if (!tokenError && tokenUser) {
+          user = tokenUser;
+          // Tạo client mới với token để query (RLS sẽ hoạt động đúng)
+          supabase = createClient(url, anon, {
+            global: {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          });
+        }
+      }
+    }
+
+    // Fallback: lấy user từ cookies (supabaseServer)
+    if (!user) {
+      const { data: { user: cookieUser }, error: authError } = await supabase.auth.getUser();
+      if (authError || !cookieUser) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      }
+      user = cookieUser;
     }
 
     const json = await req.json();

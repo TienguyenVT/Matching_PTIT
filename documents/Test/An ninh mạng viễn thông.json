@@ -1,0 +1,736 @@
+{
+  "document_title": "BÀI GIẢNG AN NINH MẠNG VIỄN THÔNG",
+  "test_type": "Multiple Choice Questions",
+  "tests": [
+    {
+      "chapter_id": "1",
+      "chapter_title": "Chương 1: Tổng quan an toàn mạng truyền thông",
+      "questions": [
+        {
+          "id": 1,
+          "question": "An toàn mạng (Network Security) tập trung vào việc bảo vệ điều gì?",
+          "options": {
+            "A": "Bảo vệ phần cứng máy tính khỏi hỏng hóc vật lý.",
+            "B": "Bảo vệ thông tin trong quá trình truyền thông tin trên mạng.",
+            "C": "Bảo vệ hệ điều hành khỏi virus.",
+            "D": "Bảo vệ cơ sở dữ liệu nội bộ.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 1.1: Network Security là bảo vệ thông tin trong quá trình truyền thông tin trên mạng."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.1: Network Security là bảo vệ thông tin trong quá trình truyền thông tin trên mạng."
+        },
+        {
+          "id": 2,
+          "question": "Tấn công thụ động (Passive Attack) có đặc điểm gì?",
+          "options": {
+            "A": "Cố gắng thay đổi tài nguyên hệ thống.",
+            "B": "Làm ngưng trệ hoạt động của mạng.",
+            "C": "Cố gắng lấy hoặc lợi dụng thông tin nhưng không ảnh hưởng đến tài nguyên hệ thống.",
+            "D": "Mạo danh người dùng hợp pháp.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 1.3: Tấn công thụ động là việc cố gắng lấy hoặc lợi dụng thông tin hệ thống nhưng không ảnh hưởng đến các tài nguyên hệ thống."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.3: Tấn công thụ động là việc cố gắng lấy hoặc lợi dụng thông tin hệ thống nhưng không ảnh hưởng đến các tài nguyên hệ thống."
+        },
+        {
+          "id": 3,
+          "question": "Loại tấn công nào sau đây thuộc nhóm tấn công thụ động?",
+          "options": {
+            "A": "Phân tích luồng thông tin (Traffic analysis).",
+            "B": "Mạo danh (Masquerade).",
+            "C": "Phát lại (Replay).",
+            "D": "Từ chối dịch vụ (DoS).",
+            "answer": "A",
+            "explanation": "Dựa trên mục 1.3: Hai kiểu của tấn công thụ động là xem trộm các nội dung bản tin và phân tích luồng thông tin."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 1.3: Hai kiểu của tấn công thụ động là xem trộm các nội dung bản tin và phân tích luồng thông tin."
+        },
+        {
+          "id": 4,
+          "question": "Tấn công phát lại (Replay attack) là gì?",
+          "options": {
+            "A": "Kẻ tấn công giả làm một thực thể khác.",
+            "B": "Sao chép thụ động dữ liệu và sau đó gửi lại bản sao chép đó cho bên nhận.",
+            "C": "Sửa đổi nội dung bản tin trước khi gửi đi.",
+            "D": "Làm quá tải hệ thống bằng các gói tin rác.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 1.3: Tấn công phát lại liên quan đến việc sao chép thụ động dữ liệu và sau đó gửi lại bản sao chép đó cho bên nhận."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.3: Tấn công phát lại liên quan đến việc sao chép thụ động dữ liệu và sau đó gửi lại bản sao chép đó cho bên nhận."
+        },
+        {
+          "id": 5,
+          "question": "Theo khuyến nghị X.800, dịch vụ nào đảm bảo rằng người gửi và người nhận không bị mạo danh?",
+          "options": {
+            "A": "Dịch vụ toàn vẹn dữ liệu.",
+            "B": "Dịch vụ bảo mật dữ liệu.",
+            "C": "Dịch vụ xác thực (Authentication).",
+            "D": "Dịch vụ không thể chối bỏ.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 1.4: Dịch vụ xác thực liên quan đến việc đảm bảo rằng quá trình truyền thông được xác thực nghĩa là cả người gửi và người nhận không bị mạo danh."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.4: Dịch vụ xác thực liên quan đến việc đảm bảo rằng quá trình truyền thông được xác thực nghĩa là cả người gửi và người nhận không bị mạo danh."
+        },
+        {
+          "id": 6,
+          "question": "Dịch vụ an toàn nào ngăn chặn việc bên gửi hay bên nhận phủ nhận hành động truyền tin của mình?",
+          "options": {
+            "A": "Điều khiển truy nhập.",
+            "B": "Không thể chối bỏ (Nonrepudiation).",
+            "C": "Tính toàn vẹn dữ liệu.",
+            "D": "Tính khả dụng.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 1.4: Dịch vụ không thể chối bỏ ngăn chặn việc bên gửi hay bên nhận chối bỏ bản tin đã được truyền."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.4: Dịch vụ không thể chối bỏ ngăn chặn việc bên gửi hay bên nhận chối bỏ bản tin đã được truyền."
+        },
+        {
+          "id": 7,
+          "question": "Cơ chế an toàn nào sử dụng việc chèn các bit vào khoảng trống của luồng dữ liệu để chống lại phân tích lưu lượng?",
+          "options": {
+            "A": "Mật mã hóa.",
+            "B": "Chữ ký số.",
+            "C": "Đệm lưu lượng (Traffic padding).",
+            "D": "Điều khiển định tuyến.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 1.5: Đệm lưu lượng: chèn các bit vào các khoảng trống của luồng dữ liệu để gây khó khăn cho kiểu tấn công phân tích lưu lượng."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.5: Đệm lưu lượng: chèn các bit vào các khoảng trống của luồng dữ liệu để gây khó khăn cho kiểu tấn công phân tích lưu lượng."
+        },
+        {
+          "id": 8,
+          "question": "Trong mô hình an toàn mạng, thành phần 'bên thứ ba chứng thực' có vai trò gì?",
+          "options": {
+            "A": "Thực hiện tấn công vào hệ thống.",
+            "B": "Chịu trách nhiệm phân phối thông tin bí mật tới bên gửi và bên nhận.",
+            "C": "Giám sát lưu lượng mạng để tính cước.",
+            "D": "Cung cấp đường truyền vật lý.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 1.6: Bên thứ ba chứng thực... có thể chịu trách nhiệm phân phối thông tin bí mật tới bên gửi và bên nhận mà không bị phát hiện."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.6: Bên thứ ba chứng thực... có thể chịu trách nhiệm phân phối thông tin bí mật tới bên gửi và bên nhận mà không bị phát hiện."
+        },
+        {
+          "id": 9,
+          "question": "Tấn công 'Từ chối dịch vụ' (DoS) nhằm mục đích gì?",
+          "options": {
+            "A": "Ăn cắp mật khẩu người dùng.",
+            "B": "Sửa đổi nội dung bản tin.",
+            "C": "Làm mất khả năng hoạt động hoặc làm giảm hiệu năng của mạng.",
+            "D": "Nghe lén cuộc gọi.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 1.3: Tấn công từ chối dịch vụ... làm mất khả năng hoạt động của mạng hoặc làm quá tải mạng... làm suy giảm hiệu năng mạng."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 1.3: Tấn công từ chối dịch vụ... làm mất khả năng hoạt động của mạng hoặc làm quá tải mạng... làm suy giảm hiệu năng mạng."
+        },
+        {
+          "id": 10,
+          "question": "Loại tấn công nào được cho là khó ngăn chặn tuyệt đối nhưng dễ phát hiện?",
+          "options": {
+            "A": "Tấn công thụ động.",
+            "B": "Tấn công tích cực (chủ động).",
+            "C": "Phân tích luồng thông tin.",
+            "D": "Nghe trộm.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 1.3: Kiểu tấn công chủ động dễ phát hiện nhưng lại rất khó ngăn chặn tuyệt đối."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 1.3: Kiểu tấn công chủ động dễ phát hiện nhưng lại rất khó ngăn chặn tuyệt đối."
+        }
+      ]
+    },
+    {
+      "chapter_id": "2",
+      "chapter_title": "Chương 2: Mật mã khóa đối xứng",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Trong mô hình mật mã khóa đối xứng, yêu cầu về khóa là gì?",
+          "options": {
+            "A": "Bên gửi và bên nhận sử dụng hai khóa khác nhau.",
+            "B": "Chỉ bên gửi cần giữ bí mật khóa.",
+            "C": "Bên gửi và bên nhận phải có bản sao của cùng một khóa bí mật.",
+            "D": "Khóa không cần được giữ bí mật, chỉ thuật toán cần bí mật.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 2.1: Bên gửi và bên nhận phải có bản sao của khóa bí mật... khóa phải được giữ bí mật giữa người gửi và người nhận."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.1: Bên gửi và bên nhận phải có bản sao của khóa bí mật... khóa phải được giữ bí mật giữa người gửi và người nhận."
+        },
+        {
+          "id": 2,
+          "question": "Kích thước khối và kích thước khóa của chuẩn mã hóa DES là bao nhiêu?",
+          "options": {
+            "A": "Khối 64 bit, khóa 64 bit.",
+            "B": "Khối 64 bit, khóa 56 bit.",
+            "C": "Khối 128 bit, khóa 128 bit.",
+            "D": "Khối 56 bit, khóa 64 bit.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 2.2.2: Với DEA (DES), dữ liệu được mật mã hóa theo khối 64 bit sử dụng khóa 56 bit."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.2.2: Với DEA (DES), dữ liệu được mật mã hóa theo khối 64 bit sử dụng khóa 56 bit."
+        },
+        {
+          "id": 3,
+          "question": "Hiệu ứng lan truyền (Avalanche Effect) trong mật mã có nghĩa là gì?",
+          "options": {
+            "A": "Một thay đổi nhỏ trong bản rõ hoặc khóa dẫn đến thay đổi lớn trong bản mã.",
+            "B": "Lỗi đường truyền sẽ lan truyền qua toàn bộ bản tin.",
+            "C": "Tốc độ mã hóa tăng dần theo thời gian.",
+            "D": "Khóa được mở rộng kích thước gấp đôi qua mỗi vòng.",
+            "answer": "A",
+            "explanation": "Dựa trên mục 2.2.2.5: Chỉ cần thay đổi một bit trong bản rõ hay khóa thì dẫn đến sự thay đổi của nhiều bit bản mã."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 2.2.2.5: Chỉ cần thay đổi một bit trong bản rõ hay khóa thì dẫn đến sự thay đổi của nhiều bit bản mã."
+        },
+        {
+          "id": 4,
+          "question": "AES sử dụng kích thước khối là bao nhiêu?",
+          "options": {
+            "A": "64 bit.",
+            "B": "128 bit.",
+            "C": "192 bit.",
+            "D": "256 bit.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 2.3.1: Kích thước khối bản rõ được sử dụng là 128 bit, hay 16 byte."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.3.1: Kích thước khối bản rõ được sử dụng là 128 bit, hay 16 byte."
+        },
+        {
+          "id": 5,
+          "question": "Phép biến đổi nào trong AES thực hiện việc trộn các cột của ma trận đầu vào?",
+          "options": {
+            "A": "SubBytes.",
+            "B": "ShiftRows.",
+            "C": "MixColumns.",
+            "D": "AddRoundKey.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 2.3.2.3: Hàm MixColumns thực hiện biến đổi trộn các cột của ma trận đầu vào."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.3.2.3: Hàm MixColumns thực hiện biến đổi trộn các cột của ma trận đầu vào."
+        },
+        {
+          "id": 6,
+          "question": "Tấn công 'Gặp nhau ở giữa' (Meet-in-the-middle) là mối đe dọa đối với phương pháp mã hóa nào?",
+          "options": {
+            "A": "DES đơn.",
+            "B": "Double DES (DES hai lần).",
+            "C": "Triple DES (DES ba lần).",
+            "D": "AES.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 2.4.1: Tuy nhiên người ta đã tìm được một phương pháp tấn công Double DES có tên gọi là gặp-nhau-ở-giữa."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.4.1: Tuy nhiên người ta đã tìm được một phương pháp tấn công Double DES có tên gọi là gặp-nhau-ở-giữa."
+        },
+        {
+          "id": 7,
+          "question": "Chế độ hoạt động nào của mật mã khối có đặc điểm: 'nếu bản rõ giống nhau thì bản mã giống nhau'?",
+          "options": {
+            "A": "CBC (Cipher Block Chaining).",
+            "B": "CFB (Cipher Feedback).",
+            "C": "ECB (Electronic Codebook).",
+            "D": "CTR (Counter).",
+            "answer": "C",
+            "explanation": "Dựa trên mục 2.4.2: Đặc điểm nổi bật của mô hình ECB là nếu như bản rõ giống nhau thì bản mã giống nhau."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 2.4.2: Đặc điểm nổi bật của mô hình ECB là nếu như bản rõ giống nhau thì bản mã giống nhau."
+        },
+        {
+          "id": 8,
+          "question": "RC4 là loại thuật toán mật mã nào?",
+          "options": {
+            "A": "Mật mã khối (Block cipher).",
+            "B": "Mật mã dòng (Stream cipher).",
+            "C": "Mật mã khóa công khai.",
+            "D": "Hàm băm.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 2.5.4: RC4 là một phương pháp mật mã dòng được thiết kế vào năm 1987."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.5.4: RC4 là một phương pháp mật mã dòng được thiết kế vào năm 1987."
+        },
+        {
+          "id": 9,
+          "question": "Trong chế độ CBC, Vector khởi tạo (IV) cần phải như thế nào?",
+          "options": {
+            "A": "Được giữ bí mật tuyệt đối.",
+            "B": "Được chọn ngẫu nhiên và không cần giữ bí mật.",
+            "C": "Giống nhau cho mọi bản tin.",
+            "D": "Là một phần của khóa bí mật.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 2.4.2: Vector khởi tạo không cần giữ bí mật nên thường được gắn vào trước bản mã... Do đó nếu có hai bản rõ giống nhau thì hai bản mã sẽ không giống nhau (do IV ngẫu nhiên)."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 2.4.2: Vector khởi tạo không cần giữ bí mật nên thường được gắn vào trước bản mã... Do đó nếu có hai bản rõ giống nhau thì hai bản mã sẽ không giống nhau (do IV ngẫu nhiên)."
+        },
+        {
+          "id": 10,
+          "question": "Tiêu chuẩn nào được sử dụng để đánh giá một bộ tạo số giả ngẫu nhiên?",
+          "options": {
+            "A": "Phân phối đồng nhất và Độc lập.",
+            "B": "Tốc độ và Kích thước bộ nhớ.",
+            "C": "Độ dài chuỗi và Độ phức tạp.",
+            "D": "Tính thuận nghịch và Tính duy nhất.",
+            "answer": "A",
+            "explanation": "Dựa trên mục 2.5.1: Có hai tiêu chí được sử dụng để đánh giá tính ngẫu nhiên... đó là: Phân phối đồng nhất... và Độc lập."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 2.5.1: Có hai tiêu chí được sử dụng để đánh giá tính ngẫu nhiên... đó là: Phân phối đồng nhất... và Độc lập."
+        }
+      ]
+    },
+    {
+      "chapter_id": "3",
+      "chapter_title": "Chương 3: Mật mã khóa bất đối xứng",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Hệ mật khóa công khai sử dụng bao nhiêu khóa?",
+          "options": {
+            "A": "1 khóa duy nhất cho cả mã hóa và giải mã.",
+            "B": "2 khóa: một khóa công khai và một khóa riêng.",
+            "C": "3 khóa: hai khóa phiên và một khóa chủ.",
+            "D": "Không sử dụng khóa.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 3.1.1: Giải thuật bất đối xứng dựa trên cơ chế sử dụng một khóa để mã hóa và một khóa khác... Hai khóa được sử dụng... được gọi là khóa công khai và khóa riêng."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1.1: Giải thuật bất đối xứng dựa trên cơ chế sử dụng một khóa để mã hóa và một khóa khác... Hai khóa được sử dụng... được gọi là khóa công khai và khóa riêng."
+        },
+        {
+          "id": 2,
+          "question": "Nếu Bob muốn gửi bản tin bí mật cho Alice bằng hệ mật khóa công khai, Bob sẽ dùng khóa nào để mã hóa?",
+          "options": {
+            "A": "Khóa riêng của Bob.",
+            "B": "Khóa công khai của Bob.",
+            "C": "Khóa riêng của Alice.",
+            "D": "Khóa công khai của Alice.",
+            "answer": "D",
+            "explanation": "Dựa trên mục 3.1.1.1: Nếu Bob muốn gửi một bản tin bí mật cho Alice, Bob mã hóa bản tin bằng khóa công khai của Alice."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 3.1.1.1: Nếu Bob muốn gửi một bản tin bí mật cho Alice, Bob mã hóa bản tin bằng khóa công khai của Alice."
+        },
+        {
+          "id": 3,
+          "question": "Để tạo chữ ký điện tử (xác thực nguồn gốc), người gửi sử dụng khóa nào để mã hóa?",
+          "options": {
+            "A": "Khóa công khai của người nhận.",
+            "B": "Khóa riêng của người nhận.",
+            "C": "Khóa công khai của người gửi.",
+            "D": "Khóa riêng của người gửi.",
+            "answer": "D",
+            "explanation": "Dựa trên mục 3.1.1.1: A chuẩn bị một bản tin đến B và mã hóa nó bằng khóa riêng của mình... toàn bộ bản tin được mã hóa phục vụ như một chữ ký kỹ thuật số."
+          },
+          "answer": "D",
+          "explanation": "Dựa trên mục 3.1.1.1: A chuẩn bị một bản tin đến B và mã hóa nó bằng khóa riêng của mình... toàn bộ bản tin được mã hóa phục vụ như một chữ ký kỹ thuật số."
+        },
+        {
+          "id": 4,
+          "question": "Độ an toàn của thuật toán RSA dựa trên bài toán khó nào?",
+          "options": {
+            "A": "Bài toán logarit rời rạc.",
+            "B": "Bài toán phân tích thừa số nguyên tố của các số nguyên lớn.",
+            "C": "Bài toán xếp ba lô (Knapsack problem).",
+            "D": "Bài toán đường cong Elliptic.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 3.1.2.1: Bài toán tìm thừa số là tiếp cận tấn công toán học vào RSA... Các hướng giải mật mã RSA đều tập trung vào nhiệm vụ tìm ra n từ 2 thừa số nguyên tố."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1.2.1: Bài toán tìm thừa số là tiếp cận tấn công toán học vào RSA... Các hướng giải mật mã RSA đều tập trung vào nhiệm vụ tìm ra n từ 2 thừa số nguyên tố."
+        },
+        {
+          "id": 5,
+          "question": "Trong RSA, biểu thức mã hóa bản rõ M thành bản mã C là gì?",
+          "options": {
+            "A": "C = M^d mod n",
+            "B": "C = M^e mod n",
+            "C": "C = M + e mod n",
+            "D": "C = M * d mod n",
+            "answer": "B",
+            "explanation": "Dựa trên mục 3.1.2.1: Mã hóa và giải mã được thực hiện theo dạng sau... C = M^e mod n."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1.2.1: Mã hóa và giải mã được thực hiện theo dạng sau... C = M^e mod n."
+        },
+        {
+          "id": 6,
+          "question": "Thuật toán Diffie-Hellman được sử dụng chủ yếu cho mục đích gì?",
+          "options": {
+            "A": "Mã hóa toàn bộ nội dung file.",
+            "B": "Tạo chữ ký số.",
+            "C": "Trao đổi khóa bí mật một cách an toàn.",
+            "D": "Nén dữ liệu.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 3.2: Mục đích của thuật toán là cho phép 2 người dùng trao đổi một cách an toàn một khóa mà sau đó có thể được dùng để mã hóa đối xứng."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.2: Mục đích của thuật toán là cho phép 2 người dùng trao đổi một cách an toàn một khóa mà sau đó có thể được dùng để mã hóa đối xứng."
+        },
+        {
+          "id": 7,
+          "question": "Độ an toàn của thuật toán Diffie-Hellman và Elgamal dựa trên bài toán nào?",
+          "options": {
+            "A": "Phân tích thừa số nguyên tố.",
+            "B": "Logarit rời rạc (Discrete Logarithm).",
+            "C": "Xác suất thống kê.",
+            "D": "Hàm băm.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 3.2 và 3.3: Tính an toàn của trao đổi khóa Diffie-Hellman... và Elgamal dựa trên độ khó trong tính toán hàm logarit rời rạc."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.2 và 3.3: Tính an toàn của trao đổi khóa Diffie-Hellman... và Elgamal dựa trên độ khó trong tính toán hàm logarit rời rạc."
+        },
+        {
+          "id": 8,
+          "question": "Giao thức Diffie-Hellman cơ bản dễ bị tổn thương bởi loại tấn công nào?",
+          "options": {
+            "A": "Tấn công vét cạn (Brute-force).",
+            "B": "Tấn công phân tích thời gian.",
+            "C": "Tấn công người đứng giữa (Man-in-the-middle).",
+            "D": "Tấn công từ chối dịch vụ.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 3.2: Giao thức chỉ ra trên hình 3.10 không an toàn để chống lại kẻ tấn công ở giữa."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 3.2: Giao thức chỉ ra trên hình 3.10 không an toàn để chống lại kẻ tấn công ở giữa."
+        },
+        {
+          "id": 9,
+          "question": "Tại sao mật mã khóa công khai thường không được dùng để mã hóa những dữ liệu lớn?",
+          "options": {
+            "A": "Vì nó không an toàn.",
+            "B": "Vì tốc độ tính toán chậm hơn nhiều so với mã hóa đối xứng.",
+            "C": "Vì chiều dài khóa quá ngắn.",
+            "D": "Vì thuật toán phức tạp khó cài đặt.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 3.1.2.1: Kích thước khóa càng lớn thì hệ thống hoạt động càng chậm... các thuật toán không đối xứng thường chậm hơn so với thuật toán đối xứng (mục 3.4)."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1.2.1: Kích thước khóa càng lớn thì hệ thống hoạt động càng chậm... các thuật toán không đối xứng thường chậm hơn so với thuật toán đối xứng (mục 3.4)."
+        },
+        {
+          "id": 10,
+          "question": "Trong tấn công thời gian (Timing Attack) đối với RSA, kẻ tấn công dựa vào yếu tố nào?",
+          "options": {
+            "A": "Lỗi phần cứng của CPU.",
+            "B": "Thời gian máy tính thực hiện giải mã để suy đoán khóa riêng.",
+            "C": "Sự chênh lệch thời gian gửi và nhận gói tin.",
+            "D": "Thời gian hết hạn của chứng chỉ số.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 3.1.2.1: Paul Kocher... nhấn mạnh rằng một kẻ đi rình có thể xác định được khóa riêng biệt bằng việc theo dõi thời gian một máy tính đưa ra bản giải mã."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 3.1.2.1: Paul Kocher... nhấn mạnh rằng một kẻ đi rình có thể xác định được khóa riêng biệt bằng việc theo dõi thời gian một máy tính đưa ra bản giải mã."
+        }
+      ]
+    },
+    {
+      "chapter_id": "4",
+      "chapter_title": "Chương 4: Các giải thuật toàn vẹn dữ liệu",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Hàm băm (Hash function) có đặc điểm nào sau đây?",
+          "options": {
+            "A": "Đầu ra có độ dài thay đổi tùy thuộc vào đầu vào.",
+            "B": "Đầu ra có độ dài cố định bất kể kích thước đầu vào.",
+            "C": "Có thể dễ dàng suy ngược lại đầu vào từ đầu ra.",
+            "D": "Yêu cầu một khóa bí mật để hoạt động.",
+            "answer": "B",
+            "explanation": "Dựa trên Bảng 4.1, mục 4.1.2: Kích thước đầu ra cố định: H tạo ra đầu ra có độ dài cố định."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên Bảng 4.1, mục 4.1.2: Kích thước đầu ra cố định: H tạo ra đầu ra có độ dài cố định."
+        },
+        {
+          "id": 2,
+          "question": "Tính chất 'Một chiều' (One-way property) của hàm băm nghĩa là gì?",
+          "options": {
+            "A": "Với bất kỳ x, dễ dàng tính được H(x).",
+            "B": "Với bất kỳ giá trị băm h, tính toán y để H(y)=h là bất khả thi.",
+            "C": "Không thể tìm thấy cặp (x, y) sao cho H(x) = H(y).",
+            "D": "Hàm băm chỉ hoạt động trên một chiều dữ liệu.",
+            "answer": "B",
+            "explanation": "Dựa trên Bảng 4.1, mục 4.1.2: Tính chất một chiều: Với bất kỳ giá trị băm h, tính toán y để H(y)=h là bất khả thi."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên Bảng 4.1, mục 4.1.2: Tính chất một chiều: Với bất kỳ giá trị băm h, tính toán y để H(y)=h là bất khả thi."
+        },
+        {
+          "id": 3,
+          "question": "Xung đột (Collision) trong hàm băm xảy ra khi nào?",
+          "options": {
+            "A": "Khi hai đầu vào khác nhau x và y có H(x) = H(y).",
+            "B": "Khi kẻ tấn công tìm được khóa bí mật.",
+            "C": "Khi đầu ra có độ dài lớn hơn đầu vào.",
+            "D": "Khi hệ thống bị quá tải.",
+            "answer": "A",
+            "explanation": "Dựa trên mục 4.1.2: Một xung đột xảy ra nếu x khác y và H(x) = H(y)."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.1.2: Một xung đột xảy ra nếu x khác y và H(x) = H(y)."
+        },
+        {
+          "id": 4,
+          "question": "Mã xác thực bản tin (MAC) khác với hàm băm ở điểm nào?",
+          "options": {
+            "A": "MAC không có độ dài cố định.",
+            "B": "MAC sử dụng một khóa bí mật được chia sẻ.",
+            "C": "MAC không đảm bảo tính toàn vẹn.",
+            "D": "MAC chỉ dùng cho chữ ký số.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 4.2.2: Mã xác thực bản tin (MAC): Một hàm của bản tin và khóa bí mật tạo ra giá trị có chiều dài cố định."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.2: Mã xác thực bản tin (MAC): Một hàm của bản tin và khóa bí mật tạo ra giá trị có chiều dài cố định."
+        },
+        {
+          "id": 5,
+          "question": "Tấn công 'Ngày sinh' (Birthday attack) là loại tấn công nhằm vào tính chất nào của hàm băm?",
+          "options": {
+            "A": "Tính chất một chiều.",
+            "B": "Tính kháng xung đột (Collision resistance).",
+            "C": "Tính toàn vẹn.",
+            "D": "Tính bí mật.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 4.2.5 (An ninh của HMAC): Kẻ tấn công tìm kiếm hai bản tin M và M’ tạo ra cùng giá trị băm... còn gọi là tấn công ngày sinh."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.5 (An ninh của HMAC): Kẻ tấn công tìm kiếm hai bản tin M và M’ tạo ra cùng giá trị băm... còn gọi là tấn công ngày sinh."
+        },
+        {
+          "id": 6,
+          "question": "HMAC được cấu trúc dựa trên cái gì?",
+          "options": {
+            "A": "Chỉ sử dụng thuật toán DES.",
+            "B": "Sử dụng một hàm băm có sẵn (như MD5, SHA) kết hợp với khóa bí mật.",
+            "C": "Sử dụng thuật toán RSA.",
+            "D": "Sử dụng thuật toán Diffie-Hellman.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 4.2.5: Đã có một số đề xuất đối với việc liên kết một khóa bí mật với một thuật toán băm có sẵn... Tiếp cận đã nhận được nhiều sự ủng hộ nhất là HMAC."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.5: Đã có một số đề xuất đối với việc liên kết một khóa bí mật với một thuật toán băm có sẵn... Tiếp cận đã nhận được nhiều sự ủng hộ nhất là HMAC."
+        },
+        {
+          "id": 7,
+          "question": "Trong cấu trúc HMAC, vai trò của 'ipad' và 'opad' là gì?",
+          "options": {
+            "A": "Là các khóa bí mật.",
+            "B": "Là các vector khởi tạo ngẫu nhiên.",
+            "C": "Là các chuỗi bit hằng số được dùng để đệm và XOR với khóa.",
+            "D": "Là các bản tin cần xác thực.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 4.2.5 (Thuật toán HMAC): Ipad = 00110110... được lặp lại; Opad = 01011100... được lặp lại. XOR K+ với ipad/opad."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.2.5 (Thuật toán HMAC): Ipad = 00110110... được lặp lại; Opad = 01011100... được lặp lại. XOR K+ với ipad/opad."
+        },
+        {
+          "id": 8,
+          "question": "Phương pháp 'Mã hóa sau khi nhận thực' (Encrypt-then-Authenticate) được sử dụng trong giao thức nào?",
+          "options": {
+            "A": "SSL/TLS.",
+            "B": "IPSec.",
+            "C": "SSH.",
+            "D": "WEP.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 4.2.7: Mã hóa sau khi nhận thực (E->A)... Tiếp cận này được sử dụng trong giao thức IPSec."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 4.2.7: Mã hóa sau khi nhận thực (E->A)... Tiếp cận này được sử dụng trong giao thức IPSec."
+        },
+        {
+          "id": 9,
+          "question": "Chế độ CCM (Counter with Cipher Block Chaining-Message) kết hợp những thuật toán nào?",
+          "options": {
+            "A": "AES chế độ CTR và thuật toán CMAC.",
+            "B": "DES và MD5.",
+            "C": "RSA và SHA-1.",
+            "D": "RC4 và HMAC.",
+            "answer": "A",
+            "explanation": "Dựa trên mục 4.2.7: Các thành phần then chốt của thuật toán CCM là thuật toán mã hóa AES, chế độ hoạt động CTR và thuật toán nhận thực CMAC."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 4.2.7: Các thành phần then chốt của thuật toán CCM là thuật toán mã hóa AES, chế độ hoạt động CTR và thuật toán nhận thực CMAC."
+        },
+        {
+          "id": 10,
+          "question": "MAC có cung cấp tính năng 'Không thể chối bỏ' (Non-repudiation) không? Tại sao?",
+          "options": {
+            "A": "Có, vì có sử dụng khóa.",
+            "B": "Có, vì nó đảm bảo toàn vẹn dữ liệu.",
+            "C": "Không, vì cả bên gửi và bên nhận đều chia sẻ cùng một khóa bí mật.",
+            "D": "Không, vì MAC quá ngắn.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 4.2.2: Cuối cùng, lưu ý MAC không cung cấp chữ ký số, do cả bên gửi và bên nhận đều chia sẻ cùng một khóa."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 4.2.2: Cuối cùng, lưu ý MAC không cung cấp chữ ký số, do cả bên gửi và bên nhận đều chia sẻ cùng một khóa."
+        }
+      ]
+    },
+    {
+      "chapter_id": "5",
+      "chapter_title": "Chương 5: Xác thực",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Trung tâm phân phối khóa (KDC) có vai trò chính là gì?",
+          "options": {
+            "A": "Lưu trữ tất cả các bản tin của người dùng.",
+            "B": "Phân phối khóa cho các cặp người dùng khi cần thiết.",
+            "C": "Cung cấp kết nối internet.",
+            "D": "Quét virus cho mạng.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 5.1.1: Trong lược đồ này, một trung tâm phân phối khóa chịu trách nhiệm phân phối khóa cho các cặp người dùng... khi cần thiết."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1.1: Trong lược đồ này, một trung tâm phân phối khóa chịu trách nhiệm phân phối khóa cho các cặp người dùng... khi cần thiết."
+        },
+        {
+          "id": 2,
+          "question": "Khóa phiên (Session key) khác với khóa chủ (Master key) như thế nào?",
+          "options": {
+            "A": "Khóa phiên được dùng lâu dài, khóa chủ dùng một lần.",
+            "B": "Khóa phiên dùng cho một kết nối logic cụ thể và tồn tại ngắn hạn, khóa chủ dùng để mã hóa khóa phiên.",
+            "C": "Khóa phiên dùng cho mã hóa công khai, khóa chủ dùng cho mã hóa đối xứng.",
+            "D": "Không có sự khác biệt.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 5.1.1: Khóa phiên được sử dụng trong khoảng thời gian của một kết nối logic tồn tại... Các khóa phiên được truyền đi trong dạng mã hóa, sử dụng một khóa chủ."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1.1: Khóa phiên được sử dụng trong khoảng thời gian của một kết nối logic tồn tại... Các khóa phiên được truyền đi trong dạng mã hóa, sử dụng một khóa chủ."
+        },
+        {
+          "id": 3,
+          "question": "Nonce (N1, N2) được sử dụng trong các giao thức phân phối khóa để làm gì?",
+          "options": {
+            "A": "Để tăng tốc độ mã hóa.",
+            "B": "Để tạo độ dài bản tin chẵn.",
+            "C": "Để xác định giao dịch là duy nhất và chống lại tấn công phát lại.",
+            "D": "Để nén dữ liệu.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 5.1.1: N1 được gọi là nonce... yêu cầu tối thiểu là phải khác nhau với mỗi yêu cầu... để cho thấy đây không phải là của bản tin phát lại trước đó."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.1.1: N1 được gọi là nonce... yêu cầu tối thiểu là phải khác nhau với mỗi yêu cầu... để cho thấy đây không phải là của bản tin phát lại trước đó."
+        },
+        {
+          "id": 4,
+          "question": "Một chứng thư số (Certificate) về bản chất bao gồm những gì?",
+          "options": {
+            "A": "Một khóa bí mật và tên người dùng.",
+            "B": "Một khóa công khai, định danh chủ sở hữu, và chữ ký của bên thứ ba tin cậy (CA).",
+            "C": "Danh sách các mật khẩu người dùng.",
+            "D": "Địa chỉ IP của máy chủ.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 5.1.3: Về bản chất, một giấy chứng thư bao gồm một khóa công khai, một nhận dạng của chủ sở hữu chính và toàn bộ khối chữ ký của một bên thứ ba đáng tin cậy."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1.3: Về bản chất, một giấy chứng thư bao gồm một khóa công khai, một nhận dạng của chủ sở hữu chính và toàn bộ khối chữ ký của một bên thứ ba đáng tin cậy."
+        },
+        {
+          "id": 5,
+          "question": "Chuẩn X.509 là chuẩn quốc tế về cái gì?",
+          "options": {
+            "A": "Mã hóa khóa đối xứng.",
+            "B": "Dịch vụ thư mục và khung làm việc cho chứng thư số.",
+            "C": "Giao thức truyền file.",
+            "D": "Hệ điều hành mạng.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 5.1.4: ITU-T đưa ra khuyến nghị X.509... định nghĩa một khung làm việc cho nhiệm vụ cung cấp dịch vụ chứng thực."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1.4: ITU-T đưa ra khuyến nghị X.509... định nghĩa một khung làm việc cho nhiệm vụ cung cấp dịch vụ chứng thực."
+        },
+        {
+          "id": 6,
+          "question": "Trong X.509 version 2, trường 'Issuer Unique ID' dùng để làm gì?",
+          "options": {
+            "A": "Nhận dạng người dùng.",
+            "B": "Nhận dạng CA trong trường hợp tên CA được sử dụng lại.",
+            "C": "Lưu trữ khóa công khai.",
+            "D": "Lưu trữ chữ ký số.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 5.1.4: Issuer Unique ID... dành để nhận dạng CA. Khi CA thay mới chứng chỉ... một Issuer Unique ID mới được khởi tạo."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.1.4: Issuer Unique ID... dành để nhận dạng CA. Khi CA thay mới chứng chỉ... một Issuer Unique ID mới được khởi tạo."
+        },
+        {
+          "id": 7,
+          "question": "Phương tiện xác thực người dùng dựa trên 'Những gì bạn có' (Something you have) là gì?",
+          "options": {
+            "A": "Mật khẩu, mã PIN.",
+            "B": "Vân tay, khuôn mặt.",
+            "C": "Thẻ thông minh, thẻ khóa điện (token).",
+            "D": "Giọng nói, chữ viết.",
+            "answer": "C",
+            "explanation": "Dựa trên mục 5.2.1: Một vài điều cá nhân sở hữu: Ví dụ như các khóa mật mã, các thẻ khóa điện, các thẻ thông minh."
+          },
+          "answer": "C",
+          "explanation": "Dựa trên mục 5.2.1: Một vài điều cá nhân sở hữu: Ví dụ như các khóa mật mã, các thẻ khóa điện, các thẻ thông minh."
+        },
+        {
+          "id": 8,
+          "question": "Giao thức Needham-Schroeder được thiết kế để làm gì?",
+          "options": {
+            "A": "Phân phối khóa bí mật sử dụng KDC và cung cấp xác thực.",
+            "B": "Mã hóa file trên đĩa cứng.",
+            "C": "Tạo chữ ký số X.509.",
+            "D": "Chống virus.",
+            "answer": "A",
+            "explanation": "Dựa trên mục 5.2.2: Needham và Schroeder đưa ra một giao thức phân phối khóa bí mật sử dụng KDC gồm các đặc điểm xác thực."
+          },
+          "answer": "A",
+          "explanation": "Dựa trên mục 5.2.2: Needham và Schroeder đưa ra một giao thức phân phối khóa bí mật sử dụng KDC gồm các đặc điểm xác thực."
+        },
+        {
+          "id": 9,
+          "question": "Điểm yếu chính của giao thức Needham-Schroeder gốc là gì?",
+          "options": {
+            "A": "Dễ bị tấn công vét cạn khóa.",
+            "B": "Dễ bị tấn công phát lại nếu khóa phiên cũ bị lộ.",
+            "C": "Không sử dụng mã hóa mạnh.",
+            "D": "Không có KDC.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 5.2.2: Giao thức vẫn có thể bị tấn công bởi tấn công phát lại. Giả sử một kẻ tấn công X đã có thể thỏa hiệp một khóa phiên cũ."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2.2: Giao thức vẫn có thể bị tấn công bởi tấn công phát lại. Giả sử một kẻ tấn công X đã có thể thỏa hiệp một khóa phiên cũ."
+        },
+        {
+          "id": 10,
+          "question": "Để khắc phục tấn công phát lại trong giao thức Needham-Schroeder, Denning đã đề xuất bổ sung cái gì?",
+          "options": {
+            "A": "Sử dụng thêm một KDC nữa.",
+            "B": "Sử dụng tem thời gian (Timestamp).",
+            "C": "Tăng độ dài khóa.",
+            "D": "Sử dụng mật mã khóa công khai.",
+            "answer": "B",
+            "explanation": "Dựa trên mục 5.2.2: Denning đề xuất khắc phục điểm yếu này bằng cách sửa đổi các giao thức... bao gồm việc bổ sung các tem thời gian."
+          },
+          "answer": "B",
+          "explanation": "Dựa trên mục 5.2.2: Denning đề xuất khắc phục điểm yếu này bằng cách sửa đổi các giao thức... bao gồm việc bổ sung các tem thời gian."
+        }
+      ]
+    }
+  ]
+}
