@@ -88,7 +88,7 @@ export default function HomePage() {
     <div className="p-4 md:p-6">
       {/* Title với thanh màu cam bên trái */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-orange-500 rounded"></div>
+        <div className="w-1 h-8 bg-red-500 rounded"></div>
         <h1 className="text-2xl font-semibold text-gray-800">Khóa học đã đăng ký</h1>
       </div>
 
@@ -127,7 +127,7 @@ export default function HomePage() {
               {/* Course Content */}
               <div className="flex flex-col flex-1 p-4">
                 <div className="flex items-start gap-2 mb-2">
-                  <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
+                  <div className="w-1 h-5 bg-red-500 rounded mt-1 flex-shrink-0"></div>
                   <h3 className="font-semibold text-gray-800 line-clamp-2">{course.title}</h3>
                 </div>
                 
@@ -173,7 +173,7 @@ export default function HomePage() {
       {suggested.length > 0 && (
         <>
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-1 h-8 bg-orange-500 rounded"></div>
+            <div className="w-1 h-8 bg-red-500 rounded"></div>
             <h1 className="text-2xl font-semibold text-gray-800">Khóa học đề xuất</h1>
           </div>
 
@@ -205,8 +205,8 @@ export default function HomePage() {
                 <div className="flex flex-col flex-1 p-4">
                   <Link href={ROUTES.COURSE_DETAIL(course.id)}>
                     <div className="flex items-start gap-2 mb-2">
-                      <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
-                      <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-orange-500 transition-colors">{course.title}</h3>
+                      <div className="w-1 h-5 bg-red-500 rounded mt-1 flex-shrink-0"></div>
+                      <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-red-500 transition-colors">{course.title}</h3>
                     </div>
                   </Link>
                   
@@ -222,7 +222,7 @@ export default function HomePage() {
                       {registering === course.id ? 'Đang đăng ký...' : 'Đăng ký'}
                     </button>
                     <Link href={ROUTES.COURSE_DETAIL(course.id)} className="flex-1">
-                      <div className="w-full text-center py-2 px-3 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                      <div className="w-full text-center py-2 px-3 bg-red-500 hover:bg-red-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
                         Xem
                       </div>
                     </Link>

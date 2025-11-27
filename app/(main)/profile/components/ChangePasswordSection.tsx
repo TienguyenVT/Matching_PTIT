@@ -25,8 +25,10 @@ export default function ChangePasswordSection({
 }: ChangePasswordSectionProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6 max-w-2xl mx-auto">
-      <h2 className="text-xl font-semibold mb-4">Thay đổi mật khẩu</h2>
-
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+        <h1 className="text-xl font-semibold text-gray-800">Thay đổi mật khẩu</h1>
+      </div>
       <div className="space-y-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">

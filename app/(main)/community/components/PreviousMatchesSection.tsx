@@ -28,7 +28,10 @@ export default function PreviousMatchesSection({
   if (loading) {
     return (
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold mb-4">Người dùng đã ghép đôi</h2>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+          <h1 className="text-xl font-semibold text-gray-800">Người dùng đã ghép đôi</h1>
+        </div>
         <p className="text-gray-500">Đang tải...</p>
       </div>
     );
@@ -37,7 +40,11 @@ export default function PreviousMatchesSection({
   if (matches.length === 0) {
     return (
       <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-        <h2 className="text-xl font-semibold mb-4">Người dùng đã ghép đôi</h2>
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+          <h1 className="text-xl font-semibold text-gray-800">Người dùng đã ghép đôi</h1>
+        </div>
+
         <p className="text-gray-500">Bạn chưa có người học cùng nào.</p>
       </div>
     );
@@ -45,7 +52,10 @@ export default function PreviousMatchesSection({
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-xl font-semibold mb-4">Người dùng đã ghép đôi</h2>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+        <h1 className="text-xl font-semibold text-gray-800">Người dùng đã ghép đôi</h1>
+      </div>
       <div className="space-y-3">
         {matches.map((match) => (
           <UserCard key={match.id} user={match} />

@@ -83,7 +83,10 @@ export default function CommunityPage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
-      <h1 className="text-2xl font-semibold mb-6">Cộng đồng học tập</h1>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-8 bg-red-500 rounded flex-shrink-0"></div>
+        <h1 className="text-2xl font-semibold text-gray-800">Cộng đồng học tập</h1>
+      </div>
 
       {/* Phần 0: Tìm kiếm người dùng */}
       <SearchUsersSection />

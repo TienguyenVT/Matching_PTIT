@@ -228,10 +228,10 @@ export default function SearchUsersSection() {
 
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-      <h2 className="text-xl font-semibold mb-4">Tìm kiếm người dùng</h2>
-      <p className="text-sm text-gray-600 mb-4">
-        Tìm kiếm người dùng theo tên đăng nhập (username), tên hoặc email trên toàn bộ hệ thống
-      </p>
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-5 bg-red-500 rounded flex-shrink-0"></div>
+        <h1 className="text-xl font-semibold text-gray-800">Tìm kiếm người dùng</h1>
+      </div>
 
       {/* Search Form */}
       <form onSubmit={handleSearch} className="mb-6">

@@ -412,7 +412,14 @@ export default function ProfilePage() {
 
   return (
     <div className="p-4 md:p-6 space-y-6">
+<<<<<<< HEAD
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-1 h-8 bg-red-500 rounded flex-shrink-0"></div>
+        <h1 className="text-2xl font-semibold text-gray-800">Hồ sơ học tập</h1>
+      </div>
+=======
       <h1 className="text-2xl font-semibold mb-6">Tài khoản cá nhân</h1>
+>>>>>>> c81032b2e66fc15f95794a49e8be4199cc96046b
 
       {/* Phần 1: Avatar Section */}
       <AvatarSection
