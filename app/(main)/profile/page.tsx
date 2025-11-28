@@ -249,6 +249,29 @@ export default function ProfilePage() {
         alert("Đổi mật khẩu thất bại. Vui lòng thử lại.");
       } else {
         alert("Đổi mật khẩu thành công!");
+
+        // Thêm thông báo bảo mật vào hệ thống notifications (best-effort)
+        try {
+          if (user?.id) {
+            const { error: notifError } = await supabase
+              .from("notifications")
+              .insert({
+                user_id: user.id,
+                title: "Đổi mật khẩu thành công",
+                message: "Mật khẩu tài khoản của bạn đã được thay đổi.",
+                type: "password_changed",
+                read: false,
+                metadata: {},
+              });
+
+            if (notifError) {
+              console.error("[ProfilePage] Error creating password change notification:", notifError);
+            }
+          }
+        } catch (notifErr) {
+          console.error("[ProfilePage] Exception while creating password change notification:", notifErr);
+        }
+
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");

@@ -409,7 +409,11 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     setActiveTab('knowledge');
   };
 
-  const persistCompletion = async (content: CourseContent, score: number | null = null) => {
+  const persistCompletion = async (
+    content: CourseContent,
+    score: number | null = null,
+    shouldNotify: boolean = false,
+  ) => {
     try {
       if (!user) return;
 
@@ -431,6 +435,33 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
 
       if (error) {
         console.error('[DetailPage] Error saving learning progress:', error);
+        return;
+      }
+
+      if (shouldNotify) {
+        try {
+          const { error: notifError } = await supabase
+            .from('notifications')
+            .insert({
+              user_id: user.id,
+              title: 'Hoàn thành bài học',
+              message: course?.title
+                ? `Bạn đã hoàn thành "${content.title}" trong khóa "${course.title}".`
+                : `Bạn đã hoàn thành bài học "${content.title}".`,
+              type: 'lesson_completed',
+              read: false,
+              metadata: {
+                course_id: courseId,
+                content_id: content.id,
+              },
+            });
+
+          if (notifError) {
+            console.error('[DetailPage] Error creating completion notification:', notifError);
+          }
+        } catch (notifErr) {
+          console.error('[DetailPage] Exception while creating completion notification:', notifErr);
+        }
       }
     } catch (err) {
       console.error('[DetailPage] Exception while saving learning progress:', err);
@@ -441,13 +472,14 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     if (!selectedContent) return;
     const idx = findIndexById(selectedContent.id);
     if (idx < 0) return;
-    setCompletedContentIds((prev) => {
-      if (prev.includes(selectedContent.id)) return prev;
-      return [...prev, selectedContent.id];
-    });
 
-    // Fire-and-forget persistence to server
-    persistCompletion(selectedContent, score);
+    const alreadyCompleted = completedContentIds.includes(selectedContent.id);
+    if (!alreadyCompleted) {
+      setCompletedContentIds((prev) => [...prev, selectedContent.id]);
+    }
+
+    // Fire-and-forget persistence to server; chỉ tạo notification lần đầu hoàn thành
+    persistCompletion(selectedContent, score, !alreadyCompleted);
   };
 
   const isNextLocked =
