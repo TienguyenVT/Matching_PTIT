@@ -33,104 +33,157 @@ function StudyProfileContent() {
   const supabase = supabaseBrowser();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { user } = useAuth(); // ✅ Use shared state
+  const { user, loading: authLoading, error: authError } = useAuth(); // ✅ Use shared state
   const [viewingUserId, setViewingUserId] = useState<string>("");
   const [profile, setProfile] = useState<PublicProfile | null>(null);
   const [courses, setCourses] = useState<EnrolledCourse[]>([]);
   const [loading, setLoading] = useState(true);
   const [showLearningProgress, setShowLearningProgress] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
+
     const load = async () => {
-      // Check authenticated user from shared state
+      console.log("[StudyProfilePage] load() start", {
+        authLoading,
+        hasUser: !!user,
+        userId: user?.id,
+      });
+
+      if (authLoading) {
+        console.log("[StudyProfilePage] Auth still loading, skip fetch");
+        return;
+      }
+
       if (!user) {
+        console.warn("[StudyProfilePage] No authenticated user, redirecting to login");
+        setErrorMessage("Bạn cần đăng nhập để xem hồ sơ học tập.");
         router.replace(ROUTES.LOGIN);
         return;
       }
 
-      // Get userId from query param, default to current user
       const userIdParam = searchParams.get("userId");
       const targetUserId = userIdParam || user.id;
-      setViewingUserId(targetUserId);
 
-      const isViewingOwnProfile = targetUserId === user.id;
+      setLoading(true);
+      setErrorMessage(null);
 
-      // Load current user's role to filter access
-      const { data: currentUserProfile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-      
-      const currentUserRole = currentUserProfile?.role || 'user';
+      try {
+        if (cancelled) return;
 
-      // Load profile data (including show_learning_progress and role)
-      // Try to load with show_learning_progress first, fallback if column doesn't exist
-      let { data: p, error: profileError } = await supabase
-        .from("profiles")
-        .select("id, username, full_name, email, avatar_url, created_at, show_learning_progress, role")
-        .eq("id", targetUserId)
-        .single();
+        setViewingUserId(targetUserId);
 
-      // If column doesn't exist (error code 42703), retry without it
-      if (profileError && profileError.code === '42703') {
-        console.warn("[StudyProfilePage] Column show_learning_progress does not exist. Please run migration. Falling back...");
-        const retryResult = await supabase
+        const isViewingOwnProfile = targetUserId === user.id;
+
+        // Load current user's role to filter access
+        const { data: currentUserProfile, error: currentProfileError } = await supabase
           .from("profiles")
-          .select("id, username, full_name, email, avatar_url, created_at, role")
+          .select("role")
+          .eq("id", user.id)
+          .single();
+
+        if (currentProfileError) {
+          console.error("[StudyProfilePage] Error loading current user role:", currentProfileError);
+        }
+
+        const currentUserRole = currentUserProfile?.role || 'user';
+
+        // Load profile data (including show_learning_progress and role)
+        // Try to load with show_learning_progress first, fallback if column doesn't exist
+        let { data: p, error: profileError } = await supabase
+          .from("profiles")
+          .select("id, username, full_name, email, avatar_url, created_at, show_learning_progress, role")
           .eq("id", targetUserId)
           .single();
-        profileError = retryResult.error;
-        // Set default to false since column doesn't exist
-        if (retryResult.data) {
-          p = { ...retryResult.data, show_learning_progress: false } as any;
+
+        // If column doesn't exist (error code 42703), retry without it
+        if (profileError && (profileError as any).code === '42703') {
+          console.warn("[StudyProfilePage] Column show_learning_progress does not exist. Please run migration. Falling back...");
+          const retryResult = await supabase
+            .from("profiles")
+            .select("id, username, full_name, email, avatar_url, created_at, role")
+            .eq("id", targetUserId)
+            .single();
+          profileError = retryResult.error;
+          if (retryResult.data) {
+            p = { ...retryResult.data, show_learning_progress: false } as any;
+          }
+        }
+
+        if (profileError || !p) {
+          console.error("[StudyProfilePage] Error loading profile:", profileError);
+          setErrorMessage("Không tìm thấy hồ sơ người dùng.");
+          router.replace(ROUTES.STUDY_PROFILE);
+          return;
+        }
+
+        // Check if target user has same role (users can't view admin profiles and vice versa)
+        const targetUserRole = (p as any).role || 'user';
+        if (!isViewingOwnProfile && targetUserRole !== currentUserRole) {
+          console.log("[StudyProfilePage] Access denied: different roles", {
+            currentUserRole,
+            targetUserRole,
+          });
+          setErrorMessage("Bạn không có quyền xem hồ sơ này.");
+          router.replace(ROUTES.STUDY_PROFILE);
+          return;
+        }
+
+        if (cancelled) return;
+
+        setProfile(p as any);
+        setShowLearningProgress((p as any).show_learning_progress || false);
+
+        // Load courses for the target user
+        const { data: uc, error: coursesError } = await supabase
+          .from("user_courses")
+          .select("created_at, courses(id, title, cover_url, level, tags)")
+          .eq("user_id", targetUserId);
+
+        if (coursesError) {
+          console.error("[StudyProfilePage] Error loading courses:", coursesError);
+        }
+
+        const normalized: EnrolledCourse[] = (uc || []).map((row: any) => {
+          const c = Array.isArray(row.courses) ? row.courses[0] : row.courses;
+          return {
+            courseId: c?.id || "",
+            title: c?.title || "",
+            coverUrl: c?.cover_url || null,
+            level: c?.level || null,
+            tags: (c?.tags as string[] | null) || null,
+            enrolledAt: row?.created_at || null,
+            progressPercent: 0,
+          };
+        });
+
+        if (cancelled) return;
+
+        setCourses(normalized);
+      } catch (error) {
+        if (cancelled) return;
+        console.error("[StudyProfilePage] Unexpected error in load():", error);
+        setErrorMessage("Có lỗi xảy ra khi tải hồ sơ học tập. Vui lòng thử lại sau.");
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+          console.log("[StudyProfilePage] load() finished", {
+            hasProfile: !!profile,
+            coursesCount: courses.length,
+            errorMessage,
+          });
         }
       }
-
-      if (profileError || !p) {
-        console.error("[StudyProfilePage] Error loading profile:", profileError);
-        alert("Không tìm thấy hồ sơ người dùng.");
-        router.replace(ROUTES.STUDY_PROFILE);
-        return;
-      }
-
-      // Check if target user has same role (users can't view admin profiles and vice versa)
-      const targetUserRole = (p as any).role || 'user';
-      if (!isViewingOwnProfile && targetUserRole !== currentUserRole) {
-        console.log("[StudyProfilePage] Access denied: different roles");
-        alert("Bạn không có quyền xem hồ sơ này.");
-        router.replace(ROUTES.STUDY_PROFILE);
-        return;
-      }
-
-      setProfile(p as any);
-      setShowLearningProgress((p as any).show_learning_progress || false);
-
-      // Load courses for the target user
-      const { data: uc } = await supabase
-        .from("user_courses")
-        .select("created_at, courses(id, title, cover_url, level, tags)")
-        .eq("user_id", targetUserId);
-
-      const normalized: EnrolledCourse[] = (uc || []).map((row: any) => {
-        const c = Array.isArray(row.courses) ? row.courses[0] : row.courses;
-        return {
-          courseId: c?.id || "",
-          title: c?.title || "",
-          coverUrl: c?.cover_url || null,
-          level: c?.level || null,
-          tags: (c?.tags as string[] | null) || null,
-          enrolledAt: row?.created_at || null,
-          // MVP: 0% until per-content tracking exists
-          progressPercent: 0,
-        };
-      });
-
-      setCourses(normalized);
-      setLoading(false);
     };
+
     load();
-  }, [supabase, router, searchParams, user]);
+
+    return () => {
+      cancelled = true;
+      console.log("[StudyProfilePage] cleanup - cancelling pending load() if any");
+    };
+  }, [authLoading, user, supabase, router, searchParams]);
 
   const handlePrivacyToggleChange = async (newValue: boolean) => {
     try {
@@ -167,6 +220,15 @@ function StudyProfileContent() {
     return (
       <div className="p-6">
         <p className="text-gray-500">Đang tải hồ sơ học tập...</p>
+      </div>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <div className="p-6">
+        <p className="text-red-600 mb-2">{errorMessage}</p>
+        <p className="text-sm text-gray-500">Nếu lỗi tiếp tục xảy ra, vui lòng tải lại trang hoặc đăng nhập lại.</p>
       </div>
     );
   }
