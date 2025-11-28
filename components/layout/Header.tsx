@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import { toast } from "sonner";
+import { Bell, Home, Menu, MessageCircle, UserRound } from "lucide-react";
 
 interface HeaderProps {
   onMenuToggle?: () => void;
@@ -145,44 +146,20 @@ export function Header({ onMenuToggle }: HeaderProps) {
   };
 
   return (
-    <header className="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-50">
+    <header className="h-16 bg-white/80 backdrop-blur border-b border-gray-200/80 flex items-center justify-between px-3 md:px-6 sticky top-0 z-50">
       <div className="flex items-center gap-4">
         <button
           onClick={onMenuToggle}
           className="p-2 hover:bg-gray-100 rounded-md"
         >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 6h16M4 12h16M4 18h16"
-            />
-          </svg>
+          <Menu className="w-6 h-6" />
         </button>
         <Link
           href={homeHref}
-          className="p-2 hover:bg-gray-100 rounded-md flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
+          className="p-2 hover:bg-gray-100 rounded-md flex items-center gap-2 text-gray-800 hover:text-primary transition-colors"
           title="Về trang chủ"
         >
-          <svg
-            className="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-            />
-          </svg>
+          <Home className="w-5 h-5" />
           <span className="hidden sm:inline text-sm font-medium">
             Trang chủ
           </span>
@@ -195,20 +172,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
           onClick={() => router.push(ROUTES.MESSAGES)}
         >
           <span className="sr-only">Tin nhắn</span>
-          <svg
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
-            />
-          </svg>
+          <MessageCircle className="h-6 w-6" />
           {/* Unread message indicator */}
           <span className="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-400 ring-2 ring-white"></span>
         </button>
@@ -223,19 +187,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
                 setNotificationOpen(!notificationOpen);
               }}
             >
-              <svg
-                className="w-6 h-6 text-gray-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
+              <Bell className="w-6 h-6 text-gray-600" />
               {unreadCount > 0 && (
                 <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-medium">
                   {unreadCount > 99 ? "99+" : unreadCount}
@@ -354,19 +306,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
                 }}
                 className="w-full text-left px-4 py-2 hover:bg-gray-100 text-sm flex items-center gap-2"
               >
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                  />
-                </svg>
+                <UserRound className="w-4 h-4" />
                 Tài khoản
               </button>
               <div className="border-t border-gray-200 my-1"></div>
