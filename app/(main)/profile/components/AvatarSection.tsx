@@ -81,11 +81,11 @@ export default function AvatarSection({
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6 max-w-2xl mx-auto">
       <div className="flex items-center gap-4 mb-6">
         <div className="relative">
-          <div className="w-20 h-20 rounded-full bg-teal-100 flex items-center justify-center overflow-hidden">
+          <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center overflow-hidden">
             {getAvatarDisplay()}
             {!selectedAvatar && (
               <svg
-                className="w-10 h-10 text-teal-600"
+                className="w-10 h-10 text-red-600"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -238,7 +238,7 @@ export default function AvatarSection({
             <button
               onClick={onSaveProfile}
               disabled={saving || !hasChanges}
-              className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 disabled:bg-red-400 disabled:cursor-not-allowed transition-colors"
               aria-label={saving ? "Đang lưu thay đổi" : "Lưu thay đổi hồ sơ"}
             >
               {saving ? "Đang lưu..." : "Lưu thay đổi"}

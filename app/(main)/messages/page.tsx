@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useCallback, useEffect, useRef, useState } from "react";
+
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -34,7 +35,20 @@ type Conversation = {
 };
 
 export default function MessagesPage() {
+    return (
+        <Suspense
+            fallback={
+                <div className="flex h-screen items-center justify-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary" />
+                </div>
+            }
+        >
+            <MessagesPageContent />
+        </Suspense>
+    );
+}
 
+function MessagesPageContent() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState("");
     const [conversations, setConversations] = useState<Conversation[]>([]);
@@ -47,6 +61,100 @@ export default function MessagesPage() {
     const searchParams = useSearchParams();
     const queryUserId = searchParams.get("user");
 
+    const updateConversationsList = useCallback(
+        async (userId: string, lastMessage: string) => {
+            try {
+                let exists = false;
+
+                setConversations((prev) => {
+                    const existingConversation = prev.find((c) => c.user_id === userId);
+
+                    if (existingConversation) {
+                        exists = true;
+                        const updated = prev
+                            .map((c) =>
+                                c.user_id === userId
+                                    ? {
+                                          ...c,
+                                          last_message: lastMessage,
+                                          unread_count:
+                                              c.user_id === selectedConversation
+                                                  ? 0
+                                                  : c.unread_count + 1,
+                                          updated_at: new Date().toISOString(),
+                                      }
+                                    : c
+                            )
+                            .sort(
+                                (a, b) =>
+                                    new Date(b.updated_at).getTime() -
+                                    new Date(a.updated_at).getTime()
+                            );
+
+                        return updated;
+                    }
+
+                    return prev;
+                });
+
+                if (!exists) {
+                    const { data: userData, error: userError } = await supabase
+                        .from("profiles")
+                        .select("full_name, avatar_url")
+                        .eq("id", userId)
+                        .single();
+
+                    if (userError) throw userError;
+
+                    setConversations((prev) => [
+                        {
+                            id: userId,
+                            user_id: userId,
+                            full_name: userData.full_name,
+                            avatar_url: userData.avatar_url,
+                            last_message: lastMessage,
+                            unread_count: 1,
+                            updated_at: new Date().toISOString(),
+                        },
+                        ...prev,
+                    ]);
+                }
+            } catch (error) {
+                console.error("Error updating conversations list:", error);
+            }
+        },
+        [selectedConversation, supabase]
+    );
+
+    const markMessagesAsRead = useCallback(
+        async (senderId: string) => {
+            if (!user) return;
+
+            try {
+                await supabase
+                    .from("messages")
+                    .update({ read: true })
+                    .eq("sender_id", senderId)
+                    .eq("receiver_id", user.id)
+                    .eq("read", false);
+
+                setConversations((prev) =>
+                    prev.map((c) =>
+                        c.user_id === senderId
+                            ? {
+                                  ...c,
+                                  unread_count: 0,
+                              }
+                            : c
+                    )
+                );
+            } catch (error) {
+                console.error("Error marking messages as read:", error);
+            }
+        },
+        [supabase, user?.id]
+    );
+
     // Fetch conversations
     useEffect(() => {
         if (!user) return;
@@ -55,8 +163,8 @@ export default function MessagesPage() {
             try {
                 setLoading(true);
                 const { data: conversationsData, error: conversationsError } = await supabase
-                    .rpc('get_user_conversations', { p_user_id: user.id });
-                console.log('[messages] conversationsData:', conversationsData, 'error:', conversationsError);
+                    .rpc("get_user_conversations", { p_user_id: user.id });
+
                 if (conversationsError) throw conversationsError;
                 const list = conversationsData || [];
                 setConversations(list);
@@ -64,14 +172,14 @@ export default function MessagesPage() {
                 // Chọn cuộc trò chuyện ban đầu
                 if (list.length > 0 && !selectedConversation) {
                     // Ưu tiên userId từ query (?user=...)
-                    const hasQueryUser = queryUserId && list.some((c: Conversation) => c.user_id === queryUserId);
+                    const hasQueryUser =
+                        queryUserId && list.some((c: Conversation) => c.user_id === queryUserId);
                     const targetId = hasQueryUser ? queryUserId! : list[0].user_id;
                     setSelectedConversation(targetId);
                 }
-
             } catch (error) {
-                console.error('Error fetching conversations:', error);
-                toast.error('Lỗi khi tải danh sách trò chuyện');
+                console.error("Error fetching conversations:", error);
+                toast.error("Lỗi khi tải danh sách trò chuyện");
             } finally {
                 setLoading(false);
             }
@@ -81,17 +189,18 @@ export default function MessagesPage() {
 
         // Set up real-time subscription for new messages
         const channel = supabase
-            .channel('messages')
-            .on('postgres_changes',
+            .channel("messages")
+            .on(
+                "postgres_changes",
                 {
-                    event: 'INSERT',
-                    schema: 'public',
-                    table: 'messages',
-                    filter: `receiver_id=eq.${user.id}`
+                    event: "INSERT",
+                    schema: "public",
+                    table: "messages",
+                    filter: `receiver_id=eq.${user.id}`,
                 },
                 (payload) => {
                     const newMessage = payload.new as Message;
-                    setMessages(prev => [...prev, newMessage]);
+                    setMessages((prev) => [...prev, newMessage]);
                     scrollToBottom();
 
                     // Update conversations list
@@ -103,7 +212,7 @@ export default function MessagesPage() {
         return () => {
             supabase.removeChannel(channel);
         };
-    }, [user, selectedConversation]);
+    }, [user?.id, selectedConversation, queryUserId, supabase, updateConversationsList]);
 
     // Fetch messages for selected conversation
     useEffect(() => {
@@ -113,10 +222,12 @@ export default function MessagesPage() {
             try {
                 setLoading(true);
                 const { data: messagesData, error: messagesError } = await supabase
-                    .from('messages')
-                    .select('*')
-                    .or(`and(sender_id.eq.${user.id},receiver_id.eq.${selectedConversation}),and(sender_id.eq.${selectedConversation},receiver_id.eq.${user.id})`)
-                    .order('created_at', { ascending: true });
+                    .from("messages")
+                    .select("*")
+                    .or(
+                        `and(sender_id.eq.${user.id},receiver_id.eq.${selectedConversation}),and(sender_id.eq.${selectedConversation},receiver_id.eq.${user.id})`
+                    )
+                    .order("created_at", { ascending: true });
 
                 if (messagesError) throw messagesError;
                 setMessages(messagesData || []);
@@ -126,88 +237,15 @@ export default function MessagesPage() {
 
                 scrollToBottom();
             } catch (error) {
-                console.error('Error fetching messages:', error);
-                toast.error('Lỗi khi tải tin nhắn');
+                console.error("Error fetching messages:", error);
+                toast.error("Lỗi khi tải tin nhắn");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchMessages();
-    }, [selectedConversation]);
-
-    const updateConversationsList = async (userId: string, lastMessage: string) => {
-        try {
-            // Find if conversation already exists
-            const existingConversation = conversations.find(c => c.user_id === userId);
-
-            if (existingConversation) {
-                // Update existing conversation
-                setConversations(prev =>
-                    prev.map(c =>
-                        c.user_id === userId
-                            ? {
-                                ...c,
-                                last_message: lastMessage,
-                                unread_count: c.user_id === selectedConversation ? 0 : c.unread_count + 1,
-                                updated_at: new Date().toISOString()
-                            }
-                            : c
-                    ).sort((a, b) =>
-                        new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
-                    )
-                );
-            } else {
-                // Fetch user profile for new conversation
-                const { data: userData, error: userError } = await supabase
-                    .from('profiles')
-                    .select('full_name, avatar_url')
-                    .eq('id', userId)
-                    .single();
-
-                if (userError) throw userError;
-
-                setConversations(prev => [
-                    {
-                        id: userId,
-                        user_id: userId,
-                        full_name: userData.full_name,
-                        avatar_url: userData.avatar_url,
-                        last_message: lastMessage,
-                        unread_count: 1,
-                        updated_at: new Date().toISOString()
-                    },
-                    ...prev
-                ]);
-            }
-        } catch (error) {
-            console.error('Error updating conversations list:', error);
-        }
-    };
-
-    const markMessagesAsRead = async (senderId: string) => {
-        if (!user) return;
-
-        try {
-            await supabase
-                .from('messages')
-                .update({ read: true })
-                .eq('sender_id', senderId)
-                .eq('receiver_id', user.id)
-                .eq('read', false);
-
-            // Update unread count in conversations
-            setConversations(prev =>
-                prev.map(c =>
-                    c.user_id === senderId
-                        ? { ...c, unread_count: 0 }
-                        : c
-                )
-            );
-        } catch (error) {
-            console.error('Error marking messages as read:', error);
-        }
-    };
+    }, [selectedConversation, user?.id, supabase, markMessagesAsRead]);
 
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -215,14 +253,14 @@ export default function MessagesPage() {
 
         try {
             const { data, error } = await supabase
-                .from('messages')
+                .from("messages")
                 .insert([
                     {
                         sender_id: user.id,
                         receiver_id: selectedConversation,
                         content: newMessage.trim(),
-                        read: false
-                    }
+                        read: false,
+                    },
                 ])
                 .select()
                 .single();
@@ -230,34 +268,32 @@ export default function MessagesPage() {
             if (error) throw error;
 
             setNewMessage("");
-            setMessages(prev => [...prev, data]);
+            setMessages((prev) => [...prev, data]);
 
-            // Update conversations list
             updateConversationsList(selectedConversation, data.content);
-
             scrollToBottom();
         } catch (error) {
-            console.error('Error sending message:', error);
-            toast.error('Lỗi khi gửi tin nhắn');
+            console.error("Error sending message:", error);
+            toast.error("Lỗi khi gửi tin nhắn");
         }
     };
 
     const scrollToBottom = () => {
-        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     const getInitials = (name: string) => {
         return name
-            .split(' ')
-            .map(n => n[0])
-            .join('')
+            .split(" ")
+            .map((n) => n[0])
+            .join("")
             .toUpperCase();
     };
 
     if (loading && !selectedConversation) {
         return (
             <div className="flex h-screen items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
             </div>
         );
     }
@@ -278,14 +314,14 @@ export default function MessagesPage() {
                         conversations.map((conversation) => (
                             <div
                                 key={conversation.user_id}
-                                className={`flex items-center p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 ${selectedConversation === conversation.user_id ? 'bg-blue-50' : ''}`}
+                                className={`flex items-center p-4 border-b border-gray-100 cursor-pointer hover:bg-gray-50 ${
+                                    selectedConversation === conversation.user_id ? "bg-red-50" : ""
+                                }`}
                                 onClick={() => setSelectedConversation(conversation.user_id)}
                             >
                                 <Avatar className="h-10 w-10">
-                                    <AvatarImage src={conversation.avatar_url || ''} />
-                                    <AvatarFallback>
-                                        {getInitials(conversation.full_name)}
-                                    </AvatarFallback>
+                                    <AvatarImage src={conversation.avatar_url || ""} />
+                                    <AvatarFallback>{getInitials(conversation.full_name)}</AvatarFallback>
                                 </Avatar>
                                 <div className="ml-3 flex-1 min-w-0">
                                     <div className="flex justify-between items-center">
@@ -293,19 +329,19 @@ export default function MessagesPage() {
                                             {conversation.full_name}
                                         </h3>
                                         <span className="text-xs text-gray-400">
-                                            {new Date(conversation.updated_at).toLocaleTimeString('vi-VN', {
-                                                hour: '2-digit',
-                                                minute: '2-digit'
+                                            {new Date(conversation.updated_at).toLocaleTimeString("vi-VN", {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
                                             })}
                                         </span>
                                     </div>
                                     <p className="text-sm text-gray-500 truncate">
-                                        {conversation.last_message || 'Bắt đầu trò chuyện'}
+                                        {conversation.last_message || "Bắt đầu trò chuyện"}
                                     </p>
                                 </div>
                                 {conversation.unread_count > 0 && (
-                                    <span className="ml-2 bg-blue-500 text-white text-xs font-medium px-2 py-0.5 rounded-full">
-                                        {conversation.unread_count > 9 ? '9+' : conversation.unread_count}
+                                    <span className="ml-2 bg-primary text-primary-foreground text-xs font-medium px-2 py-0.5 rounded-full">
+                                        {conversation.unread_count > 9 ? "9+" : conversation.unread_count}
                                     </span>
                                 )}
                             </div>
@@ -320,17 +356,28 @@ export default function MessagesPage() {
                     <>
                         {/* Chat Header */}
                         <div className="p-4 border-b border-gray-200 bg-white flex items-center">
-                            {conversations.find(c => c.user_id === selectedConversation) && (
+                            {conversations.find((c) => c.user_id === selectedConversation) && (
                                 <>
                                     <Avatar className="h-10 w-10">
-                                        <AvatarImage src={conversations.find(c => c.user_id === selectedConversation)?.avatar_url || ''} />
+                                        <AvatarImage
+                                            src={
+                                                conversations.find((c) => c.user_id === selectedConversation)
+                                                    ?.avatar_url || ""
+                                            }
+                                        />
                                         <AvatarFallback>
-                                            {getInitials(conversations.find(c => c.user_id === selectedConversation)?.full_name || '')}
+                                            {getInitials(
+                                                conversations.find((c) => c.user_id === selectedConversation)
+                                                    ?.full_name || ""
+                                            )}
                                         </AvatarFallback>
                                     </Avatar>
                                     <div className="ml-3">
                                         <h3 className="text-base font-medium text-gray-900">
-                                            {conversations.find(c => c.user_id === selectedConversation)?.full_name}
+                                            {
+                                                conversations.find((c) => c.user_id === selectedConversation)
+                                                    ?.full_name
+                                            }
                                         </h3>
                                         <p className="text-sm text-gray-500">Đang hoạt động</p>
                                     </div>
@@ -349,17 +396,34 @@ export default function MessagesPage() {
                                     {messages.map((message) => (
                                         <div
                                             key={message.id}
-                                            className={`flex ${message.sender_id === user?.id ? 'justify-end' : 'justify-start'}`}
+                                            className={`flex ${
+                                                message.sender_id === user?.id
+                                                    ? "justify-end"
+                                                    : "justify-start"
+                                            }`}
                                         >
                                             <div
-                                                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${message.sender_id === user?.id ? 'bg-blue-500 text-white' : 'bg-white border border-gray-200'}`}
+                                                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                                                    message.sender_id === user?.id
+                                                        ? "bg-primary text-primary-foreground"
+                                                        : "bg-white border border-gray-200"
+                                                }`}
                                             >
                                                 <p className="text-sm">{message.content}</p>
-                                                <p className={`text-xs mt-1 text-right ${message.sender_id === user?.id ? 'text-blue-100' : 'text-gray-400'}`}>
-                                                    {new Date(message.created_at).toLocaleTimeString('vi-VN', {
-                                                        hour: '2-digit',
-                                                        minute: '2-digit'
-                                                    })}
+                                                <p
+                                                    className={`text-xs mt-1 text-right ${
+                                                        message.sender_id === user?.id
+                                                            ? "text-red-100"
+                                                            : "text-gray-400"
+                                                    }`}
+                                                >
+                                                    {new Date(message.created_at).toLocaleTimeString(
+                                                        "vi-VN",
+                                                        {
+                                                            hour: "2-digit",
+                                                            minute: "2-digit",
+                                                        }
+                                                    )}
                                                 </p>
                                             </div>
                                         </div>
@@ -403,7 +467,9 @@ export default function MessagesPage() {
                                     />
                                 </svg>
                             </div>
-                            <h3 className="text-lg font-medium text-gray-900 mb-1">Không có cuộc trò chuyện nào</h3>
+                            <h3 className="text-lg font-medium text-gray-900 mb-1">
+                                Không có cuộc trò chuyện nào
+                            </h3>
                             <p className="text-sm text-gray-500">
                                 Chọn một cuộc trò chuyện hoặc bắt đầu trò chuyện mới
                             </p>

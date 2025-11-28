@@ -93,8 +93,8 @@ export default function AllCoursesPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-3">
-          <div className="w-1 h-8 bg-orange-500 rounded"></div>
-          <h1 className="text-2xl font-semibold text-gray-800">Tất cả khóa học</h1>
+          <div className="w-1 h-8 bg-primary rounded"></div>
+          <h1 className="text-2xl font-semibold text-gray-900">Tất cả khóa học</h1>
         </div>
       </div>
 
@@ -104,7 +104,7 @@ export default function AllCoursesPage() {
           onClick={() => setFilter('all')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             filter === 'all'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-primary text-primary-foreground'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -114,7 +114,7 @@ export default function AllCoursesPage() {
           onClick={() => setFilter('enrolled')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             filter === 'enrolled'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-primary text-primary-foreground'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -124,7 +124,7 @@ export default function AllCoursesPage() {
           onClick={() => setFilter('not-enrolled')}
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             filter === 'not-enrolled'
-              ? 'bg-orange-500 text-white'
+              ? 'bg-primary text-primary-foreground'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
@@ -146,7 +146,7 @@ export default function AllCoursesPage() {
           {filteredCourses.map((course) => (
             <div
               key={course.id}
-              className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+              className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200"
             >
               {/* Course Image */}
               <Link href={ROUTES.COURSE_DETAIL(course.id)}>
@@ -165,7 +165,7 @@ export default function AllCoursesPage() {
                   )}
                   {/* Enrolled Badge */}
                   {enrolledIds.has(course.id) && (
-                    <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                    <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded-full text-xs font-medium">
                       Đã đăng ký
                     </div>
                   )}
@@ -176,8 +176,8 @@ export default function AllCoursesPage() {
               <div className="flex flex-col flex-1 p-4">
                 <Link href={ROUTES.COURSE_DETAIL(course.id)}>
                   <div className="flex items-start gap-2 mb-2">
-                    <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
-                    <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-orange-500 transition-colors">{course.title}</h3>
+                    <div className="w-1 h-5 bg-primary rounded mt-1 flex-shrink-0"></div>
+                    <h3 className="font-semibold text-gray-900 line-clamp-2 hover:text-primary transition-colors">{course.title}</h3>
                   </div>
                 </Link>
                 
@@ -186,7 +186,7 @@ export default function AllCoursesPage() {
                 {/* Button Actions */}
                 {enrolledIds.has(course.id) ? (
                   <Link href={ROUTES.COURSE_DETAIL(course.id)} className="mt-auto block">
-                    <div className="w-full text-center py-2 px-4 bg-teal-600 hover:bg-teal-700 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                    <div className="w-full text-center py-2 px-4 bg-primary text-primary-foreground hover:opacity-90 rounded-md transition-colors text-sm font-medium cursor-pointer">
                       Xem chi tiết
                     </div>
                   </Link>
@@ -195,12 +195,12 @@ export default function AllCoursesPage() {
                     <button
                       onClick={(e) => handleRegisterCourse(course.id, e)}
                       disabled={registering === course.id}
-                      className="flex-1 text-center py-2 px-3 bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white rounded-md transition-colors text-sm font-medium cursor-pointer"
+                      className="flex-1 text-center py-2 px-3 bg-primary text-primary-foreground hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed rounded-md transition-colors text-sm font-medium cursor-pointer"
                     >
                       {registering === course.id ? 'Đang đăng ký...' : 'Đăng ký'}
                     </button>
                     <Link href={ROUTES.COURSE_DETAIL(course.id)} className="flex-1">
-                      <div className="w-full text-center py-2 px-3 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                      <div className="w-full text-center py-2 px-3 border border-gray-200 text-gray-900 hover:bg-gray-50 rounded-md transition-colors text-sm font-medium cursor-pointer">
                         Xem
                       </div>
                     </Link>

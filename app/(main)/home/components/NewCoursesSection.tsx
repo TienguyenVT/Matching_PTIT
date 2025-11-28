@@ -35,7 +35,7 @@ export default function NewCoursesSection({ courses, loading }: NewCoursesSectio
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h2 className="text-2xl font-bold text-gray-900">Khóa học mới nhất</h2>
-        <Link href="/courses" className="text-teal-600 hover:text-teal-700 font-medium">
+        <Link href="/courses" className="text-primary hover:opacity-90 font-medium">
           Xem tất cả →
         </Link>
       </div>
@@ -45,7 +45,7 @@ export default function NewCoursesSection({ courses, loading }: NewCoursesSectio
           <Link 
             key={course.id} 
             href={`/course/${course.id}/detail`}
-            className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow overflow-hidden group"
+            className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
           >
             <div className="aspect-[16/10] bg-gray-100 relative overflow-hidden">
               {course.cover_url ? (

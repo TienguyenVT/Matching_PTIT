@@ -136,7 +136,7 @@ export default function QuizJSONUploadForm({ onUploadSuccess, onUploadError, sup
           onChange={handleFileChange}
           disabled={uploading}
           required
-          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 disabled:opacity-50"
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 disabled:opacity-50"
         />
       </div>
 
@@ -150,7 +150,7 @@ export default function QuizJSONUploadForm({ onUploadSuccess, onUploadError, sup
           value={courseTitle}
           onChange={(e) => setCourseTitle(e.target.value)}
           disabled={uploading}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 disabled:opacity-50"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary disabled:opacity-50"
           placeholder="Ví dụ: Kỹ năng thuyết trình"
         />
       </div>
@@ -165,7 +165,7 @@ export default function QuizJSONUploadForm({ onUploadSuccess, onUploadError, sup
           value={courseId}
           onChange={(e) => setCourseId(e.target.value)}
           disabled={uploading}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 disabled:opacity-50"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary disabled:opacity-50"
           placeholder="Nhập ID khóa học nếu bạn đã biết"
         />
       </div>
@@ -178,7 +178,7 @@ export default function QuizJSONUploadForm({ onUploadSuccess, onUploadError, sup
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
-              className="bg-teal-600 h-2.5 rounded-full transition-all duration-300"
+              className="bg-primary h-2.5 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -188,7 +188,7 @@ export default function QuizJSONUploadForm({ onUploadSuccess, onUploadError, sup
       <button
         type="submit"
         disabled={uploading || !file}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {uploading ? 'Đang xử lý...' : 'Upload bài kiểm tra JSON'}
       </button>

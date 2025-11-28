@@ -211,7 +211,7 @@ export async function POST(req: NextRequest) {
       
       // Create module
       console.log(`Creating module ${moduleOrder}: ${chapter.title}`);
-      const { data: module, error: moduleError } = await supabaseAdmin
+      const { data: createdModule, error: moduleError } = await supabaseAdmin
         .from('course_modules')
         .insert({
           course_id: course.id,
@@ -223,15 +223,15 @@ export async function POST(req: NextRequest) {
         .select()
         .single();
 
-      if (moduleError || !module) {
+      if (moduleError || !createdModule) {
         console.error(`Error creating module ${moduleOrder}:`, moduleError);
         continue; // Skip this module but continue with others
       }
 
       createdModules.push({
-        id: module.id,
+        id: createdModule.id,
         chapter_number: chapter.chapterNumber,
-        title: module.title,
+        title: createdModule.title,
       });
 
       // Create lessons (sections) for this module
@@ -276,7 +276,7 @@ export async function POST(req: NextRequest) {
         }
       }
 
-      console.log(`Created ${lessonOrder} lessons for module ${module.title}`);
+      console.log(`Created ${lessonOrder} lessons for module ${createdModule.title}`);
     }
 
     // Nếu admin upload kèm file JSON bài kiểm tra, tạo luôn quiz content cho khóa học này
@@ -296,9 +296,9 @@ export async function POST(req: NextRequest) {
       for (let i = 0; i < parsedQuiz.tests.length; i++) {
         const chapterTest = parsedQuiz.tests[i];
         const chapterIndex = parseChapterIndex(chapterTest.chapter_id, i);
-        const module = moduleByChapter.get(chapterIndex);
+        const targetModule = moduleByChapter.get(chapterIndex);
 
-        if (!module) {
+        if (!targetModule) {
           if (chapterTest.chapter_id != null) {
             skippedChapters.push(String(chapterTest.chapter_id));
           }
@@ -354,7 +354,7 @@ export async function POST(req: NextRequest) {
           .from('course_contents')
           .insert({
             course_id: course.id,
-            module_id: module.id,
+            module_id: targetModule.id,
             title: chapterTest.chapter_title || `Bài kiểm tra chương ${chapterIndex}`,
             kind: 'quiz',
             order_index: 1000 + chapterIndex,

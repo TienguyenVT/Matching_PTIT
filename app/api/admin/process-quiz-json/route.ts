@@ -165,9 +165,9 @@ export async function POST(req: NextRequest) {
     for (let i = 0; i < parsed.tests.length; i++) {
       const chapterTest = parsed.tests[i];
       const chapterIndex = parseChapterIndex(chapterTest.chapter_id, i);
-      const module = moduleByChapter.get(chapterIndex);
+      const targetModule = moduleByChapter.get(chapterIndex);
 
-      if (!module) {
+      if (!targetModule) {
         if (chapterTest.chapter_id != null) {
           skippedChapters.push(String(chapterTest.chapter_id));
         }
@@ -223,7 +223,7 @@ export async function POST(req: NextRequest) {
         .from('course_contents')
         .insert({
           course_id: course.id,
-          module_id: module.id,
+          module_id: targetModule.id,
           title: chapterTest.chapter_title || `Bài kiểm tra chương ${chapterIndex}`,
           kind: 'quiz',
           order_index: 1000 + chapterIndex,

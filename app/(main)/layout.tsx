@@ -8,13 +8,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
   const [sidebarOpen, setSidebarOpen] = useState(true); // Mặc định mở trên desktop
 
   return (
-    <div className="flex h-screen bg-gray-50 relative overflow-hidden">
+    <div className="flex h-screen bg-background relative overflow-y-auto">
       <Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)}
       />
       <div 
-        className={`flex-1 flex flex-col overflow-hidden min-w-0 transition-all duration-300 ${
+        className={`flex-1 flex flex-col overflow-y-auto min-w-0 transition-all duration-300 ${
           sidebarOpen ? 'md:ml-64' : 'md:ml-0'
         }`}
       >

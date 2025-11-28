@@ -175,7 +175,7 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           onChange={handleFileChange}
           disabled={uploading}
           required
-          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 disabled:opacity-50"
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 disabled:opacity-50"
         />
         <p className="mt-1 text-xs text-gray-500">
           Chọn file JSON nội dung khóa học (từ thư mục <code className="bg-gray-100 px-1 rounded">documents/Courses</code>).
@@ -193,7 +193,7 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           accept=".json,application/json"
           onChange={handleQuizFileChange}
           disabled={uploading}
-          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-teal-50 file:text-teal-700 hover:file:bg-teal-100 disabled:opacity-50"
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 disabled:opacity-50"
         />
         <p className="mt-1 text-xs text-gray-500">
           Nếu chọn, hệ thống sẽ tự động tạo bài kiểm tra theo chương cho khóa học này (từ thư mục <code className="bg-gray-100 px-1 rounded">documents/Test</code> với tên file giống nội dung khóa học).
@@ -212,7 +212,7 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           onChange={(e) => setCourseTitle(e.target.value)}
           required
           disabled={uploading}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 disabled:opacity-50"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary disabled:opacity-50"
           placeholder="Nhập tên khóa học"
         />
       </div>
@@ -228,7 +228,7 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           onChange={(e) => setCourseDescription(e.target.value)}
           disabled={uploading}
           rows={4}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 disabled:opacity-50"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary disabled:opacity-50"
           placeholder="Nhập mô tả khóa học (tùy chọn)"
         />
       </div>
@@ -243,7 +243,7 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           value={courseLevel}
           onChange={(e) => setCourseLevel(e.target.value)}
           disabled={uploading}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 disabled:opacity-50"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary disabled:opacity-50"
         >
           <option value="Beginner">Cơ bản</option>
           <option value="Intermediate">Trung bình</option>
@@ -260,7 +260,7 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
-              className="bg-teal-600 h-2.5 rounded-full transition-all duration-300"
+              className="bg-primary h-2.5 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
@@ -271,7 +271,7 @@ export default function JSONUploadForm({ onUploadSuccess, onUploadError, supabas
       <button
         type="submit"
         disabled={uploading || !file}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {uploading ? 'Đang xử lý...' : 'Upload và tạo khóa học'}
       </button>

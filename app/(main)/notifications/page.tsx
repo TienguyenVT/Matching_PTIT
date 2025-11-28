@@ -78,7 +78,7 @@ export default function NotificationsPage() {
         return () => {
             supabase.removeChannel(channel);
         };
-    }, [user?.id]);
+    }, [user?.id, supabase]);
 
     const markAsRead = async (id: string) => {
         try {
@@ -228,6 +228,7 @@ export default function NotificationsPage() {
             toast.error('Có lỗi xảy ra khi xử lý yêu cầu');
         }
     };
+
     const renderNotificationContent = (notification: Notification) => {
         const isMatchRequest = notification.type === 'match_request';
         const isProcessed = notification.metadata?.status === 'accepted' || notification.metadata?.status === 'rejected';
@@ -314,7 +315,7 @@ export default function NotificationsPage() {
                 {notifications.some(n => !n.read) && (
                     <button
                         onClick={markAllAsRead}
-                        className="text-sm text-blue-600 hover:text-blue-800"
+                        className="text-sm text-primary hover:opacity-90"
                     >
                         Đánh dấu tất cả đã đọc
                     </button>
@@ -344,13 +345,13 @@ export default function NotificationsPage() {
                     {notifications.map((notification) => (
                         <div
                             key={notification.id}
-                            className={`p-4 border rounded-lg ${!notification.read ? 'bg-blue-50 border-blue-200' : 'bg-white hover:bg-gray-50'}`}
+                            className={`p-4 border rounded-lg ${!notification.read ? 'bg-red-50 border-red-200' : 'bg-white hover:bg-gray-50'}`}
                             onClick={() => !notification.read && markAsRead(notification.id)}
                         >
                             <div className="flex items-start">
                                 <div className="flex-shrink-0 pt-0.5">
                                     {!notification.read && (
-                                        <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                        <span className="inline-block w-2 h-2 bg-primary rounded-full mr-2"></span>
                                     )}
                                 </div>
                                 {renderNotificationContent(notification)}

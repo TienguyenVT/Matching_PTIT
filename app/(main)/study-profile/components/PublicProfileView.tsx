@@ -36,10 +36,10 @@ export default function PublicProfileView({ profile }: { profile: PublicProfile 
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6 max-w-3xl">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">Trang cá nhân</h2>
       <div className="flex items-center gap-4">
-        <div className="w-20 h-20 rounded-full bg-teal-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+        <div className="w-20 h-20 rounded-full bg-red-50 flex items-center justify-center overflow-hidden flex-shrink-0">
           {getAvatar()}
           {!profile.avatar_url && (
-            <svg className="w-10 h-10 text-teal-600" fill="currentColor" viewBox="0 0 20 20">
+            <svg className="w-10 h-10 text-red-600" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
             </svg>
           )}
