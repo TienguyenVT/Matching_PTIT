@@ -23,14 +23,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       section: "HỌC TẬP",
       items: isAdmin
         ? [
-            { label: "Khóa học", href: ROUTES.COURSES, icon: "📚" },
-            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: "➕" },
-            { label: "Tài khoản", href: ROUTES.PROFILE, icon: "👤" },
+            { label: "Khóa học", href: ROUTES.COURSES, icon: "🎓" },
+            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: "📝" },
+            { label: "Tài khoản", href: ROUTES.PROFILE, icon: "🪪" },
           ]
         : [
-            { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
-            { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: "👥" },
-            { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
+            { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "🎓" },
+            { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: "🌐" },
+            { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "📄" },
           ],
     },
   ];
