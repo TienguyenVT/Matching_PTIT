@@ -195,28 +195,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Subscribe to auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
-      
-      console.log('[AuthProvider] Auth event:', event);
-      
-      // Ignore USER_UPDATED events to prevent interrupting profile save flow
-      // The profile page will handle refresh manually after save
-      if (event === 'USER_UPDATED') {
-        console.log('[AuthProvider] Ignoring USER_UPDATED event');
-        return;
-      }
-      
-      if (session?.user) {
-        const userProfile = await fetchProfile(session.user.id);
-        if (mounted) {
-          setUser(session.user);
-          setProfile(userProfile);
-          saveToCache(session.user, userProfile);
-        }
-      } else {
-        setUser(null);
-        setProfile(null);
-        saveToCache(null, null);
-      }
+  
+  console.log('[AuthProvider] Auth event:', event);
+  
+  // Bỏ qua sự kiện SIGNED_IN từ tab focus và đã có session
+  if (event === 'SIGNED_IN' && document.visibilityState === 'visible' && user) {
+    console.log('Ignoring SIGNED_IN event from tab focus');
+    return;
+  }
+
+  // Xử lý đăng xuất
+  if (event === 'SIGNED_OUT') {
+    console.log('[AuthProvider] User signed out, clearing cache');
+    localStorage.removeItem(CACHE_KEYS.USER);
+    localStorage.removeItem(CACHE_KEYS.PROFILE);
+    localStorage.removeItem(CACHE_KEYS.TIMESTAMP);
+    setUser(null);
+    setProfile(null);
+    setLoading(false);
+    return;
+  }
+
+  // Xử lý đăng nhập
+  if (session?.user) {
+    try {
+      console.log('[AuthProvider] User authenticated:', session.user.id);
+      setUser(session.user);
+      await refreshProfile();
+    } catch (error) {
+      console.error('[AuthProvider] Error refreshing profile:', error);
+      setError(error as Error);
+    }
+  }
+  
+  setLoading(false);
     });
 
     return () => {

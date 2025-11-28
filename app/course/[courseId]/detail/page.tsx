@@ -542,10 +542,10 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
 
   return (
     <div className="min-h-screen bg-gray-50 py-6 md:py-10">
-      <div className="max-w-10xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="max-w-10xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-7 gap-6">
         {/* Left Sidebar - Chương trình học */}
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 sticky top-20">
+        <div className="lg:col-span-2">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 h-full">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-1 h-5 bg-primary rounded-full"></div>
               <h2 className="text-base font-semibold text-gray-800">Chương trình học</h2>
@@ -620,7 +620,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         </div>
 
         {/* Right Main Content - ÔN TẬP */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-5">
           <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 space-y-5">
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
