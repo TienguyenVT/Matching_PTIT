@@ -311,17 +311,25 @@ function StudyProfileContent() {
 
   if (loading) {
     return (
-      <div className="p-6">
-        <p className="text-gray-500">Đang tải hồ sơ học tập...</p>
+      <div className="soft-page p-4 md:p-8">
+        <div className="soft-page-inner">
+          <div className="soft-card p-6">
+            <p className="text-gray-500">Đang tải hồ sơ học tập...</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (errorMessage) {
     return (
-      <div className="p-6">
-        <p className="text-red-600 mb-2">{errorMessage}</p>
-        <p className="text-sm text-gray-500">Nếu lỗi tiếp tục xảy ra, vui lòng tải lại trang hoặc đăng nhập lại.</p>
+      <div className="soft-page p-4 md:p-8">
+        <div className="soft-page-inner">
+          <div className="soft-card p-6">
+            <p className="text-red-600 mb-2">{errorMessage}</p>
+            <p className="text-sm text-gray-500">Nếu lỗi tiếp tục xảy ra, vui lòng tải lại trang hoặc đăng nhập lại.</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -330,39 +338,59 @@ function StudyProfileContent() {
   const shouldShowProgress = isViewingOwnProfile || showLearningProgress;
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-900">
-        {isViewingOwnProfile ? "Hồ sơ học tập" : "Hồ sơ học tập của người dùng khác"}
-      </h1>
-      
-      {/* Section 1: Public profile view */}
-      {profile && <PublicProfileView profile={profile} />}
-
-      {/* Privacy toggle - only show for own profile */}
-      {/* Note: Toggle will only work after migration is run */}
-      {isViewingOwnProfile && profile && 'show_learning_progress' in profile && (
-        <PrivacyToggle
-          value={showLearningProgress}
-          onChange={handlePrivacyToggleChange}
-        />
-      )}
-      {isViewingOwnProfile && profile && !('show_learning_progress' in profile) && (
-        <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-          <p className="text-sm text-yellow-800">
-            <strong>Lưu ý:</strong> Để sử dụng tính năng công khai/ẩn tiến độ học tập, vui lòng chạy migration SQL trong Supabase.
-            Xem file: <code className="bg-yellow-100 px-1 rounded">supabase/add-show-learning-progress.sql</code>
-          </p>
+    <div className="soft-page p-4 md:p-8">
+      <div className="soft-page-inner space-y-6">
+        <div className="soft-card px-5 py-4">
+          <div className="soft-section-title">
+            <div className="soft-section-title-pill" />
+            <div>
+              <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
+                {isViewingOwnProfile ? "Hồ sơ học tập" : "Hồ sơ học tập của người dùng khác"}
+              </h1>
+              <p className="mt-1 text-xs md:text-sm text-gray-500">
+                Tổng quan hồ sơ, cài đặt quyền riêng tư và tiến độ học tập của bạn.
+              </p>
+            </div>
+          </div>
         </div>
-      )}
 
-      {/* Section 2: Learning progress */}
-      {shouldShowProgress ? (
-        <LearningProgressSection courses={courses} isOwner={isViewingOwnProfile} showProgress={true} />
-      ) : (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 md:p-6">
-          <p className="text-gray-500">Người dùng này đã ẩn tiến độ học tập.</p>
-        </div>
-      )}
+        {/* Section 1: Public profile view */}
+        {profile && (
+          <div className="soft-card p-4 md:p-6">
+            <PublicProfileView profile={profile} />
+          </div>
+        )}
+
+        {/* Privacy toggle - only show for own profile */}
+        {/* Note: Toggle will only work after migration is run */}
+        {isViewingOwnProfile && profile && 'show_learning_progress' in profile && (
+          <div className="soft-card soft-card-inset p-4 md:p-5">
+            <PrivacyToggle
+              value={showLearningProgress}
+              onChange={handlePrivacyToggleChange}
+            />
+          </div>
+        )}
+        {isViewingOwnProfile && profile && !('show_learning_progress' in profile) && (
+          <div className="soft-card p-4 md:p-5 bg-yellow-50 border border-yellow-200">
+            <p className="text-sm text-yellow-800">
+              <strong>Lưu ý:</strong> Để sử dụng tính năng công khai/ẩn tiến độ học tập, vui lòng chạy migration SQL trong Supabase.
+              Xem file: <code className="bg-yellow-100 px-1 rounded">supabase/add-show-learning-progress.sql</code>
+            </p>
+          </div>
+        )}
+
+        {/* Section 2: Learning progress */}
+        {shouldShowProgress ? (
+          <div className="soft-card p-4 md:p-6">
+            <LearningProgressSection courses={courses} isOwner={isViewingOwnProfile} showProgress={true} />
+          </div>
+        ) : (
+          <div className="soft-card p-4 md:p-6">
+            <p className="text-gray-500">Người dùng này đã ẩn tiến độ học tập.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

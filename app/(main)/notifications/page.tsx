@@ -293,73 +293,93 @@ export default function NotificationsPage() {
 
     if (loading) {
         return (
-            <div className="p-6">
-                <h1 className="text-2xl font-bold mb-6">Thông báo</h1>
-                <div className="space-y-4">
-                    {[...Array(5)].map((_, i) => (
-                        <div key={i} className="p-4 border rounded-lg">
-                            <Skeleton className="h-4 w-3/4 mb-2" />
-                            <Skeleton className="h-4 w-1/2" />
-                            <Skeleton className="h-3 w-1/4 mt-2" />
+            <div className="soft-page p-4 md:p-8">
+                <div className="soft-page-inner space-y-4">
+                    <div className="soft-card px-5 py-4">
+                        <div className="soft-section-title">
+                            <div className="soft-section-title-pill" />
+                            <div>
+                                <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Thông báo</h1>
+                                <p className="mt-1 text-xs md:text-sm text-gray-500">Danh sách thông báo và yêu cầu ghép đôi gần đây.</p>
+                            </div>
                         </div>
-                    ))}
+                    </div>
+                    <div className="soft-card p-4 md:p-6 space-y-3">
+                        {[...Array(5)].map((_, i) => (
+                            <div key={i} className="p-4 rounded-xl bg-white/70 flex flex-col gap-2">
+                                <Skeleton className="h-4 w-3/4" />
+                                <Skeleton className="h-4 w-1/2" />
+                                <Skeleton className="h-3 w-1/4" />
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="p-6">
-            <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold">Thông báo</h1>
-                {notifications.some(n => !n.read) && (
-                    <button
-                        onClick={markAllAsRead}
-                        className="text-sm text-primary hover:opacity-90"
-                    >
-                        Đánh dấu tất cả đã đọc
-                    </button>
-                )}
-            </div>
-
-            {notifications.length === 0 ? (
-                <div className="text-center py-12">
-                    <svg
-                        className="mx-auto h-12 w-12 text-gray-400"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                    >
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                        />
-                    </svg>
-                    <h3 className="mt-2 text-sm font-medium text-gray-900">Không có thông báo</h3>
-                    <p className="mt-1 text-sm text-gray-500">Bạn chưa có thông báo nào</p>
-                </div>
-            ) : (
-                <div className="space-y-4">
-                    {notifications.map((notification) => (
-                        <div
-                            key={notification.id}
-                            className={`p-4 border rounded-lg ${!notification.read ? 'bg-red-50 border-red-200' : 'bg-white hover:bg-gray-50'}`}
-                            onClick={() => !notification.read && markAsRead(notification.id)}
-                        >
-                            <div className="flex items-start">
-                                <div className="flex-shrink-0 pt-0.5">
-                                    {!notification.read && (
-                                        <span className="inline-block w-2 h-2 bg-primary rounded-full mr-2"></span>
-                                    )}
-                                </div>
-                                {renderNotificationContent(notification)}
+        <div className="soft-page p-4 md:p-8">
+            <div className="soft-page-inner space-y-4">
+                <div className="soft-card px-5 py-4">
+                    <div className="flex items-center justify-between">
+                        <div className="soft-section-title">
+                            <div className="soft-section-title-pill" />
+                            <div>
+                                <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Thông báo</h1>
+                                <p className="mt-1 text-xs md:text-sm text-gray-500">Xem và quản lý các thông báo mới nhất của bạn.</p>
                             </div>
                         </div>
-                    ))}
+                        {notifications.some(n => !n.read) && (
+                            <button
+                                onClick={markAllAsRead}
+                                className="text-xs md:text-sm text-primary hover:opacity-90 soft-pressable px-3 py-1 rounded-full bg-white/60"
+                            >
+                                Đánh dấu tất cả đã đọc
+                            </button>
+                        )}
+                    </div>
                 </div>
-            )}
+
+                {notifications.length === 0 ? (
+                    <div className="soft-card p-8 text-center">
+                        <svg
+                            className="mx-auto h-12 w-12 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                            />
+                        </svg>
+                        <h3 className="mt-2 text-sm font-medium text-gray-900">Không có thông báo</h3>
+                        <p className="mt-1 text-sm text-gray-500">Bạn chưa có thông báo nào</p>
+                    </div>
+                ) : (
+                    <div className="space-y-3">
+                        {notifications.map((notification) => (
+                            <div
+                                key={notification.id}
+                                className={`soft-card soft-pressable p-4 cursor-pointer transition-colors ${!notification.read ? 'bg-red-50/70' : ''}`}
+                                onClick={() => !notification.read && markAsRead(notification.id)}
+                            >
+                                <div className="flex items-start">
+                                    <div className="flex-shrink-0 pt-0.5">
+                                        {!notification.read && (
+                                            <span className="inline-block w-2 h-2 bg-primary rounded-full mr-2"></span>
+                                        )}
+                                    </div>
+                                    {renderNotificationContent(notification)}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
