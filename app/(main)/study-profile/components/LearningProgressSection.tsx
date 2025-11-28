@@ -55,14 +55,14 @@ export default function LearningProgressSection({
                 {showProgress && (
                   <div>
                     <div className="w-full bg-gray-100 rounded h-2">
-                      <div className="h-2 rounded bg-teal-500" style={{ width: `${Math.max(0, Math.min(100, c.progressPercent))}%` }} />
+                      <div className="h-2 rounded bg-primary" style={{ width: `${Math.max(0, Math.min(100, c.progressPercent))}%` }} />
                     </div>
                     <div className="mt-1 text-xs text-gray-600">{c.progressPercent}% hoàn thành</div>
                   </div>
                 )}
                 <div className="pt-2">
                   {isOwner ? (
-                    <Link href={ROUTES.COURSE_DETAIL(c.courseId)} className="inline-flex items-center px-3 py-1.5 bg-teal-600 text-white rounded hover:bg-teal-700 text-sm">
+                    <Link href={ROUTES.COURSE_DETAIL(c.courseId)} className="inline-flex items-center px-3 py-1.5 bg-primary text-primary-foreground rounded hover:opacity-90 text-sm">
                       Tiếp tục học
                     </Link>
                   ) : (

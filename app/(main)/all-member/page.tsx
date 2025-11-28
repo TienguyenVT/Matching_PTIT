@@ -112,7 +112,7 @@ export default function AllMemberPage() {
 
                             {/* Button ghép đôi */}
                             <button
-                                className={`px-4 py-2 ${matchingUser === user.id ? 'bg-green-600' : 'bg-blue-600'} text-white rounded-md hover:bg-blue-700 transition disabled:opacity-50`}
+                                className={`px-4 py-2 ${matchingUser === user.id ? 'bg-green-600' : 'bg-primary'} text-white rounded-md hover:opacity-90 transition disabled:opacity-50`}
                                 onClick={async () => {
                                     try {
                                         setMatchingUser(user.id);

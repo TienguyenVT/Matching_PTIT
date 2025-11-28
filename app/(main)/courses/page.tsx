@@ -91,8 +91,8 @@ export default function CoursesPage() {
   return (
     <main className="p-4 md:p-6">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-orange-500 rounded"></div>
-        <h1 className="text-2xl font-semibold text-gray-800">Khóa học khả dụng</h1>
+        <div className="w-1 h-8 bg-primary rounded"></div>
+        <h1 className="text-2xl font-semibold text-gray-900">Khóa học khả dụng</h1>
       </div>
 
       {available.length === 0 ? (
@@ -114,7 +114,7 @@ export default function CoursesPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {available.map((c) => (
-            <div key={c.id} className="bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100">
+            <div key={c.id} className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200">
               <div
                 className="h-40 w-full bg-gray-200"
                 style={{ backgroundImage: c.cover_url ? `url(${c.cover_url})` : undefined, backgroundSize: 'cover', backgroundPosition: 'center' }}
@@ -129,7 +129,7 @@ export default function CoursesPage() {
                   <button 
                     onClick={() => onRegister(c.id)} 
                     disabled={registering === c.id}
-                    className="flex-1 rounded-md bg-teal-600 px-4 py-2 text-white hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed text-sm font-medium"
+                    className="flex-1 rounded-md bg-primary px-4 py-2 text-primary-foreground hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed text-sm font-medium"
                   >
                     {registering === c.id ? 'Đang đăng ký...' : 'Đăng ký'}
                   </button>

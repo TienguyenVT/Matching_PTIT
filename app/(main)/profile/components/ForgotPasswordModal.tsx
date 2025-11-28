@@ -36,7 +36,7 @@ export default function ForgotPasswordModal({
           <button
             onClick={onConfirm}
             disabled={sendingOtp}
-            className="flex-1 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
             {sendingOtp ? "Đang gửi..." : "Gửi email"}
           </button>

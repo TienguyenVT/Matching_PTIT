@@ -57,7 +57,7 @@ export default function EditAccountModal({
               type="text"
               value={fullName}
               onChange={(e) => onFullNameChange(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="Nhập tên tài khoản"
             />
           </div>
@@ -70,7 +70,7 @@ export default function EditAccountModal({
               type="email"
               value={email}
               onChange={(e) => onEmailChange(e.target.value)}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               placeholder="Nhập email"
             />
             <p className="text-xs text-gray-500 mt-1">
@@ -89,7 +89,7 @@ export default function EditAccountModal({
           <button
             onClick={onSave}
             disabled={saving}
-            className="flex-1 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors"
           >
             {saving ? "Đang lưu..." : "Lưu thông tin"}
           </button>

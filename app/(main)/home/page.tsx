@@ -86,17 +86,17 @@ export default function HomePage() {
 
   return (
     <div className="p-4 md:p-6">
-      {/* Title với thanh màu cam bên trái */}
+      {/* Title với thanh màu đỏ bên trái */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-orange-500 rounded"></div>
-        <h1 className="text-2xl font-semibold text-gray-800">Khóa học đã đăng ký</h1>
+        <div className="w-1 h-8 bg-primary rounded"></div>
+        <h1 className="text-2xl font-semibold text-gray-900">Khóa học đã đăng ký</h1>
       </div>
 
       {/* Course Grid - Khóa học tự ôn */}
       {enrolled.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-500 mb-4">Bạn chưa đăng ký khóa học nào.</p>
-          <Link href="/courses" className="text-teal-600 hover:underline">
+          <Link href="/courses" className="text-primary hover:underline">
             Xem các khóa học khả dụng →
           </Link>
         </div>
@@ -106,7 +106,7 @@ export default function HomePage() {
             <Link
               key={course.id}
               href={ROUTES.COURSE_DETAIL(course.id)}
-              className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+              className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200"
             >
               {/* Course Image */}
               <div 
@@ -127,8 +127,8 @@ export default function HomePage() {
               {/* Course Content */}
               <div className="flex flex-col flex-1 p-4">
                 <div className="flex items-start gap-2 mb-2">
-                  <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
-                  <h3 className="font-semibold text-gray-800 line-clamp-2">{course.title}</h3>
+                  <div className="w-1 h-5 bg-primary rounded mt-1 flex-shrink-0"></div>
+                  <h3 className="font-semibold text-gray-900 line-clamp-2">{course.title}</h3>
                 </div>
                 
                 <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
@@ -138,7 +138,7 @@ export default function HomePage() {
                   <span>Khóa học đang diễn ra</span>
                 </div>
 
-                <div className="mt-auto w-full text-center py-2 px-4 bg-teal-600 text-white rounded-md hover:bg-teal-700 transition-colors text-sm font-medium">
+                <div className="mt-auto w-full text-center py-2 px-4 text-primary font-medium text-sm">
                   Xem chi tiết
                 </div>
               </div>
@@ -148,7 +148,7 @@ export default function HomePage() {
           {totalEnrolled > enrolled.length && (
             <Link
               href={ROUTES.ALL_COURSES}
-              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 block border-dashed"
+              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200 block border-dashed"
             >
               <div className="h-40 w-full bg-gray-50 relative overflow-hidden flex items-center justify-center">
                 <div className="text-center">
@@ -173,15 +173,15 @@ export default function HomePage() {
       {suggested.length > 0 && (
         <>
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-1 h-8 bg-orange-500 rounded"></div>
-            <h1 className="text-2xl font-semibold text-gray-800">Khóa học đề xuất</h1>
+            <div className="w-1 h-8 bg-primary rounded"></div>
+            <h1 className="text-2xl font-semibold text-gray-900">Khóa học đề xuất</h1>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {suggested.map((course) => (
               <div
                 key={course.id}
-                className="flex flex-col h-full bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100"
+                className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200"
               >
                 {/* Course Image */}
                 <Link href={ROUTES.COURSE_DETAIL(course.id)}>
@@ -205,8 +205,8 @@ export default function HomePage() {
                 <div className="flex flex-col flex-1 p-4">
                   <Link href={ROUTES.COURSE_DETAIL(course.id)}>
                     <div className="flex items-start gap-2 mb-2">
-                      <div className="w-1 h-5 bg-orange-500 rounded mt-1 flex-shrink-0"></div>
-                      <h3 className="font-semibold text-gray-800 line-clamp-2 hover:text-orange-500 transition-colors">{course.title}</h3>
+                      <div className="w-1 h-5 bg-primary rounded mt-1 flex-shrink-0"></div>
+                      <h3 className="font-semibold text-gray-900 line-clamp-2 hover:text-primary transition-colors">{course.title}</h3>
                     </div>
                   </Link>
                   
@@ -217,12 +217,12 @@ export default function HomePage() {
                     <button
                       onClick={(e) => handleRegisterCourse(course.id, e)}
                       disabled={registering === course.id}
-                      className="flex-1 text-center py-2 px-3 bg-green-500 hover:bg-green-600 disabled:bg-green-300 text-white rounded-md transition-colors text-sm font-medium cursor-pointer"
+                      className="flex-1 text-center py-2 px-3 bg-primary text-primary-foreground rounded-md hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors text-sm font-medium cursor-pointer"
                     >
                       {registering === course.id ? 'Đang đăng ký...' : 'Đăng ký'}
                     </button>
                     <Link href={ROUTES.COURSE_DETAIL(course.id)} className="flex-1">
-                      <div className="w-full text-center py-2 px-3 bg-orange-500 hover:bg-orange-600 text-white rounded-md transition-colors text-sm font-medium cursor-pointer">
+                      <div className="w-full text-center py-2 px-3 border border-gray-200 text-gray-900 rounded-md hover:bg-gray-50 transition-colors text-sm font-medium cursor-pointer">
                         Xem
                       </div>
                     </Link>

@@ -51,7 +51,7 @@ export default function RecommendedCoursesSection({
           <Link 
             key={course.id} 
             href={`/course/${course.id}/detail`}
-            className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow overflow-hidden group"
+            className="bg-white rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
           >
             <div className="aspect-video bg-gray-100 relative overflow-hidden">
               {course.cover_url ? (

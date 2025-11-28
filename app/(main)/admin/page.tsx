@@ -196,7 +196,7 @@ export default function AdminPage() {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <p className="text-gray-600">Đang kiểm tra quyền truy cập...</p>
         </div>
       </div>
@@ -212,7 +212,7 @@ export default function AdminPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-1 h-8 bg-teal-500 rounded"></div>
+          <div className="w-1 h-8 bg-primary rounded"></div>
           <h1 className="text-2xl font-semibold text-gray-800">Quản trị hệ thống</h1>
         </div>
       </div>
@@ -221,7 +221,7 @@ export default function AdminPage() {
       <div className="bg-white rounded-lg shadow-sm border p-6 space-y-8">
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <svg className="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
             </svg>
             <h2 className="text-lg font-semibold text-gray-800">Tải lên và xử lý JSON</h2>
@@ -237,7 +237,7 @@ export default function AdminPage() {
         </div>
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <svg className="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13l-3-3m0 0l-3 3m3-3v12M12 3v10" />
             </svg>
             <h2 className="text-lg font-semibold text-gray-800">Upload bài kiểm tra riêng lẻ</h2>
@@ -256,7 +256,7 @@ export default function AdminPage() {
       {/* Batch Process Section */}
       <div className="bg-white rounded-lg shadow-sm border p-6">
         <div className="flex items-center gap-2 mb-4">
-          <svg className="w-5 h-5 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
           </svg>
           <h2 className="text-lg font-semibold text-gray-800">Xử lý batch từ folder documents</h2>
@@ -264,7 +264,7 @@ export default function AdminPage() {
         <button
           onClick={handleBatchProcess}
           disabled={batchProcessing}
-          className="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:opacity-90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {batchProcessing ? 'Đang xử lý...' : 'Xử lý batch (JSON)'}
         </button>
@@ -283,7 +283,7 @@ export default function AdminPage() {
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2.5">
                 <div
-                  className="bg-orange-500 h-2.5 rounded-full transition-all duration-300"
+                  className="bg-primary h-2.5 rounded-full transition-all duration-300"
                   style={{ 
                     width: `${progress.totalFiles > 0 ? (progress.processedFiles / progress.totalFiles) * 100 : 0}%` 
                   }}
@@ -304,10 +304,10 @@ export default function AdminPage() {
 
             {/* Current File Progress */}
             {progress.currentFileName && (
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+              <div className="bg-red-50 border border-red-200 rounded-lg p-3">
                 <div className="flex items-center gap-2">
-                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"></div>
-                  <p className="text-sm text-blue-800">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+                  <p className="text-sm text-red-800">
                     Đang xử lý: <span className="font-medium">{progress.currentFileName}</span>
                   </p>
                 </div>
@@ -396,16 +396,16 @@ export default function AdminPage() {
       </div>
 
       {/* Info Section */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
         <div className="flex items-start gap-3">
-          <svg className="w-5 h-5 text-blue-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-red-500 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <div className="text-sm text-blue-800">
+          <div className="text-sm text-red-800">
             <p className="font-medium mb-1">Lưu ý:</p>
             <ul className="list-disc list-inside space-y-1">
               <li>Upload file JSON trực tiếp hoặc sử dụng batch processing từ folder documents/</li>
-              <li>File JSON phải có cấu trúc Chương/Mục với format: <code className="bg-blue-100 px-1 rounded">{"{ \"data\": [...] }"}</code></li>
+              <li>File JSON phải có cấu trúc Chương/Mục với format: <code className="bg-red-100 px-1 rounded">{"{ \"data\": [...] }"}</code></li>
               <li>Hệ thống sẽ tự động tạo khóa học, học phần và bài học từ nội dung JSON</li>
             </ul>
           </div>

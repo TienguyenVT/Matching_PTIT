@@ -110,7 +110,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user?.id]);
+  }, [user?.id, supabase]);
 
   // Removed - auth state now managed by AuthProvider globally
 
@@ -167,7 +167,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
         </button>
         <Link
           href={homeHref}
-          className="p-2 hover:bg-gray-100 rounded-md flex items-center gap-2 text-gray-700 hover:text-teal-600 transition-colors"
+          className="p-2 hover:bg-gray-100 rounded-md flex items-center gap-2 text-gray-700 hover:text-primary transition-colors"
           title="Về trang chủ"
         >
           <svg
@@ -249,7 +249,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
                   <h3 className="font-semibold text-gray-800">Thông báo mới</h3>
                   <Link
                     href={ROUTES.NOTIFICATIONS}
-                    className="text-sm text-blue-600 hover:text-blue-800"
+                    className="text-sm text-primary hover:opacity-90"
                     onClick={() => setNotificationOpen(false)}
                   >
                     Xem tất cả
@@ -267,7 +267,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
                         <Link
                           key={notification.id}
                           href={ROUTES.NOTIFICATIONS}
-                          className={`block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 ${!notification.read ? "bg-blue-50" : ""
+                          className={`block px-4 py-3 hover:bg-gray-50 border-b border-gray-100 last:border-0 ${!notification.read ? "bg-red-50" : ""
                             }`}
                           onClick={async (e) => {
                             e.preventDefault();
@@ -280,7 +280,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
                         >
                           <div className="flex items-start gap-3">
                             {!notification.read && (
-                              <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                              <div className="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
                             )}
                             <div className="flex-1 min-w-0">
                               <p className="font-semibold text-gray-800 text-sm">
@@ -313,7 +313,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
         <div className="relative user-menu-container">
           <button
             onClick={() => setUserMenuOpen(!userMenuOpen)}
-            className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center hover:ring-2 ring-teal-200 transition-all overflow-hidden"
+            className="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center hover:ring-2 ring-red-200 transition-all overflow-hidden"
           >
             {user?.user_metadata?.avatar_url ? (
               <img
@@ -332,7 +332,7 @@ export function Header({ onMenuToggle }: HeaderProps) {
               />
             ) : null}
             <svg
-              className={`w-6 h-6 text-teal-600 ${user?.user_metadata?.avatar_url ? "hidden" : ""
+              className={`w-6 h-6 text-red-600 ${user?.user_metadata?.avatar_url ? "hidden" : ""
                 }`}
               fill="currentColor"
               viewBox="0 0 20 20"

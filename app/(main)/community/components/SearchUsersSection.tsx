@@ -241,13 +241,13 @@ export default function SearchUsersSection() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Nhập username, tên hoặc email để tìm kiếm..."
-            className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+            className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
             disabled={searching}
           />
           <button
             type="submit"
             disabled={searching || !searchTerm.trim()}
-            className="px-6 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700 disabled:bg-teal-400 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
+            className="px-6 py-2 bg-primary text-primary-foreground rounded-md hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed transition-colors whitespace-nowrap"
           >
             {searching ? "Đang tìm..." : "Tìm kiếm"}
           </button>

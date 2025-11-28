@@ -93,7 +93,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
                       flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors
                       ${
                         isActive(item.href)
-                          ? "bg-teal-50 text-teal-600"
+                          ? "bg-red-50 text-primary"
                           : "text-gray-700 hover:bg-gray-100"
                       }
                     `}
