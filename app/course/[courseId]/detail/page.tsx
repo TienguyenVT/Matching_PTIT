@@ -409,7 +409,11 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     setActiveTab('knowledge');
   };
 
-  const persistCompletion = async (content: CourseContent, score: number | null = null) => {
+  const persistCompletion = async (
+    content: CourseContent,
+    score: number | null = null,
+    shouldNotify: boolean = false,
+  ) => {
     try {
       if (!user) return;
 
@@ -431,6 +435,33 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
 
       if (error) {
         console.error('[DetailPage] Error saving learning progress:', error);
+        return;
+      }
+
+      if (shouldNotify) {
+        try {
+          const { error: notifError } = await supabase
+            .from('notifications')
+            .insert({
+              user_id: user.id,
+              title: 'Hoàn thành bài học',
+              message: course?.title
+                ? `Bạn đã hoàn thành "${content.title}" trong khóa "${course.title}".`
+                : `Bạn đã hoàn thành bài học "${content.title}".`,
+              type: 'lesson_completed',
+              read: false,
+              metadata: {
+                course_id: courseId,
+                content_id: content.id,
+              },
+            });
+
+          if (notifError) {
+            console.error('[DetailPage] Error creating completion notification:', notifError);
+          }
+        } catch (notifErr) {
+          console.error('[DetailPage] Exception while creating completion notification:', notifErr);
+        }
       }
     } catch (err) {
       console.error('[DetailPage] Exception while saving learning progress:', err);
@@ -441,20 +472,21 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
     if (!selectedContent) return;
     const idx = findIndexById(selectedContent.id);
     if (idx < 0) return;
-    setCompletedContentIds((prev) => {
-      if (prev.includes(selectedContent.id)) return prev;
-      return [...prev, selectedContent.id];
-    });
 
-    // Fire-and-forget persistence to server
-    persistCompletion(selectedContent, score);
+    const alreadyCompleted = completedContentIds.includes(selectedContent.id);
+    if (!alreadyCompleted) {
+      setCompletedContentIds((prev) => [...prev, selectedContent.id]);
+    }
+
+    // Fire-and-forget persistence to server; chỉ tạo notification lần đầu hoàn thành
+    persistCompletion(selectedContent, score, !alreadyCompleted);
   };
 
   const isNextLocked =
     hasNext && currentIndex + 1 > unlockedUntilIndex;
 
   const toggleModule = (moduleId: string) => {
-    setExpandedModules(prev => {
+    setExpandedModules((prev) => {
       const next = new Set(prev);
       if (next.has(moduleId)) {
         next.delete(moduleId);
@@ -477,7 +509,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   };
 
   const handleSelectAnswer = (questionIndex: number, optionIndex: number) => {
-    setUserAnswers(prev => {
+    setUserAnswers((prev) => {
       const next = [...prev];
       next[questionIndex] = optionIndex;
       return next;
@@ -515,20 +547,21 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
       return;
     }
 
-    const currentModule = groupedModules.find(m =>
-      m.contents.some(c => c.id === selectedContent.id)
+    const currentModule = groupedModules.find((m) =>
+      m.contents.some((c) => c.id === selectedContent.id)
     );
 
     if (!currentModule) {
       return;
     }
 
-    const quizForModule = currentModule.contents.find(c => c.kind === 'quiz');
+    const quizForModule = currentModule.contents.find((c) => c.kind === 'quiz');
 
     if (!quizForModule) {
       alert('Chưa có bài kiểm tra cho chương này.');
       return;
     }
+
     const quizIndex = flatContents.findIndex((c) => c.id === quizForModule.id);
     if (quizIndex > unlockedUntilIndex && quizIndex !== -1) {
       alert('Bạn cần học xong toàn bộ nội dung chương này trước khi làm bài kiểm tra.');
@@ -540,29 +573,30 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
   };
 
   return (
-    <div className="p-4 md:p-6">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+    <div className="min-h-screen bg-gray-50 py-6 md:py-10">
+      <div className="max-w-10xl mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-7 gap-6">
         {/* Left Sidebar - Chương trình học */}
-        <div className="lg:col-span-1">
-          <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-8">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-1 h-6 bg-primary rounded"></div>
-              <h2 className="text-lg font-semibold text-gray-800">Chương trình học</h2>
+        <div className="lg:col-span-2">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 h-full">
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-1 h-5 bg-primary rounded-full"></div>
+              <h2 className="text-base font-semibold text-gray-800">Chương trình học</h2>
             </div>
-            <div className="space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto">
+            <div className="space-y-1 max-h-[calc(100vh-200px)] overflow-y-auto pr-1">
               {groupedModules.length === 0 ? (
                 <p className="text-gray-500 text-sm">Chưa có nội dung</p>
               ) : (
                 groupedModules.map((courseModule) => (
-                  <div key={courseModule.id} className="border border-gray-200 rounded-lg">
+                  <div key={courseModule.id} className="border border-gray-200 rounded-xl">
                     <button
                       onClick={() => toggleModule(courseModule.id)}
-                      className="w-full text-left p-3 hover:bg-gray-50 rounded-lg transition-colors flex items-center justify-between"
+                      className="w-full text-left p-2.5 hover:bg-gray-50 rounded-lg transition-colors flex items-center justify-between"
                     >
-                      <span className="text-sm font-medium text-gray-700">{courseModule.title}</span>
+                      <span className="text-sm font-medium text-gray-800">{courseModule.title}</span>
                       <svg
-                        className={`w-4 h-4 text-gray-500 transition-transform ${expandedModules.has(courseModule.id) ? 'rotate-180' : ''
-                          }`}
+                        className={`w-4 h-4 text-gray-500 transition-transform ${
+                          expandedModules.has(courseModule.id) ? 'rotate-180' : ''
+                        }`}
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -571,7 +605,7 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                       </svg>
                     </button>
                     {expandedModules.has(courseModule.id) && (
-                      <div className="px-3 pb-2 space-y-1">
+                      <div className="px-2.5 pb-2 space-y-1">
                         {courseModule.contents.map((content) => {
                           const contentIndex = flatContents.findIndex((c) => c.id === content.id);
                           const isLocked = contentIndex !== -1 && contentIndex > unlockedUntilIndex;
@@ -587,12 +621,12 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
                                 }
                               }}
                               disabled={isLocked}
-                              className={`w-full text-left p-2 rounded text-sm ${
+                              className={`w-full text-left p-1.5 rounded text-xs ${
                                 isActive
                                   ? 'bg-red-50 text-red-700'
                                   : isLocked
-                                    ? 'text-gray-400 cursor-not-allowed opacity-60'
-                                    : 'text-gray-600 hover:bg-gray-50'
+                                  ? 'text-gray-400 cursor-not-allowed opacity-60'
+                                  : 'text-gray-600 hover:bg-gray-50'
                               }`}
                             >
                               <span className="mr-1 text-xs uppercase">
@@ -618,273 +652,263 @@ export default function CourseDetailPage({ params }: { params: { courseId: strin
         </div>
 
         {/* Right Main Content - ÔN TẬP */}
-        <div className="lg:col-span-3">
-          <div className="bg-white rounded-lg shadow-sm border p-6">
+        <div className="lg:col-span-5">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-5 space-y-5">
             {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <div className="w-1 h-6 bg-primary rounded"></div>
-                <h2 className="text-lg font-semibold text-gray-800">{getCurrentModuleTitle()}</h2>
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div className="space-y-1">
+                <p className="text-2xs font-semibold tracking-wide text-primary uppercase">Khóa học</p>
+                <h1 className="text-lg md:text-4xl font-bold text-gray-900">{course?.title}</h1>
+                {course?.description && (
+                  <p className="text-xs text-gray-600 max-w-2xl">{course.description}</p>
+                )}
               </div>
-              {isEnrolled && (
-                <span className="px-3 py-1 bg-red-50 text-red-700 text-sm font-medium rounded-full">
-                  Đã tham gia
-                </span>
+              <div className="flex items-center gap-2">
+                {isEnrolled && (
+                  <span className="px-2.5 py-1 bg-red-50 text-red-700 text-xs font-medium rounded-full">
+                    Đã tham gia
+                  </span>
+                )}
+                {/* Chỉ giữ lại button Ghép đôi học tập */}
+                <button
+                  onClick={() => router.push(ROUTES.ALL_MEMBER)}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold shadow-sm hover:shadow-md hover:opacity-90 transition-all"
+                >
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+                    />
+                  </svg>
+                  <span className="text-xs">Ghép đôi học tập</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between border-t border-gray-200 pt-3">
+              <div className="flex items-center gap-2">
+                <div className="w-1 h-4 bg-primary rounded-full" />
+                <h2 className="text-xs font-semibold text-gray-800">{getCurrentModuleTitle()}</h2>
+              </div>
+              {selectedContent && (
+                <p className="text-xs text-gray-500">
+                  Nội dung hiện tại:{' '}
+                  <span className="font-medium text-gray-800">{selectedContent.title}</span>
+                </p>
               )}
             </div>
 
-            <div className="space-y-2 mb-6">
-              <div className="mt-3">
-                <p className="text-sm text-gray-600 mb-1">Nội dung buổi học</p>
-                <p className="text-sm font-medium text-gray-800">{selectedContent?.title}</p>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-              <button
-                onClick={() => setActiveTab('knowledge')}
-                className="flex flex-col items-center gap-2 p-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-                <span className="text-xs">Xem kiến thức</span>
-              </button>
-              <button
-                onClick={() => setActiveTab('exercises')}
-                className="flex flex-col items-center gap-2 p-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                <span className="text-xs">Làm bài tập</span>
-              </button>
-              <button
-                onClick={startQuizForCurrentModule}
-                className="flex flex-col items-center gap-2 p-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
-                <span className="text-xs">Làm bài kiểm tra</span>
-              </button>
-              <button
-                onClick={() => router.push(ROUTES.ALL_MEMBER)}
-                className="flex flex-col items-center gap-2 p-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                </svg>
-                <span className="text-xs">Ghép đôi học tập</span>
-              </button>
-            </div>
-
-            {activeTab === 'knowledge' && (
-              <div className="space-y-6">
-                {loadingContent ? (
-                  <div className="flex items-center justify-center py-12">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                    <span className="ml-3 text-gray-600">Đang tải nội dung...</span>
+            {/* Nội dung kiến thức / quiz / video */}
+            <div className="space-y-6">
+              {loadingContent ? (
+                <div className="flex items-center justify-center py-12">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                  <span className="ml-3 text-gray-600">Đang tải nội dung...</span>
+                </div>
+              ) : selectedContent?.kind === 'doc' && lessonContent ? (
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    <h3 className="font-medium text-gray-800">Nội dung bài học</h3>
                   </div>
-                ) : selectedContent?.kind === 'doc' && lessonContent ? (
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <h3 className="font-medium text-gray-800">Nội dung bài học</h3>
-                    </div>
-                    <div
-                      className="bg-white rounded-lg p-6 prose-content"
-                      dangerouslySetInnerHTML={{ __html: lessonContent.content_text }}
-                      style={{
-                        lineHeight: '1.75',
-                      }}
-                    />
+                  <div
+                    className="bg-white rounded-xl p-6 prose-content"
+                    dangerouslySetInnerHTML={{ __html: lessonContent.content_text }}
+                    style={{ lineHeight: '1.75' }}
+                  />
+                </div>
+              ) : selectedContent?.kind === 'quiz' && quizContent ? (
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                    <h3 className="font-medium text-gray-800">Bài kiểm tra trắc nghiệm</h3>
                   </div>
-                ) : selectedContent?.kind === 'quiz' && quizContent ? (
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                      </svg>
-                      <h3 className="font-medium text-gray-800">Bài kiểm tra trắc nghiệm</h3>
-                    </div>
-                    <div className="bg-white rounded-lg p-6 space-y-6">
-                      {quizContent.questions.map((q, idx) => (
-                        <div key={idx} className="border border-gray-200 rounded-lg p-4">
-                          <div className="flex items-start gap-2 mb-3">
-                            <span className="flex-shrink-0 w-6 h-6 bg-red-500 text-red-100 rounded-full flex items-center justify-center text-sm font-medium">
-                              {idx + 1}
-                            </span>
-                            <p className="font-medium text-gray-800 flex-1">{q.question}</p>
-                          </div>
-                          <div className="ml-8 space-y-2">
-                            {q.options.map((option, optIdx) => (
-                              <label
-                                key={optIdx}
-                                className={`flex items-center gap-2 p-2 rounded cursor-pointer ${
+                  <div className="bg-white rounded-xl p-6 space-y-6">
+                    {quizContent.questions.map((q, idx) => (
+                      <div key={idx} className="border border-gray-200 rounded-lg p-4">
+                        <div className="flex items-start gap-2 mb-3">
+                          <span className="flex-shrink-0 w-6 h-6 bg-red-500 text-red-100 rounded-full flex items-center justify-center text-sm font-medium">
+                            {idx + 1}
+                          </span>
+                          <p className="font-medium text-gray-800 flex-1">{q.question}</p>
+                        </div>
+                        <div className="ml-8 space-y-2">
+                          {q.options.map((option, optIdx) => (
+                            <label
+                              key={optIdx}
+                              className={`flex items-center gap-2 p-2 rounded cursor-pointer ${
+                                showQuizResults
+                                  ? optIdx === q.correctAnswer
+                                    ? 'bg-green-50 border border-green-200'
+                                    : userAnswers[idx] === optIdx
+                                    ? 'bg-red-50 border border-red-200'
+                                    : 'hover:bg-gray-50'
+                                  : userAnswers[idx] === optIdx
+                                  ? 'bg-red-50 border border-red-200'
+                                  : 'hover:bg-gray-50'
+                              }`}
+                            >
+                              <input
+                                type="radio"
+                                name={`question-${idx}`}
+                                value={optIdx}
+                                checked={userAnswers[idx] === optIdx}
+                                disabled={showQuizResults}
+                                onChange={() => handleSelectAnswer(idx, optIdx)}
+                                className="text-red-500"
+                              />
+                              <span
+                                className={`${
                                   showQuizResults
                                     ? optIdx === q.correctAnswer
-                                      ? 'bg-green-50 border border-green-200'
+                                      ? 'font-medium text-green-700'
                                       : userAnswers[idx] === optIdx
-                                        ? 'bg-red-50 border border-red-200'
-                                        : 'hover:bg-gray-50'
+                                      ? 'font-medium text-red-700'
+                                      : 'text-gray-700'
                                     : userAnswers[idx] === optIdx
-                                      ? 'bg-red-50 border border-red-200'
-                                      : 'hover:bg-gray-50'
-                                  }`}
+                                    ? 'font-medium text-red-700'
+                                    : 'text-gray-700'
+                                }`}
                               >
-                                <input
-                                  type="radio"
-                                  name={`question-${idx}`}
-                                  value={optIdx}
-                                  checked={userAnswers[idx] === optIdx}
-                                  disabled={showQuizResults}
-                                  onChange={() => handleSelectAnswer(idx, optIdx)}
-                                  className="text-red-500"
-                                />
-                                <span
-                                  className={`${
-                                    showQuizResults
-                                      ? optIdx === q.correctAnswer
-                                        ? 'font-medium text-green-700'
-                                        : userAnswers[idx] === optIdx
-                                          ? 'font-medium text-red-700'
-                                          : 'text-gray-700'
-                                      : userAnswers[idx] === optIdx
-                                        ? 'font-medium text-red-700'
-                                        : 'text-gray-700'
-                                  }`}
-                                >
-                                  {String.fromCharCode(65 + optIdx)}. {option}
-                                </span>
-                                {showQuizResults && optIdx === q.correctAnswer && (
-                                  <span className="ml-auto text-green-600 text-sm">✓ Đáp án đúng</span>
-                                )}
-                              </label>
-                            ))}
-                          </div>
-                          {showQuizResults && q.explanation && (
-                            <div className="ml-8 mt-3 p-3 bg-red-50 border border-red-200 rounded">
-                              <p className="text-sm text-red-800">
-                                <strong>Giải thích:</strong> {q.explanation}
-                              </p>
-                            </div>
-                          )}
+                                {String.fromCharCode(65 + optIdx)}. {option}
+                              </span>
+                              {showQuizResults && optIdx === q.correctAnswer && (
+                                <span className="ml-auto text-green-600 text-sm">✓ Đáp án đúng</span>
+                              )}
+                            </label>
+                          ))}
                         </div>
-                      ))}
-                      <div className="mt-6 flex flex-col gap-4 border-t border-gray-200 pt-4">
-                        <div className="flex justify-between items-center">
-                          <button
-                            type="button"
-                            onClick={handleSubmitQuiz}
-                            disabled={showQuizResults || quizContent.questions.length === 0}
-                            className="px-4 py-2 bg-red-500 text-red-100 text-sm font-medium rounded-md hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                          >
-                            Nộp bài và xem kết quả
-                          </button>
-                          {showQuizResults && quizScore !== null && (
-                            <div className="text-right text-sm">
-                              <p className="font-semibold text-gray-800">
-                                Điểm: <span className="text-green-700">{quizScore.toFixed(1)} / 10</span>
-                              </p>
-                              <p className="text-gray-600">
-                                Đúng {quizSummary.correct.length}/{quizContent.questions.length} câu
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                        {showQuizResults && (
-                          <div className="text-sm text-gray-700 space-y-1">
-                            <p>
-                              Câu đúng:{' '}
-                              {quizSummary.correct.length > 0 ? quizSummary.correct.join(', ') : 'Không có'}
-                            </p>
-                            <p>
-                              Câu sai:{' '}
-                              {quizSummary.incorrect.length > 0 ? quizSummary.incorrect.join(', ') : 'Không có'}
+                        {showQuizResults && q.explanation && (
+                          <div className="ml-8 mt-3 p-3 bg-red-50 border border-red-200 rounded">
+                            <p className="text-sm text-red-800">
+                              <strong>Giải thích:</strong> {q.explanation}
                             </p>
                           </div>
                         )}
                       </div>
-                    </div>
-                  </div>
-                ) : selectedContent?.kind === 'video' ? (
-                  <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                      </svg>
-                      <h3 className="font-medium text-gray-800">Video bài học</h3>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-6">
-                      {selectedContent.storage_path ? (
-                        <video src={selectedContent.storage_path} controls className="w-full rounded-md bg-black" />
-                      ) : (
-                        <p className="text-gray-500 text-sm">Video chưa được cập nhật</p>
+                    ))}
+                    <div className="mt-6 flex flex-col gap-4 border-t border-gray-200 pt-4">
+                      <div className="flex justify-between items-center">
+                        <button
+                          type="button"
+                          onClick={handleSubmitQuiz}
+                          disabled={showQuizResults || quizContent.questions.length === 0}
+                          className="px-4 py-2 bg-red-500 text-red-100 text-sm font-medium rounded-md hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          Nộp bài và xem kết quả
+                        </button>
+                        {showQuizResults && quizScore !== null && (
+                          <div className="text-right text-sm">
+                            <p className="font-semibold text-gray-800">
+                              Điểm: <span className="text-green-700">{quizScore.toFixed(1)} / 10</span>
+                            </p>
+                            <p className="text-gray-600">
+                              Đúng {quizSummary.correct.length}/{quizContent.questions.length} câu
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                      {showQuizResults && (
+                        <div className="text-sm text-gray-700 space-y-1">
+                          <p>
+                            Câu đúng:{' '}
+                            {quizSummary.correct.length > 0 ? quizSummary.correct.join(', ') : 'Không có'}
+                          </p>
+                          <p>
+                            Câu sai:{' '}
+                            {quizSummary.incorrect.length > 0 ? quizSummary.incorrect.join(', ') : 'Không có'}
+                          </p>
+                        </div>
                       )}
                     </div>
                   </div>
-                ) : (
-                  <div className="bg-gray-50 rounded-lg p-6">
-                    <p className="text-gray-500 text-sm">Nội dung bài học đang được cập nhật</p>
+                </div>
+              ) : selectedContent?.kind === 'video' ? (
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                    <h3 className="font-medium text-gray-800">Video bài học</h3>
                   </div>
-                )}
+                  <div className="bg-gray-50 rounded-xl p-6">
+                    {selectedContent.storage_path ? (
+                      <video src={selectedContent.storage_path} controls className="w-full rounded-md bg-black" />
+                    ) : (
+                      <p className="text-gray-500 text-sm">Video chưa được cập nhật</p>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-gray-50 rounded-xl p-6">
+                  <p className="text-gray-500 text-sm">Nội dung bài học đang được cập nhật</p>
+                </div>
+              )}
 
-                {/* Điều hướng bài học trước / tiếp theo */}
-                {!loadingContent && flatContents.length > 0 && currentIndex >= 0 && (
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                    <button
-                      type="button"
-                      onClick={goToPrev}
-                      disabled={!hasPrev}
-                      className="px-4 py-2 text-sm rounded-md border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Bài trước
-                    </button>
-                    <span className="text-xs text-gray-500">
-                      Bài {currentIndex + 1} / {flatContents.length}
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        if (!hasNext) return;
-                        const nextContent = flatContents[currentIndex + 1];
-                        if (!nextContent) return;
+              {/* Điều hướng bài học trước / tiếp theo */}
+              {!loadingContent && flatContents.length > 0 && currentIndex >= 0 && (
+                <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+                  <button
+                    type="button"
+                    onClick={goToPrev}
+                    disabled={!hasPrev}
+                    className="px-4 py-2 text-sm rounded-full border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Bài trước
+                  </button>
+                  <span className="text-xs text-gray-500">
+                    Bài {currentIndex + 1} / {flatContents.length}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (!hasNext) return;
+                      const nextContent = flatContents[currentIndex + 1];
+                      if (!nextContent) return;
 
-                        if (selectedContent?.kind === 'doc' || selectedContent?.kind === 'video') {
-                          // Đánh dấu đã hoàn thành bài hiện tại rồi chuyển sang bài tiếp theo
-                          markCurrentContentCompleted();
-                          setSelectedContent(nextContent);
-                          setActiveTab('knowledge');
-                          return;
-                        }
-
-                        const idxNext = currentIndex + 1;
-                        const lockedNext = idxNext > unlockedUntilIndex;
-                        if (lockedNext) {
-                          alert('Bạn cần hoàn thành nội dung hiện tại trước khi sang bài tiếp theo.');
-                          return;
-                        }
-
+                      if (selectedContent?.kind === 'doc' || selectedContent?.kind === 'video') {
+                        // Đánh dấu đã hoàn thành bài hiện tại rồi chuyển sang bài tiếp theo
+                        markCurrentContentCompleted();
                         setSelectedContent(nextContent);
                         setActiveTab('knowledge');
-                      }}
-                      disabled={
-                        !hasNext ||
-                        loadingContent ||
-                        (selectedContent?.kind === 'quiz' && isNextLocked)
+                        return;
                       }
-                      className="px-4 py-2 text-sm rounded-md bg-primary text-primary-foreground hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Bài tiếp theo
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
 
+                      const idxNext = currentIndex + 1;
+                      const lockedNext = idxNext > unlockedUntilIndex;
+                      if (lockedNext) {
+                        alert('Bạn cần hoàn thành nội dung hiện tại trước khi sang bài tiếp theo.');
+                        return;
+                      }
+
+                      setSelectedContent(nextContent);
+                      setActiveTab('knowledge');
+                    }}
+                    disabled={
+                      !hasNext ||
+                      loadingContent ||
+                      (selectedContent?.kind === 'quiz' && isNextLocked)
+                    }
+                    className="px-4 py-2 text-sm rounded-full bg-primary text-primary-foreground hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    Bài tiếp theo
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Các tab khác hiện vẫn giữ code nhưng sẽ không được kích hoạt nếu không thay đổi activeTab */}
             {activeTab === 'exercises' && (
               <div className="text-center py-12">
                 <p className="text-gray-500">Nội dung bài tập đang được cập nhật</p>

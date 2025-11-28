@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useRef } from 'react';
 import { User } from '@supabase/supabase-js';
 import { supabaseBrowser } from '@/lib/supabase/client';
 import { UserProfile } from '@/lib/auth-helpers.client';
@@ -38,6 +38,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
   const supabase = supabaseBrowser();
+  // Keep ref of current user id to avoid stale closures in subscription handlers
+  const currentUserIdRef = useRef<string | null>(null);
 
   // Load from cache first
   const loadFromCache = useCallback(() => {
@@ -113,22 +115,27 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         // Fetch fresh user data from auth (includes updated metadata)
         const { data: { user: freshUser }, error: authError } = await supabase.auth.getUser();
-        
+
         if (authError) throw authError;
-        
-        if (freshUser) {
-          // Fetch updated profile from database
-          const newProfile = await fetchProfile(freshUser.id);
-          if (newProfile) {
-            setUser(freshUser); // Update user with fresh metadata
-            setProfile(newProfile);
-            saveToCache(freshUser, newProfile);
-            console.log('[AuthProvider] Profile refreshed successfully');
-            return true;
-          }
+
+        // If there's no authenticated user, don't retry — return false quickly
+        if (!freshUser) {
+          console.log('[AuthProvider] No authenticated user found during refresh');
+          return false;
         }
-        
-        // Nếu không có lỗi nhưng không có user hoặc profile, thử lại
+
+        // Fetch updated profile from database
+        const newProfile = await fetchProfile(freshUser.id);
+        if (newProfile) {
+          setUser(freshUser); // Update user with fresh metadata
+          setProfile(newProfile);
+          saveToCache(freshUser, newProfile);
+          currentUserIdRef.current = freshUser.id;
+          console.log('[AuthProvider] Profile refreshed successfully');
+          return true;
+        }
+
+        // If profile missing, allow retry
         if (attempt < MAX_RETRIES) {
           const delay = BASE_DELAY * attempt;
           console.log(`[AuthProvider] Profile data incomplete, retrying in ${delay}ms...`);
@@ -173,6 +180,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 setUser(authUser);
                 setProfile(userProfile);
                 saveToCache(authUser, userProfile);
+                currentUserIdRef.current = authUser.id;
               }
             }
           } else {
@@ -195,28 +203,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Subscribe to auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (!mounted) return;
-      
-      console.log('[AuthProvider] Auth event:', event);
-      
-      // Ignore USER_UPDATED events to prevent interrupting profile save flow
-      // The profile page will handle refresh manually after save
-      if (event === 'USER_UPDATED') {
-        console.log('[AuthProvider] Ignoring USER_UPDATED event');
-        return;
-      }
-      
-      if (session?.user) {
-        const userProfile = await fetchProfile(session.user.id);
-        if (mounted) {
-          setUser(session.user);
-          setProfile(userProfile);
-          saveToCache(session.user, userProfile);
-        }
-      } else {
-        setUser(null);
-        setProfile(null);
-        saveToCache(null, null);
-      }
+  
+  console.log('[AuthProvider] Auth event:', event);
+  
+  // Bỏ qua sự kiện SIGNED_IN phát ra do tab focus nếu user hiện tại giống session user
+  if (event === 'SIGNED_IN' && document.visibilityState === 'visible' && session?.user && currentUserIdRef.current === session.user.id) {
+    console.log('Ignoring SIGNED_IN event from tab focus (same user)');
+    return;
+  }
+
+  // Xử lý đăng xuất
+  if (event === 'SIGNED_OUT') {
+    console.log('[AuthProvider] User signed out, clearing cache');
+    localStorage.removeItem(CACHE_KEYS.USER);
+    localStorage.removeItem(CACHE_KEYS.PROFILE);
+    localStorage.removeItem(CACHE_KEYS.TIMESTAMP);
+    setUser(null);
+    setProfile(null);
+    setLoading(false);
+    return;
+  }
+
+  // Xử lý đăng nhập
+  if (session?.user) {
+    try {
+      // Mark loading while we refresh profile
+      setLoading(true);
+      console.log('[AuthProvider] User authenticated:', session.user.id);
+      setUser(session.user);
+      await refreshProfile();
+    } catch (error) {
+      console.error('[AuthProvider] Error refreshing profile:', error);
+      setError(error as Error);
+    }
+  }
+  
+  // Ensure loading state is cleared after handler completes
+  setLoading(false);
     });
 
     return () => {

@@ -52,106 +52,119 @@ export default function AllMemberPage() {
 
     if (error) {
         return (
-            <div className="p-6">
-                <h1 className="text-2xl font-bold">Danh sách thành viên</h1>
-                <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-md">
-                    {error}
+            <div className="soft-page p-4 md:p-8">
+                <div className="soft-page-inner">
+                    <div className="soft-card p-5">
+                        <h1 className="text-2xl font-bold mb-3">Danh sách thành viên</h1>
+                        <div className="mt-2 p-4 rounded-xl bg-red-50 text-red-700">
+                            {error}
+                        </div>
+                    </div>
                 </div>
             </div>
         );
     }
     return (
-        <div className="p-6">
-            <div className="mb-8">
-                <h1 className="text-2xl font-bold">Danh sách thành viên</h1>
-                <p className="mt-2 text-gray-600">
-                    {loading ? 'Đang tải...' : `Tổng số thành viên: ${users.length}`}
-                </p>
-            </div>
-
-            {loading ? (
-                <div className="space-y-4">
-                    {[...Array(5)].map((_, i) => (
-                        <div key={i} className="flex items-center space-x-4 p-4 border rounded-lg">
-                            <Skeleton className="h-12 w-12 rounded-full" />
-                            <div className="space-y-2 flex-1">
-                                <Skeleton className="h-4 w-3/4" />
-                                <Skeleton className="h-4 w-1/2" />
-                            </div>
-                            <Skeleton className="h-8 w-20" />
+        <div className="soft-page p-4 md:p-8">
+            <div className="soft-page-inner">
+                <div className="soft-card p-5 mb-6">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                        <div>
+                            <h1 className="text-2xl font-bold">Danh sách thành viên</h1>
+                            <p className="mt-1 text-sm text-gray-500">
+                                Kết nối và gửi yêu cầu ghép đôi tới các thành viên khác.
+                            </p>
                         </div>
-                    ))}
+                        <p className="text-xs sm:text-sm text-gray-500">
+                            {loading ? 'Đang tải...' : `Tổng số thành viên: ${users.length}`}
+                        </p>
+                    </div>
                 </div>
-            ) : (
-                <div className="space-y-4">
-                    {users.map((user) => (
-                        <div
-                            key={user.id}
-                            className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 transition-colors"
-                        >
-                            {/* User info */}
-                            <div className="flex items-center space-x-4">
-                                <Avatar>
-                                    <AvatarImage src={user.avatar_url || ''} alt={user.full_name || ''} />
-                                    <AvatarFallback>
-                                        {user.full_name?.charAt(0) ||
-                                            user.email?.charAt(0).toUpperCase() ||
-                                            'U'}
-                                    </AvatarFallback>
-                                </Avatar>
 
-                                <div>
-                                    <h3 className="font-medium">
-                                        {user.full_name || 'Người dùng ẩn danh'}
-                                    </h3>
-                                    <p className="text-sm text-gray-500">
-                                        {user.username || user.email?.split('@')[0]}
-                                    </p>
+                {loading ? (
+                    <div className="space-y-4">
+                        {[...Array(5)].map((_, i) => (
+                            <div key={i} className="soft-card p-4 flex items-center space-x-4">
+                                <Skeleton className="h-12 w-12 rounded-full" />
+                                <div className="space-y-2 flex-1">
+                                    <Skeleton className="h-4 w-3/4" />
+                                    <Skeleton className="h-4 w-1/2" />
                                 </div>
+                                <Skeleton className="h-8 w-20" />
                             </div>
-
-                            {/* Button ghép đôi */}
-                            <button
-                                className={`px-4 py-2 ${matchingUser === user.id ? 'bg-green-600' : 'bg-primary'} text-white rounded-md hover:opacity-90 transition disabled:opacity-50`}
-                                onClick={async () => {
-                                    try {
-                                        setMatchingUser(user.id);
-                                        const { data: { user: currentUser } } = await supabaseBrowser().auth.getUser();
-
-                                        // Insert a new notification for the matched user
-                                        const { error } = await supabaseBrowser()
-                                            .from('notifications')
-                                            .insert([
-                                                {
-                                                    user_id: user.id,
-                                                    title: 'Yêu cầu ghép đôi',
-                                                    message: `${currentUser?.user_metadata?.full_name || 'Ai đó'} muốn ghép đôi với bạn`,
-                                                    type: 'match_request',
-                                                    read: false,
-                                                    metadata: { from_user: currentUser?.id }
-                                                }
-                                            ]);
-
-                                        if (error) throw error;
-
-                                        toast.success(`Đã gửi yêu cầu ghép đôi đến ${user.full_name}`);
-
-                                        // Reset the button state after 3 seconds
-                                        setTimeout(() => setMatchingUser(null), 3000);
-                                    } catch (err) {
-                                        console.error('Lỗi khi gửi yêu cầu ghép đôi:', err);
-                                        toast.error('Có lỗi xảy ra khi gửi yêu cầu');
-                                        setMatchingUser(null);
-                                    }
-                                }}
-                                disabled={!!matchingUser}
+                        ))}
+                    </div>
+                ) : (
+                    <div className="space-y-4">
+                        {users.map((user) => (
+                            <div
+                                key={user.id}
+                                className="soft-card soft-pressable flex items-center justify-between p-4 md:p-5"
                             >
-                                {matchingUser === user.id ? 'Đã gửi yêu cầu ✓' : 'Ghép đôi'}
-                            </button>
-                        </div>
-                    ))}
-                </div>
-            )}
+                                {/* User info */}
+                                <div className="flex items-center space-x-4">
+                                    <Avatar>
+                                        <AvatarImage src={user.avatar_url || ''} alt={user.full_name || ''} />
+                                        <AvatarFallback>
+                                            {user.full_name?.charAt(0) ||
+                                                user.email?.charAt(0).toUpperCase() ||
+                                                'U'}
+                                        </AvatarFallback>
+                                    </Avatar>
+
+                                    <div>
+                                        <h3 className="font-medium">
+                                            {user.full_name || 'Người dùng ẩn danh'}
+                                        </h3>
+                                        <p className="text-sm text-gray-500">
+                                            {user.username || user.email?.split('@')[0]}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                {/* Button ghép đôi */}
+                                <button
+                                    className={`px-4 py-2 text-sm font-medium rounded-full transition disabled:opacity-60 ${matchingUser === user.id ? 'bg-green-500 text-white' : 'bg-primary text-primary-foreground shadow-sm'}`}
+                                    onClick={async () => {
+                                        try {
+                                            setMatchingUser(user.id);
+                                            const { data: { user: currentUser } } = await supabaseBrowser().auth.getUser();
+
+                                            // Insert a new notification for the matched user
+                                            const { error } = await supabaseBrowser()
+                                                .from('notifications')
+                                                .insert([
+                                                    {
+                                                        user_id: user.id,
+                                                        title: 'Yêu cầu ghép đôi',
+                                                        message: `${currentUser?.user_metadata?.full_name || 'Ai đó'} muốn ghép đôi với bạn`,
+                                                        type: 'match_request',
+                                                        read: false,
+                                                        metadata: { from_user: currentUser?.id }
+                                                    }
+                                                ]);
+
+                                            if (error) throw error;
+
+                                            toast.success(`Đã gửi yêu cầu ghép đôi đến ${user.full_name}`);
+
+                                            // Reset the button state after 3 seconds
+                                            setTimeout(() => setMatchingUser(null), 3000);
+                                        } catch (err) {
+                                            console.error('Lỗi khi gửi yêu cầu ghép đôi:', err);
+                                            toast.error('Có lỗi xảy ra khi gửi yêu cầu');
+                                            setMatchingUser(null);
+                                        }
+                                    }}
+                                    disabled={!!matchingUser}
+                                >
+                                    {matchingUser === user.id ? 'Đã gửi yêu cầu ✓' : 'Ghép đôi'}
+                                </button>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

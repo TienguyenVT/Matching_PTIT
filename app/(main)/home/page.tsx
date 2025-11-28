@@ -78,25 +78,35 @@ export default function HomePage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-gray-500">Đang tải...</p>
+      <div className="soft-page p-4 md:p-8">
+        <div className="soft-page-inner">
+          <div className="soft-card p-6">
+            <p className="text-gray-500">Đang tải...</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="p-4 md:p-6">
+    <div className="soft-page p-4 md:p-8">
+      <div className="soft-page-inner space-y-8">
       {/* Title với thanh màu đỏ bên trái */}
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-primary rounded"></div>
-        <h1 className="text-2xl font-semibold text-gray-900">Khóa học đã đăng ký</h1>
+      <div className="soft-card px-5 py-4">
+        <div className="soft-section-title">
+          <div className="soft-section-title-pill" />
+          <div>
+            <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Khóa học đã đăng ký</h1>
+            <p className="mt-1 text-xs md:text-sm text-gray-500">Những khóa học bạn đang theo học gần đây.</p>
+          </div>
+        </div>
       </div>
 
       {/* Course Grid - Khóa học tự ôn */}
       {enrolled.length === 0 ? (
-        <div className="text-center py-12">
-          <p className="text-gray-500 mb-4">Bạn chưa đăng ký khóa học nào.</p>
-          <Link href="/courses" className="text-primary hover:underline">
+        <div className="soft-card p-8 text-center">
+          <p className="text-gray-600 mb-4">Bạn chưa đăng ký khóa học nào.</p>
+          <Link href="/courses" className="inline-flex items-center justify-center soft-pressable px-4 py-2 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition-colors">
             Xem các khóa học khả dụng →
           </Link>
         </div>
@@ -106,7 +116,7 @@ export default function HomePage() {
             <Link
               key={course.id}
               href={ROUTES.COURSE_DETAIL(course.id)}
-              className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200"
+              className="soft-card soft-pressable flex flex-col h-full overflow-hidden"
             >
               {/* Course Image */}
               <div 
@@ -148,7 +158,7 @@ export default function HomePage() {
           {totalEnrolled > enrolled.length && (
             <Link
               href={ROUTES.ALL_COURSES}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200 block border-dashed"
+              className="soft-card soft-pressable block overflow-hidden"
             >
               <div className="h-40 w-full bg-gray-50 relative overflow-hidden flex items-center justify-center">
                 <div className="text-center">
@@ -172,16 +182,21 @@ export default function HomePage() {
       {/* Khóa học đề xuất */}
       {suggested.length > 0 && (
         <>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-1 h-8 bg-primary rounded"></div>
-            <h1 className="text-2xl font-semibold text-gray-900">Khóa học đề xuất</h1>
+          <div className="soft-card px-5 py-4">
+            <div className="soft-section-title">
+              <div className="soft-section-title-pill" />
+              <div>
+                <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Khóa học đề xuất</h1>
+                <p className="mt-1 text-xs md:text-sm text-gray-500">Gợi ý dựa trên sở thích và tiến độ học.</p>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {suggested.map((course) => (
               <div
                 key={course.id}
-                className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-200"
+                className="soft-card soft-pressable flex flex-col h-full overflow-hidden"
               >
                 {/* Course Image */}
                 <Link href={ROUTES.COURSE_DETAIL(course.id)}>
@@ -234,7 +249,7 @@ export default function HomePage() {
             {totalSuggested > suggested.length && (
               <Link
                 href={ROUTES.ALL_COURSES}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 block border-dashed"
+                className="soft-card soft-pressable block overflow-hidden"
               >
                 <div className="h-40 w-full bg-gray-50 relative overflow-hidden flex items-center justify-center">
                   <div className="text-center">
@@ -246,7 +261,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="p-4">
-                  <div className="w-full text-center py-2 px-4 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 transition-colors text-sm font-medium">
+                  <div className="w-full text-center py-2 px-4 bg-gray-100 text-gray-700 rounded-full hover:bg-gray-200 transition-colors text-sm font-medium">
                     Xem tất cả
                   </div>
                 </div>
@@ -255,7 +270,7 @@ export default function HomePage() {
           </div>
         </>
       )}
+      </div>
     </div>
   );
 }
-

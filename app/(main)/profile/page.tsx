@@ -249,6 +249,29 @@ export default function ProfilePage() {
         alert("Đổi mật khẩu thất bại. Vui lòng thử lại.");
       } else {
         alert("Đổi mật khẩu thành công!");
+
+        // Thêm thông báo bảo mật vào hệ thống notifications (best-effort)
+        try {
+          if (user?.id) {
+            const { error: notifError } = await supabase
+              .from("notifications")
+              .insert({
+                user_id: user.id,
+                title: "Đổi mật khẩu thành công",
+                message: "Mật khẩu tài khoản của bạn đã được thay đổi.",
+                type: "password_changed",
+                read: false,
+                metadata: {},
+              });
+
+            if (notifError) {
+              console.error("[ProfilePage] Error creating password change notification:", notifError);
+            }
+          }
+        } catch (notifErr) {
+          console.error("[ProfilePage] Exception while creating password change notification:", notifErr);
+        }
+
         setCurrentPassword("");
         setNewPassword("");
         setConfirmPassword("");
@@ -404,96 +427,116 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="p-6">
-        <p className="text-gray-500">Đang tải...</p>
+      <div className="soft-page p-4 md:p-8">
+        <div className="soft-page-inner">
+          <div className="soft-card p-6">
+            <p className="text-gray-500">Đang tải...</p>
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <h1 className="text-2xl font-semibold mb-6">Tài khoản cá nhân</h1>
+    <div className="soft-page p-4 md:p-8">
+      <div className="soft-page-inner space-y-6">
+        <div className="soft-card px-5 py-4">
+          <div className="soft-section-title">
+            <div className="soft-section-title-pill" />
+            <div>
+              <h1 className="text-xl md:text-2xl font-semibold text-gray-900">Tài khoản cá nhân</h1>
+              <p className="mt-1 text-xs md:text-sm text-gray-500">Quản lý thông tin, bảo mật và cài đặt tài khoản của bạn.</p>
+            </div>
+          </div>
+        </div>
 
-      {/* Phần 1: Avatar Section */}
-      <AvatarSection
-        selectedAvatar={selectedAvatar}
-        fullName={fullName}
-        userEmail={user?.email || ""}
-        onSelectAvatar={handleSelectAvatar}
-        isChangingAvatar={isChangingAvatar}
-        showAvatarSelector={showAvatarSelector}
-        onToggleAvatarSelector={() =>
-          setShowAvatarSelector(!showAvatarSelector)
-        }
-        expandedAvatars={expandedAvatars}
-        onToggleExpandedAvatars={() => setExpandedAvatars(!expandedAvatars)}
-        onFullNameChange={(value) => {
-          setSaveFeedback(null);
-          setFullName(value);
-        }}
-        onSaveProfile={handleSaveProfile}
-        onResetChanges={handleResetProfileChanges}
-        saving={saving}
-        hasChanges={hasProfileChanges}
-        feedback={saveFeedback}
-        onClearFeedback={() => setSaveFeedback(null)}
-      />
+        {/* Phần 1: Avatar Section */}
+        <div className="soft-card p-4 md:p-6">
+          <AvatarSection
+            selectedAvatar={selectedAvatar}
+            fullName={fullName}
+            userEmail={user?.email || ""}
+            onSelectAvatar={handleSelectAvatar}
+            isChangingAvatar={isChangingAvatar}
+            showAvatarSelector={showAvatarSelector}
+            onToggleAvatarSelector={() =>
+              setShowAvatarSelector(!showAvatarSelector)
+            }
+            expandedAvatars={expandedAvatars}
+            onToggleExpandedAvatars={() => setExpandedAvatars(!expandedAvatars)}
+            onFullNameChange={(value) => {
+              setSaveFeedback(null);
+              setFullName(value);
+            }}
+            onSaveProfile={handleSaveProfile}
+            onResetChanges={handleResetProfileChanges}
+            saving={saving}
+            hasChanges={hasProfileChanges}
+            feedback={saveFeedback}
+            onClearFeedback={() => setSaveFeedback(null)}
+          />
+        </div>
 
-      {/* Phần 2: Thông tin tài khoản */}
-      <AccountInfoSection
-        user={user}
-        fullName={fullName}
-        enrolledCoursesCount={enrolledCoursesCount}
-        onEditAccount={handleOpenEditAccountModal}
-        onDeleteAccount={() => setShowDeleteModal(true)}
-      />
+        {/* Phần 2: Thông tin tài khoản */}
+        <div className="soft-card p-4 md:p-6">
+          <AccountInfoSection
+            user={user}
+            fullName={fullName}
+            enrolledCoursesCount={enrolledCoursesCount}
+            onEditAccount={handleOpenEditAccountModal}
+            onDeleteAccount={() => setShowDeleteModal(true)}
+          />
+        </div>
 
-      {/* Phần 3: Thay đổi mật khẩu */}
-      <ChangePasswordSection
-        currentPassword={currentPassword}
-        newPassword={newPassword}
-        confirmPassword={confirmPassword}
-        changingPassword={changingPassword}
-        onCurrentPasswordChange={setCurrentPassword}
-        onNewPasswordChange={setNewPassword}
-        onConfirmPasswordChange={setConfirmPassword}
-        onChangePassword={handleChangePassword}
-        onForgotPassword={() => setShowForgotPasswordModal(true)}
-      />
+        {/* Phần 3: Thay đổi mật khẩu */}
+        <div className="soft-card p-4 md:p-6">
+          <ChangePasswordSection
+            currentPassword={currentPassword}
+            newPassword={newPassword}
+            confirmPassword={confirmPassword}
+            changingPassword={changingPassword}
+            onCurrentPasswordChange={setCurrentPassword}
+            onNewPasswordChange={setNewPassword}
+            onConfirmPasswordChange={setConfirmPassword}
+            onChangePassword={handleChangePassword}
+            onForgotPassword={() => setShowForgotPasswordModal(true)}
+          />
+        </div>
 
-      {/* Modals */}
-      <DeleteAccountModal
-        show={showDeleteModal}
-        deletePassword={deletePassword}
-        deleting={deleting}
-        onPasswordChange={setDeletePassword}
-        onConfirm={handleDeleteAccount}
-        onCancel={() => {
-          setShowDeleteModal(false);
-          setDeletePassword("");
-        }}
-      />
+        {/* Modals */}
+        <DeleteAccountModal
+          show={showDeleteModal}
+          deletePassword={deletePassword}
+          deleting={deleting}
+          onPasswordChange={setDeletePassword}
+          onConfirm={handleDeleteAccount}
+          onCancel={() => {
+            setShowDeleteModal(false);
+            setDeletePassword("");
+          }}
+        />
 
-      <ForgotPasswordModal
-        show={showForgotPasswordModal}
-        userEmail={user?.email || ""}
-        sendingOtp={sendingOtp}
-        onConfirm={handleSendPasswordResetOTP}
-        onCancel={() => setShowForgotPasswordModal(false)}
-      />
+        <ForgotPasswordModal
+          show={showForgotPasswordModal}
+          userEmail={user?.email || ""}
+          sendingOtp={sendingOtp}
+          onConfirm={handleSendPasswordResetOTP}
+          onCancel={() => setShowForgotPasswordModal(false)}
+        />
 
-      <EditAccountModal
-        show={showEditAccountModal}
-        username={editUsername}
-        fullName={editFullName}
-        email={editEmail}
-        saving={savingAccount}
-        onUsernameChange={setEditUsername}
-        onFullNameChange={setEditFullName}
-        onEmailChange={setEditEmail}
-        onSave={handleSaveAccountInfo}
-        onCancel={() => setShowEditAccountModal(false)}
-      />
+        <EditAccountModal
+          show={showEditAccountModal}
+          username={editUsername}
+          fullName={editFullName}
+          email={editEmail}
+          saving={savingAccount}
+          onUsernameChange={setEditUsername}
+          onFullNameChange={setEditFullName}
+          onEmailChange={setEditEmail}
+          onSave={handleSaveAccountInfo}
+          onCancel={() => setShowEditAccountModal(false)}
+        />
+      </div>
     </div>
   );
 }

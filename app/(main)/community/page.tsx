@@ -82,25 +82,41 @@ export default function CommunityPage() {
   }, [supabase, router, user, authLoading]);
 
   return (
-    <div className="p-4 md:p-6 space-y-6">
-      <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-8 bg-primary rounded"></div>
-        <h1 className="text-2xl font-semibold text-gray-900">Cộng đồng học tập</h1>
+    <div className="soft-page p-4 md:p-8">
+      <div className="soft-page-inner space-y-6">
+        <div className="soft-card px-5 py-4">
+          <div className="soft-section-title">
+            <div className="soft-section-title-pill" />
+            <div>
+              <h1 className="text-xl md:text-2xl font-semibold text-gray-900">
+                Cộng đồng học tập
+              </h1>
+              <p className="mt-1 text-xs md:text-sm text-gray-500">
+                Kết nối, ghép đôi và tìm người học phù hợp với mục tiêu của bạn.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Phần 0: Tìm kiếm người dùng */}
+        <section className="soft-card soft-card-inset p-4 md:p-6">
+          <SearchUsersSection />
+        </section>
+
+        {/* Phần 1: Người dùng đã ghép đôi */}
+        <section className="soft-card p-4 md:p-6">
+          <PreviousMatchesSection
+            matches={previousMatches}
+            totalCount={totalPreviousMatches}
+            loading={loading}
+          />
+        </section>
+
+        {/* Phần 2: Matching người dùng mới */}
+        <section className="soft-card p-4 md:p-6">
+          <NewMatchesSection matches={newMatches} loading={loading} />
+        </section>
       </div>
-
-      {/* Phần 0: Tìm kiếm người dùng */}
-      <SearchUsersSection />
-
-      {/* Phần 1: Người dùng đã ghép đôi */}
-      <PreviousMatchesSection
-        matches={previousMatches}
-        totalCount={totalPreviousMatches}
-        loading={loading}
-      />
-
-      {/* Phần 2: Matching người dùng mới */}
-      <NewMatchesSection matches={newMatches} loading={loading} />
     </div>
   );
 }
-

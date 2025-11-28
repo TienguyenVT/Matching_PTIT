@@ -112,6 +112,42 @@ export async function POST(req: NextRequest) {
       console.error('Insert error:', insertErr);
       return NextResponse.json({ error: insertErr.message }, { status: 400 });
     }
+
+    // Best-effort notification for successful course registration
+    try {
+      // Lấy thêm tiêu đề khóa học để hiển thị đẹp hơn trong thông báo (optional)
+      const { data: course, error: courseError } = await queryClient
+        .from('courses')
+        .select('title')
+        .eq('id', courseId)
+        .maybeSingle();
+
+      if (courseError) {
+        console.warn('[register-course] Error fetching course for notification:', courseError);
+      }
+
+      const { error: notifError } = await queryClient
+        .from('notifications')
+        .insert({
+          user_id: user.id,
+          title: 'Đăng ký khóa học thành công',
+          message: course?.title
+            ? `Bạn đã đăng ký khóa học "${course.title}" thành công.`
+            : 'Bạn đã đăng ký một khóa học mới thành công.',
+          type: 'course_register',
+          read: false,
+          metadata: {
+            course_id: courseId,
+          },
+        });
+
+      if (notifError) {
+        console.warn('[register-course] Error creating notification:', notifError);
+      }
+    } catch (notifErr) {
+      console.warn('[register-course] Exception while creating notification:', notifErr);
+    }
+
     return NextResponse.json({ ok: true });
   } catch (e: any) {
     return NextResponse.json({ error: e?.message || 'Internal error' }, { status: 500 });

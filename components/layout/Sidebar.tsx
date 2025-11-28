@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { ROUTES } from "@/lib/routes";
 import { useAuth } from "@/providers/auth-provider";
+import { BookOpen, GraduationCap, Users, User, PlusCircle } from "lucide-react";
 
 interface SidebarProps {
   isOpen: boolean;
@@ -23,14 +24,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       section: "HỌC TẬP",
       items: isAdmin
         ? [
-            { label: "Khóa học", href: ROUTES.COURSES, icon: "📚" },
-            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: "➕" },
-            { label: "Tài khoản", href: ROUTES.PROFILE, icon: "👤" },
+            { label: "Khóa học", href: ROUTES.COURSES, icon: <GraduationCap className="w-4 h-4" /> },
+            { label: "Thêm khóa học", href: ROUTES.ADMIN, icon: <PlusCircle className="w-4 h-4" /> },
+            { label: "Tài khoản", href: ROUTES.PROFILE, icon: <User className="w-4 h-4" /> },
           ]
         : [
-            { label: "Khóa học", href: ROUTES.DASHBOARD, icon: "📚" },
-            { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: "👥" },
-            { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: "👤" },
+            { label: "Khóa học", href: ROUTES.DASHBOARD, icon: <BookOpen className="w-4 h-4" /> },
+            { label: "Cộng đồng", href: ROUTES.COMMUNITY, icon: <Users className="w-4 h-4" /> },
+            { label: "Hồ sơ học tập", href: ROUTES.STUDY_PROFILE, icon: <GraduationCap className="w-4 h-4" /> },
           ],
     },
   ];
