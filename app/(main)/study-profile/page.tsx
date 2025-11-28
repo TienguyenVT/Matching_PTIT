@@ -158,9 +158,102 @@ function StudyProfileContent() {
           };
         });
 
+        console.log("[StudyProfilePage] Loaded enrolled courses:", normalized.length);
+
+        // Compute learning progress per course based on user_content_progress and course_contents
+        let courseProgressById: Record<string, number> = {};
+        try {
+          const courseIds = normalized
+            .map((c) => c.courseId)
+            .filter((id) => !!id);
+
+          if (courseIds.length > 0) {
+            console.log("[StudyProfilePage] Loading course contents for progress calculation", {
+              courseCount: courseIds.length,
+            });
+
+            // 1) Load all contents for these courses
+            const { data: contentsData, error: contentsError } = await supabase
+              .from("course_contents")
+              .select("id, course_id")
+              .in("course_id", courseIds);
+
+            if (contentsError) {
+              console.error("[StudyProfilePage] Error loading course contents for progress:", contentsError);
+            } else {
+              const totalByCourse = new Map<string, number>();
+              (contentsData || []).forEach((row: any) => {
+                const cid = (row as any).course_id as string | null;
+                const contentId = (row as any).id as string | null;
+                if (!cid || !contentId) return;
+                totalByCourse.set(cid, (totalByCourse.get(cid) || 0) + 1);
+              });
+
+              console.log("[StudyProfilePage] Total contents by course:", Object.fromEntries(totalByCourse));
+
+              // 2) Load completed contents for the viewing user across these courses
+              try {
+                const { data: progressData, error: progressError } = await supabase
+                  .from("user_content_progress")
+                  .select("course_id, content_id, is_completed")
+                  .eq("user_id", targetUserId)
+                  .in("course_id", courseIds);
+
+                if (progressError) {
+                  console.warn("[StudyProfilePage] Error loading user_content_progress (optional):", progressError);
+                } else if (progressData) {
+                  const completedByCourse = new Map<string, Set<string>>();
+
+                  (progressData as any[]).forEach((row) => {
+                    const cid = (row as any).course_id as string | null;
+                    const contentId = (row as any).content_id as string | null;
+                    const isCompleted = !!(row as any).is_completed;
+                    if (!cid || !contentId || !isCompleted) return;
+                    let set = completedByCourse.get(cid);
+                    if (!set) {
+                      set = new Set<string>();
+                      completedByCourse.set(cid, set);
+                    }
+                    set.add(contentId);
+                  });
+
+                  console.log("[StudyProfilePage] Completed contents by course:",
+                    Array.from(completedByCourse.entries()).reduce((acc, [cid, set]) => {
+                      acc[cid] = set.size;
+                      return acc;
+                    }, {} as Record<string, number>)
+                  );
+
+                  // 3) Calculate percentage per course
+                  courseIds.forEach((cid) => {
+                    const total = totalByCourse.get(cid) || 0;
+                    const completedCount = completedByCourse.get(cid)?.size || 0;
+                    let percent = 0;
+                    if (total > 0) {
+                      percent = Math.round((completedCount / total) * 100);
+                    }
+                    if (!Number.isFinite(percent) || percent < 0) percent = 0;
+                    if (percent > 100) percent = 100;
+                    courseProgressById[cid] = percent;
+                  });
+                }
+              } catch (progressErr) {
+                console.warn("[StudyProfilePage] Exception while loading user_content_progress (optional):", progressErr);
+              }
+            }
+          }
+        } catch (progressCalcError) {
+          console.error("[StudyProfilePage] Error computing course progress:", progressCalcError);
+        }
+
+        const coursesWithProgress: EnrolledCourse[] = normalized.map((course) => ({
+          ...course,
+          progressPercent: courseProgressById[course.courseId] ?? 0,
+        }));
+
         if (cancelled) return;
 
-        setCourses(normalized);
+        setCourses(coursesWithProgress);
       } catch (error) {
         if (cancelled) return;
         console.error("[StudyProfilePage] Unexpected error in load():", error);
